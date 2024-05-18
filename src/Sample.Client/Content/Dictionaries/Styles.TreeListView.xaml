@@ -1,0 +1,87 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:sd="https://github.com/lishilei0523/SD.Framework">
+
+    <!--TreeListView缩进转换器-->
+    <sd:TreeListViewIndentConverter x:Key="TreeListView.Converters.IndentConverter" />
+    <!--TreeListView默认样式-->
+    <Style x:Key="TreeListView.Styles.Default" TargetType="{x:Type sd:TreeListView}"
+           BasedOn="{StaticResource TreeListView.Styles.Template}">
+        <Setter Property="BorderThickness" Value="0" />
+    </Style>
+    <!--TreeListViewItem默认样式-->
+    <Style x:Key="TreeListViewItem.Styles.Default" TargetType="{x:Type sd:TreeListViewItem}"
+           BasedOn="{StaticResource TreeListViewItem.Styles.Template}">
+        <Setter Property="Background" Value="White" />
+        <Setter Property="BorderBrush" Value="LightGray" />
+        <Setter Property="BorderThickness" Value="0,0,0,1" />
+        <Setter Property="Padding" Value="2" />
+        <Setter Property="FontSize" Value="14" />
+        <Setter Property="IsExpanded" Value="True" />
+    </Style>
+    <!--TreeListView折叠按钮样式-->
+    <Style x:Key="TreeListView.Styles.ToggleButton" TargetType="{x:Type ToggleButton}">
+        <Setter Property="Width" Value="19" />
+        <Setter Property="Height" Value="13" />
+        <Setter Property="Focusable" Value="False" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type ToggleButton}">
+                    <Border Width="14" Height="14" Background="Transparent">
+                        <Path x:Name="ExpanderPath" RenderTransformOrigin="0.5,0.5" Stretch="Uniform" 
+                              Data="{StaticResource Graphics.Path.Arrow}" 
+                              Fill="{Binding Foreground, RelativeSource={RelativeSource AncestorType=TreeViewItem}}">
+                            <Path.RenderTransform>
+                                <RotateTransform Angle="-90" />
+                            </Path.RenderTransform>
+                        </Path>
+                    </Border>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsChecked" Value="True">
+                            <Setter Property="RenderTransform" TargetName="ExpanderPath">
+                                <Setter.Value>
+                                    <RotateTransform Angle="0" />
+                                </Setter.Value>
+                            </Setter>
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+    <!--TreeListView表格边框样式-->
+    <Style x:Key="TreeListView.Styles.Border" TargetType="{x:Type Border}">
+        <Setter Property="BorderBrush" Value="LightGray" />
+        <Setter Property="BorderThickness" Value="1,0,0,0" />
+        <Setter Property="Margin" Value="-8,-2,-5,-2" />
+    </Style>
+    <!--TreeListView表格边框结尾样式-->
+    <Style x:Key="TreeListView.Styles.Border.End" TargetType="{x:Type Border}"
+           BasedOn="{StaticResource TreeListView.Styles.Border}">
+        <Setter Property="BorderThickness" Value="1,0,1,0" />
+    </Style>
+    <!--TreeListView基准列数据模板-->
+    <DataTemplate x:Key="TreeListView.CellTemplates.Criterion">
+        <Border Style="{StaticResource TreeListView.Styles.Border}">
+            <WrapPanel VerticalAlignment="Center">
+                <ToggleButton x:Name="CriterionExpander" 
+                              Style="{StaticResource TreeListView.Styles.ToggleButton}" 
+                              Margin="{Binding RelativeSource={RelativeSource AncestorType={x:Type sd:TreeListViewItem}}, Converter={StaticResource TreeListView.Converters.IndentConverter}}"
+                              IsChecked="{Binding Path=IsExpanded, RelativeSource={RelativeSource AncestorType={x:Type sd:TreeListViewItem}}}" 
+                              ClickMode="Press" />
+                <Image x:Name="CriterionIcon" Width="14" Height="14" 
+                       HorizontalAlignment="Center" VerticalAlignment="Center" 
+                       Source="{StaticResource Graphics.Icon.Folder}" />
+                <CheckBox x:Name="CriterionCbx" Visibility="Collapsed" IsChecked="{Binding IsChecked}" />
+                <TextBlock Text="{Binding Name}" Margin="2,0,0,0" />
+            </WrapPanel>
+        </Border>
+        <DataTemplate.Triggers>
+            <DataTrigger Binding="{Binding Path=HasItems, RelativeSource={RelativeSource AncestorType={x:Type sd:TreeListViewItem}}}" Value="False">
+                <Setter TargetName="CriterionExpander" Property="Visibility" Value="Hidden" />
+                <Setter TargetName="CriterionIcon" Property="Source" Value="{StaticResource Graphics.Icon.File}" />
+                <Setter TargetName="CriterionCbx" Property="Visibility" Value="Visible" />
+            </DataTrigger>
+        </DataTemplate.Triggers>
+    </DataTemplate>
+</ResourceDictionary>

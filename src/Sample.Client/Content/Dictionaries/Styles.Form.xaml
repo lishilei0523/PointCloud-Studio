@@ -1,0 +1,35 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+
+    <!--功能面板边框样式-->
+    <Style x:Key="Panel.Styles.Function.Border" TargetType="{x:Type Border}">
+        <Setter Property="BorderBrush" Value="{DynamicResource SystemListLowColorBrush}" />
+        <Setter Property="BorderThickness" Value="0,1,0,1" />
+    </Style>
+    <!--功能面板操作按钮区WrapPanel样式-->
+    <Style x:Key="WrapPanel.Styles.Function.Operation" TargetType="{x:Type WrapPanel}">
+        <Setter Property="VerticalAlignment" Value="Center" />
+        <Setter Property="Margin" Value="5,0,0,5" />
+    </Style>
+    <!--功能面板查询按钮区WrapPanel样式-->
+    <Style x:Key="WrapPanel.Styles.Function.Query" TargetType="{x:Type WrapPanel}">
+        <Setter Property="VerticalAlignment" Value="Center" />
+        <Setter Property="Margin" Value="10,0,0,5" />
+    </Style>
+    <!--功能面板查询按钮区Grid样式-->
+    <Style x:Key="Grid.Styles.Function.Query" TargetType="{x:Type Grid}">
+        <Setter Property="VerticalAlignment" Value="Center" />
+        <Setter Property="Margin" Value="10,0,0,5" />
+    </Style>
+    <!--表单提交Grid样式-->
+    <Style x:Key="Form.Styles.Submit.Grid" TargetType="{x:Type Grid}">
+        <Setter Property="Background" Value="{DynamicResource SystemListLowColorBrush}" />
+        <Setter Property="Margin" Value="0,0,0,10" />
+    </Style>
+    <!--表单提交WrapPanel样式-->
+    <Style x:Key="Form.Styles.Submit.WrapPanel" TargetType="{x:Type WrapPanel}">
+        <Setter Property="HorizontalAlignment" Value="Right" />
+        <Setter Property="VerticalAlignment" Value="Center" />
+        <Setter Property="Margin" Value="0,0,10,0" />
+    </Style>
+</ResourceDictionary>

@@ -1,0 +1,27 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <TargetFramework>net48</TargetFramework>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+    <Authors>Lee</Authors>
+    <Company>SD</Company>
+    <Copyright>Copyright © SD 2024</Copyright>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Include="..\Sample.PCL.Filters\bin\$(Configuration)\x64\*.dll">
+      <Link>Runtimes\%(Filename)%(Extension)</Link>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      <TargetPath>%(Filename)%(Extension)</TargetPath>
+    </None>
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="HelixToolkit.Wpf.SharpDX" Version="2.25.0" />
+    <PackageReference Include="SD.Common" Version="3.2.1" />
+    <PackageReference Include="SD.Toolkits.Mapper" Version="1.1.2" />
+    <PackageReference Include="SD.IOC.Core" Version="1.3.1" />
+    <PackageReference Include="SD.Infrastructure" Version="3.6.0" />
+    <PackageReference Include="SD.Infrastructure.WPF" Version="1.3.2" />
+    <PackageReference Include="SD.Infrastructure.WPF.Caliburn" Version="1.2.1" />
+  </ItemGroup>
+</Project>

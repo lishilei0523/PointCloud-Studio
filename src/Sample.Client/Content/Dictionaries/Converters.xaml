@@ -1,0 +1,12 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:sd="https://github.com/lishilei0523/SD.Framework">
+
+    <!--枚举成员转换器-->
+    <sd:EnumMemberConverter x:Key="Converters.EnumMemberConverter" />
+    <!--停/启用描述转换器-->
+    <sd:BooleanDescriptionConverter x:Key="Converters.EnabledDescriptionConverter">
+        <TextBlock>已停用</TextBlock>
+        <TextBlock>已启用</TextBlock>
+    </sd:BooleanDescriptionConverter>
+</ResourceDictionary>

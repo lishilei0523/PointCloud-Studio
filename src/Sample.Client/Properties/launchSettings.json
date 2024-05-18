@@ -1,0 +1,8 @@
+{
+  "profiles": {
+    "Sample.Client": {
+      "commandName": "Project",
+      "nativeDebugging": true
+    }
+  }
+}
