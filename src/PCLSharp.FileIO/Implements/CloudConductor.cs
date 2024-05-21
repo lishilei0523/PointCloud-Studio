@@ -1,5 +1,6 @@
 ﻿using PCLSharp.FileIO.Declarations;
 using PCLSharp.FileIO.Interfaces;
+using PCLSharp.Primitives.Maps;
 using PCLSharp.Primitives.Models;
 using System;
 using System.Collections.Generic;
@@ -20,7 +21,7 @@ namespace PCLSharp.FileIO.Implements
         /// </summary>
         /// <param name="filePath">文件路径</param>
         /// <returns>点集</returns>
-        public unsafe Point3F[] LoadPCD(string filePath)
+        public Point3F[] LoadPCD(string filePath)
         {
             #region # 验证
 
@@ -35,11 +36,10 @@ namespace PCLSharp.FileIO.Implements
 
             #endregion
 
-            IntPtr point3FsPtr = ConductorNative.LoadPCD(filePath);
-            Point3Fs point3Fs = Marshal.PtrToStructure<Point3Fs>(point3FsPtr);
-            Span<Point3F> span = new Span<Point3F>(point3Fs.Points.ToPointer(), point3Fs.Length);
-            Point3F[] points = span.ToArray();
-            ConductorNative.Dispose(point3FsPtr);
+            IntPtr pointer = ConductorNative.LoadPCD(filePath);
+            Point3Fs point3Fs = Marshal.PtrToStructure<Point3Fs>(pointer);
+            Point3F[] points = point3Fs.ToPoint3Fs();
+            ConductorNative.Dispose(pointer);
 
             return points;
         }
@@ -51,7 +51,7 @@ namespace PCLSharp.FileIO.Implements
         /// </summary>
         /// <param name="filePath">文件路径</param>
         /// <returns>点集</returns>
-        public unsafe Point3F[] LoadPLY(string filePath)
+        public Point3F[] LoadPLY(string filePath)
         {
             #region # 验证
 
@@ -66,11 +66,10 @@ namespace PCLSharp.FileIO.Implements
 
             #endregion
 
-            IntPtr point3FsPtr = ConductorNative.LoadPLY(filePath);
-            Point3Fs point3Fs = Marshal.PtrToStructure<Point3Fs>(point3FsPtr);
-            Span<Point3F> span = new Span<Point3F>(point3Fs.Points.ToPointer(), point3Fs.Length);
-            Point3F[] points = span.ToArray();
-            ConductorNative.Dispose(point3FsPtr);
+            IntPtr pointer = ConductorNative.LoadPLY(filePath);
+            Point3Fs point3Fs = Marshal.PtrToStructure<Point3Fs>(pointer);
+            Point3F[] points = point3Fs.ToPoint3Fs();
+            ConductorNative.Dispose(pointer);
 
             return points;
         }
@@ -82,7 +81,7 @@ namespace PCLSharp.FileIO.Implements
         /// </summary>
         /// <param name="filePath">文件路径</param>
         /// <returns>点集</returns>
-        public unsafe Point3F[] LoadOBJ(string filePath)
+        public Point3F[] LoadOBJ(string filePath)
         {
             #region # 验证
 
@@ -97,11 +96,10 @@ namespace PCLSharp.FileIO.Implements
 
             #endregion
 
-            IntPtr point3FsPtr = ConductorNative.LoadOBJ(filePath);
-            Point3Fs point3Fs = Marshal.PtrToStructure<Point3Fs>(point3FsPtr);
-            Span<Point3F> span = new Span<Point3F>(point3Fs.Points.ToPointer(), point3Fs.Length);
-            Point3F[] points = span.ToArray();
-            ConductorNative.Dispose(point3FsPtr);
+            IntPtr pointer = ConductorNative.LoadOBJ(filePath);
+            Point3Fs point3Fs = Marshal.PtrToStructure<Point3Fs>(pointer);
+            Point3F[] points = point3Fs.ToPoint3Fs();
+            ConductorNative.Dispose(pointer);
 
             return points;
         }

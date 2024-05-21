@@ -6,7 +6,7 @@ namespace PCLSharp.Primitives.Models
     /// 法向量
     /// </summary>
     [StructLayout(LayoutKind.Sequential)]
-    public struct Normal3F
+    public readonly struct Normal3F
     {
         /// <summary>
         /// 创建3D法向量构造器
@@ -25,16 +25,16 @@ namespace PCLSharp.Primitives.Models
         /// <summary>
         /// 法向量X坐标
         /// </summary>
-        public float NX;
+        public readonly float NX;
 
         /// <summary>
         /// 法向量Y坐标
         /// </summary>
-        public float NY;
+        public readonly float NY;
 
         /// <summary>
         /// 法向量Z坐标
         /// </summary>
-        public float NZ;
+        public readonly float NZ;
     }
 }

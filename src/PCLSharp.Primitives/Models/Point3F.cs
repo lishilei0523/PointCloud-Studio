@@ -6,7 +6,7 @@ namespace PCLSharp.Primitives.Models
     /// 坐标点
     /// </summary>
     [StructLayout(LayoutKind.Sequential)]
-    public struct Point3F
+    public readonly struct Point3F
     {
         /// <summary>
         /// 创建坐标点构造器
@@ -25,16 +25,16 @@ namespace PCLSharp.Primitives.Models
         /// <summary>
         /// X坐标
         /// </summary>
-        public float X;
+        public readonly float X;
 
         /// <summary>
         /// Y坐标
         /// </summary>
-        public float Y;
+        public readonly float Y;
 
         /// <summary>
         /// Z坐标
         /// </summary>
-        public float Z;
+        public readonly float Z;
     }
 }

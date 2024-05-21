@@ -6,7 +6,7 @@ namespace PCLSharp.Primitives.Models
     /// RGBA颜色
     /// </summary>
     [StructLayout(LayoutKind.Sequential)]
-    public struct Color4F
+    public readonly struct Color4F
     {
         /// <summary>
         /// 创建RGBA颜色构造器
@@ -27,21 +27,21 @@ namespace PCLSharp.Primitives.Models
         /// <summary>
         /// R值
         /// </summary>
-        public float R;
+        public readonly float R;
 
         /// <summary>
         /// G值
         /// </summary>
-        public float G;
+        public readonly float G;
 
         /// <summary>
         /// B值
         /// </summary>
-        public float B;
+        public readonly float B;
 
         /// <summary>
         /// A值
         /// </summary>
-        public float A;
+        public readonly float A;
     }
 }

@@ -6,7 +6,7 @@ namespace PCLSharp.Primitives.Models
     /// 强度坐标点
     /// </summary>
     [StructLayout(LayoutKind.Sequential)]
-    public struct Point3FI
+    public readonly struct Point3FI
     {
         /// <summary>
         /// 创建强度坐标点构造器
@@ -27,21 +27,21 @@ namespace PCLSharp.Primitives.Models
         /// <summary>
         /// X坐标
         /// </summary>
-        public float X;
+        public readonly float X;
 
         /// <summary>
         /// Y坐标
         /// </summary>
-        public float Y;
+        public readonly float Y;
 
         /// <summary>
         /// Z坐标
         /// </summary>
-        public float Z;
+        public readonly float Z;
 
         /// <summary>
         /// 强度
         /// </summary>
-        public float Intensity;
+        public readonly float Intensity;
     }
 }
