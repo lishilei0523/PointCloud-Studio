@@ -9,6 +9,7 @@
 #include <pcl/filters/statistical_outlier_removal.h>
 #include <point3f.h>
 #include <point3fs.h>
+#include <primitives_map.h>
 
 /// <summary>
 /// ÊÊÓÃÖ±Í¨ÂË²¨

@@ -1,4 +1,3 @@
-#include <primitives_map.h>
 #include "pcl_filters.h"
 using namespace std;
 using namespace pcl;

@@ -1,11 +1,11 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
     <TargetFrameworks>net462;netstandard2.0</TargetFrameworks>
     <LangVersion>8.0</LangVersion>
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
     <Authors>Lee</Authors>
     <Company>SD</Company>
-    <Description>SD.Toolkits PCL滤波</Description>
+    <Description>SD.Toolkits PCL文件I/O</Description>
     <Copyright>Copyright © SD 2024</Copyright>
     <Version>0.1.0</Version>
     <AssemblyVersion>0.1.0</AssemblyVersion>
@@ -13,14 +13,14 @@
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
-    <DocumentationFile>bin\Debug\$(TargetFramework)\PCLSharp.Filters.xml</DocumentationFile>
+    <DocumentationFile>bin\Debug\$(TargetFramework)\PCLSharp.FileIO.xml</DocumentationFile>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
-    <DocumentationFile>bin\Release\$(TargetFramework)\PCLSharp.Filters.xml</DocumentationFile>
+    <DocumentationFile>bin\Release\$(TargetFramework)\PCLSharp.FileIO.xml</DocumentationFile>
   </PropertyGroup>
 
   <ItemGroup>
-    <None Include="..\PCLSharp.Filters.Native\bin\$(Configuration)\x64\*.dll">
+    <None Include="..\PCLSharp.FileIO.Native\bin\$(Configuration)\x64\*.dll">
       <Link>Runtimes\%(Filename)%(Extension)</Link>
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
       <TargetPath>%(Filename)%(Extension)</TargetPath>

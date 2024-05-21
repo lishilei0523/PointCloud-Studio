@@ -11,7 +11,7 @@ namespace PCLSharp.Filters.Implements
     /// <summary>
     /// 点云滤波实现
     /// </summary>
-    public class PointCloudFilters : IPointCloudFilters
+    public class CloudFilters : ICloudFilters
     {
         #region # 适用直通滤波 —— Point3F[] ApplyPassThrogh(IEnumerable<Point3F> points...
         /// <summary>

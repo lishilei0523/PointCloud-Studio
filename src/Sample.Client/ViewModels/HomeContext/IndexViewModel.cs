@@ -26,14 +26,14 @@ namespace Sample.Client.ViewModels.HomeContext
         /// <summary>
         /// 点云滤波接口
         /// </summary>
-        private readonly IPointCloudFilters _pointCloudFilters;
+        private readonly ICloudFilters _cloudFilters;
 
         /// <summary>
         /// 依赖注入构造器
         /// </summary>
-        public IndexViewModel(IPointCloudFilters pointCloudFilters)
+        public IndexViewModel(ICloudFilters cloudFilters)
         {
-            this._pointCloudFilters = pointCloudFilters;
+            this._cloudFilters = cloudFilters;
         }
 
         #endregion
@@ -104,7 +104,7 @@ namespace Sample.Client.ViewModels.HomeContext
             this.Busy();
 
             IEnumerable<Point3F> points = this.OriginalPointCloud.Points.Select(point => point.ToPoint3F());
-            ICollection<Point3F> filterdPoints = await Task.Run(() => this._pointCloudFilters.ApplyPassThrogh(points, "z", 0, 0.05f));
+            ICollection<Point3F> filterdPoints = await Task.Run(() => this._cloudFilters.ApplyPassThrogh(points, "z", 0, 0.05f));
 
             this.Idle();
 
@@ -125,7 +125,7 @@ namespace Sample.Client.ViewModels.HomeContext
             this.Busy();
 
             IEnumerable<Point3F> points = this.OriginalPointCloud.Points.Select(point => point.ToPoint3F());
-            ICollection<Point3F> filterdPoints = await Task.Run(() => this._pointCloudFilters.ApplyUniformSampling(points, 0.05f));
+            ICollection<Point3F> filterdPoints = await Task.Run(() => this._cloudFilters.ApplyUniformSampling(points, 0.05f));
 
             this.Idle();
 
@@ -146,7 +146,7 @@ namespace Sample.Client.ViewModels.HomeContext
             this.Busy();
 
             IEnumerable<Point3F> points = this.OriginalPointCloud.Points.Select(point => point.ToPoint3F());
-            ICollection<Point3F> filterdPoints = await Task.Run(() => this._pointCloudFilters.ApplyVoxelGrid(points, 0.01f));
+            ICollection<Point3F> filterdPoints = await Task.Run(() => this._cloudFilters.ApplyVoxelGrid(points, 0.01f));
 
             this.Idle();
 
@@ -167,7 +167,7 @@ namespace Sample.Client.ViewModels.HomeContext
             this.Busy();
 
             IEnumerable<Point3F> points = this.OriginalPointCloud.Points.Select(point => point.ToPoint3F());
-            ICollection<Point3F> filterdPoints = await Task.Run(() => this._pointCloudFilters.ApplyOutlierRemoval(points, 50, 1));
+            ICollection<Point3F> filterdPoints = await Task.Run(() => this._cloudFilters.ApplyOutlierRemoval(points, 50, 1));
 
             this.Idle();
 

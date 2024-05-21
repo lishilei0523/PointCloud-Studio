@@ -6,7 +6,7 @@ namespace PCLSharp.Filters.Interfaces
     /// <summary>
     /// 点云滤波接口
     /// </summary>
-    public interface IPointCloudFilters
+    public interface ICloudFilters
     {
         #region # 适用直通滤波 —— Point3F[] ApplyPassThrogh(IEnumerable<Point3F> points...
         /// <summary>

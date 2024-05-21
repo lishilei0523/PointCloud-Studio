@@ -33,7 +33,9 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\PCLSharp.Filters\PCLSharp.Filters.csproj" />
     <ProjectReference Include="..\Sample.Presentation\Sample.Presentation.csproj" />
+    <ProjectReference Include="..\PCLSharp.Primitives\PCLSharp.Primitives.csproj" />
+    <ProjectReference Include="..\PCLSharp.FileIO\PCLSharp.FileIO.csproj" />
+    <ProjectReference Include="..\PCLSharp.Filters\PCLSharp.Filters.csproj" />
   </ItemGroup>
 </Project>
