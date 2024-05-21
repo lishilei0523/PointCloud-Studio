@@ -33,7 +33,7 @@ Point3Fs* loadPCD(const char* filePath)
 /// </summary>
 /// <param name="filePath">文件路径</param>
 /// <returns>点集</returns>
-Point3Fs* CALLING_MODE loadPLY(const char* filePath)
+Point3Fs* loadPLY(const char* filePath)
 {
 	PointCloud<PointXYZ> cloud;
 	const int& loadStatus = pcl::io::loadPLYFile(filePath, cloud);
@@ -52,7 +52,7 @@ Point3Fs* CALLING_MODE loadPLY(const char* filePath)
 /// </summary>
 /// <param name="filePath">文件路径</param>
 /// <returns>点集</returns>
-Point3Fs* CALLING_MODE loadOBJ(const char* filePath)
+Point3Fs* loadOBJ(const char* filePath)
 {
 	PointCloud<PointXYZ> cloud;
 	const int& loadStatus = pcl::io::loadOBJFile(filePath, cloud);
