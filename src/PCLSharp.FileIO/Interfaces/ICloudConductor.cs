@@ -35,40 +35,40 @@ namespace PCLSharp.FileIO.Interfaces
         Point3F[] LoadOBJ(string filePath);
         #endregion
 
-        #region # 保存PCD文本文件 —— void SaveTextPCD(string filePath, IEnumerable<Point3F> points)
+        #region # 保存PCD文本文件 —— void SaveTextPCD(IEnumerable<Point3F> points, string filePath)
         /// <summary>
         /// 保存PCD文本文件
         /// </summary>
-        /// <param name="filePath">文件路径</param>
         /// <param name="points">点集</param>
-        void SaveTextPCD(string filePath, IEnumerable<Point3F> points);
+        /// <param name="filePath">文件路径</param>
+        void SaveTextPCD(IEnumerable<Point3F> points, string filePath);
         #endregion
 
-        #region # 保存PCD二进制文件 —— void SaveBinaryPCD(string filePath, IEnumerable<Point3F> points)
+        #region # 保存PCD二进制文件 —— void SaveBinaryPCD(IEnumerable<Point3F> points, string filePath)
         /// <summary>
         /// 保存PCD二进制文件
         /// </summary>
-        /// <param name="filePath">文件路径</param>
         /// <param name="points">点集</param>
-        void SaveBinaryPCD(string filePath, IEnumerable<Point3F> points);
+        /// <param name="filePath">文件路径</param>
+        void SaveBinaryPCD(IEnumerable<Point3F> points, string filePath);
         #endregion
 
-        #region # 保存PLY文本文件 —— void SaveTextPLY(string filePath, IEnumerable<Point3F> points)
+        #region # 保存PLY文本文件 —— void SaveTextPLY(IEnumerable<Point3F> points, string filePath)
         /// <summary>
         /// 保存PLY文本文件
         /// </summary>
-        /// <param name="filePath">文件路径</param>
         /// <param name="points">点集</param>
-        void SaveTextPLY(string filePath, IEnumerable<Point3F> points);
+        /// <param name="filePath">文件路径</param>
+        void SaveTextPLY(IEnumerable<Point3F> points, string filePath);
         #endregion
 
-        #region # 保存PLY二进制文件 —— void SaveBinaryPLY(string filePath, IEnumerable<Point3F> points)
+        #region # 保存PLY二进制文件 —— void SaveBinaryPLY(IEnumerable<Point3F> points, string filePath)
         /// <summary>
         /// 保存PLY二进制文件
         /// </summary>
-        /// <param name="filePath">文件路径</param>
         /// <param name="points">点集</param>
-        void SaveBinaryPLY(string filePath, IEnumerable<Point3F> points);
+        /// <param name="filePath">文件路径</param>
+        void SaveBinaryPLY(IEnumerable<Point3F> points, string filePath);
         #endregion
     }
 }

@@ -105,13 +105,13 @@ namespace PCLSharp.FileIO.Implements
         }
         #endregion
 
-        #region # 保存PCD文本文件 —— void SaveTextPCD(string filePath, IEnumerable<Point3F> points)
+        #region # 保存PCD文本文件 —— void SaveTextPCD(IEnumerable<Point3F> points, string filePath)
         /// <summary>
         /// 保存PCD文本文件
         /// </summary>
-        /// <param name="filePath">文件路径</param>
         /// <param name="points">点集</param>
-        public void SaveTextPCD(string filePath, IEnumerable<Point3F> points)
+        /// <param name="filePath">文件路径</param>
+        public void SaveTextPCD(IEnumerable<Point3F> points, string filePath)
         {
             Point3F[] points_ = points?.ToArray() ?? Array.Empty<Point3F>();
 
@@ -132,13 +132,13 @@ namespace PCLSharp.FileIO.Implements
         }
         #endregion
 
-        #region # 保存PCD二进制文件 —— void SaveBinaryPCD(string filePath, IEnumerable<Point3F> points)
+        #region # 保存PCD二进制文件 —— void SaveBinaryPCD(IEnumerable<Point3F> points, string filePath)
         /// <summary>
         /// 保存PCD二进制文件
         /// </summary>
-        /// <param name="filePath">文件路径</param>
         /// <param name="points">点集</param>
-        public void SaveBinaryPCD(string filePath, IEnumerable<Point3F> points)
+        /// <param name="filePath">文件路径</param>
+        public void SaveBinaryPCD(IEnumerable<Point3F> points, string filePath)
         {
             Point3F[] points_ = points?.ToArray() ?? Array.Empty<Point3F>();
 
@@ -159,13 +159,13 @@ namespace PCLSharp.FileIO.Implements
         }
         #endregion
 
-        #region # 保存PLY文本文件 —— void SaveTextPLY(string filePath, IEnumerable<Point3F> points)
+        #region # 保存PLY文本文件 —— void SaveTextPLY(IEnumerable<Point3F> points, string filePath)
         /// <summary>
         /// 保存PLY文本文件
         /// </summary>
-        /// <param name="filePath">文件路径</param>
         /// <param name="points">点集</param>
-        public void SaveTextPLY(string filePath, IEnumerable<Point3F> points)
+        /// <param name="filePath">文件路径</param>
+        public void SaveTextPLY(IEnumerable<Point3F> points, string filePath)
         {
             Point3F[] points_ = points?.ToArray() ?? Array.Empty<Point3F>();
 
@@ -186,13 +186,13 @@ namespace PCLSharp.FileIO.Implements
         }
         #endregion
 
-        #region # 保存PLY二进制文件 —— void SaveBinaryPLY(string filePath, IEnumerable<Point3F> points)
+        #region # 保存PLY二进制文件 —— void SaveBinaryPLY(IEnumerable<Point3F> points, string filePath)
         /// <summary>
         /// 保存PLY二进制文件
         /// </summary>
-        /// <param name="filePath">文件路径</param>
         /// <param name="points">点集</param>
-        public void SaveBinaryPLY(string filePath, IEnumerable<Point3F> points)
+        /// <param name="filePath">文件路径</param>
+        public void SaveBinaryPLY(IEnumerable<Point3F> points, string filePath)
         {
             Point3F[] points_ = points?.ToArray() ?? Array.Empty<Point3F>();
 
