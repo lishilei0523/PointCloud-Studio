@@ -1,15 +1,8 @@
 #pragma once
 #define EXPORT extern "C" __declspec(dllexport)
 #define CALLING_MODE _cdecl
-#include <format>
-#include <pcl/point_types.h>
-#include <pcl/point_cloud.h>
-#include <pcl/io/pcd_io.h>
-#include <pcl/io/ply_io.h>
-#include <pcl/io/obj_io.h>
 #include <point3f.h>
 #include <point3fs.h>
-#include <primitives_map.h>
 
 /// <summary>
 /// ╪стьPCDнд╪Ч

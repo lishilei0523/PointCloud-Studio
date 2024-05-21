@@ -1,3 +1,10 @@
+#include <format>
+#include <pcl/point_types.h>
+#include <pcl/point_cloud.h>
+#include <pcl/io/pcd_io.h>
+#include <pcl/io/ply_io.h>
+#include <pcl/io/obj_io.h>
+#include <primitives_map.h>
 #include "pcl_conductor.h"
 using namespace std;
 using namespace pcl;

@@ -1,3 +1,10 @@
+#include <pcl/point_types.h>
+#include <pcl/point_cloud.h>
+#include <pcl/filters/passthrough.h>
+#include <pcl/filters/uniform_sampling.h>
+#include <pcl/filters/voxel_grid.h>
+#include <pcl/filters/statistical_outlier_removal.h>
+#include <primitives_map.h>
 #include "pcl_filters.h"
 using namespace std;
 using namespace pcl;
