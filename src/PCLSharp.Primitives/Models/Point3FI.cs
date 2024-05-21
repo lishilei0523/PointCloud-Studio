@@ -1,0 +1,47 @@
+﻿using System.Runtime.InteropServices;
+
+namespace PCLSharp.Primitives.Models
+{
+    /// <summary>
+    /// 强度坐标点
+    /// </summary>
+    [StructLayout(LayoutKind.Sequential)]
+    public struct Point3FI
+    {
+        /// <summary>
+        /// 创建强度坐标点构造器
+        /// </summary>
+        /// <param name="x">X坐标</param>
+        /// <param name="y">Y坐标</param>
+        /// <param name="z">Z坐标</param>
+        /// <param name="intensity">强度</param>
+        public Point3FI(float x, float y, float z, float intensity)
+            : this()
+        {
+            this.X = x;
+            this.Y = y;
+            this.Z = z;
+            this.Intensity = intensity;
+        }
+
+        /// <summary>
+        /// X坐标
+        /// </summary>
+        public float X;
+
+        /// <summary>
+        /// Y坐标
+        /// </summary>
+        public float Y;
+
+        /// <summary>
+        /// Z坐标
+        /// </summary>
+        public float Z;
+
+        /// <summary>
+        /// 强度
+        /// </summary>
+        public float Intensity;
+    }
+}

@@ -18,19 +18,11 @@
       <Platform>x64</Platform>
     </ProjectConfiguration>
   </ItemGroup>
-  <ItemGroup>
-    <ClInclude Include="point3f.h" />
-    <ClInclude Include="point_cloud_filter.h" />
-    <ClInclude Include="point_array.h" />
-  </ItemGroup>
-  <ItemGroup>
-    <ClCompile Include="point_cloud_filter.cpp" />
-  </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>17.0</VCProjectVersion>
     <Keyword>Win32Proj</Keyword>
-    <ProjectGuid>{91e6cc88-09d2-4f37-828e-1b29e6817fff}</ProjectGuid>
-    <RootNamespace>SamplePCLFilters</RootNamespace>
+    <ProjectGuid>{2e39ca0f-912b-46c6-808a-34bb95c4cb6f}</ProjectGuid>
+    <RootNamespace>PCLSharpPrimitivesNative</RootNamespace>
     <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
@@ -160,6 +152,14 @@
       <GenerateDebugInformation>true</GenerateDebugInformation>
     </Link>
   </ItemDefinitionGroup>
+  <ItemGroup>
+    <ClInclude Include="point3f.h" />
+    <ClInclude Include="point3fs.h" />
+    <ClInclude Include="primitives_map.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="primitives_map.cpp" />
+  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>

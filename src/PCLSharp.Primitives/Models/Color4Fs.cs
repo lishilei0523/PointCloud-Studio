@@ -1,16 +1,16 @@
 ﻿using System;
 
-namespace Sample.Presentation.Models
+namespace PCLSharp.Primitives.Models
 {
     /// <summary>
-    /// 3D坐标点数组
+    /// RGBA颜色集结构体
     /// </summary>
-    public struct PointArray
+    public struct Color4Fs
     {
         /// <summary>
-        /// 点集指针
+        /// RGBA颜色集指针
         /// </summary>
-        public IntPtr Points;
+        public IntPtr Colors;
 
         /// <summary>
         /// 长度

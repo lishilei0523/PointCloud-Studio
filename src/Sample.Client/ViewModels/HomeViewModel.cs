@@ -1,7 +1,7 @@
 ﻿using HelixToolkit.Wpf.SharpDX;
+using PCLSharp.Filters.Interfaces;
+using PCLSharp.Primitives.Models;
 using Sample.Presentation.Maps;
-using Sample.Presentation.Models;
-using Sample.Presentation.Presenters;
 using SD.Infrastructure.WPF.Caliburn.Aspects;
 using SD.Infrastructure.WPF.Caliburn.Base;
 using SharpDX;
@@ -24,16 +24,16 @@ namespace Sample.Client.ViewModels
         #region # 字段及构造器
 
         /// <summary>
-        /// 点云呈现器
+        /// 点云滤波接口
         /// </summary>
-        private readonly PointCloudPresenter _pointCloudPresenter;
+        private readonly IPointCloudFilters _pointCloudFilters;
 
         /// <summary>
         /// 依赖注入构造器
         /// </summary>
-        public HomeViewModel(PointCloudPresenter pointCloudPresenter)
+        public HomeViewModel(IPointCloudFilters pointCloudFilters)
         {
-            this._pointCloudPresenter = pointCloudPresenter;
+            this._pointCloudFilters = pointCloudFilters;
         }
 
         #endregion
@@ -104,7 +104,7 @@ namespace Sample.Client.ViewModels
             this.Busy();
 
             IEnumerable<Point3F> points = this.OriginalPointCloud.Points.Select(point => point.ToPoint3F());
-            ICollection<Point3F> filterdPoints = await Task.Run(() => this._pointCloudPresenter.ApplyPassThrogh(points, "z", 0, 0.05f));
+            ICollection<Point3F> filterdPoints = await Task.Run(() => this._pointCloudFilters.ApplyPassThrogh(points, "z", 0, 0.05f));
 
             this.Idle();
 
@@ -125,7 +125,7 @@ namespace Sample.Client.ViewModels
             this.Busy();
 
             IEnumerable<Point3F> points = this.OriginalPointCloud.Points.Select(point => point.ToPoint3F());
-            ICollection<Point3F> filterdPoints = await Task.Run(() => this._pointCloudPresenter.ApplyUniformSampling(points, 0.05f));
+            ICollection<Point3F> filterdPoints = await Task.Run(() => this._pointCloudFilters.ApplyUniformSampling(points, 0.05f));
 
             this.Idle();
 
@@ -146,7 +146,7 @@ namespace Sample.Client.ViewModels
             this.Busy();
 
             IEnumerable<Point3F> points = this.OriginalPointCloud.Points.Select(point => point.ToPoint3F());
-            ICollection<Point3F> filterdPoints = await Task.Run(() => this._pointCloudPresenter.ApplyVoxelGrid(points, 0.01f));
+            ICollection<Point3F> filterdPoints = await Task.Run(() => this._pointCloudFilters.ApplyVoxelGrid(points, 0.01f));
 
             this.Idle();
 
@@ -167,7 +167,7 @@ namespace Sample.Client.ViewModels
             this.Busy();
 
             IEnumerable<Point3F> points = this.OriginalPointCloud.Points.Select(point => point.ToPoint3F());
-            ICollection<Point3F> filterdPoints = await Task.Run(() => this._pointCloudPresenter.ApplyOutlierRemoval(points, 50, 1));
+            ICollection<Point3F> filterdPoints = await Task.Run(() => this._pointCloudFilters.ApplyOutlierRemoval(points, 50, 1));
 
             this.Idle();
 

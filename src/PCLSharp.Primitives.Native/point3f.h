@@ -1,7 +1,7 @@
 #pragma once
 
 /// <summary>
-/// 3D坐标点
+/// 坐标点
 /// </summary>
 struct Point3F
 {
@@ -13,7 +13,7 @@ public:
 	Point3F() = default;
 
 	/// <summary>
-	/// 创建3D坐标点构造器
+	/// 创建坐标点构造器
 	/// </summary>
 	/// <param name="x">X坐标</param>
 	/// <param name="y">Y坐标</param>

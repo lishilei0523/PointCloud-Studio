@@ -1,5 +1,5 @@
 ﻿using HelixToolkit.Wpf.SharpDX;
-using Sample.Presentation.Models;
+using PCLSharp.Primitives.Models;
 using SharpDX;
 
 namespace Sample.Presentation.Maps
@@ -10,7 +10,7 @@ namespace Sample.Presentation.Maps
     public static class PointMap
     {
         /// <summary>
-        /// HX坐标点映射3D坐标点
+        /// HX坐标点映射坐标点
         /// </summary>
         public static Point3F ToPoint3F(this Geometry3D.Point point)
         {
@@ -18,7 +18,7 @@ namespace Sample.Presentation.Maps
         }
 
         /// <summary>
-        /// 3D坐标点映射三维向量
+        /// 坐标点映射三维向量
         /// </summary>
         public static Vector3 ToVector3(this Point3F point3F)
         {

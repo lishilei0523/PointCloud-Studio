@@ -33,6 +33,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\PCLSharp.Filters\PCLSharp.Filters.csproj" />
     <ProjectReference Include="..\Sample.Presentation\Sample.Presentation.csproj" />
   </ItemGroup>
 </Project>
