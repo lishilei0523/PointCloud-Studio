@@ -9,29 +9,35 @@
         xmlns:busyIndicator="https://github.com/Peoky/BusyIndicator"
         mc:Ignorable="d"
         Style="{StaticResource MetroWindow.Styles.Clean}"
-        Title="Point Cloud" 
-        ShowIconOnTitleBar="True"
+        Title="Point Cloud" ShowIconOnTitleBar="True"
         Width="1440" Height="900" FontSize="14">
 
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height="50" />
+            <!--Header-->
+            <RowDefinition Height="Auto" />
+            <!--Body-->
             <RowDefinition Height="*" />
+            <!--Footer-->
+            <RowDefinition Height="25" />
         </Grid.RowDefinitions>
-        <!--功能区-->
+        <!--Header-->
         <Border Grid.Row="0" Style="{StaticResource Panel.Styles.Function.Border}">
-            <WrapPanel Style="{StaticResource WrapPanel.Styles.Function.Operation}">
-                <Button Content="直通滤波" cm:Message.Attach="ApplyPassThrogh()" 
-                        Style="{StaticResource Button.Styles.Fluent.Transparent.Round}" />
-                <Button Content="均匀降采样" cm:Message.Attach="ApplyUniformSample()" 
-                        Style="{StaticResource Button.Styles.Fluent.Transparent.Round}" />
-                <Button Content="体素降采样" cm:Message.Attach="ApplyVoxelGrid()" 
-                        Style="{StaticResource Button.Styles.Fluent.Transparent.Round}" />
-                <Button Content="离群点移除" cm:Message.Attach="ApplyOutlierRemoval()"
-                        Style="{StaticResource Button.Styles.Fluent.Transparent.Round}" />
-            </WrapPanel>
+            <Menu Margin="4,2">
+                <MenuItem Header="文件">
+                    <MenuItem Header="打开" />
+                    <MenuItem Header="保存" />
+                    <MenuItem Header="另存为" />
+                </MenuItem>
+                <MenuItem Header="滤波">
+                    <MenuItem Header="直通滤波" cm:Message.Attach="ApplyPassThrogh()" />
+                    <MenuItem Header="均匀降采样" cm:Message.Attach="ApplyUniformSample()" />
+                    <MenuItem Header="体素降采样" cm:Message.Attach="ApplyVoxelGrid()" />
+                    <MenuItem Header="离群点移除" cm:Message.Attach="ApplyOutlierRemoval()" />
+                </MenuItem>
+            </Menu>
         </Border>
-        <!--效果区-->
+        <!--Body-->
         <busyIndicator:BusyMask Grid.Row="1" IndicatorType="Cupertino" IsBusy="{Binding IsBusy}">
             <Grid>
                 <Grid.ColumnDefinitions>
@@ -41,15 +47,14 @@
                 <!--原始点云-->
                 <GroupBox Header="原始点云" Grid.Column="0" Margin="4,4,2,4">
                     <hx:Viewport3DX BackgroundColor="LightGray"
-                                MSAA="Maximum"
-                                ShowCameraInfo="True"
-                                ShowViewCube="True"
-                                ShowCoordinateSystem="True"
-                                CoordinateSystemSize="2"
-                                CoordinateSystemHorizontalPosition="-1"
-                                CoordinateSystemVerticalPosition="1"
-                                CoordinateSystemLabelForeground="Black"
-                                Camera="{Binding Camera}">
+                                    MSAA="Maximum"
+                                    ShowViewCube="False"
+                                    ShowCoordinateSystem="True"
+                                    CoordinateSystemSize="2"
+                                    CoordinateSystemHorizontalPosition="-1"
+                                    CoordinateSystemVerticalPosition="1"
+                                    CoordinateSystemLabelForeground="Black"
+                                    Camera="{Binding Camera}">
                         <!--效果器-->
                         <hx:Viewport3DX.EffectsManager>
                             <hx:DefaultEffectsManager />
@@ -75,15 +80,9 @@
                 <!--效果点云-->
                 <GroupBox Header="效果点云" Grid.Column="1" Margin="2,4,4,4">
                     <hx:Viewport3DX BackgroundColor="LightGray"
-                                MSAA="Maximum"
-                                ShowCameraInfo="True"
-                                ShowViewCube="True"
-                                ShowCoordinateSystem="True"
-                                CoordinateSystemSize="2"
-                                CoordinateSystemHorizontalPosition="-1"
-                                CoordinateSystemVerticalPosition="1"
-                                CoordinateSystemLabelForeground="Black"
-                                Camera="{Binding Camera}">
+                                    MSAA="Maximum"
+                                    ShowViewCube="True"
+                                    Camera="{Binding Camera}">
                         <!--效果器-->
                         <hx:Viewport3DX.EffectsManager>
                             <hx:DefaultEffectsManager />
@@ -108,5 +107,24 @@
                 </GroupBox>
             </Grid>
         </busyIndicator:BusyMask>
+        <!--Footer-->
+        <Border Grid.Row="2" Style="{StaticResource Panel.Styles.Function.Border}" BorderThickness="0,1,0,0">
+            <Grid>
+                <WrapPanel Margin="10,0,0,0" HorizontalAlignment="Left" VerticalAlignment="Center">
+                    <TextBlock Text="{Binding Camera.LookDirection, StringFormat=LookDirection: \{0:0.0\}}" FontSize="12" />
+                    <TextBlock Text=" | " FontSize="12" />
+                    <TextBlock Text="{Binding Camera.UpDirection, StringFormat=UpDirection: \{0:0.0\}}" FontSize="12" />
+                    <TextBlock Text=" | " FontSize="12" />
+                    <TextBlock Text="{Binding Camera.Position, StringFormat=Position: \{0:0.0\}}" FontSize="12" />
+                    <TextBlock Text=" | " FontSize="12" />
+                    <TextBlock Text="{Binding Camera.FieldOfView, StringFormat=FieldOfView: \{0:0.0\}}" FontSize="12" />
+                </WrapPanel>
+                <WrapPanel Margin="0,0,10,0" HorizontalAlignment="Right" VerticalAlignment="Center">
+                    <TextBlock Text="开发及技术支持 —— " FontSize="12" xml:space="preserve" />
+                    <TextBlock Text="SlamDunk co.,ltd." TextDecorations="Underline" Foreground="Blue" FontSize="12"
+                               Cursor="Hand" cm:Message.Attach="[Event MouseLeftButtonDown] = [Action LaunchGitee()]" />
+                </WrapPanel>
+            </Grid>
+        </Border>
     </Grid>
 </mah:MetroWindow>
