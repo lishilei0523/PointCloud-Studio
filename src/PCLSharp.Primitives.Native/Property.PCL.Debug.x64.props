@@ -18,6 +18,7 @@
       <ConformanceMode>false</ConformanceMode>
       <EnableEnhancedInstructionSet>AdvancedVectorExtensions</EnableEnhancedInstructionSet>
       <SDLCheck>false</SDLCheck>
+      <OpenMPSupport>true</OpenMPSupport>
     </ClCompile>
   </ItemDefinitionGroup>
   <ItemGroup />

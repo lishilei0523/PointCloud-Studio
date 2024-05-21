@@ -6,8 +6,6 @@
 /// </summary>
 struct Point3Fs
 {
-public:
-
 	/// <summary>
 	/// 无参构造器
 	/// </summary>

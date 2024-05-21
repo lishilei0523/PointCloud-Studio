@@ -26,7 +26,7 @@ PointCloud<PointXYZ> pclsharp::toPointCloud(Point3F point3Fs[], const int& lengt
 	for (int i = 0; i < length; i++)
 	{
 		const Point3F& point3F = point3Fs[i];
-		PointXYZ pointXYZ = PointXYZ(point3F.X, point3F.Y, point3F.Z);
+		const PointXYZ& pointXYZ = PointXYZ(point3F.X, point3F.Y, point3F.Z);
 		pointXYZs.push_back(pointXYZ);
 	}
 
