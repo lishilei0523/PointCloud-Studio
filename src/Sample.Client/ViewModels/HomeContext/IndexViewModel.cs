@@ -14,12 +14,12 @@ using System.Threading.Tasks;
 using System.Windows.Media.Media3D;
 using PerspectiveCamera = HelixToolkit.Wpf.SharpDX.PerspectiveCamera;
 
-namespace Sample.Client.ViewModels
+namespace Sample.Client.ViewModels.HomeContext
 {
     /// <summary>
     /// 首页视图模型
     /// </summary>
-    public class HomeViewModel : ScreenBase
+    public class IndexViewModel : ScreenBase
     {
         #region # 字段及构造器
 
@@ -31,7 +31,7 @@ namespace Sample.Client.ViewModels
         /// <summary>
         /// 依赖注入构造器
         /// </summary>
-        public HomeViewModel(IPointCloudFilters pointCloudFilters)
+        public IndexViewModel(IPointCloudFilters pointCloudFilters)
         {
             this._pointCloudFilters = pointCloudFilters;
         }
@@ -88,7 +88,7 @@ namespace Sample.Client.ViewModels
             };
 
             //加载点云
-            await this.LoadPointCloud();
+            await this.ReloadPointCloud();
         }
         #endregion
 
@@ -182,11 +182,11 @@ namespace Sample.Client.ViewModels
 
         //Private
 
-        #region 加载点云 —— async Task LoadPointCloud()
+        #region 加载点云 —— async Task ReloadPointCloud()
         /// <summary>
         /// 加载点云
         /// </summary>
-        private async Task LoadPointCloud()
+        private async Task ReloadPointCloud()
         {
             //读取ply文件
             string pointCloudPath = "../../../../../assets/table_scene_lms400.ply";
@@ -207,7 +207,7 @@ namespace Sample.Client.ViewModels
             }
 
             //几何对象赋值
-            Vector3[] pointVectors = point3Fs.Select(point => new Vector3(point.X, point.Y, point.Z)).ToArray();
+            Vector3[] pointVectors = point3Fs.Select(point => point.ToVector3()).ToArray();
             this.OriginalPointCloud = new PointGeometry3D
             {
                 Positions = new Vector3Collection(pointVectors)

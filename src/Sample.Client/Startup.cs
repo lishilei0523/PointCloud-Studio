@@ -1,6 +1,6 @@
 ﻿using Autofac;
 using Caliburn.Micro;
-using Sample.Client.ViewModels;
+using Sample.Client.ViewModels.HomeContext;
 using SD.IOC.Core.Extensions;
 using SD.IOC.Core.Mediators;
 using System;
@@ -37,7 +37,7 @@ namespace Sample.Client
         /// </summary>
         protected override async void OnStartup(object sender, StartupEventArgs e)
         {
-            await base.DisplayRootViewForAsync<HomeViewModel>();
+            await base.DisplayRootViewForAsync<IndexViewModel>();
         }
         #endregion
 

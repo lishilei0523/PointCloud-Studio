@@ -1,14 +1,14 @@
-﻿namespace Sample.Client.Views
+﻿namespace Sample.Client.Views.HomeContext
 {
     /// <summary>
     /// 首页视图
     /// </summary>
-    public partial class HomeView
+    public partial class IndexView
     {
         /// <summary>
         /// 构造器
         /// </summary>
-        public HomeView()
+        public IndexView()
         {
             this.InitializeComponent();
         }
