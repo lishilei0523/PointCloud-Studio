@@ -312,18 +312,33 @@ namespace Sample.Client.ViewModels.HomeContext
         /// </summary>
         public async void ApplyUniformSampling()
         {
+            #region # 验证
+
+            if (this.OriginalPointCloud == null)
+            {
+                MessageBox.Show("点云未加载！", "错误", MessageBoxButton.OK, MessageBoxImage.Error);
+                return;
+            }
+
+            #endregion
+
             this.Busy();
 
-            IEnumerable<Point3F> points = this.OriginalPointCloud.Points.Select(point => point.ToPoint3F());
-            ICollection<Point3F> filterdPoints = await Task.Run(() => this._cloudFilters.ApplyUniformSampling(points, 0.05f));
+            UniformSampleViewModel viewModel = ResolveMediator.Resolve<UniformSampleViewModel>();
+            bool? result = await this._windowManager.ShowDialogAsync(viewModel);
+            if (result == true)
+            {
+                IEnumerable<Point3F> points = this.OriginalPointCloud.Points.Select(point => point.ToPoint3F());
+                ICollection<Point3F> filterdPoints = await Task.Run(() => this._cloudFilters.ApplyUniformSampling(points, viewModel.Radius!.Value));
+
+                IEnumerable<Vector3> positions = filterdPoints.Select(x => x.ToVector3());
+                this.EffectivePointCloud = new PointGeometry3D
+                {
+                    Positions = new Vector3Collection(positions)
+                };
+            }
 
             this.Idle();
-
-            IEnumerable<Vector3> vectors = filterdPoints.Select(x => x.ToVector3());
-            this.EffectivePointCloud = new PointGeometry3D
-            {
-                Positions = new Vector3Collection(vectors)
-            };
         }
         #endregion
 
