@@ -7,6 +7,21 @@ namespace PCLSharp
     public static class Constants
     {
         /// <summary>
+        /// X轴
+        /// </summary>
+        public const string AxisX = "x";
+
+        /// <summary>
+        /// Y轴
+        /// </summary>
+        public const string AxisY = "y";
+
+        /// <summary>
+        /// Z轴
+        /// </summary>
+        public const string AxisZ = "z";
+
+        /// <summary>
         /// PCD格式点云
         /// </summary>
         public const string PCD = ".pcd";

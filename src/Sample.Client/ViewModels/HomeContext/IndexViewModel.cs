@@ -1,11 +1,14 @@
-﻿using HelixToolkit.Wpf.SharpDX;
+﻿using Caliburn.Micro;
+using HelixToolkit.Wpf.SharpDX;
 using Microsoft.Win32;
 using PCLSharp.FileIO.Interfaces;
 using PCLSharp.Filters.Interfaces;
 using PCLSharp.Primitives.Models;
+using Sample.Client.ViewModels.FilterContext;
 using Sample.Presentation.Maps;
 using SD.Infrastructure.WPF.Caliburn.Aspects;
 using SD.Infrastructure.WPF.Caliburn.Base;
+using SD.IOC.Core.Mediators;
 using SharpDX;
 using System;
 using System.Collections.Generic;
@@ -13,6 +16,7 @@ using System.IO;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
+using System.Windows;
 using System.Windows.Input;
 using System.Windows.Media.Media3D;
 using Constants = PCLSharp.Constants;
@@ -38,12 +42,18 @@ namespace Sample.Client.ViewModels.HomeContext
         private readonly ICloudFilters _cloudFilters;
 
         /// <summary>
+        /// 窗体管理器
+        /// </summary>
+        private readonly IWindowManager _windowManager;
+
+        /// <summary>
         /// 依赖注入构造器
         /// </summary>
-        public IndexViewModel(ICloudConductor cloudConductor, ICloudFilters cloudFilters)
+        public IndexViewModel(ICloudConductor cloudConductor, ICloudFilters cloudFilters, IWindowManager windowManager)
         {
             this._cloudConductor = cloudConductor;
             this._cloudFilters = cloudFilters;
+            this._windowManager = windowManager;
         }
 
         #endregion
@@ -230,18 +240,33 @@ namespace Sample.Client.ViewModels.HomeContext
         /// </summary>
         public async void ApplyPassThrogh()
         {
+            #region # 验证
+
+            if (this.OriginalPointCloud == null)
+            {
+                MessageBox.Show("点云未加载！", "错误", MessageBoxButton.OK, MessageBoxImage.Error);
+                return;
+            }
+
+            #endregion
+
             this.Busy();
 
-            IEnumerable<Point3F> points = this.OriginalPointCloud.Points.Select(point => point.ToPoint3F());
-            ICollection<Point3F> filterdPoints = await Task.Run(() => this._cloudFilters.ApplyPassThrogh(points, "z", 0, 0.05f));
+            PassThroghViewModel viewModel = ResolveMediator.Resolve<PassThroghViewModel>();
+            bool? result = await this._windowManager.ShowDialogAsync(viewModel);
+            if (result == true)
+            {
+                IEnumerable<Point3F> points = this.OriginalPointCloud.Points.Select(point => point.ToPoint3F());
+                ICollection<Point3F> filterdPoints = await Task.Run(() => this._cloudFilters.ApplyPassThrogh(points, viewModel.SelectedAxis, viewModel.LimitMin.Value, viewModel.LimitMax.Value));
+
+                IEnumerable<Vector3> positions = filterdPoints.Select(x => x.ToVector3());
+                this.EffectivePointCloud = new PointGeometry3D
+                {
+                    Positions = new Vector3Collection(positions)
+                };
+            }
 
             this.Idle();
-
-            IEnumerable<Vector3> vectors = filterdPoints.Select(x => x.ToVector3());
-            this.EffectivePointCloud = new PointGeometry3D
-            {
-                Positions = new Vector3Collection(vectors)
-            };
         }
         #endregion
 
