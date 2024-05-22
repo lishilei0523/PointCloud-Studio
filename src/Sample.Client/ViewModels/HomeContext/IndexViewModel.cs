@@ -1,4 +1,6 @@
 ﻿using HelixToolkit.Wpf.SharpDX;
+using Microsoft.Win32;
+using PCLSharp.FileIO.Interfaces;
 using PCLSharp.Filters.Interfaces;
 using PCLSharp.Primitives.Models;
 using Sample.Presentation.Maps;
@@ -11,7 +13,9 @@ using System.IO;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
+using System.Windows.Input;
 using System.Windows.Media.Media3D;
+using Constants = PCLSharp.Constants;
 using PerspectiveCamera = HelixToolkit.Wpf.SharpDX.PerspectiveCamera;
 
 namespace Sample.Client.ViewModels.HomeContext
@@ -24,6 +28,11 @@ namespace Sample.Client.ViewModels.HomeContext
         #region # 字段及构造器
 
         /// <summary>
+        /// 点云读写器接口
+        /// </summary>
+        private readonly ICloudConductor _cloudConductor;
+
+        /// <summary>
         /// 点云滤波接口
         /// </summary>
         private readonly ICloudFilters _cloudFilters;
@@ -31,8 +40,9 @@ namespace Sample.Client.ViewModels.HomeContext
         /// <summary>
         /// 依赖注入构造器
         /// </summary>
-        public IndexViewModel(ICloudFilters cloudFilters)
+        public IndexViewModel(ICloudConductor cloudConductor, ICloudFilters cloudFilters)
         {
+            this._cloudConductor = cloudConductor;
             this._cloudFilters = cloudFilters;
         }
 
@@ -40,12 +50,20 @@ namespace Sample.Client.ViewModels.HomeContext
 
         #region # 属性
 
-        #region 相机 —— PerspectiveCamera Camera
+        #region 文件路径 —— string FilePath
         /// <summary>
-        /// 相机
+        /// 文件路径
         /// </summary>
         [DependencyProperty]
-        public PerspectiveCamera Camera { get; set; }
+        public string FilePath { get; set; }
+        #endregion
+
+        #region 文件格式 —— string FileExtension
+        /// <summary>
+        /// 文件格式
+        /// </summary>
+        [DependencyProperty]
+        public string FileExtension { get; set; }
         #endregion
 
         #region 原始点云 —— PointGeometry3D OriginalPointCloud
@@ -64,6 +82,14 @@ namespace Sample.Client.ViewModels.HomeContext
         public PointGeometry3D EffectivePointCloud { get; set; }
         #endregion
 
+        #region 相机 —— PerspectiveCamera Camera
+        /// <summary>
+        /// 相机
+        /// </summary>
+        [DependencyProperty]
+        public PerspectiveCamera Camera { get; set; }
+        #endregion
+
         #endregion
 
         #region # 方法
@@ -74,7 +100,7 @@ namespace Sample.Client.ViewModels.HomeContext
         /// <summary>
         /// 初始化
         /// </summary>
-        protected override async Task OnInitializeAsync(CancellationToken cancellationToken)
+        protected override Task OnInitializeAsync(CancellationToken cancellationToken)
         {
             //初始化相机
             this.Camera = new PerspectiveCamera
@@ -87,13 +113,116 @@ namespace Sample.Client.ViewModels.HomeContext
                 FieldOfView = 30
             };
 
-            //加载点云
-            await this.ReloadPointCloud();
+            return base.OnInitializeAsync(cancellationToken);
         }
         #endregion
 
 
         //Actions
+
+        #region 打开点云 —— async void OpenCloud()
+        /// <summary>
+        /// 打开点云
+        /// </summary>
+        public async void OpenCloud()
+        {
+            OpenFileDialog openFileDialog = new OpenFileDialog
+            {
+                Filter = Constants.OpenCloudExtFilter,
+                AddExtension = true,
+                RestoreDirectory = true
+            };
+            if (openFileDialog.ShowDialog() == true)
+            {
+                this.Busy();
+
+                this.FilePath = openFileDialog.FileName;
+                this.FileExtension = Path.GetExtension(this.FilePath);
+                await this.ReloadCloud();
+
+                this.Idle();
+            }
+        }
+        #endregion
+
+        #region 刷新点云 —— async void RefreshCloud()
+        /// <summary>
+        /// 刷新点云
+        /// </summary>
+        public async void RefreshCloud()
+        {
+            this.Busy();
+
+            await this.ReloadCloud();
+
+            this.Idle();
+        }
+        #endregion
+
+        #region 保存点云 —— async void SaveCloud()
+        /// <summary>
+        /// 保存点云
+        /// </summary>
+        public async void SaveCloud()
+        {
+            this.Busy();
+
+            IEnumerable<Point3F> points = this.EffectivePointCloud.Points.Select(x => x.ToPoint3F());
+            if (this.FileExtension == Constants.PCD)
+            {
+                await Task.Run(() => this._cloudConductor.SaveTextPCD(points, this.FilePath));
+            }
+            if (this.FileExtension == Constants.PLY)
+            {
+                await Task.Run(() => this._cloudConductor.SaveTextPLY(points, this.FilePath));
+            }
+            if (this.FileExtension == Constants.OBJ)
+            {
+                this.FilePath = this.FilePath.Replace(Constants.OBJ, Constants.PCD);
+                await Task.Run(() => this._cloudConductor.SaveTextPCD(points, this.FilePath));
+            }
+
+            await this.ReloadCloud();
+
+            this.Idle();
+            this.ToastSuccess("保存成功！");
+        }
+        #endregion
+
+        #region 另存为点云 —— async void SaveAsCloud()
+        /// <summary>
+        /// 另存为点云
+        /// </summary>
+        public async void SaveAsCloud()
+        {
+            SaveFileDialog saveFileDialog = new SaveFileDialog
+            {
+                Filter = Constants.SaveCloudExtFilter,
+                FileName = $"{Path.GetFileNameWithoutExtension(this.FilePath)} - 副本",
+                AddExtension = true,
+                RestoreDirectory = true
+            };
+            if (saveFileDialog.ShowDialog() == true)
+            {
+                this.Busy();
+
+                IEnumerable<Point3F> points = this.EffectivePointCloud.Points.Select(x => x.ToPoint3F());
+                string filePath = saveFileDialog.FileName;
+                string fileExt = Path.GetExtension(filePath);
+                if (fileExt == Constants.PCD)
+                {
+                    await Task.Run(() => this._cloudConductor.SaveTextPCD(points, filePath));
+                }
+                if (fileExt == Constants.PLY)
+                {
+                    await Task.Run(() => this._cloudConductor.SaveTextPLY(points, filePath));
+                }
+
+                this.Idle();
+                this.ToastSuccess("保存成功！");
+            }
+        }
+        #endregion
 
         #region 适用直通滤波 —— async void ApplyPassThrogh()
         /// <summary>
@@ -179,42 +308,48 @@ namespace Sample.Client.ViewModels.HomeContext
         }
         #endregion
 
+        #region 键盘按下事件 —— void OnKeyDown()
+        /// <summary>
+        /// 键盘按下事件
+        /// </summary>
+        public void OnKeyDown()
+        {
+            if (Keyboard.IsKeyDown(Key.F5))
+            {
+                this.RefreshCloud();
+            }
+            if (Keyboard.IsKeyDown(Key.LeftCtrl) && Keyboard.IsKeyDown(Key.S))
+            {
+                this.SaveCloud();
+            }
+        }
+        #endregion
+
 
         //Private
 
-        #region 加载点云 —— async Task ReloadPointCloud()
+        #region 加载点云 —— async Task ReloadCloud()
         /// <summary>
         /// 加载点云
         /// </summary>
-        private async Task ReloadPointCloud()
+        private async Task ReloadCloud()
         {
-            //读取ply文件
-            string pointCloudPath = "../../../../../assets/table_scene_lms400.ply";
-            string[] lines = await Task.Run(() => File.ReadAllLines(pointCloudPath));
-            int index = Array.IndexOf(lines, "end_header");
-
-            //解析点集
-            IList<Point3F> point3Fs = new List<Point3F>();
-            for (int i = index + 1; i < lines.Length; i++)
+            Point3F[] points = this.FileExtension switch
             {
-                string line = lines[i];
-                string[] pointsText = line.Split(' ');
-                float x = float.Parse(pointsText[0]);
-                float y = float.Parse(pointsText[1]);
-                float z = float.Parse(pointsText[2]);
-                Point3F point3F = new Point3F(x, y, z);
-                point3Fs.Add(point3F);
-            }
+                Constants.PCD => await Task.Run(() => this._cloudConductor.LoadPCD(this.FilePath)),
+                Constants.PLY => await Task.Run(() => this._cloudConductor.LoadPLY(this.FilePath)),
+                Constants.OBJ => await Task.Run(() => this._cloudConductor.LoadOBJ(this.FilePath)),
+                _ => throw new NotSupportedException("不支持的点云格式！")
+            };
 
-            //几何对象赋值
-            Vector3[] pointVectors = point3Fs.Select(point => point.ToVector3()).ToArray();
+            Vector3[] vectors = points.Select(x => x.ToVector3()).ToArray();
             this.OriginalPointCloud = new PointGeometry3D
             {
-                Positions = new Vector3Collection(pointVectors)
+                Positions = new Vector3Collection(vectors)
             };
             this.EffectivePointCloud = new PointGeometry3D
             {
-                Positions = new Vector3Collection(pointVectors)
+                Positions = new Vector3Collection(vectors)
             };
         }
         #endregion

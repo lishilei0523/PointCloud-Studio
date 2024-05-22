@@ -10,7 +10,8 @@
         mc:Ignorable="d"
         Style="{StaticResource MetroWindow.Styles.Clean}"
         Title="Point Cloud" ShowIconOnTitleBar="True"
-        Width="1440" Height="900" FontSize="14">
+        Width="1440" Height="900" FontSize="14"
+        cm:Message.Attach="[Event KeyDown] = [Action OnKeyDown()]">
 
     <Grid>
         <Grid.RowDefinitions>
@@ -25,9 +26,10 @@
         <Border Grid.Row="0" Style="{StaticResource Panel.Styles.Function.Border}">
             <Menu Margin="4,2">
                 <MenuItem Header="文件">
-                    <MenuItem Header="打开" />
-                    <MenuItem Header="保存" />
-                    <MenuItem Header="另存为" />
+                    <MenuItem Header="打开" cm:Message.Attach="OpenCloud()" />
+                    <MenuItem Header="刷新" cm:Message.Attach="RefreshCloud()" />
+                    <MenuItem Header="保存" cm:Message.Attach="SaveCloud()" />
+                    <MenuItem Header="另存为" cm:Message.Attach="SaveAsCloud()" />
                 </MenuItem>
                 <MenuItem Header="滤波">
                     <MenuItem Header="直通滤波" cm:Message.Attach="ApplyPassThrogh()" />
