@@ -24,6 +24,19 @@ namespace PCLSharp.Filters.Declarations
         public static extern IntPtr ApplyPassThrogh(Point3F[] points, int length, string axis, float limitMin, float limixMax);
         #endregion
 
+        #region # 适用随机采样 —— static extern IntPtr ApplyRandomSampling(Point3F[] points...
+        /// <summary>
+        /// 适用随机采样
+        /// </summary>
+        /// <param name="points">点集</param>
+        /// <param name="length">点集长度</param>
+        /// <param name="seed">随机种子</param>
+        /// <param name="samplesCount">采样数量</param>
+        /// <returns>过滤后点集</returns>
+        [DllImport(AssemblyNames.Filters, EntryPoint = "applyRandomSampling")]
+        public static extern IntPtr ApplyRandomSampling(Point3F[] points, int length, int seed, int samplesCount);
+        #endregion
+
         #region # 适用均匀采样 —— static extern IntPtr ApplyUniformSampling(Point3F[] points...
         /// <summary>
         /// 适用均匀采样
@@ -48,17 +61,42 @@ namespace PCLSharp.Filters.Declarations
         public static extern IntPtr ApplyVoxelGrid(Point3F[] points, int length, float leafSize);
         #endregion
 
-        #region # 适用离群点移除 —— static extern IntPtr ApplyOutlierRemoval(Point3F[] points...
+        #region # 适用近似体素降采样 —— static extern IntPtr ApplyApproximateVoxelGrid(Point3F[] points...
         /// <summary>
-        /// 适用离群点移除
+        /// 适用近似体素降采样
+        /// </summary>
+        /// <param name="points">点集</param>
+        /// <param name="length">点集长度</param>
+        /// <param name="leafSize">叶尺寸</param>
+        /// <returns>过滤后点集</returns>
+        [DllImport(AssemblyNames.Filters, EntryPoint = "applyApproximateVoxelGrid")]
+        public static extern IntPtr ApplyApproximateVoxelGrid(Point3F[] points, int length, float leafSize);
+        #endregion
+
+        #region # 适用统计离群点移除 —— static extern IntPtr ApplyStatisticalOutlierRemoval(Point3F[] points...
+        /// <summary>
+        /// 适用统计离群点移除
         /// </summary>
         /// <param name="points">点集</param>
         /// <param name="length">点集长度</param>
         /// <param name="meanK">平均距离估计的最近邻居的数量</param>
         /// <param name="stddevMult">标准差阈值系数</param>
         /// <returns>过滤后点集</returns>
-        [DllImport(AssemblyNames.Filters, EntryPoint = "applyOutlierRemoval")]
-        public static extern IntPtr ApplyOutlierRemoval(Point3F[] points, int length, int meanK, float stddevMult);
+        [DllImport(AssemblyNames.Filters, EntryPoint = "applyStatisticalOutlierRemoval")]
+        public static extern IntPtr ApplyStatisticalOutlierRemoval(Point3F[] points, int length, int meanK, float stddevMult);
+        #endregion
+
+        #region # 适用半径离群点移除 —— static extern IntPtr ApplyRadiusOutlierRemoval(Point3F[] points...
+        /// <summary>
+        /// 适用半径离群点移除
+        /// </summary>
+        /// <param name="points">点集</param>
+        /// <param name="length">点集长度</param>
+        /// <param name="radius">搜索半径</param>
+        /// <param name="minNeighborsInRadius">半径范围内点数量最小值</param>
+        /// <returns>过滤后点集</returns>
+        [DllImport(AssemblyNames.Filters, EntryPoint = "applyRadiusOutlierRemoval")]
+        public static extern IntPtr ApplyRadiusOutlierRemoval(Point3F[] points, int length, float radius, int minNeighborsInRadius);
         #endregion
 
         #region # 释放资源 —— static extern void Dispose(IntPtr pointer)

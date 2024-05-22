@@ -33,9 +33,12 @@
                 </MenuItem>
                 <MenuItem Header="滤波">
                     <MenuItem Header="直通滤波" cm:Message.Attach="ApplyPassThrogh()" />
-                    <MenuItem Header="均匀降采样" cm:Message.Attach="ApplyUniformSample()" />
+                    <MenuItem Header="随机采样" cm:Message.Attach="ApplyRandomSampling()" />
+                    <MenuItem Header="均匀采样" cm:Message.Attach="ApplyUniformSampling()" />
                     <MenuItem Header="体素降采样" cm:Message.Attach="ApplyVoxelGrid()" />
-                    <MenuItem Header="离群点移除" cm:Message.Attach="ApplyOutlierRemoval()" />
+                    <MenuItem Header="近似体素降采样" cm:Message.Attach="ApplyApproximateVoxelGrid()" />
+                    <MenuItem Header="统计离群点移除" cm:Message.Attach="ApplyStatisticalOutlierRemoval()" />
+                    <MenuItem Header="半径离群点移除" cm:Message.Attach="ApplyRadiusOutlierRemoval()" />
                 </MenuItem>
             </Menu>
         </Border>

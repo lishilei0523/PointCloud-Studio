@@ -245,11 +245,32 @@ namespace Sample.Client.ViewModels.HomeContext
         }
         #endregion
 
-        #region 适用均匀降采样 —— async void ApplyUniformSample()
+        #region 适用随机采样 —— async void ApplyRandomSampling()
         /// <summary>
-        /// 适用均匀降采样
+        /// 适用随机采样
         /// </summary>
-        public async void ApplyUniformSample()
+        public async void ApplyRandomSampling()
+        {
+            this.Busy();
+
+            IEnumerable<Point3F> points = this.OriginalPointCloud.Points.Select(point => point.ToPoint3F());
+            ICollection<Point3F> filterdPoints = await Task.Run(() => this._cloudFilters.ApplyRandomSampling(points, 12345, 10000));
+
+            this.Idle();
+
+            IEnumerable<Vector3> vectors = filterdPoints.Select(x => x.ToVector3());
+            this.EffectivePointCloud = new PointGeometry3D
+            {
+                Positions = new Vector3Collection(vectors)
+            };
+        }
+        #endregion
+
+        #region 适用均匀采样 —— async void ApplyUniformSampling()
+        /// <summary>
+        /// 适用均匀采样
+        /// </summary>
+        public async void ApplyUniformSampling()
         {
             this.Busy();
 
@@ -287,16 +308,58 @@ namespace Sample.Client.ViewModels.HomeContext
         }
         #endregion
 
-        #region 适用离群点移除 —— async void ApplyOutlierRemoval()
+        #region 适用近似体素降采样 —— async void ApplyApproximateVoxelGrid()
         /// <summary>
-        /// 适用离群点移除
+        /// 适用近似体素降采样
         /// </summary>
-        public async void ApplyOutlierRemoval()
+        public async void ApplyApproximateVoxelGrid()
         {
             this.Busy();
 
             IEnumerable<Point3F> points = this.OriginalPointCloud.Points.Select(point => point.ToPoint3F());
-            ICollection<Point3F> filterdPoints = await Task.Run(() => this._cloudFilters.ApplyOutlierRemoval(points, 50, 1));
+            ICollection<Point3F> filterdPoints = await Task.Run(() => this._cloudFilters.ApplyApproximateVoxelGrid(points, 0.02f));
+
+            this.Idle();
+
+            IEnumerable<Vector3> vectors = filterdPoints.Select(x => x.ToVector3());
+            this.EffectivePointCloud = new PointGeometry3D
+            {
+                Positions = new Vector3Collection(vectors)
+            };
+        }
+        #endregion
+
+        #region 适用统计离群点移除 —— async void ApplyStatisticalOutlierRemoval()
+        /// <summary>
+        /// 适用统计离群点移除
+        /// </summary>
+        public async void ApplyStatisticalOutlierRemoval()
+        {
+            this.Busy();
+
+            IEnumerable<Point3F> points = this.OriginalPointCloud.Points.Select(point => point.ToPoint3F());
+            ICollection<Point3F> filterdPoints = await Task.Run(() => this._cloudFilters.ApplyStatisticalOutlierRemoval(points, 50, 1));
+
+            this.Idle();
+
+            IEnumerable<Vector3> vectors = filterdPoints.Select(x => x.ToVector3());
+            this.EffectivePointCloud = new PointGeometry3D
+            {
+                Positions = new Vector3Collection(vectors)
+            };
+        }
+        #endregion
+
+        #region 适用半径离群点移除 —— async void ApplyRadiusOutlierRemoval()
+        /// <summary>
+        /// 适用半径离群点移除
+        /// </summary>
+        public async void ApplyRadiusOutlierRemoval()
+        {
+            this.Busy();
+
+            IEnumerable<Point3F> points = this.OriginalPointCloud.Points.Select(point => point.ToPoint3F());
+            ICollection<Point3F> filterdPoints = await Task.Run(() => this._cloudFilters.ApplyRadiusOutlierRemoval(points, 0.1f, 3));
 
             this.Idle();
 
