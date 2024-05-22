@@ -420,18 +420,33 @@ namespace Sample.Client.ViewModels.HomeContext
         /// </summary>
         public async void ApplyStatisticalOutlierRemoval()
         {
+            #region # 验证
+
+            if (this.OriginalPointCloud == null)
+            {
+                MessageBox.Show("点云未加载！", "错误", MessageBoxButton.OK, MessageBoxImage.Error);
+                return;
+            }
+
+            #endregion
+
             this.Busy();
 
-            IEnumerable<Point3F> points = this.OriginalPointCloud.Points.Select(point => point.ToPoint3F());
-            ICollection<Point3F> filterdPoints = await Task.Run(() => this._cloudFilters.ApplyStatisticalOutlierRemoval(points, 50, 1));
+            StatOutlierRemovalViewModel viewModel = ResolveMediator.Resolve<StatOutlierRemovalViewModel>();
+            bool? result = await this._windowManager.ShowDialogAsync(viewModel);
+            if (result == true)
+            {
+                IEnumerable<Point3F> points = this.OriginalPointCloud.Points.Select(point => point.ToPoint3F());
+                ICollection<Point3F> filterdPoints = await Task.Run(() => this._cloudFilters.ApplyStatisticalOutlierRemoval(points, viewModel.MeanK!.Value, viewModel.StddevMult!.Value));
+
+                IEnumerable<Vector3> positions = filterdPoints.Select(x => x.ToVector3());
+                this.EffectivePointCloud = new PointGeometry3D
+                {
+                    Positions = new Vector3Collection(positions)
+                };
+            }
 
             this.Idle();
-
-            IEnumerable<Vector3> vectors = filterdPoints.Select(x => x.ToVector3());
-            this.EffectivePointCloud = new PointGeometry3D
-            {
-                Positions = new Vector3Collection(vectors)
-            };
         }
         #endregion
 
@@ -441,18 +456,33 @@ namespace Sample.Client.ViewModels.HomeContext
         /// </summary>
         public async void ApplyRadiusOutlierRemoval()
         {
+            #region # 验证
+
+            if (this.OriginalPointCloud == null)
+            {
+                MessageBox.Show("点云未加载！", "错误", MessageBoxButton.OK, MessageBoxImage.Error);
+                return;
+            }
+
+            #endregion
+
             this.Busy();
 
-            IEnumerable<Point3F> points = this.OriginalPointCloud.Points.Select(point => point.ToPoint3F());
-            ICollection<Point3F> filterdPoints = await Task.Run(() => this._cloudFilters.ApplyRadiusOutlierRemoval(points, 0.1f, 3));
+            RadiusOutlierRemovalViewModel viewModel = ResolveMediator.Resolve<RadiusOutlierRemovalViewModel>();
+            bool? result = await this._windowManager.ShowDialogAsync(viewModel);
+            if (result == true)
+            {
+                IEnumerable<Point3F> points = this.OriginalPointCloud.Points.Select(point => point.ToPoint3F());
+                ICollection<Point3F> filterdPoints = await Task.Run(() => this._cloudFilters.ApplyRadiusOutlierRemoval(points, viewModel.Radius!.Value, viewModel.MinNeighborsInRadius!.Value));
+
+                IEnumerable<Vector3> positions = filterdPoints.Select(x => x.ToVector3());
+                this.EffectivePointCloud = new PointGeometry3D
+                {
+                    Positions = new Vector3Collection(positions)
+                };
+            }
 
             this.Idle();
-
-            IEnumerable<Vector3> vectors = filterdPoints.Select(x => x.ToVector3());
-            this.EffectivePointCloud = new PointGeometry3D
-            {
-                Positions = new Vector3Collection(vectors)
-            };
         }
         #endregion
 
