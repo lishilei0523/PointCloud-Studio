@@ -125,9 +125,11 @@
                     <TextBlock Text="{Binding Camera.FieldOfView, StringFormat=FieldOfView: \{0:0.0\}}" FontSize="12" />
                 </WrapPanel>
                 <WrapPanel Margin="0,0,10,0" HorizontalAlignment="Right" VerticalAlignment="Center">
-                    <TextBlock Text="开发及技术支持 —— " FontSize="12" xml:space="preserve" />
-                    <TextBlock Text="SlamDunk co.,ltd." TextDecorations="Underline" Foreground="Blue" FontSize="12"
-                               Cursor="Hand" cm:Message.Attach="[Event MouseLeftButtonDown] = [Action LaunchGitee()]" />
+                    <TextBlock Text="原始点云数量：" FontSize="12" />
+                    <TextBlock Text="{Binding OriginalPointCloud.Positions.Count}" FontSize="12" />
+                    <TextBlock Text=" | " FontSize="12" />
+                    <TextBlock Text="效果点云数量：" FontSize="12" />
+                    <TextBlock Text="{Binding EffectivePointCloud.Positions.Count}" FontSize="12" />
                 </WrapPanel>
             </Grid>
         </Border>
