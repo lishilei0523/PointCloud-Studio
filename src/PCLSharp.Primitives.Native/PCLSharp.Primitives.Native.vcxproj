@@ -153,6 +153,8 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="normal3f.h" />
+    <ClInclude Include="normal3fs.h" />
     <ClInclude Include="point3f.h" />
     <ClInclude Include="point3fs.h" />
     <ClInclude Include="primitives_map.h" />

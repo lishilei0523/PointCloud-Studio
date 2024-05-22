@@ -9,7 +9,7 @@ namespace PCLSharp.Primitives.Models
     public readonly struct Normal3F
     {
         /// <summary>
-        /// 创建3D法向量构造器
+        /// 创建法向量构造器
         /// </summary>
         /// <param name="nx">法向量X坐标</param>
         /// <param name="ny">法向量Y坐标</param>

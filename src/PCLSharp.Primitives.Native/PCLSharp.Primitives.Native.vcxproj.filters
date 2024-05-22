@@ -10,6 +10,12 @@
     <ClInclude Include="primitives_map.h">
       <Filter>Maps</Filter>
     </ClInclude>
+    <ClInclude Include="normal3f.h">
+      <Filter>Models</Filter>
+    </ClInclude>
+    <ClInclude Include="normal3fs.h">
+      <Filter>Models</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Models">
