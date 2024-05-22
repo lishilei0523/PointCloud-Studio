@@ -348,18 +348,33 @@ namespace Sample.Client.ViewModels.HomeContext
         /// </summary>
         public async void ApplyVoxelGrid()
         {
+            #region # 验证
+
+            if (this.OriginalPointCloud == null)
+            {
+                MessageBox.Show("点云未加载！", "错误", MessageBoxButton.OK, MessageBoxImage.Error);
+                return;
+            }
+
+            #endregion
+
             this.Busy();
 
-            IEnumerable<Point3F> points = this.OriginalPointCloud.Points.Select(point => point.ToPoint3F());
-            ICollection<Point3F> filterdPoints = await Task.Run(() => this._cloudFilters.ApplyVoxelGrid(points, 0.01f));
+            VoxelGridViewModel viewModel = ResolveMediator.Resolve<VoxelGridViewModel>();
+            bool? result = await this._windowManager.ShowDialogAsync(viewModel);
+            if (result == true)
+            {
+                IEnumerable<Point3F> points = this.OriginalPointCloud.Points.Select(point => point.ToPoint3F());
+                ICollection<Point3F> filterdPoints = await Task.Run(() => this._cloudFilters.ApplyVoxelGrid(points, viewModel.LeafSize!.Value));
+
+                IEnumerable<Vector3> positions = filterdPoints.Select(x => x.ToVector3());
+                this.EffectivePointCloud = new PointGeometry3D
+                {
+                    Positions = new Vector3Collection(positions)
+                };
+            }
 
             this.Idle();
-
-            IEnumerable<Vector3> vectors = filterdPoints.Select(x => x.ToVector3());
-            this.EffectivePointCloud = new PointGeometry3D
-            {
-                Positions = new Vector3Collection(vectors)
-            };
         }
         #endregion
 
@@ -369,18 +384,33 @@ namespace Sample.Client.ViewModels.HomeContext
         /// </summary>
         public async void ApplyApproximateVoxelGrid()
         {
+            #region # 验证
+
+            if (this.OriginalPointCloud == null)
+            {
+                MessageBox.Show("点云未加载！", "错误", MessageBoxButton.OK, MessageBoxImage.Error);
+                return;
+            }
+
+            #endregion
+
             this.Busy();
 
-            IEnumerable<Point3F> points = this.OriginalPointCloud.Points.Select(point => point.ToPoint3F());
-            ICollection<Point3F> filterdPoints = await Task.Run(() => this._cloudFilters.ApplyApproximateVoxelGrid(points, 0.02f));
+            ApprVoxelGridViewModel viewModel = ResolveMediator.Resolve<ApprVoxelGridViewModel>();
+            bool? result = await this._windowManager.ShowDialogAsync(viewModel);
+            if (result == true)
+            {
+                IEnumerable<Point3F> points = this.OriginalPointCloud.Points.Select(point => point.ToPoint3F());
+                ICollection<Point3F> filterdPoints = await Task.Run(() => this._cloudFilters.ApplyApproximateVoxelGrid(points, viewModel.LeafSize!.Value));
+
+                IEnumerable<Vector3> positions = filterdPoints.Select(x => x.ToVector3());
+                this.EffectivePointCloud = new PointGeometry3D
+                {
+                    Positions = new Vector3Collection(positions)
+                };
+            }
 
             this.Idle();
-
-            IEnumerable<Vector3> vectors = filterdPoints.Select(x => x.ToVector3());
-            this.EffectivePointCloud = new PointGeometry3D
-            {
-                Positions = new Vector3Collection(vectors)
-            };
         }
         #endregion
 
