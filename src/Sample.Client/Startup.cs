@@ -1,6 +1,7 @@
 ﻿using Autofac;
 using Caliburn.Micro;
 using Sample.Client.ViewModels.HomeContext;
+using SD.Infrastructure.WPF.Caliburn.Extensions;
 using SD.IOC.Core.Extensions;
 using SD.IOC.Core.Mediators;
 using System;
@@ -45,9 +46,16 @@ namespace Sample.Client
         /// <summary>
         /// 应用程序异常事件
         /// </summary>
-        protected override void OnUnhandledException(object sender, DispatcherUnhandledExceptionEventArgs exceptionEventArgs)
+        protected override void OnUnhandledException(object sender, DispatcherUnhandledExceptionEventArgs eventArgs)
         {
-            //TODO 处理异常
+            Exception exception = GetInnerException(eventArgs.Exception);
+            eventArgs.Handled = true;
+
+            //释放遮罩
+            BusyExtension.GlobalIdle();
+
+            //提示消息
+            MessageBox.Show(exception.Message, "错误", MessageBoxButton.OK, MessageBoxImage.Error);
         }
         #endregion
 
@@ -106,7 +114,24 @@ namespace Sample.Client
             IEnumerable<object> instances = ResolveMediator.ResolveAll(service);
             return instances;
         }
-        #endregion 
+        #endregion
+
+        #region 获取内部异常 —— static Exception GetInnerException(Exception exception)
+        /// <summary>
+        /// 获取内部异常
+        /// </summary>
+        /// <param name="exception">异常</param>
+        /// <returns>内部异常</returns>
+        private static Exception GetInnerException(Exception exception)
+        {
+            if (exception.InnerException != null)
+            {
+                return GetInnerException(exception.InnerException);
+            }
+
+            return exception;
+        }
+        #endregion
 
         #endregion
     }

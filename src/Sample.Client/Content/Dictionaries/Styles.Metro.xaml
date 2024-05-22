@@ -4,13 +4,24 @@
                     xmlns:mah="http://metro.mahapps.com/winfx/xaml/controls">
 
     <!--MahApps.Metro.Window默认样式-->
-    <Style x:Key="MetroWindow.Styles.Clean" TargetType="{x:Type mah:MetroWindow}" 
-           BasedOn="{StaticResource MahApps.Styles.MetroWindow.Clean}">
+    <Style x:Key="MetroWindow.Styles.Clean" TargetType="{x:Type mah:MetroWindow}">
         <Setter Property="WindowTitleBrush" Value="{DynamicResource MahApps.Brushes.Transparent}" />
         <Setter Property="NonActiveWindowTitleBrush" Value="{DynamicResource MahApps.Brushes.Transparent}" />
         <Setter Property="TitleAlignment" Value="Left" />
         <Setter Property="TitleCharacterCasing" Value="Normal" />
+        <Setter Property="TitleBarHeight" Value="28" />
         <Setter Property="TitleForeground" Value="{DynamicResource MahApps.Brushes.ThemeForeground}" />
+        <Setter Property="TitleTemplate">
+            <Setter.Value>
+                <DataTemplate>
+                    <TextBlock Margin="8,0,0,0"
+                               VerticalAlignment="Center"
+                               FontFamily="微软雅黑"
+                               FontSize="14"
+                               Text="{TemplateBinding Content}" />
+                </DataTemplate>
+            </Setter.Value>
+        </Setter>
     </Style>
     <!--MahApps.Metro.Icon默认样式-->
     <Style TargetType="{x:Type iconPacks:PackIconMaterialDesign}">

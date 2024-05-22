@@ -3,14 +3,15 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:hx="http://helix-toolkit.org/wpf/SharpDX"
-        xmlns:cm="http://caliburnmicro.com"
         xmlns:mah="http://metro.mahapps.com/winfx/xaml/controls"
+        xmlns:cm="http://caliburnmicro.com"
+        xmlns:hx="http://helix-toolkit.org/wpf/SharpDX"
         xmlns:busyIndicator="https://github.com/Peoky/BusyIndicator"
         mc:Ignorable="d"
-        Style="{StaticResource MetroWindow.Styles.Clean}"
-        Title="Point Cloud" ShowIconOnTitleBar="True"
+        Title="Point Cloud" 
         Width="1440" Height="900" FontSize="14"
+        WindowStartupLocation="CenterScreen"
+        Style="{StaticResource MetroWindow.Styles.Clean}"
         cm:Message.Attach="[Event KeyDown] = [Action OnKeyDown()]">
 
     <Grid>
@@ -42,8 +43,8 @@
                 </MenuItem>
                 <MenuItem Header="法向量">
                     <MenuItem Header="K估算法向量" cm:Message.Attach="EstimateNormalsByK()" />
-                    <MenuItem Header="Radius估算法向量" cm:Message.Attach="EstimateNormalsByRadius()" />
                     <MenuItem Header="K估算法向量(OMP)" cm:Message.Attach="EstimateNormalsByKP()" />
+                    <MenuItem Header="Radius估算法向量" cm:Message.Attach="EstimateNormalsByRadius()" />
                     <MenuItem Header="Radius估算法向量(OMP)" cm:Message.Attach="EstimateNormalsByRadiusP()" />
                 </MenuItem>
             </Menu>
