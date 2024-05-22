@@ -58,7 +58,7 @@ Point3Fs* pclsharp::toPoint3Fs(const PointCloud<PointXYZ>& pointCloud)
 /// </summary>
 /// <param name="normal3F">法向量</param>
 /// <returns>Normal</returns>
-Normal toNormal(const Normal3F& normal3F)
+Normal pclsharp::toNormal(const Normal3F& normal3F)
 {
 	const Normal& normal = Normal(normal3F.NX, normal3F.NY, normal3F.NZ);
 
@@ -71,7 +71,7 @@ Normal toNormal(const Normal3F& normal3F)
 /// <param name="normal3Fs">法向量集</param>
 /// <param name="length">长度</param>
 /// <returns>点云</returns>
-PointCloud<Normal> toPointCloud(Normal3F normal3Fs[], const int& length)
+PointCloud<Normal> pclsharp::toPointCloud(Normal3F normal3Fs[], const int& length)
 {
 	PointCloud<Normal> normals;
 	for (int i = 0; i < length; i++)
@@ -89,7 +89,7 @@ PointCloud<Normal> toPointCloud(Normal3F normal3Fs[], const int& length)
 /// </summary>
 /// <param name="pointCloud">点云</param>
 /// <returns>法向量集结构体</returns>
-Normal3Fs* toNormal3Fs(const PointCloud<Normal>& pointCloud)
+Normal3Fs* pclsharp::toNormal3Fs(const PointCloud<Normal>& pointCloud)
 {
 	const size_t length = pointCloud.size();
 	Normal3F* normals = new Normal3F[length];
