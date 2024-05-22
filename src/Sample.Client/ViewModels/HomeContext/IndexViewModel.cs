@@ -3,6 +3,7 @@ using HelixToolkit.Wpf.SharpDX;
 using Microsoft.Win32;
 using PCLSharp.FileIO.Interfaces;
 using PCLSharp.Filters.Interfaces;
+using PCLSharp.Normals.Interfaces;
 using PCLSharp.Primitives.Models;
 using Sample.Client.ViewModels.FilterContext;
 using Sample.Presentation.Maps;
@@ -42,6 +43,11 @@ namespace Sample.Client.ViewModels.HomeContext
         private readonly ICloudFilters _cloudFilters;
 
         /// <summary>
+        /// 点云法向量接口
+        /// </summary>
+        private readonly ICloudNormals _cloudNormals;
+
+        /// <summary>
         /// 窗体管理器
         /// </summary>
         private readonly IWindowManager _windowManager;
@@ -49,10 +55,11 @@ namespace Sample.Client.ViewModels.HomeContext
         /// <summary>
         /// 依赖注入构造器
         /// </summary>
-        public IndexViewModel(ICloudConductor cloudConductor, ICloudFilters cloudFilters, IWindowManager windowManager)
+        public IndexViewModel(ICloudConductor cloudConductor, ICloudFilters cloudFilters, ICloudNormals cloudNormals, IWindowManager windowManager)
         {
             this._cloudConductor = cloudConductor;
             this._cloudFilters = cloudFilters;
+            this._cloudNormals = cloudNormals;
             this._windowManager = windowManager;
         }
 
