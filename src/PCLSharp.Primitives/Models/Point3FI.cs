@@ -43,5 +43,18 @@ namespace PCLSharp.Primitives.Models
         /// 强度
         /// </summary>
         public readonly float Intensity;
+
+        /// <summary>
+        /// 是否是非数值
+        /// </summary>
+        public bool IsNaN()
+        {
+            if (this.X.Equals(float.NaN) || this.Y.Equals(float.NaN) || this.Z.Equals(float.NaN))
+            {
+                return true;
+            }
+
+            return false;
+        }
     }
 }

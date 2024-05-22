@@ -40,6 +40,12 @@
                     <MenuItem Header="统计离群点移除" cm:Message.Attach="ApplyStatisticalOutlierRemoval()" />
                     <MenuItem Header="半径离群点移除" cm:Message.Attach="ApplyRadiusOutlierRemoval()" />
                 </MenuItem>
+                <MenuItem Header="法向量">
+                    <MenuItem Header="K估算法向量" cm:Message.Attach="EstimateNormalsByK()" />
+                    <MenuItem Header="Radius估算法向量" cm:Message.Attach="EstimateNormalsByRadius()" />
+                    <MenuItem Header="K估算法向量(OMP)" cm:Message.Attach="EstimateNormalsByKP()" />
+                    <MenuItem Header="Radius估算法向量(OMP)" cm:Message.Attach="EstimateNormalsByRadiusP()" />
+                </MenuItem>
             </Menu>
         </Border>
         <!--Body-->
@@ -79,7 +85,7 @@
                         <!--光源-->
                         <hx:DirectionalLight3D Color="White" Direction="{Binding Camera.LookDirection}" />
                         <!--点云-->
-                        <hx:PointGeometryModel3D Geometry="{Binding OriginalPointCloud}" Color="Red" />
+                        <hx:PointGeometryModel3D Geometry="{Binding OriginalPointCloud}" Color="{Binding OriginalPointColor}" />
                     </hx:Viewport3DX>
                 </GroupBox>
                 <!--效果点云-->
@@ -107,7 +113,9 @@
                         <!--光源-->
                         <hx:DirectionalLight3D Color="White" Direction="{Binding Camera.LookDirection}" />
                         <!--点云-->
-                        <hx:PointGeometryModel3D Geometry="{Binding EffectivePointCloud}" Color="Red" />
+                        <hx:PointGeometryModel3D Geometry="{Binding EffectivePointCloud}" Color="{Binding EffectivePointColor}" />
+                        <!--法向量-->
+                        <hx:ItemsModel3D ItemsSource="{Binding EffectivePointNormals}" />
                     </hx:Viewport3DX>
                 </GroupBox>
             </Grid>

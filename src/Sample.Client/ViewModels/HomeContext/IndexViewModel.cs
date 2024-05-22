@@ -13,13 +13,16 @@ using SD.IOC.Core.Mediators;
 using SharpDX;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.IO;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Input;
+using System.Windows.Media;
 using System.Windows.Media.Media3D;
+using Color = System.Windows.Media.Color;
 using Constants = PCLSharp.Constants;
 using PerspectiveCamera = HelixToolkit.Wpf.SharpDX.PerspectiveCamera;
 
@@ -99,6 +102,30 @@ namespace Sample.Client.ViewModels.HomeContext
         public PointGeometry3D EffectivePointCloud { get; set; }
         #endregion
 
+        #region 原始点云颜色 —— Color OriginalPointColor
+        /// <summary>
+        /// 原始点云颜色
+        /// </summary>
+        [DependencyProperty]
+        public Color OriginalPointColor { get; set; }
+        #endregion
+
+        #region 效果点云颜色 —— Color EffectivePointColor
+        /// <summary>
+        /// 效果点云颜色
+        /// </summary>
+        [DependencyProperty]
+        public Color EffectivePointColor { get; set; }
+        #endregion
+
+        #region 效果点云法向量列表 —— ObservableCollection<LineGeometryModel3D> EffectivePointNormals
+        /// <summary>
+        /// 效果点云法向量列表
+        /// </summary>
+        [DependencyProperty]
+        public ObservableCollection<LineGeometryModel3D> EffectivePointNormals { get; set; }
+        #endregion
+
         #region 相机 —— PerspectiveCamera Camera
         /// <summary>
         /// 相机
@@ -119,6 +146,9 @@ namespace Sample.Client.ViewModels.HomeContext
         /// </summary>
         protected override Task OnInitializeAsync(CancellationToken cancellationToken)
         {
+            //默认值
+            this.EffectivePointNormals = new ObservableCollection<LineGeometryModel3D>();
+
             //初始化相机
             this.Camera = new PerspectiveCamera
             {
@@ -493,6 +523,43 @@ namespace Sample.Client.ViewModels.HomeContext
         }
         #endregion
 
+        #region K估算法向量 —— async void EstimateNormalsByK()
+        /// <summary>
+        /// K估算法向量
+        /// </summary>
+        public async void EstimateNormalsByK()
+        {
+            #region # 验证
+
+            if (this.EffectivePointCloud == null)
+            {
+                MessageBox.Show("点云未加载！", "错误", MessageBoxButton.OK, MessageBoxImage.Error);
+                return;
+            }
+
+            #endregion
+
+            this.Busy();
+
+            Point3F[] points = this.EffectivePointCloud.Points.Select(point => point.ToPoint3F()).ToArray();
+            Normal3F[] normal3Fs = await Task.Run(() => this._cloudNormals.EstimateNormalsByK(points, 5));
+            for (int i = 0; i < points.Length; i++)
+            {
+                Point3F point = points[i];
+                Normal3F normal = normal3Fs[i];
+
+                LineGeometry3D lineGeometry3D = normal.ToLineGeometry3D(point, 0.01f);
+                LineGeometryModel3D lineGeometryModel3D = new LineGeometryModel3D();
+                lineGeometryModel3D.Geometry = lineGeometry3D;
+                lineGeometryModel3D.Color = Colors.Red;
+                lineGeometryModel3D.Thickness = 0.5;
+                this.EffectivePointNormals.Add(lineGeometryModel3D);
+            }
+
+            this.Idle();
+        }
+        #endregion
+
         #region 键盘按下事件 —— void OnKeyDown()
         /// <summary>
         /// 键盘按下事件
@@ -536,6 +603,16 @@ namespace Sample.Client.ViewModels.HomeContext
             {
                 Positions = new Vector3Collection(vectors)
             };
+
+            Random random = new Random((int)DateTime.Now.Ticks);
+            byte r = (byte)random.Next(0, 255);
+            byte g = (byte)random.Next(0, 255);
+            byte b = (byte)random.Next(0, 255);
+            this.OriginalPointColor = Color.FromRgb(r, g, b);
+            this.EffectivePointColor = Color.FromRgb(r, g, b);
+
+            //清理法向量
+            this.EffectivePointNormals.Clear();
         }
         #endregion
 
