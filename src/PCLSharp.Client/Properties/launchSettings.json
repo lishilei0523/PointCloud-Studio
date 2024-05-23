@@ -1,0 +1,8 @@
+{
+  "profiles": {
+    "PCLSharp.Client": {
+      "commandName": "Project",
+      "nativeDebugging": true
+    }
+  }
+}

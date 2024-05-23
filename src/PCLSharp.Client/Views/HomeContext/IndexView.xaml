@@ -1,0 +1,157 @@
+﻿<mah:MetroWindow x:Class="PCLSharp.Client.Views.HomeContext.IndexView"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:mah="http://metro.mahapps.com/winfx/xaml/controls"
+        xmlns:cm="http://caliburnmicro.com"
+        xmlns:hx="http://helix-toolkit.org/wpf/SharpDX"
+        xmlns:busyIndicator="https://github.com/Peoky/BusyIndicator"
+        mc:Ignorable="d"
+        Title="Point Cloud" 
+        Width="1440" Height="900" FontSize="14"
+        WindowStartupLocation="CenterScreen"
+        Style="{StaticResource MetroWindow.Styles.Clean}"
+        cm:Message.Attach="[Event KeyDown] = [Action OnKeyDown()]">
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <!--Header-->
+            <RowDefinition Height="Auto" />
+            <!--Body-->
+            <RowDefinition Height="*" />
+            <!--Footer-->
+            <RowDefinition Height="25" />
+        </Grid.RowDefinitions>
+        <!--Header-->
+        <Border Grid.Row="0" Style="{StaticResource Panel.Styles.Function.Border}">
+            <Menu Margin="4,2">
+                <MenuItem Header="文件(_F)">
+                    <MenuItem Header="打开(灰度)(_M)" cm:Message.Attach="OpenMonoCloud()" />
+                    <MenuItem Header="打开(彩色)(_C)" cm:Message.Attach="OpenColorCloud()" />
+                    <MenuItem Header="关闭(_C)" cm:Message.Attach="CloseCloud()" />
+                    <MenuItem Header="保存(_S)" cm:Message.Attach="SaveCloud()" />
+                    <MenuItem Header="另存为(_A)" cm:Message.Attach="SaveAsCloud()" />
+                </MenuItem>
+                <MenuItem Header="视图(_V)">
+                    <MenuItem Header="刷新点云(_E)" cm:Message.Attach="RefreshCloud()" />
+                    <MenuItem Header="点云颜色(_C)" cm:Message.Attach="SetCloudColor()" />
+                    <MenuItem Header="背景颜色(_B)" cm:Message.Attach="SetBackgroundColor()" />
+                    <MenuItem Header="指向质心(_O)" cm:Message.Attach="LookAtCentroid()" />
+                    <MenuItem Header="重置相机(_R)" cm:Message.Attach="ResetCamera()" />
+                </MenuItem>
+                <MenuItem Header="滤波(_B)">
+                    <MenuItem Header="直通滤波(_P)" cm:Message.Attach="ApplyPassThrogh()" />
+                    <MenuItem Header="随机采样(_D)" cm:Message.Attach="ApplyRandomSampling()" />
+                    <MenuItem Header="均匀采样(_U)" cm:Message.Attach="ApplyUniformSampling()" />
+                    <MenuItem Header="体素降采样(_V)" cm:Message.Attach="ApplyVoxelGrid()" />
+                    <MenuItem Header="近似体素降采样(_A)" cm:Message.Attach="ApplyApproximateVoxelGrid()" />
+                    <MenuItem Header="统计离群点移除(_S)" cm:Message.Attach="ApplyStatisticalOutlierRemoval()" />
+                    <MenuItem Header="半径离群点移除(_R)" cm:Message.Attach="ApplyRadiusOutlierRemoval()" />
+                </MenuItem>
+                <MenuItem Header="法向量(_N)">
+                    <MenuItem Header="估算质心(_C)" cm:Message.Attach="EstimateCentroid()" />
+                    <MenuItem Header="K估算法向量(_K)" cm:Message.Attach="EstimateNormalsByK()" />
+                    <MenuItem Header="K估算法向量(OMP)(_G)" cm:Message.Attach="EstimateNormalsByKP()" />
+                    <MenuItem Header="Radius估算法向量(_R)" cm:Message.Attach="EstimateNormalsByRadius()" />
+                    <MenuItem Header="Radius估算法向量(OMP)(_S)" cm:Message.Attach="EstimateNormalsByRadiusP()" />
+                </MenuItem>
+            </Menu>
+        </Border>
+        <!--Body-->
+        <busyIndicator:BusyMask Grid.Row="1" IndicatorType="Cupertino" IsBusy="{Binding IsBusy}">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition />
+                    <ColumnDefinition />
+                </Grid.ColumnDefinitions>
+                <!--原始点云-->
+                <GroupBox Header="原始点云" Grid.Column="0" Margin="4,4,2,4">
+                    <hx:Viewport3DX BackgroundColor="{Binding BackgroundColor}"
+                                    MSAA="Maximum"
+                                    ShowViewCube="False"
+                                    ShowCoordinateSystem="True"
+                                    CoordinateSystemSize="2"
+                                    CoordinateSystemHorizontalPosition="-1"
+                                    CoordinateSystemVerticalPosition="1"
+                                    CoordinateSystemLabelForeground="{Binding LabelColor}"
+                                    Camera="{Binding Camera}">
+                        <!--效果器-->
+                        <hx:Viewport3DX.EffectsManager>
+                            <hx:DefaultEffectsManager />
+                        </hx:Viewport3DX.EffectsManager>
+                        <!--键盘鼠标-->
+                        <hx:Viewport3DX.InputBindings>
+                            <KeyBinding Key="U" Command="hx:ViewportCommands.TopView" />
+                            <KeyBinding Key="F" Command="hx:ViewportCommands.FrontView" />
+                            <KeyBinding Key="R" Command="hx:ViewportCommands.RightView" />
+                            <KeyBinding Key="B" Command="hx:ViewportCommands.BackView" />
+                            <KeyBinding Key="L" Command="hx:ViewportCommands.LeftView" />
+                            <KeyBinding Key="D" Command="hx:ViewportCommands.BottomView" />
+                            <KeyBinding Command="hx:ViewportCommands.ZoomExtents" Gesture="Control+E" />
+                            <MouseBinding Command="hx:ViewportCommands.Pan" Gesture="MiddleClick" />
+                            <MouseBinding Command="hx:ViewportCommands.Rotate" Gesture="RightClick" />
+                        </hx:Viewport3DX.InputBindings>
+                        <!--光源-->
+                        <hx:DirectionalLight3D Color="White" Direction="{Binding Camera.LookDirection}" />
+                        <!--点云-->
+                        <hx:PointGeometryModel3D Geometry="{Binding OriginalPointCloud}" Color="{Binding PointColor}" />
+                    </hx:Viewport3DX>
+                </GroupBox>
+                <!--效果点云-->
+                <GroupBox Header="效果点云" Grid.Column="1" Margin="2,4,4,4">
+                    <hx:Viewport3DX BackgroundColor="{Binding BackgroundColor}"
+                                    MSAA="Maximum"
+                                    ShowViewCube="True"
+                                    Camera="{Binding Camera}">
+                        <!--效果器-->
+                        <hx:Viewport3DX.EffectsManager>
+                            <hx:DefaultEffectsManager />
+                        </hx:Viewport3DX.EffectsManager>
+                        <!--键盘鼠标-->
+                        <hx:Viewport3DX.InputBindings>
+                            <KeyBinding Key="U" Command="hx:ViewportCommands.TopView" />
+                            <KeyBinding Key="F" Command="hx:ViewportCommands.FrontView" />
+                            <KeyBinding Key="R" Command="hx:ViewportCommands.RightView" />
+                            <KeyBinding Key="B" Command="hx:ViewportCommands.BackView" />
+                            <KeyBinding Key="L" Command="hx:ViewportCommands.LeftView" />
+                            <KeyBinding Key="D" Command="hx:ViewportCommands.BottomView" />
+                            <KeyBinding Command="hx:ViewportCommands.ZoomExtents" Gesture="Control+E" />
+                            <MouseBinding Command="hx:ViewportCommands.Pan" Gesture="MiddleClick" />
+                            <MouseBinding Command="hx:ViewportCommands.Rotate" Gesture="RightClick" />
+                        </hx:Viewport3DX.InputBindings>
+                        <!--光源-->
+                        <hx:DirectionalLight3D Color="White" Direction="{Binding Camera.LookDirection}" />
+                        <!--点云-->
+                        <hx:PointGeometryModel3D Geometry="{Binding EffectivePointCloud}" Color="{Binding PointColor}" />
+                        <!--质心-->
+                        <hx:PointGeometryModel3D Geometry="{Binding EffectiveCentroid}" Size="10,10" Color="Red" />
+                        <!--法向量-->
+                        <hx:ItemsModel3D ItemsSource="{Binding EffectiveNormals}" />
+                    </hx:Viewport3DX>
+                </GroupBox>
+            </Grid>
+        </busyIndicator:BusyMask>
+        <!--Footer-->
+        <Border Grid.Row="2" Style="{StaticResource Panel.Styles.Function.Border}" BorderThickness="0,1,0,0">
+            <Grid>
+                <WrapPanel Margin="10,0,0,0" HorizontalAlignment="Left" VerticalAlignment="Center">
+                    <TextBlock Text="{Binding Camera.LookDirection, StringFormat=LookDirection: \{0:0.0\}}" FontSize="12" />
+                    <TextBlock Text=" | " FontSize="12" />
+                    <TextBlock Text="{Binding Camera.UpDirection, StringFormat=UpDirection: \{0:0.0\}}" FontSize="12" />
+                    <TextBlock Text=" | " FontSize="12" />
+                    <TextBlock Text="{Binding Camera.Position, StringFormat=Position: \{0:0.0\}}" FontSize="12" />
+                    <TextBlock Text=" | " FontSize="12" />
+                    <TextBlock Text="{Binding Camera.FieldOfView, StringFormat=FieldOfView: \{0:0.0\}}" FontSize="12" />
+                </WrapPanel>
+                <WrapPanel Margin="0,0,10,0" HorizontalAlignment="Right" VerticalAlignment="Center">
+                    <TextBlock Text="原始点云数量：" FontSize="12" />
+                    <TextBlock Text="{Binding OriginalPointCloud.Positions.Count}" FontSize="12" />
+                    <TextBlock Text=" | " FontSize="12" />
+                    <TextBlock Text="效果点云数量：" FontSize="12" />
+                    <TextBlock Text="{Binding EffectivePointCloud.Positions.Count}" FontSize="12" />
+                </WrapPanel>
+            </Grid>
+        </Border>
+    </Grid>
+</mah:MetroWindow>
