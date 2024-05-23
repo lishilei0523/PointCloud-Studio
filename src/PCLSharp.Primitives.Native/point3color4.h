@@ -21,7 +21,7 @@ struct Point3Color4
 	/// <param name="b">Bֵ</param>
 	/// <param name="a">Aֵ</param>
 	Point3Color4(const float& x, const float& y, const float& z, const unsigned char& r, const unsigned char& g, const unsigned char& b, const unsigned char& a)
-		:X(x), Y(y), Z(z), R(r), G(g), B(b), A(a)
+		:X(x), Y(y), Z(z), R(r), G(g), B(b), A(a == 0 ? 255 : a)
 	{
 
 	}

@@ -24,10 +24,10 @@ namespace PCLSharp.Primitives.Models
             this.X = x;
             this.Y = y;
             this.Z = z;
-            this.A = a;
             this.R = r;
             this.G = g;
             this.B = b;
+            this.A = a == 0 ? byte.MaxValue : a;
         }
 
         /// <summary>
