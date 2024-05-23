@@ -6,6 +6,7 @@ using PCLSharp.Filters.Interfaces;
 using PCLSharp.Normals.Interfaces;
 using PCLSharp.Primitives.Models;
 using Sample.Client.ViewModels.FilterContext;
+using Sample.Client.ViewModels.NormalContext;
 using Sample.Presentation.Maps;
 using SD.Infrastructure.WPF.Caliburn.Aspects;
 using SD.Infrastructure.WPF.Caliburn.Base;
@@ -20,7 +21,6 @@ using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Input;
-using System.Windows.Media;
 using System.Windows.Media.Media3D;
 using Color = System.Windows.Media.Color;
 using Constants = PCLSharp.Constants;
@@ -541,19 +541,162 @@ namespace Sample.Client.ViewModels.HomeContext
 
             this.Busy();
 
-            Point3F[] points = this.EffectivePointCloud.Points.Select(point => point.ToPoint3F()).ToArray();
-            Normal3F[] normal3Fs = await Task.Run(() => this._cloudNormals.EstimateNormalsByK(points, 5));
-            for (int i = 0; i < points.Length; i++)
-            {
-                Point3F point = points[i];
-                Normal3F normal = normal3Fs[i];
+            //清理法向量
+            this.EffectivePointNormals.Clear();
 
-                LineGeometry3D lineGeometry3D = normal.ToLineGeometry3D(point, 0.01f);
-                LineGeometryModel3D lineGeometryModel3D = new LineGeometryModel3D();
-                lineGeometryModel3D.Geometry = lineGeometry3D;
-                lineGeometryModel3D.Color = Colors.Red;
-                lineGeometryModel3D.Thickness = 0.5;
-                this.EffectivePointNormals.Add(lineGeometryModel3D);
+            KBasedViewModel viewModel = ResolveMediator.Resolve<KBasedViewModel>();
+            bool? result = await this._windowManager.ShowDialogAsync(viewModel);
+            if (result == true)
+            {
+                Point3F[] points = this.EffectivePointCloud.Points.Select(point => point.ToPoint3F()).ToArray();
+                Normal3F[] normal3Fs = await Task.Run(() => this._cloudNormals.EstimateNormalsByK(points, viewModel.K!.Value));
+                for (int i = 0; i < points.Length; i++)
+                {
+                    Point3F point = points[i];
+                    Normal3F normal = normal3Fs[i];
+
+                    LineGeometry3D lineGeometry3D = normal.ToLineGeometry3D(point, viewModel.NormalLength!.Value);
+                    LineGeometryModel3D lineGeometryModel3D = new LineGeometryModel3D();
+                    lineGeometryModel3D.Geometry = lineGeometry3D;
+                    lineGeometryModel3D.Color = viewModel.NormalColor!.Value;
+                    lineGeometryModel3D.Thickness = viewModel.NormalThickness!.Value;
+                    this.EffectivePointNormals.Add(lineGeometryModel3D);
+                }
+            }
+
+            this.Idle();
+        }
+        #endregion
+
+        #region K估算法向量(OMP) —— async void EstimateNormalsByKP()
+        /// <summary>
+        /// K估算法向量(OMP)
+        /// </summary>
+        public async void EstimateNormalsByKP()
+        {
+            #region # 验证
+
+            if (this.EffectivePointCloud == null)
+            {
+                MessageBox.Show("点云未加载！", "错误", MessageBoxButton.OK, MessageBoxImage.Error);
+                return;
+            }
+
+            #endregion
+
+            this.Busy();
+
+            //清理法向量
+            this.EffectivePointNormals.Clear();
+
+            KBasedViewModel viewModel = ResolveMediator.Resolve<KBasedViewModel>();
+            bool? result = await this._windowManager.ShowDialogAsync(viewModel);
+            if (result == true)
+            {
+                Point3F[] points = this.EffectivePointCloud.Points.Select(point => point.ToPoint3F()).ToArray();
+                Normal3F[] normal3Fs = await Task.Run(() => this._cloudNormals.EstimateNormalsByKP(points, viewModel.K!.Value));
+                for (int i = 0; i < points.Length; i++)
+                {
+                    Point3F point = points[i];
+                    Normal3F normal = normal3Fs[i];
+
+                    LineGeometry3D lineGeometry3D = normal.ToLineGeometry3D(point, viewModel.NormalLength!.Value);
+                    LineGeometryModel3D lineGeometryModel3D = new LineGeometryModel3D();
+                    lineGeometryModel3D.Geometry = lineGeometry3D;
+                    lineGeometryModel3D.Color = viewModel.NormalColor!.Value;
+                    lineGeometryModel3D.Thickness = viewModel.NormalThickness!.Value;
+                    this.EffectivePointNormals.Add(lineGeometryModel3D);
+                }
+            }
+
+            this.Idle();
+        }
+        #endregion
+
+        #region Radius估算法向量 —— async void EstimateNormalsByRadius()
+        /// <summary>
+        /// Radius估算法向量
+        /// </summary>
+        public async void EstimateNormalsByRadius()
+        {
+            #region # 验证
+
+            if (this.EffectivePointCloud == null)
+            {
+                MessageBox.Show("点云未加载！", "错误", MessageBoxButton.OK, MessageBoxImage.Error);
+                return;
+            }
+
+            #endregion
+
+            this.Busy();
+
+            //清理法向量
+            this.EffectivePointNormals.Clear();
+
+            RadiusBasedViewModel viewModel = ResolveMediator.Resolve<RadiusBasedViewModel>();
+            bool? result = await this._windowManager.ShowDialogAsync(viewModel);
+            if (result == true)
+            {
+                Point3F[] points = this.EffectivePointCloud.Points.Select(point => point.ToPoint3F()).ToArray();
+                Normal3F[] normal3Fs = await Task.Run(() => this._cloudNormals.EstimateNormalsByRadius(points, viewModel.Radius!.Value));
+                for (int i = 0; i < points.Length; i++)
+                {
+                    Point3F point = points[i];
+                    Normal3F normal = normal3Fs[i];
+
+                    LineGeometry3D lineGeometry3D = normal.ToLineGeometry3D(point, viewModel.NormalLength!.Value);
+                    LineGeometryModel3D lineGeometryModel3D = new LineGeometryModel3D();
+                    lineGeometryModel3D.Geometry = lineGeometry3D;
+                    lineGeometryModel3D.Color = viewModel.NormalColor!.Value;
+                    lineGeometryModel3D.Thickness = viewModel.NormalThickness!.Value;
+                    this.EffectivePointNormals.Add(lineGeometryModel3D);
+                }
+            }
+
+            this.Idle();
+        }
+        #endregion
+
+        #region Radius估算法向量(OMP) —— async void EstimateNormalsByRadiusP()
+        /// <summary>
+        /// Radius估算法向量(OMP)
+        /// </summary>
+        public async void EstimateNormalsByRadiusP()
+        {
+            #region # 验证
+
+            if (this.EffectivePointCloud == null)
+            {
+                MessageBox.Show("点云未加载！", "错误", MessageBoxButton.OK, MessageBoxImage.Error);
+                return;
+            }
+
+            #endregion
+
+            this.Busy();
+
+            //清理法向量
+            this.EffectivePointNormals.Clear();
+
+            RadiusBasedViewModel viewModel = ResolveMediator.Resolve<RadiusBasedViewModel>();
+            bool? result = await this._windowManager.ShowDialogAsync(viewModel);
+            if (result == true)
+            {
+                Point3F[] points = this.EffectivePointCloud.Points.Select(point => point.ToPoint3F()).ToArray();
+                Normal3F[] normal3Fs = await Task.Run(() => this._cloudNormals.EstimateNormalsByRadiusP(points, viewModel.Radius!.Value));
+                for (int i = 0; i < points.Length; i++)
+                {
+                    Point3F point = points[i];
+                    Normal3F normal = normal3Fs[i];
+
+                    LineGeometry3D lineGeometry3D = normal.ToLineGeometry3D(point, viewModel.NormalLength!.Value);
+                    LineGeometryModel3D lineGeometryModel3D = new LineGeometryModel3D();
+                    lineGeometryModel3D.Geometry = lineGeometry3D;
+                    lineGeometryModel3D.Color = viewModel.NormalColor!.Value;
+                    lineGeometryModel3D.Thickness = viewModel.NormalThickness!.Value;
+                    this.EffectivePointNormals.Add(lineGeometryModel3D);
+                }
             }
 
             this.Idle();

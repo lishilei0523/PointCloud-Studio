@@ -164,6 +164,38 @@
             </Trigger>
         </Style.Triggers>
     </Style>
+    <!--MahApps.Metro.ColorPicker默认样式-->
+    <Style x:Key="ColorPicker.Styles.Default" TargetType="{x:Type mah:ColorPicker}">
+        <Setter Property="Width" Value="210" />
+        <Setter Property="Height" Value="28" />
+        <Setter Property="VerticalContentAlignment" Value="Center" />
+        <Setter Property="mah:TextBoxHelper.Watermark" Value="选择颜色" />
+        <Setter Property="mah:TextBoxHelper.ClearTextButton" Value="True" />
+        <Setter Property="mah:TextBoxHelper.UseFloatingWatermark" Value="False" />
+    </Style>
+    <!--MahApps.Metro.ColorPicker.Fluent样式-->
+    <Style x:Key="ColorPicker.Styles.Fluent" TargetType="{x:Type mah:ColorPicker}">
+        <Setter Property="Foreground" Value="{DynamicResource SystemBaseHighColorBrush}" />
+        <Setter Property="Background" Value="{DynamicResource SystemAltMediumLowColorBrush}" />
+        <Setter Property="BorderBrush" Value="{StaticResource TextBox.Static.Border}" />
+        <Setter Property="BorderThickness" Value="2" />
+        <Setter Property="Height" Value="32" />
+        <Setter Property="FontSize" Value="14" />
+        <Setter Property="VerticalContentAlignment" Value="Center" />
+        <Setter Property="mah:TextBoxHelper.Watermark" Value="选择颜色" />
+        <Setter Property="mah:TextBoxHelper.ClearTextButton" Value="True" />
+        <Setter Property="mah:TextBoxHelper.UseFloatingWatermark" Value="False" />
+        <Setter Property="mah:ControlsHelper.FocusBorderBrush" Value="{StaticResource TextBox.Focus.Border}" />
+        <Setter Property="mah:ControlsHelper.MouseOverBorderBrush" Value="{StaticResource TextBox.MouseOver.Border}" />
+        <Style.Triggers>
+            <Trigger Property="IsMouseOver" Value="True">
+                <Setter Property="Background" Value="#BBFFFFFF" />
+            </Trigger>
+            <Trigger Property="IsFocused" Value="True">
+                <Setter Property="Background" Value="#EEFFFFFF" />
+            </Trigger>
+        </Style.Triggers>
+    </Style>
     <!--MahApps.Metro.Watermark默认样式-->
     <Style x:Key="MahApps.Styles.TextBlock.Watermark" TargetType="{x:Type TextBlock}"
            BasedOn="{StaticResource MahApps.Styles.TextBlock}">
