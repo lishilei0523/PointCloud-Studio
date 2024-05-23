@@ -256,18 +256,20 @@ namespace PCLSharp.Client.ViewModels.HomeContext
 
             #endregion
 
-            MessageBoxResult result = MessageBox.Show("是否保存？", "警告", MessageBoxButton.YesNo, MessageBoxImage.Question);
+            MessageBoxResult result = MessageBox.Show("是否保存？", "提示", MessageBoxButton.YesNoCancel, MessageBoxImage.Question);
             if (result == MessageBoxResult.Yes)
             {
                 this.SaveCloud();
             }
-
-            this.FilePath = null;
-            this.FileExtension = null;
-            this.OriginalPointCloud = null;
-            this.EffectivePointCloud = null;
-            this.CloudColorType = null;
-            this.EffectiveNormals.Clear();
+            if (result == MessageBoxResult.Yes || result == MessageBoxResult.No)
+            {
+                this.FilePath = null;
+                this.FileExtension = null;
+                this.OriginalPointCloud = null;
+                this.EffectivePointCloud = null;
+                this.CloudColorType = null;
+                this.EffectiveNormals.Clear();
+            }
         }
         #endregion
 
@@ -289,7 +291,7 @@ namespace PCLSharp.Client.ViewModels.HomeContext
 
             this.Busy();
 
-            IEnumerable<Point3F> points = this.EffectivePointCloud.Points.Select(x => x.ToPoint3F());
+            IEnumerable<Point3F> points = this.EffectivePointCloud.Points.ToPoint3Fs();
             if (this.FileExtension == Constants.PCD)
             {
                 await Task.Run(() => this._cloudConductor.SaveTextPCD(points, this.FilePath));
@@ -338,16 +340,20 @@ namespace PCLSharp.Client.ViewModels.HomeContext
             {
                 this.Busy();
 
-                IEnumerable<Point3F> points = this.EffectivePointCloud.Points.Select(x => x.ToPoint3F());
+                IEnumerable<Point3F> points = this.EffectivePointCloud.Points.ToPoint3Fs();
                 string filePath = saveFileDialog.FileName;
                 string fileExt = Path.GetExtension(filePath);
                 if (fileExt == Constants.PCD)
                 {
                     await Task.Run(() => this._cloudConductor.SaveTextPCD(points, filePath));
                 }
-                if (fileExt == Constants.PLY)
+                else if (fileExt == Constants.PLY)
                 {
                     await Task.Run(() => this._cloudConductor.SaveTextPLY(points, filePath));
+                }
+                else
+                {
+                    throw new NotSupportedException("不支持的点云格式！");
                 }
 
                 this.Idle();
@@ -432,7 +438,7 @@ namespace PCLSharp.Client.ViewModels.HomeContext
 
             this.Busy();
 
-            IEnumerable<Point3F> points = this.EffectivePointCloud.Points.Select(point => point.ToPoint3F());
+            IEnumerable<Point3F> points = this.EffectivePointCloud.Points.ToPoint3Fs();
             Point3F centroid = await Task.Run(() => this._cloudNormals.EstimateCentroid(points));
             this.Camera.LookDirection = new Vector3D(centroid.X, centroid.Y, centroid.Z + 5);
             this.Camera.Position = new Point3D(centroid.X, centroid.Y, -centroid.Z - 5);
@@ -484,10 +490,10 @@ namespace PCLSharp.Client.ViewModels.HomeContext
             bool? result = await this._windowManager.ShowDialogAsync(viewModel);
             if (result == true)
             {
-                IEnumerable<Point3F> points = this.EffectivePointCloud.Points.Select(point => point.ToPoint3F());
-                ICollection<Point3F> filterdPoints = await Task.Run(() => this._cloudFilters.ApplyPassThrogh(points, viewModel.SelectedAxis, viewModel.LimitMin!.Value, viewModel.LimitMax!.Value));
+                IEnumerable<Point3F> points = this.EffectivePointCloud.Points.ToPoint3Fs();
+                Point3F[] filterdPoints = await Task.Run(() => this._cloudFilters.ApplyPassThrogh(points, viewModel.SelectedAxis, viewModel.LimitMin!.Value, viewModel.LimitMax!.Value));
 
-                IEnumerable<Vector3> positions = filterdPoints.Select(x => x.ToVector3());
+                IEnumerable<Vector3> positions = filterdPoints.ToVector3s();
                 this.EffectivePointCloud = new PointGeometry3D
                 {
                     Positions = new Vector3Collection(positions)
@@ -520,10 +526,10 @@ namespace PCLSharp.Client.ViewModels.HomeContext
             bool? result = await this._windowManager.ShowDialogAsync(viewModel);
             if (result == true)
             {
-                IEnumerable<Point3F> points = this.EffectivePointCloud.Points.Select(point => point.ToPoint3F());
-                ICollection<Point3F> filterdPoints = await Task.Run(() => this._cloudFilters.ApplyRandomSampling(points, viewModel.Seed!.Value, viewModel.SamplesCount!.Value));
+                IEnumerable<Point3F> points = this.EffectivePointCloud.Points.ToPoint3Fs();
+                Point3F[] filterdPoints = await Task.Run(() => this._cloudFilters.ApplyRandomSampling(points, viewModel.Seed!.Value, viewModel.SamplesCount!.Value));
 
-                IEnumerable<Vector3> positions = filterdPoints.Select(x => x.ToVector3());
+                IEnumerable<Vector3> positions = filterdPoints.ToVector3s();
                 this.EffectivePointCloud = new PointGeometry3D
                 {
                     Positions = new Vector3Collection(positions)
@@ -556,10 +562,10 @@ namespace PCLSharp.Client.ViewModels.HomeContext
             bool? result = await this._windowManager.ShowDialogAsync(viewModel);
             if (result == true)
             {
-                IEnumerable<Point3F> points = this.EffectivePointCloud.Points.Select(point => point.ToPoint3F());
-                ICollection<Point3F> filterdPoints = await Task.Run(() => this._cloudFilters.ApplyUniformSampling(points, viewModel.Radius!.Value));
+                IEnumerable<Point3F> points = this.EffectivePointCloud.Points.ToPoint3Fs();
+                Point3F[] filterdPoints = await Task.Run(() => this._cloudFilters.ApplyUniformSampling(points, viewModel.Radius!.Value));
 
-                IEnumerable<Vector3> positions = filterdPoints.Select(x => x.ToVector3());
+                IEnumerable<Vector3> positions = filterdPoints.ToVector3s();
                 this.EffectivePointCloud = new PointGeometry3D
                 {
                     Positions = new Vector3Collection(positions)
@@ -592,10 +598,10 @@ namespace PCLSharp.Client.ViewModels.HomeContext
             bool? result = await this._windowManager.ShowDialogAsync(viewModel);
             if (result == true)
             {
-                IEnumerable<Point3F> points = this.EffectivePointCloud.Points.Select(point => point.ToPoint3F());
-                ICollection<Point3F> filterdPoints = await Task.Run(() => this._cloudFilters.ApplyVoxelGrid(points, viewModel.LeafSize!.Value));
+                IEnumerable<Point3F> points = this.EffectivePointCloud.Points.ToPoint3Fs();
+                Point3F[] filterdPoints = await Task.Run(() => this._cloudFilters.ApplyVoxelGrid(points, viewModel.LeafSize!.Value));
 
-                IEnumerable<Vector3> positions = filterdPoints.Select(x => x.ToVector3());
+                IEnumerable<Vector3> positions = filterdPoints.ToVector3s();
                 this.EffectivePointCloud = new PointGeometry3D
                 {
                     Positions = new Vector3Collection(positions)
@@ -628,10 +634,10 @@ namespace PCLSharp.Client.ViewModels.HomeContext
             bool? result = await this._windowManager.ShowDialogAsync(viewModel);
             if (result == true)
             {
-                IEnumerable<Point3F> points = this.EffectivePointCloud.Points.Select(point => point.ToPoint3F());
-                ICollection<Point3F> filterdPoints = await Task.Run(() => this._cloudFilters.ApplyApproximateVoxelGrid(points, viewModel.LeafSize!.Value));
+                IEnumerable<Point3F> points = this.EffectivePointCloud.Points.ToPoint3Fs();
+                Point3F[] filterdPoints = await Task.Run(() => this._cloudFilters.ApplyApproximateVoxelGrid(points, viewModel.LeafSize!.Value));
 
-                IEnumerable<Vector3> positions = filterdPoints.Select(x => x.ToVector3());
+                IEnumerable<Vector3> positions = filterdPoints.ToVector3s();
                 this.EffectivePointCloud = new PointGeometry3D
                 {
                     Positions = new Vector3Collection(positions)
@@ -664,10 +670,10 @@ namespace PCLSharp.Client.ViewModels.HomeContext
             bool? result = await this._windowManager.ShowDialogAsync(viewModel);
             if (result == true)
             {
-                IEnumerable<Point3F> points = this.EffectivePointCloud.Points.Select(point => point.ToPoint3F());
-                ICollection<Point3F> filterdPoints = await Task.Run(() => this._cloudFilters.ApplyStatisticalOutlierRemoval(points, viewModel.MeanK!.Value, viewModel.StddevMult!.Value));
+                IEnumerable<Point3F> points = this.EffectivePointCloud.Points.ToPoint3Fs();
+                Point3F[] filterdPoints = await Task.Run(() => this._cloudFilters.ApplyStatisticalOutlierRemoval(points, viewModel.MeanK!.Value, viewModel.StddevMult!.Value));
 
-                IEnumerable<Vector3> positions = filterdPoints.Select(x => x.ToVector3());
+                IEnumerable<Vector3> positions = filterdPoints.ToVector3s();
                 this.EffectivePointCloud = new PointGeometry3D
                 {
                     Positions = new Vector3Collection(positions)
@@ -700,10 +706,10 @@ namespace PCLSharp.Client.ViewModels.HomeContext
             bool? result = await this._windowManager.ShowDialogAsync(viewModel);
             if (result == true)
             {
-                IEnumerable<Point3F> points = this.EffectivePointCloud.Points.Select(point => point.ToPoint3F());
-                ICollection<Point3F> filterdPoints = await Task.Run(() => this._cloudFilters.ApplyRadiusOutlierRemoval(points, viewModel.Radius!.Value, viewModel.MinNeighborsInRadius!.Value));
+                IEnumerable<Point3F> points = this.EffectivePointCloud.Points.ToPoint3Fs();
+                Point3F[] filterdPoints = await Task.Run(() => this._cloudFilters.ApplyRadiusOutlierRemoval(points, viewModel.Radius!.Value, viewModel.MinNeighborsInRadius!.Value));
 
-                IEnumerable<Vector3> positions = filterdPoints.Select(x => x.ToVector3());
+                IEnumerable<Vector3> positions = filterdPoints.ToVector3s();
                 this.EffectivePointCloud = new PointGeometry3D
                 {
                     Positions = new Vector3Collection(positions)
@@ -735,7 +741,7 @@ namespace PCLSharp.Client.ViewModels.HomeContext
 
             this.Busy();
 
-            IEnumerable<Point3F> points = this.EffectivePointCloud.Points.Select(point => point.ToPoint3F());
+            IEnumerable<Point3F> points = this.EffectivePointCloud.Points.ToPoint3Fs();
             Point3F centroid = await Task.Run(() => this._cloudNormals.EstimateCentroid(points));
             this.EffectiveCentroid = new[] { centroid }.ToPointGeometry3D();
 
@@ -768,7 +774,7 @@ namespace PCLSharp.Client.ViewModels.HomeContext
             bool? result = await this._windowManager.ShowDialogAsync(viewModel);
             if (result == true)
             {
-                Point3F[] points = this.EffectivePointCloud.Points.Select(point => point.ToPoint3F()).ToArray();
+                Point3F[] points = this.EffectivePointCloud.Points.ToPoint3Fs().ToArray();
                 Normal3F[] normals = await Task.Run(() => this._cloudNormals.EstimateNormalsByK(points, viewModel.K!.Value));
                 for (int i = 0; i < points.Length; i++)
                 {
@@ -813,7 +819,7 @@ namespace PCLSharp.Client.ViewModels.HomeContext
             bool? result = await this._windowManager.ShowDialogAsync(viewModel);
             if (result == true)
             {
-                Point3F[] points = this.EffectivePointCloud.Points.Select(point => point.ToPoint3F()).ToArray();
+                Point3F[] points = this.EffectivePointCloud.Points.ToPoint3Fs().ToArray();
                 Normal3F[] normals = await Task.Run(() => this._cloudNormals.EstimateNormalsByKP(points, viewModel.K!.Value));
                 for (int i = 0; i < points.Length; i++)
                 {
@@ -858,7 +864,7 @@ namespace PCLSharp.Client.ViewModels.HomeContext
             bool? result = await this._windowManager.ShowDialogAsync(viewModel);
             if (result == true)
             {
-                Point3F[] points = this.EffectivePointCloud.Points.Select(point => point.ToPoint3F()).ToArray();
+                Point3F[] points = this.EffectivePointCloud.Points.ToPoint3Fs().ToArray();
                 Normal3F[] normals = await Task.Run(() => this._cloudNormals.EstimateNormalsByRadius(points, viewModel.Radius!.Value));
                 for (int i = 0; i < points.Length; i++)
                 {
@@ -903,7 +909,7 @@ namespace PCLSharp.Client.ViewModels.HomeContext
             bool? result = await this._windowManager.ShowDialogAsync(viewModel);
             if (result == true)
             {
-                Point3F[] points = this.EffectivePointCloud.Points.Select(point => point.ToPoint3F()).ToArray();
+                Point3F[] points = this.EffectivePointCloud.Points.ToPoint3Fs().ToArray();
                 Normal3F[] normals = await Task.Run(() => this._cloudNormals.EstimateNormalsByRadiusP(points, viewModel.Radius!.Value));
                 for (int i = 0; i < points.Length; i++)
                 {

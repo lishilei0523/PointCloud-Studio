@@ -1,6 +1,8 @@
 ﻿using PCLSharp.Primitives.Models;
 using SharpDX;
 using System;
+using System.Collections.Generic;
+using System.Linq;
 using System.Windows.Media.Media3D;
 #if NET462_OR_GREATER
 using Geometry3D = HelixToolkit.Wpf.SharpDX.Geometry3D;
@@ -47,6 +49,18 @@ namespace PCLSharp.HelixDX.WPF
         public static Point3F ToPoint3F(this Geometry3D.Point point)
         {
             return new Point3F(point.P0.X, point.P0.Y, point.P0.Z);
+        }
+        #endregion
+
+        #region # Helix坐标点集映射坐标点集 —— static IEnumerable<Point3F> ToPoint3Fs(this IEnumerable...
+        /// <summary>
+        /// Helix坐标点集映射坐标点集
+        /// </summary>
+        public static IEnumerable<Point3F> ToPoint3Fs(this IEnumerable<Geometry3D.Point> points)
+        {
+            IEnumerable<Point3F> point3Fs = points.Select(point => point.ToPoint3F());
+
+            return point3Fs;
         }
         #endregion
 
@@ -128,6 +142,18 @@ namespace PCLSharp.HelixDX.WPF
         public static Vector3 ToVector3(this Point3F point3F)
         {
             return new Vector3(point3F.X, point3F.Y, point3F.Z);
+        }
+        #endregion
+
+        #region # 坐标点集映射三维向量集 —— static IEnumerable<Vector3> ToVector3s(this IEnumerable...
+        /// <summary>
+        /// 坐标点集映射三维向量集
+        /// </summary>
+        public static IEnumerable<Vector3> ToVector3s(this IEnumerable<Point3F> point3Fs)
+        {
+            IEnumerable<Vector3> vector3s = point3Fs.Select(point => point.ToVector3());
+
+            return vector3s;
         }
         #endregion
 

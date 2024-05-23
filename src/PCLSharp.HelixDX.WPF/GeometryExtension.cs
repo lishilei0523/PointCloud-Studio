@@ -36,7 +36,7 @@ namespace PCLSharp.HelixDX.WPF
 
             #endregion
 
-            IEnumerable<Vector3> positions = points.Select(x => x.ToVector3());
+            IEnumerable<Vector3> positions = points.ToVector3s();
             PointGeometry3D pointGeometry3D = new PointGeometry3D
             {
                 Positions = new Vector3Collection(positions)
