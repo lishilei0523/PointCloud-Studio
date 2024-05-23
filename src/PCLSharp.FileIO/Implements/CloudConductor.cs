@@ -1,6 +1,6 @@
 ﻿using PCLSharp.FileIO.Declarations;
 using PCLSharp.FileIO.Interfaces;
-using PCLSharp.Primitives.Maps;
+using PCLSharp.Primitives.Extensions;
 using PCLSharp.Primitives.Models;
 using System;
 using System.Collections.Generic;

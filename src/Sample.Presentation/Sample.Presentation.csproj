@@ -7,6 +7,11 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Folder Include="Maps\" />
+    <Folder Include="Models\" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="HelixToolkit.Wpf.SharpDX" Version="2.25.0" />
     <PackageReference Include="SD.Common" Version="3.2.1" />
     <PackageReference Include="SD.Toolkits.Mapper" Version="1.1.2" />

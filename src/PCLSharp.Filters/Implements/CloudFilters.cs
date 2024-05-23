@@ -1,6 +1,6 @@
 ﻿using PCLSharp.Filters.Declarations;
 using PCLSharp.Filters.Interfaces;
-using PCLSharp.Primitives.Maps;
+using PCLSharp.Primitives.Extensions;
 using PCLSharp.Primitives.Models;
 using System;
 using System.Collections.Generic;

@@ -31,6 +31,7 @@
                     <MenuItem Header="刷新" cm:Message.Attach="RefreshCloud()" />
                     <MenuItem Header="保存" cm:Message.Attach="SaveCloud()" />
                     <MenuItem Header="另存为" cm:Message.Attach="SaveAsCloud()" />
+                    <MenuItem Header="关闭" cm:Message.Attach="CloseCloud()" />
                 </MenuItem>
                 <MenuItem Header="滤波">
                     <MenuItem Header="直通滤波" cm:Message.Attach="ApplyPassThrogh()" />

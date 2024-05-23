@@ -3,11 +3,11 @@ using HelixToolkit.Wpf.SharpDX;
 using Microsoft.Win32;
 using PCLSharp.FileIO.Interfaces;
 using PCLSharp.Filters.Interfaces;
+using PCLSharp.HelixDX.WPF;
 using PCLSharp.Normals.Interfaces;
 using PCLSharp.Primitives.Models;
 using Sample.Client.ViewModels.FilterContext;
 using Sample.Client.ViewModels.NormalContext;
-using Sample.Presentation.Maps;
 using SD.Infrastructure.WPF.Caliburn.Aspects;
 using SD.Infrastructure.WPF.Caliburn.Base;
 using SD.IOC.Core.Mediators;
@@ -271,6 +271,26 @@ namespace Sample.Client.ViewModels.HomeContext
         }
         #endregion
 
+        #region 关闭点云 —— void CloseCloud()
+        /// <summary>
+        /// 关闭点云
+        /// </summary>
+        public void CloseCloud()
+        {
+            MessageBoxResult result = MessageBox.Show("是否保存？", "警告", MessageBoxButton.YesNo, MessageBoxImage.Question);
+            if (result == MessageBoxResult.Yes)
+            {
+                this.SaveCloud();
+            }
+
+            this.FilePath = null;
+            this.FileExtension = null;
+            this.OriginalPointCloud = null;
+            this.EffectivePointCloud = null;
+            this.EffectivePointNormals.Clear();
+        }
+        #endregion
+
         #region 适用直通滤波 —— async void ApplyPassThrogh()
         /// <summary>
         /// 适用直通滤波
@@ -279,7 +299,7 @@ namespace Sample.Client.ViewModels.HomeContext
         {
             #region # 验证
 
-            if (this.OriginalPointCloud == null)
+            if (this.EffectivePointCloud == null)
             {
                 MessageBox.Show("点云未加载！", "错误", MessageBoxButton.OK, MessageBoxImage.Error);
                 return;
@@ -293,7 +313,7 @@ namespace Sample.Client.ViewModels.HomeContext
             bool? result = await this._windowManager.ShowDialogAsync(viewModel);
             if (result == true)
             {
-                IEnumerable<Point3F> points = this.OriginalPointCloud.Points.Select(point => point.ToPoint3F());
+                IEnumerable<Point3F> points = this.EffectivePointCloud.Points.Select(point => point.ToPoint3F());
                 ICollection<Point3F> filterdPoints = await Task.Run(() => this._cloudFilters.ApplyPassThrogh(points, viewModel.SelectedAxis, viewModel.LimitMin!.Value, viewModel.LimitMax!.Value));
 
                 IEnumerable<Vector3> positions = filterdPoints.Select(x => x.ToVector3());
@@ -315,7 +335,7 @@ namespace Sample.Client.ViewModels.HomeContext
         {
             #region # 验证
 
-            if (this.OriginalPointCloud == null)
+            if (this.EffectivePointCloud == null)
             {
                 MessageBox.Show("点云未加载！", "错误", MessageBoxButton.OK, MessageBoxImage.Error);
                 return;
@@ -329,7 +349,7 @@ namespace Sample.Client.ViewModels.HomeContext
             bool? result = await this._windowManager.ShowDialogAsync(viewModel);
             if (result == true)
             {
-                IEnumerable<Point3F> points = this.OriginalPointCloud.Points.Select(point => point.ToPoint3F());
+                IEnumerable<Point3F> points = this.EffectivePointCloud.Points.Select(point => point.ToPoint3F());
                 ICollection<Point3F> filterdPoints = await Task.Run(() => this._cloudFilters.ApplyRandomSampling(points, viewModel.Seed!.Value, viewModel.SamplesCount!.Value));
 
                 IEnumerable<Vector3> positions = filterdPoints.Select(x => x.ToVector3());
@@ -351,7 +371,7 @@ namespace Sample.Client.ViewModels.HomeContext
         {
             #region # 验证
 
-            if (this.OriginalPointCloud == null)
+            if (this.EffectivePointCloud == null)
             {
                 MessageBox.Show("点云未加载！", "错误", MessageBoxButton.OK, MessageBoxImage.Error);
                 return;
@@ -365,7 +385,7 @@ namespace Sample.Client.ViewModels.HomeContext
             bool? result = await this._windowManager.ShowDialogAsync(viewModel);
             if (result == true)
             {
-                IEnumerable<Point3F> points = this.OriginalPointCloud.Points.Select(point => point.ToPoint3F());
+                IEnumerable<Point3F> points = this.EffectivePointCloud.Points.Select(point => point.ToPoint3F());
                 ICollection<Point3F> filterdPoints = await Task.Run(() => this._cloudFilters.ApplyUniformSampling(points, viewModel.Radius!.Value));
 
                 IEnumerable<Vector3> positions = filterdPoints.Select(x => x.ToVector3());
@@ -387,7 +407,7 @@ namespace Sample.Client.ViewModels.HomeContext
         {
             #region # 验证
 
-            if (this.OriginalPointCloud == null)
+            if (this.EffectivePointCloud == null)
             {
                 MessageBox.Show("点云未加载！", "错误", MessageBoxButton.OK, MessageBoxImage.Error);
                 return;
@@ -401,7 +421,7 @@ namespace Sample.Client.ViewModels.HomeContext
             bool? result = await this._windowManager.ShowDialogAsync(viewModel);
             if (result == true)
             {
-                IEnumerable<Point3F> points = this.OriginalPointCloud.Points.Select(point => point.ToPoint3F());
+                IEnumerable<Point3F> points = this.EffectivePointCloud.Points.Select(point => point.ToPoint3F());
                 ICollection<Point3F> filterdPoints = await Task.Run(() => this._cloudFilters.ApplyVoxelGrid(points, viewModel.LeafSize!.Value));
 
                 IEnumerable<Vector3> positions = filterdPoints.Select(x => x.ToVector3());
@@ -423,7 +443,7 @@ namespace Sample.Client.ViewModels.HomeContext
         {
             #region # 验证
 
-            if (this.OriginalPointCloud == null)
+            if (this.EffectivePointCloud == null)
             {
                 MessageBox.Show("点云未加载！", "错误", MessageBoxButton.OK, MessageBoxImage.Error);
                 return;
@@ -437,7 +457,7 @@ namespace Sample.Client.ViewModels.HomeContext
             bool? result = await this._windowManager.ShowDialogAsync(viewModel);
             if (result == true)
             {
-                IEnumerable<Point3F> points = this.OriginalPointCloud.Points.Select(point => point.ToPoint3F());
+                IEnumerable<Point3F> points = this.EffectivePointCloud.Points.Select(point => point.ToPoint3F());
                 ICollection<Point3F> filterdPoints = await Task.Run(() => this._cloudFilters.ApplyApproximateVoxelGrid(points, viewModel.LeafSize!.Value));
 
                 IEnumerable<Vector3> positions = filterdPoints.Select(x => x.ToVector3());
@@ -459,7 +479,7 @@ namespace Sample.Client.ViewModels.HomeContext
         {
             #region # 验证
 
-            if (this.OriginalPointCloud == null)
+            if (this.EffectivePointCloud == null)
             {
                 MessageBox.Show("点云未加载！", "错误", MessageBoxButton.OK, MessageBoxImage.Error);
                 return;
@@ -473,7 +493,7 @@ namespace Sample.Client.ViewModels.HomeContext
             bool? result = await this._windowManager.ShowDialogAsync(viewModel);
             if (result == true)
             {
-                IEnumerable<Point3F> points = this.OriginalPointCloud.Points.Select(point => point.ToPoint3F());
+                IEnumerable<Point3F> points = this.EffectivePointCloud.Points.Select(point => point.ToPoint3F());
                 ICollection<Point3F> filterdPoints = await Task.Run(() => this._cloudFilters.ApplyStatisticalOutlierRemoval(points, viewModel.MeanK!.Value, viewModel.StddevMult!.Value));
 
                 IEnumerable<Vector3> positions = filterdPoints.Select(x => x.ToVector3());
@@ -495,7 +515,7 @@ namespace Sample.Client.ViewModels.HomeContext
         {
             #region # 验证
 
-            if (this.OriginalPointCloud == null)
+            if (this.EffectivePointCloud == null)
             {
                 MessageBox.Show("点云未加载！", "错误", MessageBoxButton.OK, MessageBoxImage.Error);
                 return;
@@ -509,7 +529,7 @@ namespace Sample.Client.ViewModels.HomeContext
             bool? result = await this._windowManager.ShowDialogAsync(viewModel);
             if (result == true)
             {
-                IEnumerable<Point3F> points = this.OriginalPointCloud.Points.Select(point => point.ToPoint3F());
+                IEnumerable<Point3F> points = this.EffectivePointCloud.Points.Select(point => point.ToPoint3F());
                 ICollection<Point3F> filterdPoints = await Task.Run(() => this._cloudFilters.ApplyRadiusOutlierRemoval(points, viewModel.Radius!.Value, viewModel.MinNeighborsInRadius!.Value));
 
                 IEnumerable<Vector3> positions = filterdPoints.Select(x => x.ToVector3());
@@ -549,11 +569,11 @@ namespace Sample.Client.ViewModels.HomeContext
             if (result == true)
             {
                 Point3F[] points = this.EffectivePointCloud.Points.Select(point => point.ToPoint3F()).ToArray();
-                Normal3F[] normal3Fs = await Task.Run(() => this._cloudNormals.EstimateNormalsByK(points, viewModel.K!.Value));
+                Normal3F[] normals = await Task.Run(() => this._cloudNormals.EstimateNormalsByK(points, viewModel.K!.Value));
                 for (int i = 0; i < points.Length; i++)
                 {
                     Point3F point = points[i];
-                    Normal3F normal = normal3Fs[i];
+                    Normal3F normal = normals[i];
 
                     LineGeometry3D lineGeometry3D = normal.ToLineGeometry3D(point, viewModel.NormalLength!.Value);
                     LineGeometryModel3D lineGeometryModel3D = new LineGeometryModel3D();
@@ -594,11 +614,11 @@ namespace Sample.Client.ViewModels.HomeContext
             if (result == true)
             {
                 Point3F[] points = this.EffectivePointCloud.Points.Select(point => point.ToPoint3F()).ToArray();
-                Normal3F[] normal3Fs = await Task.Run(() => this._cloudNormals.EstimateNormalsByKP(points, viewModel.K!.Value));
+                Normal3F[] normals = await Task.Run(() => this._cloudNormals.EstimateNormalsByKP(points, viewModel.K!.Value));
                 for (int i = 0; i < points.Length; i++)
                 {
                     Point3F point = points[i];
-                    Normal3F normal = normal3Fs[i];
+                    Normal3F normal = normals[i];
 
                     LineGeometry3D lineGeometry3D = normal.ToLineGeometry3D(point, viewModel.NormalLength!.Value);
                     LineGeometryModel3D lineGeometryModel3D = new LineGeometryModel3D();
@@ -639,11 +659,11 @@ namespace Sample.Client.ViewModels.HomeContext
             if (result == true)
             {
                 Point3F[] points = this.EffectivePointCloud.Points.Select(point => point.ToPoint3F()).ToArray();
-                Normal3F[] normal3Fs = await Task.Run(() => this._cloudNormals.EstimateNormalsByRadius(points, viewModel.Radius!.Value));
+                Normal3F[] normals = await Task.Run(() => this._cloudNormals.EstimateNormalsByRadius(points, viewModel.Radius!.Value));
                 for (int i = 0; i < points.Length; i++)
                 {
                     Point3F point = points[i];
-                    Normal3F normal = normal3Fs[i];
+                    Normal3F normal = normals[i];
 
                     LineGeometry3D lineGeometry3D = normal.ToLineGeometry3D(point, viewModel.NormalLength!.Value);
                     LineGeometryModel3D lineGeometryModel3D = new LineGeometryModel3D();
@@ -684,11 +704,11 @@ namespace Sample.Client.ViewModels.HomeContext
             if (result == true)
             {
                 Point3F[] points = this.EffectivePointCloud.Points.Select(point => point.ToPoint3F()).ToArray();
-                Normal3F[] normal3Fs = await Task.Run(() => this._cloudNormals.EstimateNormalsByRadiusP(points, viewModel.Radius!.Value));
+                Normal3F[] normals = await Task.Run(() => this._cloudNormals.EstimateNormalsByRadiusP(points, viewModel.Radius!.Value));
                 for (int i = 0; i < points.Length; i++)
                 {
                     Point3F point = points[i];
-                    Normal3F normal = normal3Fs[i];
+                    Normal3F normal = normals[i];
 
                     LineGeometry3D lineGeometry3D = normal.ToLineGeometry3D(point, viewModel.NormalLength!.Value);
                     LineGeometryModel3D lineGeometryModel3D = new LineGeometryModel3D();
@@ -729,6 +749,19 @@ namespace Sample.Client.ViewModels.HomeContext
         /// </summary>
         private async Task ReloadCloud()
         {
+            #region # 验证
+
+            if (string.IsNullOrWhiteSpace(this.FilePath))
+            {
+                return;
+            }
+            if (string.IsNullOrWhiteSpace(this.FileExtension))
+            {
+                return;
+            }
+
+            #endregion
+
             Point3F[] points = this.FileExtension switch
             {
                 Constants.PCD => await Task.Run(() => this._cloudConductor.LoadPCD(this.FilePath)),
@@ -737,15 +770,8 @@ namespace Sample.Client.ViewModels.HomeContext
                 _ => throw new NotSupportedException("不支持的点云格式！")
             };
 
-            Vector3[] vectors = points.Select(x => x.ToVector3()).ToArray();
-            this.OriginalPointCloud = new PointGeometry3D
-            {
-                Positions = new Vector3Collection(vectors)
-            };
-            this.EffectivePointCloud = new PointGeometry3D
-            {
-                Positions = new Vector3Collection(vectors)
-            };
+            this.OriginalPointCloud = points.ToPointGeometry3D();
+            this.EffectivePointCloud = points.ToPointGeometry3D();
 
             Random random = new Random((int)DateTime.Now.Ticks);
             byte r = (byte)random.Next(0, 255);

@@ -1,13 +1,62 @@
 ﻿using PCLSharp.Primitives.Models;
 using System;
+using Point3F = PCLSharp.Primitives.Models.Point3F;
 
-namespace PCLSharp.Primitives.Maps
+namespace PCLSharp.Primitives.Extensions
 {
     /// <summary>
-    /// 基元映射
+    /// 基元扩展
     /// </summary>
-    public static class PrimitivesMap
+    public static class PrimitivesExtension
     {
+        #region # 获取坐标点 —— static Point3F GetPoint(this Point3Normal3 pointNormal)
+        /// <summary>
+        /// 获取坐标点
+        /// </summary>
+        /// <param name="pointNormal">坐标点法向量</param>
+        /// <returns>坐标点</returns>
+        public static Point3F GetPoint(this Point3Normal3 pointNormal)
+        {
+            return new Point3F(pointNormal.X, pointNormal.Y, pointNormal.Z);
+        }
+        #endregion
+
+        #region # 获取法向量 —— static Normal3F GetNormal(this Point3Normal3 pointNormal)
+        /// <summary>
+        /// 获取法向量
+        /// </summary>
+        /// <param name="pointNormal">坐标点法向量</param>
+        /// <returns>法向量</returns>
+        public static Normal3F GetNormal(this Point3Normal3 pointNormal)
+        {
+            return new Normal3F(pointNormal.NX, pointNormal.NY, pointNormal.NZ);
+        }
+        #endregion
+
+        #region # 获取坐标点 —— static Point3F GetPoint(this Point3Color4 pointColor)
+        /// <summary>
+        /// 获取坐标点
+        /// </summary>
+        /// <param name="pointColor">坐标点颜色</param>
+        /// <returns>坐标点</returns>
+        public static Point3F GetPoint(this Point3Color4 pointColor)
+        {
+            return new Point3F(pointColor.X, pointColor.Y, pointColor.Z);
+        }
+        #endregion
+
+        #region # 获取颜色 —— static Color4F GetColor(this Point3Color4 pointColor)
+        /// <summary>
+        /// 获取颜色
+        /// </summary>
+        /// <param name="pointColor">坐标点颜色</param>
+        /// <returns>颜色</returns>
+        public static Color4F GetColor(this Point3Color4 pointColor)
+        {
+            return new Color4F(pointColor.R, pointColor.G, pointColor.B, pointColor.A);
+        }
+        #endregion
+
         #region # 坐标点集结构体映射坐标点数组 —— static Point3F[] ToPoint3Fs(this Point3Fs point3Fs)
         /// <summary>
         /// 坐标点集结构体映射坐标点数组
