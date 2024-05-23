@@ -36,6 +36,7 @@
                 <MenuItem Header="视图(_V)">
                     <MenuItem Header="刷新点云(_E)" cm:Message.Attach="RefreshCloud()" />
                     <MenuItem Header="点云颜色(_C)" cm:Message.Attach="SetCloudColor()" />
+                    <MenuItem Header="背景颜色(_B)" cm:Message.Attach="SetBackgroundColor()" />
                     <MenuItem Header="指向质心(_O)" cm:Message.Attach="LookAtCentroid()" />
                     <MenuItem Header="重置相机(_R)" cm:Message.Attach="ResetCamera()" />
                 </MenuItem>
@@ -66,14 +67,14 @@
                 </Grid.ColumnDefinitions>
                 <!--原始点云-->
                 <GroupBox Header="原始点云" Grid.Column="0" Margin="4,4,2,4">
-                    <hx:Viewport3DX BackgroundColor="LightGray"
+                    <hx:Viewport3DX BackgroundColor="{Binding BackgroundColor}"
                                     MSAA="Maximum"
                                     ShowViewCube="False"
                                     ShowCoordinateSystem="True"
                                     CoordinateSystemSize="2"
                                     CoordinateSystemHorizontalPosition="-1"
                                     CoordinateSystemVerticalPosition="1"
-                                    CoordinateSystemLabelForeground="Black"
+                                    CoordinateSystemLabelForeground="{Binding LabelColor}"
                                     Camera="{Binding Camera}">
                         <!--效果器-->
                         <hx:Viewport3DX.EffectsManager>
@@ -99,7 +100,7 @@
                 </GroupBox>
                 <!--效果点云-->
                 <GroupBox Header="效果点云" Grid.Column="1" Margin="2,4,4,4">
-                    <hx:Viewport3DX BackgroundColor="LightGray"
+                    <hx:Viewport3DX BackgroundColor="{Binding BackgroundColor}"
                                     MSAA="Maximum"
                                     ShowViewCube="True"
                                     Camera="{Binding Camera}">

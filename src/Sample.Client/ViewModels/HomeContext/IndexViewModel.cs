@@ -98,6 +98,22 @@ namespace Sample.Client.ViewModels.HomeContext
         public Color PointColor { get; set; }
         #endregion
 
+        #region 标签颜色 —— Color LabelColor
+        /// <summary>
+        /// 标签颜色
+        /// </summary>
+        [DependencyProperty]
+        public Color LabelColor { get; set; }
+        #endregion
+
+        #region 背景颜色 —— Color BackgroundColor
+        /// <summary>
+        /// 背景颜色
+        /// </summary>
+        [DependencyProperty]
+        public Color BackgroundColor { get; set; }
+        #endregion
+
         #region 点云颜色类型 —— PointColorType? CloudColorType
         /// <summary>
         /// 点云颜色类型
@@ -158,6 +174,8 @@ namespace Sample.Client.ViewModels.HomeContext
         protected override Task OnInitializeAsync(CancellationToken cancellationToken)
         {
             //默认值
+            this.LabelColor = Colors.Black;
+            this.BackgroundColor = Colors.LightGray;
             this.EffectiveNormals = new ObservableCollection<LineGeometryModel3D>();
 
             //初始化相机
@@ -376,6 +394,25 @@ namespace Sample.Client.ViewModels.HomeContext
             if (result == true)
             {
                 this.PointColor = viewModel.Color!.Value;
+            }
+        }
+        #endregion
+
+        #region 设置背景颜色 —— async void SetBackgroundColor()
+        /// <summary>
+        /// 设置背景颜色
+        /// </summary>
+        public async void SetBackgroundColor()
+        {
+            SelectColorViewModel viewModel = ResolveMediator.Resolve<SelectColorViewModel>();
+            bool? result = await this._windowManager.ShowDialogAsync(viewModel);
+            if (result == true)
+            {
+                this.BackgroundColor = viewModel.Color!.Value;
+                byte nr = (byte)(255 - this.BackgroundColor.R);
+                byte ng = (byte)(255 - this.BackgroundColor.G);
+                byte nb = (byte)(255 - this.BackgroundColor.B);
+                this.LabelColor = Color.FromRgb(nr, ng, nb);
             }
         }
         #endregion
