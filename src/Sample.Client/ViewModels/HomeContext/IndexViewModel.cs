@@ -8,6 +8,7 @@ using PCLSharp.Normals.Interfaces;
 using PCLSharp.Primitives.Enums;
 using PCLSharp.Primitives.Extensions;
 using PCLSharp.Primitives.Models;
+using Sample.Client.ViewModels.CommonContext;
 using Sample.Client.ViewModels.FilterContext;
 using Sample.Client.ViewModels.NormalContext;
 using SD.Infrastructure.WPF.Caliburn.Aspects;
@@ -89,12 +90,12 @@ namespace Sample.Client.ViewModels.HomeContext
         public string FileExtension { get; set; }
         #endregion
 
-        #region 灰度点云颜色 —— Color? MonoPointColor
+        #region 点云颜色 —— Color PointColor
         /// <summary>
-        /// 灰度点云颜色
+        /// 点云颜色
         /// </summary>
         [DependencyProperty]
-        public Color? MonoPointColor { get; set; }
+        public Color PointColor { get; set; }
         #endregion
 
         #region 点云颜色类型 —— PointColorType? CloudColorType
@@ -120,12 +121,20 @@ namespace Sample.Client.ViewModels.HomeContext
         public PointGeometry3D EffectivePointCloud { get; set; }
         #endregion
 
-        #region 效果点云法向量列表 —— ObservableCollection<LineGeometryModel3D> EffectivePointNormals
+        #region 效果点云质心 —— PointGeometry3D EffectiveCentroid
+        /// <summary>
+        /// 效果点云质心
+        /// </summary>
+        [DependencyProperty]
+        public PointGeometry3D EffectiveCentroid { get; set; }
+        #endregion
+
+        #region 效果点云法向量列表 —— ObservableCollection<LineGeometryModel3D> EffectiveNormals
         /// <summary>
         /// 效果点云法向量列表
         /// </summary>
         [DependencyProperty]
-        public ObservableCollection<LineGeometryModel3D> EffectivePointNormals { get; set; }
+        public ObservableCollection<LineGeometryModel3D> EffectiveNormals { get; set; }
         #endregion
 
         #region 相机 —— PerspectiveCamera Camera
@@ -149,35 +158,17 @@ namespace Sample.Client.ViewModels.HomeContext
         protected override Task OnInitializeAsync(CancellationToken cancellationToken)
         {
             //默认值
-            this.EffectivePointNormals = new ObservableCollection<LineGeometryModel3D>();
+            this.EffectiveNormals = new ObservableCollection<LineGeometryModel3D>();
 
             //初始化相机
-            this.InitializeCamera();
+            this.ResetCamera();
 
             return base.OnInitializeAsync(cancellationToken);
         }
         #endregion
 
 
-        //Actions
-
-        #region 初始化相机 —— void InitializeCamera()
-        /// <summary>
-        /// 初始化相机
-        /// </summary>
-        public void InitializeCamera()
-        {
-            this.Camera = new PerspectiveCamera
-            {
-                LookDirection = new Vector3D(0, 0, -2),
-                UpDirection = new Vector3D(0, 1, 0),
-                Position = new Point3D(0, 0, 2),
-                NearPlaneDistance = 0.125,
-                FarPlaneDistance = double.PositiveInfinity,
-                FieldOfView = 30
-            };
-        }
-        #endregion
+        //文件
 
         #region 打开灰度点云 —— async void OpenMonoCloud()
         /// <summary>
@@ -231,11 +222,11 @@ namespace Sample.Client.ViewModels.HomeContext
         }
         #endregion
 
-        #region 刷新点云 —— async void RefreshCloud()
+        #region 关闭点云 —— void CloseCloud()
         /// <summary>
-        /// 刷新点云
+        /// 关闭点云
         /// </summary>
-        public async void RefreshCloud()
+        public void CloseCloud()
         {
             #region # 验证
 
@@ -247,11 +238,18 @@ namespace Sample.Client.ViewModels.HomeContext
 
             #endregion
 
-            this.Busy();
+            MessageBoxResult result = MessageBox.Show("是否保存？", "警告", MessageBoxButton.YesNo, MessageBoxImage.Question);
+            if (result == MessageBoxResult.Yes)
+            {
+                this.SaveCloud();
+            }
 
-            await this.ReloadCloud();
-
-            this.Idle();
+            this.FilePath = null;
+            this.FileExtension = null;
+            this.OriginalPointCloud = null;
+            this.EffectivePointCloud = null;
+            this.CloudColorType = null;
+            this.EffectiveNormals.Clear();
         }
         #endregion
 
@@ -340,11 +338,14 @@ namespace Sample.Client.ViewModels.HomeContext
         }
         #endregion
 
-        #region 关闭点云 —— void CloseCloud()
+
+        //视图
+
+        #region 刷新点云 —— async void RefreshCloud()
         /// <summary>
-        /// 关闭点云
+        /// 刷新点云
         /// </summary>
-        public void CloseCloud()
+        public async void RefreshCloud()
         {
             #region # 验证
 
@@ -356,20 +357,103 @@ namespace Sample.Client.ViewModels.HomeContext
 
             #endregion
 
-            MessageBoxResult result = MessageBox.Show("是否保存？", "警告", MessageBoxButton.YesNo, MessageBoxImage.Question);
-            if (result == MessageBoxResult.Yes)
+            this.Busy();
+
+            await this.ReloadCloud();
+
+            this.Idle();
+        }
+        #endregion
+
+        #region 设置点云颜色 —— async void SetCloudColor()
+        /// <summary>
+        /// 设置点云颜色
+        /// </summary>
+        public async void SetCloudColor()
+        {
+            SelectColorViewModel viewModel = ResolveMediator.Resolve<SelectColorViewModel>();
+            bool? result = await this._windowManager.ShowDialogAsync(viewModel);
+            if (result == true)
+            {
+                this.PointColor = viewModel.Color!.Value;
+            }
+        }
+        #endregion
+
+        #region 指向质心 —— async void LookAtCentroid()
+        /// <summary>
+        /// 指向质心
+        /// </summary>
+        public async void LookAtCentroid()
+        {
+            #region # 验证
+
+            if (this.EffectivePointCloud == null)
+            {
+                MessageBox.Show("点云未加载！", "错误", MessageBoxButton.OK, MessageBoxImage.Error);
+                return;
+            }
+
+            #endregion
+
+            this.Busy();
+
+            IEnumerable<Point3F> points = this.EffectivePointCloud.Points.Select(point => point.ToPoint3F());
+            Point3F centroid = await Task.Run(() => this._cloudNormals.EstimateCentroid(points));
+            this.Camera.LookDirection = new Vector3D(centroid.X, centroid.Y, centroid.Z + 5);
+            this.Camera.Position = new Point3D(centroid.X, centroid.Y, -centroid.Z - 5);
+
+            this.Idle();
+        }
+        #endregion
+
+        #region 重置相机 —— void ResetCamera()
+        /// <summary>
+        /// 重置相机
+        /// </summary>
+        public void ResetCamera()
+        {
+            this.Camera = new PerspectiveCamera
+            {
+                LookDirection = new Vector3D(0, 0, -2),
+                UpDirection = new Vector3D(0, 1, 0),
+                Position = new Point3D(0, 0, 2),
+                NearPlaneDistance = 0.125,
+                FarPlaneDistance = double.PositiveInfinity,
+                FieldOfView = 30
+            };
+        }
+        #endregion
+
+        #region 键盘按下事件 —— void OnKeyDown()
+        /// <summary>
+        /// 键盘按下事件
+        /// </summary>
+        public void OnKeyDown()
+        {
+            #region # 验证
+
+            if (this.EffectivePointCloud == null)
+            {
+                MessageBox.Show("点云未加载！", "错误", MessageBoxButton.OK, MessageBoxImage.Error);
+                return;
+            }
+
+            #endregion
+
+            if (Keyboard.IsKeyDown(Key.F5))
+            {
+                this.RefreshCloud();
+            }
+            if (Keyboard.IsKeyDown(Key.LeftCtrl) && Keyboard.IsKeyDown(Key.S))
             {
                 this.SaveCloud();
             }
-
-            this.FilePath = null;
-            this.FileExtension = null;
-            this.OriginalPointCloud = null;
-            this.EffectivePointCloud = null;
-            this.CloudColorType = null;
-            this.EffectivePointNormals.Clear();
         }
         #endregion
+
+
+        //滤波
 
         #region 适用直通滤波 —— async void ApplyPassThrogh()
         /// <summary>
@@ -623,6 +707,35 @@ namespace Sample.Client.ViewModels.HomeContext
         }
         #endregion
 
+
+        //法向量
+
+        #region 估算质心 —— async void EstimateCentroid()
+        /// <summary>
+        /// 估算质心
+        /// </summary>
+        public async void EstimateCentroid()
+        {
+            #region # 验证
+
+            if (this.EffectivePointCloud == null)
+            {
+                MessageBox.Show("点云未加载！", "错误", MessageBoxButton.OK, MessageBoxImage.Error);
+                return;
+            }
+
+            #endregion
+
+            this.Busy();
+
+            IEnumerable<Point3F> points = this.EffectivePointCloud.Points.Select(point => point.ToPoint3F());
+            Point3F centroid = await Task.Run(() => this._cloudNormals.EstimateCentroid(points));
+            this.EffectiveCentroid = new[] { centroid }.ToPointGeometry3D();
+
+            this.Idle();
+        }
+        #endregion
+
         #region K估算法向量 —— async void EstimateNormalsByK()
         /// <summary>
         /// K估算法向量
@@ -642,7 +755,7 @@ namespace Sample.Client.ViewModels.HomeContext
             this.Busy();
 
             //清理法向量
-            this.EffectivePointNormals.Clear();
+            this.EffectiveNormals.Clear();
 
             KBasedViewModel viewModel = ResolveMediator.Resolve<KBasedViewModel>();
             bool? result = await this._windowManager.ShowDialogAsync(viewModel);
@@ -660,7 +773,7 @@ namespace Sample.Client.ViewModels.HomeContext
                     lineGeometryModel3D.Geometry = lineGeometry3D;
                     lineGeometryModel3D.Color = viewModel.NormalColor!.Value;
                     lineGeometryModel3D.Thickness = viewModel.NormalThickness!.Value;
-                    this.EffectivePointNormals.Add(lineGeometryModel3D);
+                    this.EffectiveNormals.Add(lineGeometryModel3D);
                 }
             }
 
@@ -687,7 +800,7 @@ namespace Sample.Client.ViewModels.HomeContext
             this.Busy();
 
             //清理法向量
-            this.EffectivePointNormals.Clear();
+            this.EffectiveNormals.Clear();
 
             KBasedViewModel viewModel = ResolveMediator.Resolve<KBasedViewModel>();
             bool? result = await this._windowManager.ShowDialogAsync(viewModel);
@@ -705,7 +818,7 @@ namespace Sample.Client.ViewModels.HomeContext
                     lineGeometryModel3D.Geometry = lineGeometry3D;
                     lineGeometryModel3D.Color = viewModel.NormalColor!.Value;
                     lineGeometryModel3D.Thickness = viewModel.NormalThickness!.Value;
-                    this.EffectivePointNormals.Add(lineGeometryModel3D);
+                    this.EffectiveNormals.Add(lineGeometryModel3D);
                 }
             }
 
@@ -732,7 +845,7 @@ namespace Sample.Client.ViewModels.HomeContext
             this.Busy();
 
             //清理法向量
-            this.EffectivePointNormals.Clear();
+            this.EffectiveNormals.Clear();
 
             RadiusBasedViewModel viewModel = ResolveMediator.Resolve<RadiusBasedViewModel>();
             bool? result = await this._windowManager.ShowDialogAsync(viewModel);
@@ -750,7 +863,7 @@ namespace Sample.Client.ViewModels.HomeContext
                     lineGeometryModel3D.Geometry = lineGeometry3D;
                     lineGeometryModel3D.Color = viewModel.NormalColor!.Value;
                     lineGeometryModel3D.Thickness = viewModel.NormalThickness!.Value;
-                    this.EffectivePointNormals.Add(lineGeometryModel3D);
+                    this.EffectiveNormals.Add(lineGeometryModel3D);
                 }
             }
 
@@ -777,7 +890,7 @@ namespace Sample.Client.ViewModels.HomeContext
             this.Busy();
 
             //清理法向量
-            this.EffectivePointNormals.Clear();
+            this.EffectiveNormals.Clear();
 
             RadiusBasedViewModel viewModel = ResolveMediator.Resolve<RadiusBasedViewModel>();
             bool? result = await this._windowManager.ShowDialogAsync(viewModel);
@@ -795,38 +908,11 @@ namespace Sample.Client.ViewModels.HomeContext
                     lineGeometryModel3D.Geometry = lineGeometry3D;
                     lineGeometryModel3D.Color = viewModel.NormalColor!.Value;
                     lineGeometryModel3D.Thickness = viewModel.NormalThickness!.Value;
-                    this.EffectivePointNormals.Add(lineGeometryModel3D);
+                    this.EffectiveNormals.Add(lineGeometryModel3D);
                 }
             }
 
             this.Idle();
-        }
-        #endregion
-
-        #region 键盘按下事件 —— void OnKeyDown()
-        /// <summary>
-        /// 键盘按下事件
-        /// </summary>
-        public void OnKeyDown()
-        {
-            #region # 验证
-
-            if (this.EffectivePointCloud == null)
-            {
-                MessageBox.Show("点云未加载！", "错误", MessageBoxButton.OK, MessageBoxImage.Error);
-                return;
-            }
-
-            #endregion
-
-            if (Keyboard.IsKeyDown(Key.F5))
-            {
-                this.RefreshCloud();
-            }
-            if (Keyboard.IsKeyDown(Key.LeftCtrl) && Keyboard.IsKeyDown(Key.S))
-            {
-                this.SaveCloud();
-            }
         }
         #endregion
 
@@ -888,10 +974,11 @@ namespace Sample.Client.ViewModels.HomeContext
             byte r = (byte)random.Next(0, 255);
             byte g = (byte)random.Next(0, 255);
             byte b = (byte)random.Next(0, 255);
-            this.MonoPointColor = Color.FromRgb(r, g, b);
+            this.PointColor = Color.FromRgb(r, g, b);
 
-            //清理法向量
-            this.EffectivePointNormals.Clear();
+            //清理质心、法向量
+            this.EffectiveCentroid = null;
+            this.EffectiveNormals.Clear();
         }
         #endregion
 
@@ -929,10 +1016,11 @@ namespace Sample.Client.ViewModels.HomeContext
             this.EffectivePointCloud = pointColors.ToPointGeometry3D();
 
             //白底
-            this.MonoPointColor = Colors.White;
+            this.PointColor = Colors.White;
 
-            //清理法向量
-            this.EffectivePointNormals.Clear();
+            //清理质心、法向量
+            this.EffectiveCentroid = null;
+            this.EffectiveNormals.Clear();
         }
         #endregion
 

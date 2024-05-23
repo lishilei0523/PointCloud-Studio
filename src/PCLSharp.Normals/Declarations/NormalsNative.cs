@@ -58,6 +58,17 @@ namespace PCLSharp.Normals.Declarations
         public static extern IntPtr EstimateNormalsByRadiusP(Point3F[] points, int length, float radius);
         #endregion
 
+        #region # 估算质心 —— static extern IntPtr EstimateCentroid(Point3F[] points...
+        /// <summary>
+        /// 估算质心
+        /// </summary>
+        /// <param name="points">点集</param>
+        /// <param name="length">点集长度</param>
+        /// <returns>质心坐标点</returns>
+        [DllImport(AssemblyNames.Normals, EntryPoint = "estimateCentroid")]
+        public static extern IntPtr EstimateCentroid(Point3F[] points, int length);
+        #endregion
+
         #region # 释放资源 —— static extern void Dispose(IntPtr pointer)
         /// <summary>
         /// 释放资源

@@ -129,5 +129,32 @@ namespace PCLSharp.Normals.Implements
             return normals;
         }
         #endregion
+
+        #region # 估算质心 —— Point3F EstimateCentroid(IEnumerable<Point3F> points)
+        /// <summary>
+        /// 估算质心
+        /// </summary>
+        /// <param name="points">点集</param>
+        /// <returns>质心坐标点</returns>
+        public Point3F EstimateCentroid(IEnumerable<Point3F> points)
+        {
+            Point3F[] points_ = points?.ToArray() ?? Array.Empty<Point3F>();
+
+            #region # 验证
+
+            if (!points_.Any())
+            {
+                return new Point3F();
+            }
+
+            #endregion
+
+            IntPtr pointer = NormalsNative.EstimateCentroid(points_, points_.Length);
+            Point3F centroid = Marshal.PtrToStructure<Point3F>(pointer);
+            NormalsNative.Dispose(pointer);
+
+            return centroid;
+        }
+        #endregion
     }
 }

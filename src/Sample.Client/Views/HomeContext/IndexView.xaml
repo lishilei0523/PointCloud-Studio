@@ -35,7 +35,9 @@
                 </MenuItem>
                 <MenuItem Header="视图">
                     <MenuItem Header="刷新点云" cm:Message.Attach="RefreshCloud()" />
-                    <MenuItem Header="重置相机" cm:Message.Attach="InitializeCamera()" />
+                    <MenuItem Header="点云颜色" cm:Message.Attach="SetCloudColor()" />
+                    <MenuItem Header="指向质心" cm:Message.Attach="LookAtCentroid()" />
+                    <MenuItem Header="重置相机" cm:Message.Attach="ResetCamera()" />
                 </MenuItem>
                 <MenuItem Header="滤波">
                     <MenuItem Header="直通滤波" cm:Message.Attach="ApplyPassThrogh()" />
@@ -47,6 +49,7 @@
                     <MenuItem Header="半径离群点移除" cm:Message.Attach="ApplyRadiusOutlierRemoval()" />
                 </MenuItem>
                 <MenuItem Header="法向量">
+                    <MenuItem Header="估算质心" cm:Message.Attach="EstimateCentroid()" />
                     <MenuItem Header="K估算法向量" cm:Message.Attach="EstimateNormalsByK()" />
                     <MenuItem Header="K估算法向量(OMP)" cm:Message.Attach="EstimateNormalsByKP()" />
                     <MenuItem Header="Radius估算法向量" cm:Message.Attach="EstimateNormalsByRadius()" />
@@ -91,7 +94,7 @@
                         <!--光源-->
                         <hx:DirectionalLight3D Color="White" Direction="{Binding Camera.LookDirection}" />
                         <!--点云-->
-                        <hx:PointGeometryModel3D Geometry="{Binding OriginalPointCloud}" Color="{Binding MonoPointColor}" />
+                        <hx:PointGeometryModel3D Geometry="{Binding OriginalPointCloud}" Color="{Binding PointColor}" />
                     </hx:Viewport3DX>
                 </GroupBox>
                 <!--效果点云-->
@@ -119,9 +122,11 @@
                         <!--光源-->
                         <hx:DirectionalLight3D Color="White" Direction="{Binding Camera.LookDirection}" />
                         <!--点云-->
-                        <hx:PointGeometryModel3D Geometry="{Binding EffectivePointCloud}" Color="{Binding MonoPointColor}" />
+                        <hx:PointGeometryModel3D Geometry="{Binding EffectivePointCloud}" Color="{Binding PointColor}" />
+                        <!--质心-->
+                        <hx:PointGeometryModel3D Geometry="{Binding EffectiveCentroid}" Size="10,10" Color="Red" />
                         <!--法向量-->
-                        <hx:ItemsModel3D ItemsSource="{Binding EffectivePointNormals}" />
+                        <hx:ItemsModel3D ItemsSource="{Binding EffectiveNormals}" />
                     </hx:Viewport3DX>
                 </GroupBox>
             </Grid>

@@ -124,6 +124,25 @@ Normal3Fs* estimateNormalsByRadiusP(Point3F points[], const int length, const fl
 }
 
 /// <summary>
+/// 估算质心
+/// </summary>
+/// <param name="points">点集</param>
+/// <param name="length">点集长度</param>
+/// <returns>质心坐标点</returns>
+Point3F* estimateCentroid(Point3F points[], const int length)
+{
+	//加载点云
+	const PointCloud<PointXYZ>& pointCloud = pclsharp::toPointCloud(points, length);
+
+	Eigen::Vector4f centroid;
+	pcl::compute3DCentroid(pointCloud, centroid);
+
+	Point3F* point3F = new Point3F(centroid[0], centroid[1], centroid[2]);
+
+	return point3F;
+}
+
+/// <summary>
 /// 释放资源
 /// </summary>
 /// <param name="pointer">指针</param>
