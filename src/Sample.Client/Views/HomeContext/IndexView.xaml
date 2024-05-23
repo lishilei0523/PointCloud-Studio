@@ -27,7 +27,8 @@
         <Border Grid.Row="0" Style="{StaticResource Panel.Styles.Function.Border}">
             <Menu Margin="4,2">
                 <MenuItem Header="文件">
-                    <MenuItem Header="打开" cm:Message.Attach="OpenCloud()" />
+                    <MenuItem Header="打开(灰度)" cm:Message.Attach="OpenMonoCloud()" />
+                    <MenuItem Header="打开(彩色)" cm:Message.Attach="OpenColorCloud()" />
                     <MenuItem Header="刷新" cm:Message.Attach="RefreshCloud()" />
                     <MenuItem Header="保存" cm:Message.Attach="SaveCloud()" />
                     <MenuItem Header="另存为" cm:Message.Attach="SaveAsCloud()" />
@@ -87,7 +88,7 @@
                         <!--光源-->
                         <hx:DirectionalLight3D Color="White" Direction="{Binding Camera.LookDirection}" />
                         <!--点云-->
-                        <hx:PointGeometryModel3D Geometry="{Binding OriginalPointCloud}" Color="{Binding OriginalPointColor}" />
+                        <hx:PointGeometryModel3D Geometry="{Binding OriginalPointCloud}" Color="{Binding MonoPointColor}" />
                     </hx:Viewport3DX>
                 </GroupBox>
                 <!--效果点云-->
@@ -115,7 +116,7 @@
                         <!--光源-->
                         <hx:DirectionalLight3D Color="White" Direction="{Binding Camera.LookDirection}" />
                         <!--点云-->
-                        <hx:PointGeometryModel3D Geometry="{Binding EffectivePointCloud}" Color="{Binding EffectivePointColor}" />
+                        <hx:PointGeometryModel3D Geometry="{Binding EffectivePointCloud}" Color="{Binding MonoPointColor}" />
                         <!--法向量-->
                         <hx:ItemsModel3D ItemsSource="{Binding EffectivePointNormals}" />
                     </hx:Viewport3DX>

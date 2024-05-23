@@ -36,18 +36,5 @@ namespace PCLSharp.Primitives.Models
         /// 法向量Z坐标
         /// </summary>
         public readonly float NZ;
-
-        /// <summary>
-        /// 是否是非数值
-        /// </summary>
-        public bool IsNaN()
-        {
-            if (this.NX.Equals(float.NaN) || this.NY.Equals(float.NaN) || this.NZ.Equals(float.NaN))
-            {
-                return true;
-            }
-
-            return false;
-        }
     }
 }

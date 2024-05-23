@@ -5,6 +5,8 @@ using PCLSharp.FileIO.Interfaces;
 using PCLSharp.Filters.Interfaces;
 using PCLSharp.HelixDX.WPF;
 using PCLSharp.Normals.Interfaces;
+using PCLSharp.Primitives.Enums;
+using PCLSharp.Primitives.Extensions;
 using PCLSharp.Primitives.Models;
 using Sample.Client.ViewModels.FilterContext;
 using Sample.Client.ViewModels.NormalContext;
@@ -21,6 +23,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Input;
+using System.Windows.Media;
 using System.Windows.Media.Media3D;
 using Color = System.Windows.Media.Color;
 using Constants = PCLSharp.Constants;
@@ -86,6 +89,21 @@ namespace Sample.Client.ViewModels.HomeContext
         public string FileExtension { get; set; }
         #endregion
 
+        #region 灰度点云颜色 —— Color? MonoPointColor
+        /// <summary>
+        /// 灰度点云颜色
+        /// </summary>
+        [DependencyProperty]
+        public Color? MonoPointColor { get; set; }
+        #endregion
+
+        #region 点云颜色类型 —— PointColorType? CloudColorType
+        /// <summary>
+        /// 点云颜色类型
+        /// </summary>
+        public PointColorType? CloudColorType { get; set; }
+        #endregion
+
         #region 原始点云 —— PointGeometry3D OriginalPointCloud
         /// <summary>
         /// 原始点云
@@ -100,22 +118,6 @@ namespace Sample.Client.ViewModels.HomeContext
         /// </summary>
         [DependencyProperty]
         public PointGeometry3D EffectivePointCloud { get; set; }
-        #endregion
-
-        #region 原始点云颜色 —— Color OriginalPointColor
-        /// <summary>
-        /// 原始点云颜色
-        /// </summary>
-        [DependencyProperty]
-        public Color OriginalPointColor { get; set; }
-        #endregion
-
-        #region 效果点云颜色 —— Color EffectivePointColor
-        /// <summary>
-        /// 效果点云颜色
-        /// </summary>
-        [DependencyProperty]
-        public Color EffectivePointColor { get; set; }
         #endregion
 
         #region 效果点云法向量列表 —— ObservableCollection<LineGeometryModel3D> EffectivePointNormals
@@ -167,11 +169,11 @@ namespace Sample.Client.ViewModels.HomeContext
 
         //Actions
 
-        #region 打开点云 —— async void OpenCloud()
+        #region 打开灰度点云 —— async void OpenMonoCloud()
         /// <summary>
-        /// 打开点云
+        /// 打开灰度点云
         /// </summary>
-        public async void OpenCloud()
+        public async void OpenMonoCloud()
         {
             OpenFileDialog openFileDialog = new OpenFileDialog
             {
@@ -185,6 +187,33 @@ namespace Sample.Client.ViewModels.HomeContext
 
                 this.FilePath = openFileDialog.FileName;
                 this.FileExtension = Path.GetExtension(this.FilePath);
+                this.CloudColorType = PointColorType.Mono;
+                await this.ReloadCloud();
+
+                this.Idle();
+            }
+        }
+        #endregion
+
+        #region 打开彩色点云 —— async void OpenColorCloud()
+        /// <summary>
+        /// 打开彩色点云
+        /// </summary>
+        public async void OpenColorCloud()
+        {
+            OpenFileDialog openFileDialog = new OpenFileDialog
+            {
+                Filter = Constants.OpenCloudExtFilter,
+                AddExtension = true,
+                RestoreDirectory = true
+            };
+            if (openFileDialog.ShowDialog() == true)
+            {
+                this.Busy();
+
+                this.FilePath = openFileDialog.FileName;
+                this.FileExtension = Path.GetExtension(this.FilePath);
+                this.CloudColorType = PointColorType.RGBA;
                 await this.ReloadCloud();
 
                 this.Idle();
@@ -198,6 +227,16 @@ namespace Sample.Client.ViewModels.HomeContext
         /// </summary>
         public async void RefreshCloud()
         {
+            #region # 验证
+
+            if (this.EffectivePointCloud == null)
+            {
+                MessageBox.Show("点云未加载！", "错误", MessageBoxButton.OK, MessageBoxImage.Error);
+                return;
+            }
+
+            #endregion
+
             this.Busy();
 
             await this.ReloadCloud();
@@ -212,6 +251,16 @@ namespace Sample.Client.ViewModels.HomeContext
         /// </summary>
         public async void SaveCloud()
         {
+            #region # 验证
+
+            if (this.EffectivePointCloud == null)
+            {
+                MessageBox.Show("点云未加载！", "错误", MessageBoxButton.OK, MessageBoxImage.Error);
+                return;
+            }
+
+            #endregion
+
             this.Busy();
 
             IEnumerable<Point3F> points = this.EffectivePointCloud.Points.Select(x => x.ToPoint3F());
@@ -242,6 +291,16 @@ namespace Sample.Client.ViewModels.HomeContext
         /// </summary>
         public async void SaveAsCloud()
         {
+            #region # 验证
+
+            if (this.EffectivePointCloud == null)
+            {
+                MessageBox.Show("点云未加载！", "错误", MessageBoxButton.OK, MessageBoxImage.Error);
+                return;
+            }
+
+            #endregion
+
             SaveFileDialog saveFileDialog = new SaveFileDialog
             {
                 Filter = Constants.SaveCloudExtFilter,
@@ -277,6 +336,16 @@ namespace Sample.Client.ViewModels.HomeContext
         /// </summary>
         public void CloseCloud()
         {
+            #region # 验证
+
+            if (this.EffectivePointCloud == null)
+            {
+                MessageBox.Show("点云未加载！", "错误", MessageBoxButton.OK, MessageBoxImage.Error);
+                return;
+            }
+
+            #endregion
+
             MessageBoxResult result = MessageBox.Show("是否保存？", "警告", MessageBoxButton.YesNo, MessageBoxImage.Question);
             if (result == MessageBoxResult.Yes)
             {
@@ -287,6 +356,7 @@ namespace Sample.Client.ViewModels.HomeContext
             this.FileExtension = null;
             this.OriginalPointCloud = null;
             this.EffectivePointCloud = null;
+            this.CloudColorType = null;
             this.EffectivePointNormals.Clear();
         }
         #endregion
@@ -729,6 +799,16 @@ namespace Sample.Client.ViewModels.HomeContext
         /// </summary>
         public void OnKeyDown()
         {
+            #region # 验证
+
+            if (this.EffectivePointCloud == null)
+            {
+                MessageBox.Show("点云未加载！", "错误", MessageBoxButton.OK, MessageBoxImage.Error);
+                return;
+            }
+
+            #endregion
+
             if (Keyboard.IsKeyDown(Key.F5))
             {
                 this.RefreshCloud();
@@ -747,7 +827,24 @@ namespace Sample.Client.ViewModels.HomeContext
         /// <summary>
         /// 加载点云
         /// </summary>
-        private async Task ReloadCloud()
+        public async Task ReloadCloud()
+        {
+            if (this.CloudColorType == PointColorType.Mono)
+            {
+                await this.ReloadMonoCloud();
+            }
+            if (this.CloudColorType == PointColorType.RGBA)
+            {
+                await this.ReloadColorCloud();
+            }
+        }
+        #endregion
+
+        #region 加载灰度点云 —— async Task ReloadMonoCloud()
+        /// <summary>
+        /// 加载灰度点云
+        /// </summary>
+        private async Task ReloadMonoCloud()
         {
             #region # 验证
 
@@ -770,15 +867,59 @@ namespace Sample.Client.ViewModels.HomeContext
                 _ => throw new NotSupportedException("不支持的点云格式！")
             };
 
+            //过滤NaN
+            points = points.FilterNaN();
+
             this.OriginalPointCloud = points.ToPointGeometry3D();
             this.EffectivePointCloud = points.ToPointGeometry3D();
 
+            //随机颜色
             Random random = new Random((int)DateTime.Now.Ticks);
             byte r = (byte)random.Next(0, 255);
             byte g = (byte)random.Next(0, 255);
             byte b = (byte)random.Next(0, 255);
-            this.OriginalPointColor = Color.FromRgb(r, g, b);
-            this.EffectivePointColor = Color.FromRgb(r, g, b);
+            this.MonoPointColor = Color.FromRgb(r, g, b);
+
+            //清理法向量
+            this.EffectivePointNormals.Clear();
+        }
+        #endregion
+
+        #region 加载彩色点云 —— async Task ReloadColorCloud()
+        /// <summary>
+        /// 加载彩色点云
+        /// </summary>
+        private async Task ReloadColorCloud()
+        {
+            #region # 验证
+
+            if (string.IsNullOrWhiteSpace(this.FilePath))
+            {
+                return;
+            }
+            if (string.IsNullOrWhiteSpace(this.FileExtension))
+            {
+                return;
+            }
+
+            #endregion
+
+            Point3Color4[] pointColors = this.FileExtension switch
+            {
+                Constants.PCD => await Task.Run(() => this._cloudConductor.LoadColorPCD(this.FilePath)),
+                Constants.PLY => await Task.Run(() => this._cloudConductor.LoadColorPLY(this.FilePath)),
+                Constants.OBJ => await Task.Run(() => this._cloudConductor.LoadColorOBJ(this.FilePath)),
+                _ => throw new NotSupportedException("不支持的点云格式！")
+            };
+
+            //过滤NaN
+            pointColors = pointColors.FilterNaN();
+
+            this.OriginalPointCloud = pointColors.ToPointGeometry3D();
+            this.EffectivePointCloud = pointColors.ToPointGeometry3D();
+
+            //白底
+            this.MonoPointColor = Colors.White;
 
             //清理法向量
             this.EffectivePointNormals.Clear();

@@ -36,18 +36,5 @@ namespace PCLSharp.Primitives.Models
         /// Z坐标
         /// </summary>
         public readonly float Z;
-
-        /// <summary>
-        /// 是否是非数值
-        /// </summary>
-        public bool IsNaN()
-        {
-            if (this.X.Equals(float.NaN) || this.Y.Equals(float.NaN) || this.Z.Equals(float.NaN))
-            {
-                return true;
-            }
-
-            return false;
-        }
     }
 }
