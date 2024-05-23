@@ -65,4 +65,4 @@ EXPORT_C void CALLING_MODE saveBinaryPLY(Point3F points[], int length, const cha
 /// 释放资源
 /// </summary>
 /// <param name="pointer">指针</param>
-EXPORT_C void CALLING_MODE dispose(const Point3Fs* pointer);
+EXPORT_C void CALLING_MODE dispose(const int* pointer);

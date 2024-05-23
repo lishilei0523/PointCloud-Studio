@@ -76,4 +76,4 @@ EXPORT_C Point3Fs* CALLING_MODE applyRadiusOutlierRemoval(Point3F points[], int 
 /// 释放资源
 /// </summary>
 /// <param name="pointer">指针</param>
-EXPORT_C void CALLING_MODE dispose(const Point3Fs* pointer);
+EXPORT_C void CALLING_MODE dispose(const int* pointer);

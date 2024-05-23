@@ -127,7 +127,7 @@ Normal3Fs* estimateNormalsByRadiusP(Point3F points[], const int length, const fl
 /// 释放资源
 /// </summary>
 /// <param name="pointer">指针</param>
-void dispose(const Normal3Fs* pointer)
+void dispose(const int* pointer)
 {
 	delete pointer;
 }

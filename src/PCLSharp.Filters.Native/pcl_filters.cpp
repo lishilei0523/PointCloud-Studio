@@ -214,7 +214,7 @@ Point3Fs* applyRadiusOutlierRemoval(Point3F points[], int length, const float ra
 /// 释放资源
 /// </summary>
 /// <param name="pointer">指针</param>
-void dispose(const Point3Fs* pointer)
+void dispose(const int* pointer)
 {
 	delete pointer;
 }

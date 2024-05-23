@@ -44,4 +44,4 @@ EXPORT_C Normal3Fs* CALLING_MODE estimateNormalsByRadiusP(Point3F points[], int 
 /// 释放资源
 /// </summary>
 /// <param name="pointer">指针</param>
-EXPORT_C void CALLING_MODE dispose(const Normal3Fs* pointer);
+EXPORT_C void CALLING_MODE dispose(const int* pointer);
