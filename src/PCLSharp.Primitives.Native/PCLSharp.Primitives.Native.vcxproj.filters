@@ -16,6 +16,18 @@
     <ClInclude Include="normal3fs.h">
       <Filter>Models</Filter>
     </ClInclude>
+    <ClInclude Include="point3color4.h">
+      <Filter>Models</Filter>
+    </ClInclude>
+    <ClInclude Include="point3normal3.h">
+      <Filter>Models</Filter>
+    </ClInclude>
+    <ClInclude Include="point3color4s.h">
+      <Filter>Models</Filter>
+    </ClInclude>
+    <ClInclude Include="point3normal3s.h">
+      <Filter>Models</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Models">

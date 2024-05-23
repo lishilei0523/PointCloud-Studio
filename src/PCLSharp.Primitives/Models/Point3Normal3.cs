@@ -3,25 +3,29 @@
 namespace PCLSharp.Primitives.Models
 {
     /// <summary>
-    /// 强度坐标点
+    /// 坐标点法向量
     /// </summary>
     [StructLayout(LayoutKind.Sequential)]
-    public readonly struct Point3FI
+    public readonly struct Point3Normal3
     {
         /// <summary>
-        /// 创建强度坐标点构造器
+        /// 创建坐标点法向量构造器
         /// </summary>
         /// <param name="x">X坐标</param>
         /// <param name="y">Y坐标</param>
         /// <param name="z">Z坐标</param>
-        /// <param name="intensity">强度</param>
-        public Point3FI(float x, float y, float z, float intensity)
+        /// <param name="nx">法向量X坐标</param>
+        /// <param name="ny">法向量Y坐标</param>
+        /// <param name="nz">法向量Z坐标</param>
+        public Point3Normal3(float x, float y, float z, float nx, float ny, float nz)
             : this()
         {
             this.X = x;
             this.Y = y;
             this.Z = z;
-            this.Intensity = intensity;
+            this.NX = nx;
+            this.NY = ny;
+            this.NZ = nz;
         }
 
         /// <summary>
@@ -40,21 +44,18 @@ namespace PCLSharp.Primitives.Models
         public readonly float Z;
 
         /// <summary>
-        /// 强度
+        /// 法向量X坐标
         /// </summary>
-        public readonly float Intensity;
+        public readonly float NX;
 
         /// <summary>
-        /// 是否是非数值
+        /// 法向量Y坐标
         /// </summary>
-        public bool IsNaN()
-        {
-            if (this.X.Equals(float.NaN) || this.Y.Equals(float.NaN) || this.Z.Equals(float.NaN))
-            {
-                return true;
-            }
+        public readonly float NY;
 
-            return false;
-        }
+        /// <summary>
+        /// 法向量Z坐标
+        /// </summary>
+        public readonly float NZ;
     }
 }

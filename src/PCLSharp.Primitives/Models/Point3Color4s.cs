@@ -4,27 +4,27 @@ using System.Runtime.InteropServices;
 namespace PCLSharp.Primitives.Models
 {
     /// <summary>
-    /// RGB颜色集结构体
+    /// 坐标点颜色集结构体
     /// </summary>
     [StructLayout(LayoutKind.Sequential)]
-    public readonly struct Color3Fs
+    public readonly struct Point3Color4s
     {
         /// <summary>
-        /// 创建RGB颜色集结构体构造器
+        /// 创建坐标点颜色集结构体构造器
         /// </summary>
-        /// <param name="colors">RGB颜色集指针</param>
+        /// <param name="pointColors">坐标点颜色集指针指针</param>
         /// <param name="length">长度</param>
-        public Color3Fs(IntPtr colors, int length)
+        public Point3Color4s(IntPtr pointColors, int length)
             : this()
         {
-            this.Colors = colors;
+            this.PointColors = pointColors;
             this.Length = length;
         }
 
         /// <summary>
-        /// RGB颜色集指针
+        /// 坐标点颜色集指针
         /// </summary>
-        public readonly IntPtr Colors;
+        public readonly IntPtr PointColors;
 
         /// <summary>
         /// 长度
