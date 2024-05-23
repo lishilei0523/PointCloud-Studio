@@ -363,7 +363,7 @@ namespace PCLSharp.Client.ViewModels.HomeContext
         #endregion
 
 
-        //视图
+        //编辑
 
         #region 刷新点云 —— async void RefreshCloud()
         /// <summary>
@@ -438,10 +438,20 @@ namespace PCLSharp.Client.ViewModels.HomeContext
 
             this.Busy();
 
-            IEnumerable<Point3F> points = this.EffectivePointCloud.Points.ToPoint3Fs();
-            Point3F centroid = await Task.Run(() => this._cloudNormals.EstimateCentroid(points));
-            this.Camera.LookDirection = new Vector3D(centroid.X, centroid.Y, centroid.Z + 5);
-            this.Camera.Position = new Point3D(centroid.X, centroid.Y, -centroid.Z - 5);
+            Point3F centroid;
+            if (this.EffectiveCentroid != null)
+            {
+                Vector3 position = this.EffectiveCentroid.Positions.Single();
+                centroid = position.ToPoint3F();
+            }
+            else
+            {
+                IEnumerable<Point3F> points = this.EffectivePointCloud.Points.ToPoint3Fs();
+                centroid = await Task.Run(() => this._cloudNormals.EstimateCentroid(points));
+                this.EffectiveCentroid = new[] { centroid }.ToPointGeometry3D();
+            }
+
+            this.Camera.LookAt(centroid.ToPoint(), 200);
 
             this.Idle();
         }

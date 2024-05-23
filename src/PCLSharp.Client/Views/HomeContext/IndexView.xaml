@@ -33,12 +33,12 @@
                     <MenuItem Header="保存(_S)" cm:Message.Attach="SaveCloud()" />
                     <MenuItem Header="另存为(_A)" cm:Message.Attach="SaveAsCloud()" />
                 </MenuItem>
-                <MenuItem Header="视图(_V)">
-                    <MenuItem Header="刷新点云(_E)" cm:Message.Attach="RefreshCloud()" />
-                    <MenuItem Header="点云颜色(_C)" cm:Message.Attach="SetCloudColor()" />
-                    <MenuItem Header="背景颜色(_B)" cm:Message.Attach="SetBackgroundColor()" />
+                <MenuItem Header="编辑(_E)">
+                    <MenuItem Header="刷新点云(_X)" cm:Message.Attach="RefreshCloud()" />
+                    <MenuItem Header="点云颜色(_P)" cm:Message.Attach="SetCloudColor()" />
+                    <MenuItem Header="背景颜色(_U)" cm:Message.Attach="SetBackgroundColor()" />
                     <MenuItem Header="指向质心(_O)" cm:Message.Attach="LookAtCentroid()" />
-                    <MenuItem Header="重置相机(_R)" cm:Message.Attach="ResetCamera()" />
+                    <MenuItem Header="重置相机(_C)" cm:Message.Attach="ResetCamera()" />
                 </MenuItem>
                 <MenuItem Header="滤波(_B)">
                     <MenuItem Header="直通滤波(_P)" cm:Message.Attach="ApplyPassThrogh()" />

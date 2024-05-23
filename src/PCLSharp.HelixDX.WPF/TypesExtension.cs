@@ -135,9 +135,19 @@ namespace PCLSharp.HelixDX.WPF
         }
         #endregion
 
-        #region # 坐标点映射三维向量 —— static Vector3 ToVector3(this Point3F point3F)
+        #region # Helix三维向量映射坐标点 —— static Point3F ToPoint3F(this Vector3 vector3)
         /// <summary>
-        /// 坐标点映射三维向量
+        /// Helix三维向量映射坐标点
+        /// </summary>
+        public static Point3F ToPoint3F(this Vector3 vector3)
+        {
+            return new Point3F(vector3.X, vector3.Y, vector3.Z);
+        }
+        #endregion
+
+        #region # 坐标点映射Helix三维向量 —— static Vector3 ToVector3(this Point3F point3F)
+        /// <summary>
+        /// 坐标点映射Helix三维向量
         /// </summary>
         public static Vector3 ToVector3(this Point3F point3F)
         {
