@@ -29,10 +29,13 @@
                 <MenuItem Header="文件">
                     <MenuItem Header="打开(灰度)" cm:Message.Attach="OpenMonoCloud()" />
                     <MenuItem Header="打开(彩色)" cm:Message.Attach="OpenColorCloud()" />
-                    <MenuItem Header="刷新" cm:Message.Attach="RefreshCloud()" />
+                    <MenuItem Header="关闭" cm:Message.Attach="CloseCloud()" />
                     <MenuItem Header="保存" cm:Message.Attach="SaveCloud()" />
                     <MenuItem Header="另存为" cm:Message.Attach="SaveAsCloud()" />
-                    <MenuItem Header="关闭" cm:Message.Attach="CloseCloud()" />
+                </MenuItem>
+                <MenuItem Header="视图">
+                    <MenuItem Header="刷新点云" cm:Message.Attach="RefreshCloud()" />
+                    <MenuItem Header="重置相机" cm:Message.Attach="InitializeCamera()" />
                 </MenuItem>
                 <MenuItem Header="滤波">
                     <MenuItem Header="直通滤波" cm:Message.Attach="ApplyPassThrogh()" />

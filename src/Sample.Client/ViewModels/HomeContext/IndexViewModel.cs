@@ -152,6 +152,21 @@ namespace Sample.Client.ViewModels.HomeContext
             this.EffectivePointNormals = new ObservableCollection<LineGeometryModel3D>();
 
             //初始化相机
+            this.InitializeCamera();
+
+            return base.OnInitializeAsync(cancellationToken);
+        }
+        #endregion
+
+
+        //Actions
+
+        #region 初始化相机 —— void InitializeCamera()
+        /// <summary>
+        /// 初始化相机
+        /// </summary>
+        public void InitializeCamera()
+        {
             this.Camera = new PerspectiveCamera
             {
                 LookDirection = new Vector3D(0, 0, -2),
@@ -161,13 +176,8 @@ namespace Sample.Client.ViewModels.HomeContext
                 FarPlaneDistance = double.PositiveInfinity,
                 FieldOfView = 30
             };
-
-            return base.OnInitializeAsync(cancellationToken);
         }
         #endregion
-
-
-        //Actions
 
         #region 打开灰度点云 —— async void OpenMonoCloud()
         /// <summary>
