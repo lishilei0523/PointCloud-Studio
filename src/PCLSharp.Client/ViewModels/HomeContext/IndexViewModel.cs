@@ -1,6 +1,9 @@
 ﻿using Caliburn.Micro;
 using HelixToolkit.Wpf.SharpDX;
 using Microsoft.Win32;
+using PCLSharp.Client.ViewModels.CommonContext;
+using PCLSharp.Client.ViewModels.FilterContext;
+using PCLSharp.Client.ViewModels.NormalContext;
 using PCLSharp.FileIO.Interfaces;
 using PCLSharp.Filters.Interfaces;
 using PCLSharp.HelixDX.WPF;
@@ -8,9 +11,6 @@ using PCLSharp.Normals.Interfaces;
 using PCLSharp.Primitives.Enums;
 using PCLSharp.Primitives.Extensions;
 using PCLSharp.Primitives.Models;
-using PCLSharp.Client.ViewModels.CommonContext;
-using PCLSharp.Client.ViewModels.FilterContext;
-using PCLSharp.Client.ViewModels.NormalContext;
 using SD.Infrastructure.WPF.Caliburn.Aspects;
 using SD.Infrastructure.WPF.Caliburn.Base;
 using SD.IOC.Core.Mediators;
@@ -27,7 +27,6 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Media3D;
 using Color = System.Windows.Media.Color;
-using Constants = PCLSharp.Constants;
 using PerspectiveCamera = HelixToolkit.Wpf.SharpDX.PerspectiveCamera;
 
 namespace PCLSharp.Client.ViewModels.HomeContext

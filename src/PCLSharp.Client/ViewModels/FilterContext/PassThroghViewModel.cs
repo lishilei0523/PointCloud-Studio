@@ -1,5 +1,4 @@
 ﻿using Caliburn.Micro;
-using PCLSharp;
 using SD.Infrastructure.WPF.Caliburn.Aspects;
 using SD.Infrastructure.WPF.Caliburn.Base;
 using System.Collections.ObjectModel;

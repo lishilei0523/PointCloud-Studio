@@ -1,4 +1,4 @@
-﻿<Application x:Class="Framework.App"
+﻿<Application x:Class="PCLSharp.Client.App"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:local="clr-namespace:PCLSharp.Client">
