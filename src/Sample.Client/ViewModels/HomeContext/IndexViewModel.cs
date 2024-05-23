@@ -425,33 +425,6 @@ namespace Sample.Client.ViewModels.HomeContext
         }
         #endregion
 
-        #region 键盘按下事件 —— void OnKeyDown()
-        /// <summary>
-        /// 键盘按下事件
-        /// </summary>
-        public void OnKeyDown()
-        {
-            #region # 验证
-
-            if (this.EffectivePointCloud == null)
-            {
-                MessageBox.Show("点云未加载！", "错误", MessageBoxButton.OK, MessageBoxImage.Error);
-                return;
-            }
-
-            #endregion
-
-            if (Keyboard.IsKeyDown(Key.F5))
-            {
-                this.RefreshCloud();
-            }
-            if (Keyboard.IsKeyDown(Key.LeftCtrl) && Keyboard.IsKeyDown(Key.S))
-            {
-                this.SaveCloud();
-            }
-        }
-        #endregion
-
 
         //滤波
 
@@ -913,6 +886,46 @@ namespace Sample.Client.ViewModels.HomeContext
             }
 
             this.Idle();
+        }
+        #endregion
+
+
+        //事件
+
+        #region 键盘按下事件 —— void OnKeyDown()
+        /// <summary>
+        /// 键盘按下事件
+        /// </summary>
+        public void OnKeyDown()
+        {
+            if (Keyboard.IsKeyDown(Key.F5))
+            {
+                #region # 验证
+
+                if (this.EffectivePointCloud == null)
+                {
+                    MessageBox.Show("点云未加载！", "错误", MessageBoxButton.OK, MessageBoxImage.Error);
+                    return;
+                }
+
+                #endregion
+
+                this.RefreshCloud();
+            }
+            if (Keyboard.IsKeyDown(Key.LeftCtrl) && Keyboard.IsKeyDown(Key.S))
+            {
+                #region # 验证
+
+                if (this.EffectivePointCloud == null)
+                {
+                    MessageBox.Show("点云未加载！", "错误", MessageBoxButton.OK, MessageBoxImage.Error);
+                    return;
+                }
+
+                #endregion
+
+                this.SaveCloud();
+            }
         }
         #endregion
 
