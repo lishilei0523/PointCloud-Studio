@@ -13,6 +13,7 @@ using PCLSharp.Primitives.Extensions;
 using PCLSharp.Primitives.Models;
 using SD.Infrastructure.WPF.Caliburn.Aspects;
 using SD.Infrastructure.WPF.Caliburn.Base;
+using SD.Infrastructure.WPF.Extensions;
 using SD.IOC.Core.Mediators;
 using SharpDX;
 using System;
@@ -408,10 +409,7 @@ namespace PCLSharp.Client.ViewModels.HomeContext
             if (result == true)
             {
                 this.BackgroundColor = viewModel.Color!.Value;
-                byte nr = (byte)(255 - this.BackgroundColor.R);
-                byte ng = (byte)(255 - this.BackgroundColor.G);
-                byte nb = (byte)(255 - this.BackgroundColor.B);
-                this.LabelColor = Color.FromRgb(nr, ng, nb);
+                this.LabelColor = this.BackgroundColor.Invert();
             }
         }
         #endregion
@@ -1019,11 +1017,7 @@ namespace PCLSharp.Client.ViewModels.HomeContext
             this.EffectivePointCloud = points.ToPointGeometry3D();
 
             //随机颜色
-            Random random = new Random((int)DateTime.Now.Ticks);
-            byte r = (byte)random.Next(0, 255);
-            byte g = (byte)random.Next(0, 255);
-            byte b = (byte)random.Next(0, 255);
-            this.PointColor = Color.FromRgb(r, g, b);
+            this.PointColor = ColorExtension.RandomColor();
 
             //清理质心、法向量
             this.EffectiveCentroid = null;
