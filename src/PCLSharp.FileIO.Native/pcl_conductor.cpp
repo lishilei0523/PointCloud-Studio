@@ -189,8 +189,8 @@ Point3Color4s* loadColorOBJ(const char* filePath)
 /// <returns>点集</returns>
 void saveTextPCD(Point3F points[], int length, const char* filePath)
 {
-	const PointCloud<PointXYZ>& cloud = pclsharp::toPointCloud(points, length);
-	const int& saveStatus = pcl::io::savePCDFileASCII(filePath, cloud);
+	const PointCloud<PointXYZ>::Ptr& cloud = pclsharp::toPointCloud(points, length);
+	const int& saveStatus = pcl::io::savePCDFileASCII(filePath, *cloud);
 	if (saveStatus != 0)
 	{
 		const string message = std::format("保存\"{}\"时出错！", filePath);
@@ -207,8 +207,8 @@ void saveTextPCD(Point3F points[], int length, const char* filePath)
 /// <returns>点集</returns>
 void saveBinaryPCD(Point3F points[], int length, const char* filePath)
 {
-	const PointCloud<PointXYZ>& cloud = pclsharp::toPointCloud(points, length);
-	const int& saveStatus = pcl::io::savePCDFileBinaryCompressed(filePath, cloud);
+	const PointCloud<PointXYZ>::Ptr& cloud = pclsharp::toPointCloud(points, length);
+	const int& saveStatus = pcl::io::savePCDFileBinaryCompressed(filePath, *cloud);
 	if (saveStatus != 0)
 	{
 		const string message = std::format("保存\"{}\"时出错！", filePath);
@@ -225,8 +225,8 @@ void saveBinaryPCD(Point3F points[], int length, const char* filePath)
 /// <returns>点集</returns>
 void saveNormalTextPCD(Point3Normal3 pointNormals[], int length, const char* filePath)
 {
-	const PointCloud<PointNormal>& cloud = pclsharp::toPointCloud(pointNormals, length);
-	const int& saveStatus = pcl::io::savePCDFileASCII(filePath, cloud);
+	const PointCloud<PointNormal>::Ptr& cloud = pclsharp::toPointCloud(pointNormals, length);
+	const int& saveStatus = pcl::io::savePCDFileASCII(filePath, *cloud);
 	if (saveStatus != 0)
 	{
 		const string message = std::format("保存\"{}\"时出错！", filePath);
@@ -243,8 +243,8 @@ void saveNormalTextPCD(Point3Normal3 pointNormals[], int length, const char* fil
 /// <returns>点集</returns>
 void saveNormalBinaryPCD(Point3Normal3 pointNormals[], int length, const char* filePath)
 {
-	const PointCloud<PointNormal>& cloud = pclsharp::toPointCloud(pointNormals, length);
-	const int& saveStatus = pcl::io::savePCDFileBinaryCompressed(filePath, cloud);
+	const PointCloud<PointNormal>::Ptr& cloud = pclsharp::toPointCloud(pointNormals, length);
+	const int& saveStatus = pcl::io::savePCDFileBinaryCompressed(filePath, *cloud);
 	if (saveStatus != 0)
 	{
 		const string message = std::format("保存\"{}\"时出错！", filePath);
@@ -261,8 +261,8 @@ void saveNormalBinaryPCD(Point3Normal3 pointNormals[], int length, const char* f
 /// <returns>点集</returns>
 void saveColorTextPCD(Point3Color4 pointColors[], int length, const char* filePath)
 {
-	const PointCloud<PointXYZRGBA>& cloud = pclsharp::toPointCloud(pointColors, length);
-	const int& saveStatus = pcl::io::savePCDFileASCII(filePath, cloud);
+	const PointCloud<PointXYZRGBA>::Ptr& cloud = pclsharp::toPointCloud(pointColors, length);
+	const int& saveStatus = pcl::io::savePCDFileASCII(filePath, *cloud);
 	if (saveStatus != 0)
 	{
 		const string message = std::format("保存\"{}\"时出错！", filePath);
@@ -279,8 +279,8 @@ void saveColorTextPCD(Point3Color4 pointColors[], int length, const char* filePa
 /// <returns>点集</returns>
 void saveColorBinaryPCD(Point3Color4 pointColors[], int length, const char* filePath)
 {
-	const PointCloud<PointXYZRGBA>& cloud = pclsharp::toPointCloud(pointColors, length);
-	const int& saveStatus = pcl::io::savePCDFileBinaryCompressed(filePath, cloud);
+	const PointCloud<PointXYZRGBA>::Ptr& cloud = pclsharp::toPointCloud(pointColors, length);
+	const int& saveStatus = pcl::io::savePCDFileBinaryCompressed(filePath, *cloud);
 	if (saveStatus != 0)
 	{
 		const string message = std::format("保存\"{}\"时出错！", filePath);
@@ -297,8 +297,8 @@ void saveColorBinaryPCD(Point3Color4 pointColors[], int length, const char* file
 /// <returns>点集</returns>
 void saveTextPLY(Point3F points[], int length, const char* filePath)
 {
-	const PointCloud<PointXYZ>& cloud = pclsharp::toPointCloud(points, length);
-	const int& saveStatus = pcl::io::savePLYFileASCII(filePath, cloud);
+	const PointCloud<PointXYZ>::Ptr& cloud = pclsharp::toPointCloud(points, length);
+	const int& saveStatus = pcl::io::savePLYFileASCII(filePath, *cloud);
 	if (saveStatus != 0)
 	{
 		const string message = std::format("保存\"{}\"时出错！", filePath);
@@ -315,8 +315,8 @@ void saveTextPLY(Point3F points[], int length, const char* filePath)
 /// <returns>点集</returns>
 void saveBinaryPLY(Point3F points[], int length, const char* filePath)
 {
-	const PointCloud<PointXYZ>& cloud = pclsharp::toPointCloud(points, length);
-	const int& saveStatus = pcl::io::savePLYFileBinary(filePath, cloud);
+	const PointCloud<PointXYZ>::Ptr& cloud = pclsharp::toPointCloud(points, length);
+	const int& saveStatus = pcl::io::savePLYFileBinary(filePath, *cloud);
 	if (saveStatus != 0)
 	{
 		const string message = std::format("保存\"{}\"时出错！", filePath);
@@ -333,8 +333,8 @@ void saveBinaryPLY(Point3F points[], int length, const char* filePath)
 /// <returns>点集</returns>
 void saveNormalTextPLY(Point3Normal3 pointNormals[], int length, const char* filePath)
 {
-	const PointCloud<PointNormal>& cloud = pclsharp::toPointCloud(pointNormals, length);
-	const int& saveStatus = pcl::io::savePLYFileASCII(filePath, cloud);
+	const PointCloud<PointNormal>::Ptr& cloud = pclsharp::toPointCloud(pointNormals, length);
+	const int& saveStatus = pcl::io::savePLYFileASCII(filePath, *cloud);
 	if (saveStatus != 0)
 	{
 		const string message = std::format("保存\"{}\"时出错！", filePath);
@@ -351,8 +351,8 @@ void saveNormalTextPLY(Point3Normal3 pointNormals[], int length, const char* fil
 /// <returns>点集</returns>
 void saveNormalBinaryPLY(Point3Normal3 pointNormals[], int length, const char* filePath)
 {
-	const PointCloud<PointNormal>& cloud = pclsharp::toPointCloud(pointNormals, length);
-	const int& saveStatus = pcl::io::savePLYFileBinary(filePath, cloud);
+	const PointCloud<PointNormal>::Ptr& cloud = pclsharp::toPointCloud(pointNormals, length);
+	const int& saveStatus = pcl::io::savePLYFileBinary(filePath, *cloud);
 	if (saveStatus != 0)
 	{
 		const string message = std::format("保存\"{}\"时出错！", filePath);
@@ -369,8 +369,8 @@ void saveNormalBinaryPLY(Point3Normal3 pointNormals[], int length, const char* f
 /// <returns>点集</returns>
 void saveColorTextPLY(Point3Color4 pointColors[], int length, const char* filePath)
 {
-	const PointCloud<PointXYZRGBA>& cloud = pclsharp::toPointCloud(pointColors, length);
-	const int& saveStatus = pcl::io::savePLYFileASCII(filePath, cloud);
+	const PointCloud<PointXYZRGBA>::Ptr& cloud = pclsharp::toPointCloud(pointColors, length);
+	const int& saveStatus = pcl::io::savePLYFileASCII(filePath, *cloud);
 	if (saveStatus != 0)
 	{
 		const string message = std::format("保存\"{}\"时出错！", filePath);
@@ -387,8 +387,8 @@ void saveColorTextPLY(Point3Color4 pointColors[], int length, const char* filePa
 /// <returns>点集</returns>
 void saveColorBinaryPLY(Point3Color4 pointColors[], int length, const char* filePath)
 {
-	const PointCloud<PointXYZRGBA>& cloud = pclsharp::toPointCloud(pointColors, length);
-	const int& saveStatus = pcl::io::savePLYFileBinary(filePath, cloud);
+	const PointCloud<PointXYZRGBA>::Ptr& cloud = pclsharp::toPointCloud(pointColors, length);
+	const int& saveStatus = pcl::io::savePLYFileBinary(filePath, *cloud);
 	if (saveStatus != 0)
 	{
 		const string message = std::format("保存\"{}\"时出错！", filePath);

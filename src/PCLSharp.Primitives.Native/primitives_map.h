@@ -19,7 +19,7 @@ namespace pclsharp
 	/// <param name="point3Fs">坐标点集</param>
 	/// <param name="length">长度</param>
 	/// <returns>点云</returns>
-	EXPORT_CPP pcl::PointCloud<pcl::PointXYZ> toPointCloud(Point3F point3Fs[], const int& length);
+	EXPORT_CPP pcl::PointCloud<pcl::PointXYZ>::Ptr toPointCloud(Point3F point3Fs[], const int& length);
 
 	/// <summary>
 	/// 点云映射坐标点集结构体
@@ -34,7 +34,7 @@ namespace pclsharp
 	/// <param name="normal3Fs">法向量集</param>
 	/// <param name="length">长度</param>
 	/// <returns>点云</returns>
-	EXPORT_CPP pcl::PointCloud<pcl::Normal> toPointCloud(Normal3F normal3Fs[], const int& length);
+	EXPORT_CPP pcl::PointCloud<pcl::Normal>::Ptr toPointCloud(Normal3F normal3Fs[], const int& length);
 
 	/// <summary>
 	/// 点云映射法向量集结构体
@@ -49,7 +49,7 @@ namespace pclsharp
 	/// <param name="point3Normal3s">坐标点法向量集</param>
 	/// <param name="length">长度</param>
 	/// <returns>点云</returns>
-	EXPORT_CPP pcl::PointCloud<pcl::PointNormal> toPointCloud(Point3Normal3 point3Normal3s[], const int& length);
+	EXPORT_CPP pcl::PointCloud<pcl::PointNormal>::Ptr toPointCloud(Point3Normal3 point3Normal3s[], const int& length);
 
 	/// <summary>
 	/// 点云映射坐标点法向量集结构体
@@ -64,7 +64,7 @@ namespace pclsharp
 	/// <param name="point3Color4s">坐标点颜色集</param>
 	/// <param name="length">长度</param>
 	/// <returns>点云</returns>
-	EXPORT_CPP pcl::PointCloud<pcl::PointXYZRGBA> toPointCloud(Point3Color4 point3Color4s[], const int& length);
+	EXPORT_CPP pcl::PointCloud<pcl::PointXYZRGBA>::Ptr toPointCloud(Point3Color4 point3Color4s[], const int& length);
 
 	/// <summary>
 	/// 点云映射坐标点颜色集结构体

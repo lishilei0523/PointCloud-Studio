@@ -23,12 +23,8 @@ using namespace pcl;
 /// <returns>过滤后点集</returns>
 Point3Fs* applyPassThrogh(Point3F points[], const int length, const char* axis, const float limitMin, const float limixMax)
 {
-	const PointCloud<PointXYZ>::Ptr sourceCloud = std::make_shared<PointCloud<PointXYZ>>();
+	const PointCloud<PointXYZ>::Ptr& sourceCloud = pclsharp::toPointCloud(points, length);
 	const PointCloud<PointXYZ>::Ptr targetCloud = std::make_shared<PointCloud<PointXYZ>>();
-
-	//加载点云
-	const PointCloud<PointXYZ>& pointCloud = pclsharp::toPointCloud(points, length);
-	copyPointCloud(pointCloud, *sourceCloud);
 
 	//直通滤波
 	PassThrough<PointXYZ> passThrough;
@@ -52,12 +48,8 @@ Point3Fs* applyPassThrogh(Point3F points[], const int length, const char* axis, 
 /// <returns>过滤后点集</returns>
 Point3Fs* applyRandomSampling(Point3F points[], const int length, const int seed, const int samplesCount)
 {
-	const PointCloud<PointXYZ>::Ptr sourceCloud = std::make_shared<PointCloud<PointXYZ>>();
+	const PointCloud<PointXYZ>::Ptr& sourceCloud = pclsharp::toPointCloud(points, length);
 	const PointCloud<PointXYZ>::Ptr targetCloud = std::make_shared<PointCloud<PointXYZ>>();
-
-	//加载点云
-	const PointCloud<PointXYZ>& pointCloud = pclsharp::toPointCloud(points, length);
-	copyPointCloud(pointCloud, *sourceCloud);
 
 	//随机采样
 	RandomSample<PointXYZ> randomSampling;
@@ -80,12 +72,8 @@ Point3Fs* applyRandomSampling(Point3F points[], const int length, const int seed
 /// <returns>过滤后点集</returns>
 Point3Fs* applyUniformSampling(Point3F points[], const int length, const float radius)
 {
-	const PointCloud<PointXYZ>::Ptr sourceCloud = std::make_shared<PointCloud<PointXYZ>>();
+	const PointCloud<PointXYZ>::Ptr& sourceCloud = pclsharp::toPointCloud(points, length);
 	const PointCloud<PointXYZ>::Ptr targetCloud = std::make_shared<PointCloud<PointXYZ>>();
-
-	//加载点云
-	const PointCloud<PointXYZ>& pointCloud = pclsharp::toPointCloud(points, length);
-	copyPointCloud(pointCloud, *sourceCloud);
 
 	//均匀采样
 	UniformSampling<PointXYZ> uniformSampling;
@@ -107,12 +95,8 @@ Point3Fs* applyUniformSampling(Point3F points[], const int length, const float r
 /// <returns>过滤后点集</returns>
 Point3Fs* applyVoxelGrid(Point3F points[], const int length, const float leafSize)
 {
-	const PointCloud<PointXYZ>::Ptr sourceCloud = std::make_shared<PointCloud<PointXYZ>>();
+	const PointCloud<PointXYZ>::Ptr& sourceCloud = pclsharp::toPointCloud(points, length);
 	const PointCloud<PointXYZ>::Ptr targetCloud = std::make_shared<PointCloud<PointXYZ>>();
-
-	//加载点云
-	const PointCloud<PointXYZ>& pointCloud = pclsharp::toPointCloud(points, length);
-	copyPointCloud(pointCloud, *sourceCloud);
 
 	//体素降采样
 	VoxelGrid<PointXYZ> voxelGrid;
@@ -134,12 +118,8 @@ Point3Fs* applyVoxelGrid(Point3F points[], const int length, const float leafSiz
 /// <returns>过滤后点集</returns>
 Point3Fs* applyApproximateVoxelGrid(Point3F points[], int length, float leafSize)
 {
-	const PointCloud<PointXYZ>::Ptr sourceCloud = std::make_shared<PointCloud<PointXYZ>>();
+	const PointCloud<PointXYZ>::Ptr& sourceCloud = pclsharp::toPointCloud(points, length);
 	const PointCloud<PointXYZ>::Ptr targetCloud = std::make_shared<PointCloud<PointXYZ>>();
-
-	//加载点云
-	const PointCloud<PointXYZ>& pointCloud = pclsharp::toPointCloud(points, length);
-	copyPointCloud(pointCloud, *sourceCloud);
 
 	//近似体素降采样
 	ApproximateVoxelGrid<PointXYZ> approximateVoxelGrid;
@@ -162,12 +142,8 @@ Point3Fs* applyApproximateVoxelGrid(Point3F points[], int length, float leafSize
 /// <returns>过滤后点集</returns>
 Point3Fs* applyStatisticalOutlierRemoval(Point3F points[], const int length, const int meanK, const float stddevMult)
 {
-	const PointCloud<PointXYZ>::Ptr sourceCloud = std::make_shared<PointCloud<PointXYZ>>();
+	const PointCloud<PointXYZ>::Ptr& sourceCloud = pclsharp::toPointCloud(points, length);
 	const PointCloud<PointXYZ>::Ptr targetCloud = std::make_shared<PointCloud<PointXYZ>>();
-
-	//加载点云
-	const PointCloud<PointXYZ>& pointCloud = pclsharp::toPointCloud(points, length);
-	copyPointCloud(pointCloud, *sourceCloud);
 
 	//统计离群点移除
 	StatisticalOutlierRemoval<PointXYZ> statisticalOutlierRemoval;
@@ -191,12 +167,8 @@ Point3Fs* applyStatisticalOutlierRemoval(Point3F points[], const int length, con
 /// <returns>过滤后点集</returns>
 Point3Fs* applyRadiusOutlierRemoval(Point3F points[], int length, const float radius, const int minNeighborsInRadius)
 {
-	const PointCloud<PointXYZ>::Ptr sourceCloud = std::make_shared<PointCloud<PointXYZ>>();
+	const PointCloud<PointXYZ>::Ptr& sourceCloud = pclsharp::toPointCloud(points, length);
 	const PointCloud<PointXYZ>::Ptr targetCloud = std::make_shared<PointCloud<PointXYZ>>();
-
-	//加载点云
-	const PointCloud<PointXYZ>& pointCloud = pclsharp::toPointCloud(points, length);
-	copyPointCloud(pointCloud, *sourceCloud);
 
 	//半径离群点移除
 	RadiusOutlierRemoval<PointXYZ> radiusOutlierRemoval;

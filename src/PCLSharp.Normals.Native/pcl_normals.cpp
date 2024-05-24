@@ -16,17 +16,13 @@ using namespace pcl;
 /// <returns>法向量集</returns>
 Normal3Fs* estimateNormalsByK(Point3F points[], const int length, const int k)
 {
-	const PointCloud<PointXYZ>::Ptr sourceCloud = std::make_shared<PointCloud<PointXYZ>>();
+	const PointCloud<PointXYZ>::Ptr& cloud = pclsharp::toPointCloud(points, length);
 	const PointCloud<Normal>::Ptr cloudNormals = std::make_shared<PointCloud<Normal>>();
-
-	//加载点云
-	const PointCloud<PointXYZ>& pointCloud = pclsharp::toPointCloud(points, length);
-	copyPointCloud(pointCloud, *sourceCloud);
 
 	//计算法向量
 	const search::KdTree<PointXYZ>::Ptr kdTree = std::make_shared<search::KdTree<PointXYZ>>();
 	NormalEstimation<PointXYZ, Normal> normalEstimator;
-	normalEstimator.setInputCloud(sourceCloud);
+	normalEstimator.setInputCloud(cloud);
 	normalEstimator.setSearchMethod(kdTree);
 	normalEstimator.setKSearch(k);
 	normalEstimator.compute(*cloudNormals);
@@ -45,17 +41,13 @@ Normal3Fs* estimateNormalsByK(Point3F points[], const int length, const int k)
 /// <returns>法向量集</returns>
 Normal3Fs* estimateNormalsByRadius(Point3F points[], const int length, const float radius)
 {
-	const PointCloud<PointXYZ>::Ptr sourceCloud = std::make_shared<PointCloud<PointXYZ>>();
+	const PointCloud<PointXYZ>::Ptr& cloud = pclsharp::toPointCloud(points, length);
 	const PointCloud<Normal>::Ptr cloudNormals = std::make_shared<PointCloud<Normal>>();
-
-	//加载点云
-	const PointCloud<PointXYZ>& pointCloud = pclsharp::toPointCloud(points, length);
-	copyPointCloud(pointCloud, *sourceCloud);
 
 	//计算法向量
 	const search::KdTree<PointXYZ>::Ptr kdTree = std::make_shared<search::KdTree<PointXYZ>>();
 	NormalEstimation<PointXYZ, Normal> normalEstimator;
-	normalEstimator.setInputCloud(sourceCloud);
+	normalEstimator.setInputCloud(cloud);
 	normalEstimator.setSearchMethod(kdTree);
 	normalEstimator.setRadiusSearch(radius);
 	normalEstimator.compute(*cloudNormals);
@@ -74,17 +66,13 @@ Normal3Fs* estimateNormalsByRadius(Point3F points[], const int length, const flo
 /// <returns>法向量集</returns>
 Normal3Fs* estimateNormalsByKP(Point3F points[], const int length, const int k)
 {
-	const PointCloud<PointXYZ>::Ptr sourceCloud = std::make_shared<PointCloud<PointXYZ>>();
+	const PointCloud<PointXYZ>::Ptr& cloud = pclsharp::toPointCloud(points, length);
 	const PointCloud<Normal>::Ptr cloudNormals = std::make_shared<PointCloud<Normal>>();
-
-	//加载点云
-	const PointCloud<PointXYZ>& pointCloud = pclsharp::toPointCloud(points, length);
-	copyPointCloud(pointCloud, *sourceCloud);
 
 	//计算法向量
 	const search::KdTree<PointXYZ>::Ptr kdTree = std::make_shared<search::KdTree<PointXYZ>>();
 	NormalEstimationOMP<PointXYZ, Normal> normalEstimator;
-	normalEstimator.setInputCloud(sourceCloud);
+	normalEstimator.setInputCloud(cloud);
 	normalEstimator.setSearchMethod(kdTree);
 	normalEstimator.setKSearch(k);
 	normalEstimator.compute(*cloudNormals);
@@ -103,17 +91,13 @@ Normal3Fs* estimateNormalsByKP(Point3F points[], const int length, const int k)
 /// <returns>法向量集</returns>
 Normal3Fs* estimateNormalsByRadiusP(Point3F points[], const int length, const float radius)
 {
-	const PointCloud<PointXYZ>::Ptr sourceCloud = std::make_shared<PointCloud<PointXYZ>>();
+	const PointCloud<PointXYZ>::Ptr& cloud = pclsharp::toPointCloud(points, length);
 	const PointCloud<Normal>::Ptr cloudNormals = std::make_shared<PointCloud<Normal>>();
-
-	//加载点云
-	const PointCloud<PointXYZ>& pointCloud = pclsharp::toPointCloud(points, length);
-	copyPointCloud(pointCloud, *sourceCloud);
 
 	//计算法向量
 	const search::KdTree<PointXYZ>::Ptr kdTree = std::make_shared<search::KdTree<PointXYZ>>();
 	NormalEstimationOMP<PointXYZ, Normal> normalEstimator;
-	normalEstimator.setInputCloud(sourceCloud);
+	normalEstimator.setInputCloud(cloud);
 	normalEstimator.setSearchMethod(kdTree);
 	normalEstimator.setRadiusSearch(radius);
 	normalEstimator.compute(*cloudNormals);
@@ -132,10 +116,10 @@ Normal3Fs* estimateNormalsByRadiusP(Point3F points[], const int length, const fl
 Point3F* estimateCentroid(Point3F points[], const int length)
 {
 	//加载点云
-	const PointCloud<PointXYZ>& pointCloud = pclsharp::toPointCloud(points, length);
+	const PointCloud<PointXYZ>::Ptr& cloud = pclsharp::toPointCloud(points, length);
 
 	Eigen::Vector4f centroid;
-	pcl::compute3DCentroid(pointCloud, centroid);
+	pcl::compute3DCentroid(*cloud, centroid);
 
 	Point3F* point3F = new Point3F(centroid[0], centroid[1], centroid[2]);
 
