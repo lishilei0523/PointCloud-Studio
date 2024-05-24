@@ -20,9 +20,9 @@
 
   <ItemGroup>
     <None Include="..\PCLSharp.Filters.Native\bin\$(Configuration)\x64\*.dll">
-      <Link>Runtimes\%(Filename)%(Extension)</Link>
+      <Link>%(RecursiveDir)%(Filename)%(Extension)</Link>
+      <Visible>False</Visible>
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-      <TargetPath>%(Filename)%(Extension)</TargetPath>
     </None>
   </ItemGroup>
 
