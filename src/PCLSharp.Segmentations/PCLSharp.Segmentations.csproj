@@ -4,7 +4,7 @@
     <LangVersion>8.0</LangVersion>
     <Authors>Lee</Authors>
     <Company>SD</Company>
-    <Description>SD.Framework PCL关键点/特征</Description>
+    <Description>SD.Framework PCL分割</Description>
     <Copyright>Copyright © SD 2024</Copyright>
     <Version>0.1.0</Version>
     <AssemblyVersion>0.1.0</AssemblyVersion>
@@ -12,14 +12,14 @@
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
-    <DocumentationFile>bin\Debug\$(TargetFramework)\PCLSharp.Features.xml</DocumentationFile>
+    <DocumentationFile>bin\Debug\$(TargetFramework)\PCLSharp.Segmentations.xml</DocumentationFile>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
-    <DocumentationFile>bin\Release\$(TargetFramework)\PCLSharp.Features.xml</DocumentationFile>
+    <DocumentationFile>bin\Release\$(TargetFramework)\PCLSharp.Segmentations.xml</DocumentationFile>
   </PropertyGroup>
 
   <ItemGroup>
-    <None Include="..\PCLSharp.Features.Native\bin\$(Configuration)\x64\*.dll">
+    <None Include="..\PCLSharp.Segmentations.Native\bin\$(Configuration)\x64\*.dll">
       <Link>%(RecursiveDir)%(Filename)%(Extension)</Link>
       <Visible>False</Visible>
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>

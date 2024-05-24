@@ -4,7 +4,7 @@
     <LangVersion>8.0</LangVersion>
     <Authors>Lee</Authors>
     <Company>SD</Company>
-    <Description>SD.Toolkits PCL文件I/O</Description>
+    <Description>SD.Framework PCL文件I/O</Description>
     <Copyright>Copyright © SD 2024</Copyright>
     <Version>0.1.0</Version>
     <AssemblyVersion>0.1.0</AssemblyVersion>

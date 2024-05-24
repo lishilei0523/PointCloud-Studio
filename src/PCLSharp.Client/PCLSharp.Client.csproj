@@ -5,6 +5,13 @@
     <OutputType>WinExe</OutputType>
     <UseWPF>true</UseWPF>
     <ApplicationIcon>favicon.ico</ApplicationIcon>
+    <Authors>Lee</Authors>
+    <Company>SD</Company>
+    <Description>SD.Framework PCL客户端</Description>
+    <Copyright>Copyright © SD 2024</Copyright>
+    <Version>0.1.0</Version>
+    <AssemblyVersion>0.1.0</AssemblyVersion>
+    <FileVersion>0.1.0.0</FileVersion>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Platform)'=='AnyCPU'">
@@ -29,16 +36,19 @@
     <PackageReference Include="SD.IOC.Core" Version="1.3.1" />
     <PackageReference Include="SD.Infrastructure" Version="3.7.0" />
     <PackageReference Include="SD.Infrastructure.WPF" Version="1.3.5" />
+    <PackageReference Include="SD.Infrastructure.WPF.3D" Version="0.1.1" />
     <PackageReference Include="SD.Infrastructure.WPF.Caliburn" Version="1.2.1" />
   </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\PCLSharp.Presentation\PCLSharp.Presentation.csproj" />
+    <ProjectReference Include="..\PCLSharp.HelixDX.WPF\PCLSharp.HelixDX.WPF.csproj" />
     <ProjectReference Include="..\PCLSharp.Primitives\PCLSharp.Primitives.csproj" />
     <ProjectReference Include="..\PCLSharp.FileIO\PCLSharp.FileIO.csproj" />
     <ProjectReference Include="..\PCLSharp.Filters\PCLSharp.Filters.csproj" />
     <ProjectReference Include="..\PCLSharp.Normals\PCLSharp.Normals.csproj" />
     <ProjectReference Include="..\PCLSharp.Features\PCLSharp.Features.csproj" />
-    <ProjectReference Include="..\PCLSharp.HelixDX.WPF\PCLSharp.HelixDX.WPF.csproj" />
+    <ProjectReference Include="..\PCLSharp.Segmentations\PCLSharp.Segmentations.csproj" />
+    <ProjectReference Include="..\PCLSharp.Registrations\PCLSharp.Registrations.csproj" />
   </ItemGroup>
 </Project>

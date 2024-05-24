@@ -5,7 +5,7 @@
     <UseWPF>true</UseWPF>
     <Authors>Lee</Authors>
     <Company>SD</Company>
-    <Description>SD.Toolkits PCL HelixToolkit WPF扩展</Description>
+    <Description>SD.Framework PCL Helix-Toolkit.WPF扩展</Description>
     <Copyright>Copyright © SD 2024</Copyright>
     <Version>0.1.0</Version>
     <AssemblyVersion>0.1.0</AssemblyVersion>
