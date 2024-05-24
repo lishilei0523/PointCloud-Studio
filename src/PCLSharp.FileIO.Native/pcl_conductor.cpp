@@ -395,12 +395,3 @@ void saveColorBinaryPLY(Point3Color4 pointColors[], int length, const char* file
 		throw exception(message.c_str());
 	}
 }
-
-/// <summary>
-/// 释放资源
-/// </summary>
-/// <param name="pointer">指针</param>
-void dispose(const int* pointer)
-{
-	delete pointer;
-}

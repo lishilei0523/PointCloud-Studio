@@ -47,9 +47,3 @@ EXPORT_C Normal3Fs* CALLING_MODE estimateNormalsByRadiusP(Point3F points[], int 
 /// <param name="length">点集长度</param>
 /// <returns>质心坐标点</returns>
 EXPORT_C Point3F* CALLING_MODE estimateCentroid(Point3F points[], int length);
-
-/// <summary>
-/// 释放资源
-/// </summary>
-/// <param name="pointer">指针</param>
-EXPORT_C void CALLING_MODE dispose(const int* pointer);

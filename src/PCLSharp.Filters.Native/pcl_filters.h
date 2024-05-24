@@ -71,9 +71,3 @@ EXPORT_C Point3Fs* CALLING_MODE applyStatisticalOutlierRemoval(Point3F points[],
 /// <param name="minNeighborsInRadius">半径范围内点数量最小值</param>
 /// <returns>过滤后点集</returns>
 EXPORT_C Point3Fs* CALLING_MODE applyRadiusOutlierRemoval(Point3F points[], int length, float radius, int minNeighborsInRadius);
-
-/// <summary>
-/// 释放资源
-/// </summary>
-/// <param name="pointer">指针</param>
-EXPORT_C void CALLING_MODE dispose(const int* pointer);

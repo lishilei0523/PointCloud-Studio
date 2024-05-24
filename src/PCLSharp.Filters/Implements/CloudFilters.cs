@@ -1,5 +1,6 @@
 ﻿using PCLSharp.Filters.Declarations;
 using PCLSharp.Filters.Interfaces;
+using PCLSharp.Primitives.Declarations;
 using PCLSharp.Primitives.Extensions;
 using PCLSharp.Primitives.Models;
 using System;
@@ -39,7 +40,7 @@ namespace PCLSharp.Filters.Implements
             IntPtr pointer = FiltersNative.ApplyPassThrogh(points_, points_.Length, axis, limitMin, limixMax);
             Point3Fs point3Fs = Marshal.PtrToStructure<Point3Fs>(pointer);
             Point3F[] filteredPoints = point3Fs.ToPoint3Fs();
-            FiltersNative.Dispose(pointer);
+            DisposeNative.DisposePoint3Fs(pointer);
 
             return filteredPoints;
         }
@@ -69,7 +70,7 @@ namespace PCLSharp.Filters.Implements
             IntPtr pointer = FiltersNative.ApplyRandomSampling(points_, points_.Length, seed, samplesCount);
             Point3Fs point3Fs = Marshal.PtrToStructure<Point3Fs>(pointer);
             Point3F[] filteredPoints = point3Fs.ToPoint3Fs();
-            FiltersNative.Dispose(pointer);
+            DisposeNative.DisposePoint3Fs(pointer);
 
             return filteredPoints;
         }
@@ -98,7 +99,7 @@ namespace PCLSharp.Filters.Implements
             IntPtr pointer = FiltersNative.ApplyUniformSampling(points_, points_.Length, radius);
             Point3Fs point3Fs = Marshal.PtrToStructure<Point3Fs>(pointer);
             Point3F[] filteredPoints = point3Fs.ToPoint3Fs();
-            FiltersNative.Dispose(pointer);
+            DisposeNative.DisposePoint3Fs(pointer);
 
             return filteredPoints;
         }
@@ -127,7 +128,7 @@ namespace PCLSharp.Filters.Implements
             IntPtr pointer = FiltersNative.ApplyVoxelGrid(points_, points_.Length, leafSize);
             Point3Fs point3Fs = Marshal.PtrToStructure<Point3Fs>(pointer);
             Point3F[] filteredPoints = point3Fs.ToPoint3Fs();
-            FiltersNative.Dispose(pointer);
+            DisposeNative.DisposePoint3Fs(pointer);
 
             return filteredPoints;
         }
@@ -156,7 +157,7 @@ namespace PCLSharp.Filters.Implements
             IntPtr pointer = FiltersNative.ApplyApproximateVoxelGrid(points_, points_.Length, leafSize);
             Point3Fs point3Fs = Marshal.PtrToStructure<Point3Fs>(pointer);
             Point3F[] filteredPoints = point3Fs.ToPoint3Fs();
-            FiltersNative.Dispose(pointer);
+            DisposeNative.DisposePoint3Fs(pointer);
 
             return filteredPoints;
         }
@@ -186,7 +187,7 @@ namespace PCLSharp.Filters.Implements
             IntPtr pointer = FiltersNative.ApplyStatisticalOutlierRemoval(points_, points_.Length, meanK, stddevMult);
             Point3Fs point3Fs = Marshal.PtrToStructure<Point3Fs>(pointer);
             Point3F[] filteredPoints = point3Fs.ToPoint3Fs();
-            FiltersNative.Dispose(pointer);
+            DisposeNative.DisposePoint3Fs(pointer);
 
             return filteredPoints;
         }
@@ -216,7 +217,7 @@ namespace PCLSharp.Filters.Implements
             IntPtr pointer = FiltersNative.ApplyRadiusOutlierRemoval(points_, points_.Length, radius, minNeighborsInRadius);
             Point3Fs point3Fs = Marshal.PtrToStructure<Point3Fs>(pointer);
             Point3F[] filteredPoints = point3Fs.ToPoint3Fs();
-            FiltersNative.Dispose(pointer);
+            DisposeNative.DisposePoint3Fs(pointer);
 
             return filteredPoints;
         }

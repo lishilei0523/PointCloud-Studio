@@ -1,5 +1,6 @@
 ﻿using PCLSharp.Normals.Declarations;
 using PCLSharp.Normals.Interfaces;
+using PCLSharp.Primitives.Declarations;
 using PCLSharp.Primitives.Extensions;
 using PCLSharp.Primitives.Models;
 using System;
@@ -37,7 +38,7 @@ namespace PCLSharp.Normals.Implements
             IntPtr pointer = NormalsNative.EstimateNormalsByK(points_, points_.Length, k);
             Normal3Fs normal3Fs = Marshal.PtrToStructure<Normal3Fs>(pointer);
             Normal3F[] normals = normal3Fs.ToNormal3Fs();
-            NormalsNative.Dispose(pointer);
+            DisposeNative.DisposeNormal3Fs(pointer);
 
             return normals;
         }
@@ -66,7 +67,7 @@ namespace PCLSharp.Normals.Implements
             IntPtr pointer = NormalsNative.EstimateNormalsByRadius(points_, points_.Length, radius);
             Normal3Fs normal3Fs = Marshal.PtrToStructure<Normal3Fs>(pointer);
             Normal3F[] normals = normal3Fs.ToNormal3Fs();
-            NormalsNative.Dispose(pointer);
+            DisposeNative.DisposeNormal3Fs(pointer);
 
             return normals;
         }
@@ -95,7 +96,7 @@ namespace PCLSharp.Normals.Implements
             IntPtr pointer = NormalsNative.EstimateNormalsByKP(points_, points_.Length, k);
             Normal3Fs normal3Fs = Marshal.PtrToStructure<Normal3Fs>(pointer);
             Normal3F[] normals = normal3Fs.ToNormal3Fs();
-            NormalsNative.Dispose(pointer);
+            DisposeNative.DisposeNormal3Fs(pointer);
 
             return normals;
         }
@@ -124,7 +125,7 @@ namespace PCLSharp.Normals.Implements
             IntPtr pointer = NormalsNative.EstimateNormalsByRadiusP(points_, points_.Length, radius);
             Normal3Fs normal3Fs = Marshal.PtrToStructure<Normal3Fs>(pointer);
             Normal3F[] normals = normal3Fs.ToNormal3Fs();
-            NormalsNative.Dispose(pointer);
+            DisposeNative.DisposeNormal3Fs(pointer);
 
             return normals;
         }
@@ -151,7 +152,7 @@ namespace PCLSharp.Normals.Implements
 
             IntPtr pointer = NormalsNative.EstimateCentroid(points_, points_.Length);
             Point3F centroid = Marshal.PtrToStructure<Point3F>(pointer);
-            NormalsNative.Dispose(pointer);
+            DisposeNative.DisposePoint3F(pointer);
 
             return centroid;
         }

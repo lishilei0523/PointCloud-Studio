@@ -125,12 +125,3 @@ Point3F* estimateCentroid(Point3F points[], const int length)
 
 	return point3F;
 }
-
-/// <summary>
-/// 释放资源
-/// </summary>
-/// <param name="pointer">指针</param>
-void dispose(const int* pointer)
-{
-	delete pointer;
-}

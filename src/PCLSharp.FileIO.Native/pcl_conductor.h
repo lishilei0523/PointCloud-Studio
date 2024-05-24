@@ -178,9 +178,3 @@ EXPORT_C void CALLING_MODE saveColorTextPLY(Point3Color4 pointColors[], int leng
 /// <param name="filePath">文件路径</param>
 /// <returns>点集</returns>
 EXPORT_C void CALLING_MODE saveColorBinaryPLY(Point3Color4 pointColors[], int length, const char* filePath);
-
-/// <summary>
-/// 释放资源
-/// </summary>
-/// <param name="pointer">指针</param>
-EXPORT_C void CALLING_MODE dispose(const int* pointer);

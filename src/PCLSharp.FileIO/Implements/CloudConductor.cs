@@ -1,5 +1,6 @@
 ﻿using PCLSharp.FileIO.Declarations;
 using PCLSharp.FileIO.Interfaces;
+using PCLSharp.Primitives.Declarations;
 using PCLSharp.Primitives.Extensions;
 using PCLSharp.Primitives.Models;
 using System;
@@ -39,7 +40,7 @@ namespace PCLSharp.FileIO.Implements
             IntPtr pointer = ConductorNative.LoadPCD(filePath);
             Point3Fs point3Fs = Marshal.PtrToStructure<Point3Fs>(pointer);
             Point3F[] points = point3Fs.ToPoint3Fs();
-            ConductorNative.Dispose(pointer);
+            DisposeNative.DisposePoint3Fs(pointer);
 
             return points;
         }
@@ -69,7 +70,7 @@ namespace PCLSharp.FileIO.Implements
             IntPtr pointer = ConductorNative.LoadNormalPCD(filePath);
             Point3Normal3s point3Normal3s = Marshal.PtrToStructure<Point3Normal3s>(pointer);
             Point3Normal3[] pointNormals = point3Normal3s.ToPoint3Normal3s();
-            ConductorNative.Dispose(pointer);
+            DisposeNative.DisposePoint3Normal3s(pointer);
 
             return pointNormals;
         }
@@ -99,7 +100,7 @@ namespace PCLSharp.FileIO.Implements
             IntPtr pointer = ConductorNative.LoadColorPCD(filePath);
             Point3Color4s point3Color4s = Marshal.PtrToStructure<Point3Color4s>(pointer);
             Point3Color4[] pointColors = point3Color4s.ToPoint3Color4s();
-            ConductorNative.Dispose(pointer);
+            DisposeNative.DisposePoint3Color4s(pointer);
 
             return pointColors;
         }
@@ -129,7 +130,7 @@ namespace PCLSharp.FileIO.Implements
             IntPtr pointer = ConductorNative.LoadPLY(filePath);
             Point3Fs point3Fs = Marshal.PtrToStructure<Point3Fs>(pointer);
             Point3F[] points = point3Fs.ToPoint3Fs();
-            ConductorNative.Dispose(pointer);
+            DisposeNative.DisposePoint3Fs(pointer);
 
             return points;
         }
@@ -159,7 +160,7 @@ namespace PCLSharp.FileIO.Implements
             IntPtr pointer = ConductorNative.LoadNormalPLY(filePath);
             Point3Normal3s point3Normal3s = Marshal.PtrToStructure<Point3Normal3s>(pointer);
             Point3Normal3[] pointNormals = point3Normal3s.ToPoint3Normal3s();
-            ConductorNative.Dispose(pointer);
+            DisposeNative.DisposePoint3Normal3s(pointer);
 
             return pointNormals;
         }
@@ -189,7 +190,7 @@ namespace PCLSharp.FileIO.Implements
             IntPtr pointer = ConductorNative.LoadColorPLY(filePath);
             Point3Color4s point3Color4s = Marshal.PtrToStructure<Point3Color4s>(pointer);
             Point3Color4[] pointColors = point3Color4s.ToPoint3Color4s();
-            ConductorNative.Dispose(pointer);
+            DisposeNative.DisposePoint3Color4s(pointer);
 
             return pointColors;
         }
@@ -219,7 +220,7 @@ namespace PCLSharp.FileIO.Implements
             IntPtr pointer = ConductorNative.LoadOBJ(filePath);
             Point3Fs point3Fs = Marshal.PtrToStructure<Point3Fs>(pointer);
             Point3F[] points = point3Fs.ToPoint3Fs();
-            ConductorNative.Dispose(pointer);
+            DisposeNative.DisposePoint3Fs(pointer);
 
             return points;
         }
@@ -249,7 +250,7 @@ namespace PCLSharp.FileIO.Implements
             IntPtr pointer = ConductorNative.LoadNormalOBJ(filePath);
             Point3Normal3s point3Normal3s = Marshal.PtrToStructure<Point3Normal3s>(pointer);
             Point3Normal3[] pointNormals = point3Normal3s.ToPoint3Normal3s();
-            ConductorNative.Dispose(pointer);
+            DisposeNative.DisposePoint3Normal3s(pointer);
 
             return pointNormals;
         }
@@ -279,7 +280,7 @@ namespace PCLSharp.FileIO.Implements
             IntPtr pointer = ConductorNative.LoadColorOBJ(filePath);
             Point3Color4s point3Color4s = Marshal.PtrToStructure<Point3Color4s>(pointer);
             Point3Color4[] pointColors = point3Color4s.ToPoint3Color4s();
-            ConductorNative.Dispose(pointer);
+            DisposeNative.DisposePoint3Color4s(pointer);
 
             return pointColors;
         }

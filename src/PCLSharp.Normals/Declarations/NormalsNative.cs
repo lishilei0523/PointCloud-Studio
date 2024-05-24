@@ -68,14 +68,5 @@ namespace PCLSharp.Normals.Declarations
         [DllImport(AssemblyNames.Normals, EntryPoint = "estimateCentroid")]
         public static extern IntPtr EstimateCentroid(Point3F[] points, int length);
         #endregion
-
-        #region # 释放资源 —— static extern void Dispose(IntPtr pointer)
-        /// <summary>
-        /// 释放资源
-        /// </summary>
-        /// <param name="pointer">指针</param>
-        [DllImport(AssemblyNames.Normals, EntryPoint = "dispose")]
-        public static extern void Dispose(IntPtr pointer);
-        #endregion
     }
 }

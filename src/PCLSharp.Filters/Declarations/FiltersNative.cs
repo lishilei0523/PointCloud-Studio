@@ -98,14 +98,5 @@ namespace PCLSharp.Filters.Declarations
         [DllImport(AssemblyNames.Filters, EntryPoint = "applyRadiusOutlierRemoval")]
         public static extern IntPtr ApplyRadiusOutlierRemoval(Point3F[] points, int length, float radius, int minNeighborsInRadius);
         #endregion
-
-        #region # 释放资源 —— static extern void Dispose(IntPtr pointer)
-        /// <summary>
-        /// 释放资源
-        /// </summary>
-        /// <param name="pointer">指针</param>
-        [DllImport(AssemblyNames.Filters, EntryPoint = "dispose")]
-        public static extern void Dispose(IntPtr pointer);
-        #endregion
     }
 }
