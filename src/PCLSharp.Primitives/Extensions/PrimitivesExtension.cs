@@ -2,14 +2,13 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using Point3F = PCLSharp.Primitives.Models.Point3F;
 
 namespace PCLSharp.Primitives.Extensions
 {
     /// <summary>
     /// 基元扩展
     /// </summary>
-    public static class PrimitivesExtension
+    public static unsafe class PrimitivesExtension
     {
         #region # 获取坐标点 —— static Point3F GetPoint(this Point3Normal3 pointNormal)
         /// <summary>
@@ -271,7 +270,7 @@ namespace PCLSharp.Primitives.Extensions
         /// <summary>
         /// 坐标点集结构体映射坐标点数组
         /// </summary>
-        public static unsafe Point3F[] ToPoint3Fs(this Point3Fs point3Fs)
+        public static Point3F[] ToPoint3Fs(this Point3Fs point3Fs)
         {
             Span<Point3F> span = new Span<Point3F>(point3Fs.Points.ToPointer(), point3Fs.Length);
             Point3F[] points = span.ToArray();
@@ -284,7 +283,7 @@ namespace PCLSharp.Primitives.Extensions
         /// <summary>
         /// 法向量集结构体映射法向量数组
         /// </summary>
-        public static unsafe Normal3F[] ToNormal3Fs(this Normal3Fs normal3Fs)
+        public static Normal3F[] ToNormal3Fs(this Normal3Fs normal3Fs)
         {
             Span<Normal3F> span = new Span<Normal3F>(normal3Fs.Normals.ToPointer(), normal3Fs.Length);
             Normal3F[] normals = span.ToArray();
@@ -297,7 +296,7 @@ namespace PCLSharp.Primitives.Extensions
         /// <summary>
         /// 坐标点法向量集结构体映射坐标点法向量数组
         /// </summary>
-        public static unsafe Point3Normal3[] ToPoint3Normal3s(this Point3Normal3s point3Normal3s)
+        public static Point3Normal3[] ToPoint3Normal3s(this Point3Normal3s point3Normal3s)
         {
             Span<Point3Normal3> span = new Span<Point3Normal3>(point3Normal3s.PointNormals.ToPointer(), point3Normal3s.Length);
             Point3Normal3[] pointNormals = span.ToArray();
@@ -310,7 +309,7 @@ namespace PCLSharp.Primitives.Extensions
         /// <summary>
         /// 坐标点颜色集结构体映射坐标点颜色数组
         /// </summary>
-        public static unsafe Point3Color4[] ToPoint3Color4s(this Point3Color4s point3Color4s)
+        public static Point3Color4[] ToPoint3Color4s(this Point3Color4s point3Color4s)
         {
             Span<Point3Color4> span = new Span<Point3Color4>(point3Color4s.PointColors.ToPointer(), point3Color4s.Length);
             Point3Color4[] pointColors = span.ToArray();
