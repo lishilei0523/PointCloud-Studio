@@ -3,11 +3,11 @@
 namespace PCLSharp.Client.Views.KeyPointContext
 {
     /// <summary>
-    /// SIFT关键点视图
+    /// Harris关键点视图
     /// </summary>
-    public partial class SiftView : Window
+    public partial class HarrisView : Window
     {
-        public SiftView()
+        public HarrisView()
         {
             this.InitializeComponent();
         }

@@ -196,6 +196,10 @@
             </Trigger>
         </Style.Triggers>
     </Style>
+    <!--MahApps.Metro.ToggleSwitch.Fluent样式-->
+    <Style x:Key="ToggleSwitch.Styles.Fluent" TargetType="{x:Type mah:ToggleSwitch}">
+        <Setter Property="FontFamily" Value="微软雅黑" />
+    </Style>
     <!--MahApps.Metro.Watermark默认样式-->
     <Style x:Key="MahApps.Styles.TextBlock.Watermark" TargetType="{x:Type TextBlock}"
            BasedOn="{StaticResource MahApps.Styles.TextBlock}">
