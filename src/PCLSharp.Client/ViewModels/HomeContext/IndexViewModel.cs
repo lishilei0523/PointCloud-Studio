@@ -1052,6 +1052,43 @@ namespace PCLSharp.Client.ViewModels.HomeContext
         }
         #endregion
 
+        #region 计算SIFT关键点 —— async void ComputeSIFT()
+        /// <summary>
+        /// 计算SIFT关键点
+        /// </summary>
+        public async void ComputeSIFT()
+        {
+            #region # 验证
+
+            if (this.EffectivePointCloud == null)
+            {
+                MessageBox.Show("点云未加载！", "错误", MessageBoxButton.OK, MessageBoxImage.Error);
+                return;
+            }
+
+            #endregion
+
+            this.Busy();
+
+            SiftViewModel viewModel = ResolveMediator.Resolve<SiftViewModel>();
+            bool? result = await this._windowManager.ShowDialogAsync(viewModel);
+            if (result == true)
+            {
+                IEnumerable<Point3F> points = this.EffectivePointCloud.Points.ToPoint3Fs();
+                Point3F[] keyPoints = await Task.Run(() => this._cloudKeyPoints.ComputeSIFT(points, viewModel.MinScale!.Value, viewModel.OctavesCount!.Value, viewModel.ScalesPerOctaveCount!.Value, viewModel.MinContrast!.Value));
+
+                IEnumerable<Vector3> positions = keyPoints.ToVector3s();
+                this.EffectiveKeyPoints = new PointGeometry3D
+                {
+                    Positions = new Vector3Collection(positions)
+                };
+                this.KeyPointColor = viewModel.KeyPointColor!.Value;
+            }
+
+            this.Idle();
+        }
+        #endregion
+
 
         //事件
 
