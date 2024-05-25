@@ -9,6 +9,16 @@
 #include <point3normal3s.h>
 #include <point3color4.h>
 #include <point3color4s.h>
+#include <narf36f.h>
+#include <narf36fs.h>
+#include <pfh_signature125f.h>
+#include <pfh_signature125fs.h>
+#include <fpfh_signature33f.h>
+#include <fpfh_signature33fs.h>
+#include <shape_context1980f.h>
+#include <shape_context1980fs.h>
+#include <shot352f.h>
+#include <shot352fs.h>
 
 /// <summary>
 /// 释放坐标点
@@ -57,3 +67,63 @@ EXPORT_C void CALLING_MODE disposePoint3Color4(const Point3Color4* pointer);
 /// </summary>
 /// <param name="pointer">指针</param>
 EXPORT_C void CALLING_MODE disposePoint3Color4s(const Point3Color4s* pointer);
+
+/// <summary>
+/// 释放NARF描述子
+/// </summary>
+/// <param name="pointer">指针</param>
+EXPORT_C void CALLING_MODE disposeNarf36F(const Narf36F* pointer);
+
+/// <summary>
+/// 释放NARF描述子集
+/// </summary>
+/// <param name="pointer">指针</param>
+EXPORT_C void CALLING_MODE disposeNarf36Fs(const Narf36Fs* pointer);
+
+/// <summary>
+/// 释放PFH描述子
+/// </summary>
+/// <param name="pointer">指针</param>
+EXPORT_C void CALLING_MODE disposePFHSignature125F(const PFHSignature125F* pointer);
+
+/// <summary>
+/// 释放PFH描述子集
+/// </summary>
+/// <param name="pointer">指针</param>
+EXPORT_C void CALLING_MODE disposePFHSignature125Fs(const PFHSignature125Fs* pointer);
+
+/// <summary>
+/// 释放FPFH描述子
+/// </summary>
+/// <param name="pointer">指针</param>
+EXPORT_C void CALLING_MODE disposeFPFHSignature33F(const FPFHSignature33F* pointer);
+
+/// <summary>
+/// 释放FPFH描述子集
+/// </summary>
+/// <param name="pointer">指针</param>
+EXPORT_C void CALLING_MODE disposeFPFHSignature33Fs(const FPFHSignature33Fs* pointer);
+
+/// <summary>
+/// 释放3DSC描述子
+/// </summary>
+/// <param name="pointer">指针</param>
+EXPORT_C void CALLING_MODE disposeShapeContext1980F(const ShapeContext1980F* pointer);
+
+/// <summary>
+/// 释放3DSC描述子集
+/// </summary>
+/// <param name="pointer">指针</param>
+EXPORT_C void CALLING_MODE disposeShapeContext1980Fs(const ShapeContext1980Fs* pointer);
+
+/// <summary>
+/// 释放SHOT描述子
+/// </summary>
+/// <param name="pointer">指针</param>
+EXPORT_C void CALLING_MODE disposeShot352F(const Shot352F* pointer);
+
+/// <summary>
+/// 释放SHOT描述子集
+/// </summary>
+/// <param name="pointer">指针</param>
+EXPORT_C void CALLING_MODE disposeShot352Fs(const Shot352Fs* pointer);

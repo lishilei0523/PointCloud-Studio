@@ -71,3 +71,93 @@ void disposePoint3Color4s(const Point3Color4s* pointer)
 {
 	delete pointer;
 }
+
+/// <summary>
+/// 释放NARF描述子
+/// </summary>
+/// <param name="pointer">指针</param>
+void disposeNarf36F(const Narf36F* pointer)
+{
+	delete pointer;
+}
+
+/// <summary>
+/// 释放NARF描述子集
+/// </summary>
+/// <param name="pointer">指针</param>
+void disposeNarf36Fs(const Narf36Fs* pointer)
+{
+	delete pointer;
+}
+
+/// <summary>
+/// 释放PFH描述子
+/// </summary>
+/// <param name="pointer">指针</param>
+void disposePFHSignature125F(const PFHSignature125F* pointer)
+{
+	delete pointer;
+}
+
+/// <summary>
+/// 释放PFH描述子集
+/// </summary>
+/// <param name="pointer">指针</param>
+void disposePFHSignature125Fs(const PFHSignature125Fs* pointer)
+{
+	delete pointer;
+}
+
+/// <summary>
+/// 释放FPFH描述子
+/// </summary>
+/// <param name="pointer">指针</param>
+void disposeFPFHSignature33F(const FPFHSignature33F* pointer)
+{
+	delete pointer;
+}
+
+/// <summary>
+/// 释放FPFH描述子集
+/// </summary>
+/// <param name="pointer">指针</param>
+void disposeFPFHSignature33Fs(const FPFHSignature33Fs* pointer)
+{
+	delete pointer;
+}
+
+/// <summary>
+/// 释放3DSC描述子
+/// </summary>
+/// <param name="pointer">指针</param>
+void disposeShapeContext1980F(const ShapeContext1980F* pointer)
+{
+	delete pointer;
+}
+
+/// <summary>
+/// 释放3DSC描述子集
+/// </summary>
+/// <param name="pointer">指针</param>
+void disposeShapeContext1980Fs(const ShapeContext1980Fs* pointer)
+{
+	delete pointer;
+}
+
+/// <summary>
+/// 释放SHOT描述子
+/// </summary>
+/// <param name="pointer">指针</param>
+void disposeShot352F(const Shot352F* pointer)
+{
+	delete pointer;
+}
+
+/// <summary>
+/// 释放SHOT描述子集
+/// </summary>
+/// <param name="pointer">指针</param>
+void disposeShot352Fs(const Shot352Fs* pointer)
+{
+	delete pointer;
+}
