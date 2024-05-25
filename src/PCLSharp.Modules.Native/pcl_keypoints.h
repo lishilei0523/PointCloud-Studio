@@ -5,7 +5,7 @@
 #include <point3fs.h>
 
 /// <summary>
-/// 计算NARF关键点
+/// 检测NARF关键点
 /// </summary>
 /// <param name="points">点集</param>
 /// <param name="length">点集长度</param>
@@ -17,10 +17,10 @@
 /// <param name="borderSize">边界尺寸</param>
 /// <param name="supportSize">计算范围半径</param>
 /// <returns>NARF关键点集</returns>
-EXPORT_C Point3Fs* CALLING_MODE computeNARF(Point3F points[], int length, float angularResolution, float maxAngleWidth, float maxAngleHeight, float noiseLevel, float minRange, int borderSize, float supportSize);
+EXPORT_C Point3Fs* CALLING_MODE detectNARF(Point3F points[], int length, float angularResolution, float maxAngleWidth, float maxAngleHeight, float noiseLevel, float minRange, int borderSize, float supportSize);
 
 /// <summary>
-/// 计算ISS关键点
+/// 检测ISS关键点
 /// </summary>
 /// <param name="points">点集</param>
 /// <param name="length">点集长度</param>
@@ -31,10 +31,10 @@ EXPORT_C Point3Fs* CALLING_MODE computeNARF(Point3F points[], int length, float 
 /// <param name="minNeighborsCount">最小邻域点数</param>
 /// <param name="threadsCount">线程数</param>
 /// <returns>ISS关键点集</returns>
-EXPORT_C Point3Fs* CALLING_MODE computeISS(Point3F points[], int length, float salientRadius, float nonMaxRadius, float threshold21, float threshold32, int minNeighborsCount, int threadsCount);
+EXPORT_C Point3Fs* CALLING_MODE detectISS(Point3F points[], int length, float salientRadius, float nonMaxRadius, float threshold21, float threshold32, int minNeighborsCount, int threadsCount);
 
 /// <summary>
-/// 计算SIFT关键点
+/// 检测SIFT关键点
 /// </summary>
 /// <param name="points">点集</param>
 /// <param name="length">点集长度</param>
@@ -43,10 +43,10 @@ EXPORT_C Point3Fs* CALLING_MODE computeISS(Point3F points[], int length, float s
 /// <param name="scalesPerOctaveCount">每组金字塔计算尺度</param>
 /// <param name="minContrast">限制关键点检测阈值</param>
 /// <returns>SIFT关键点集</returns>
-EXPORT_C Point3Fs* CALLING_MODE computeSIFT(Point3F points[], int length, float minScale, int octavesCount, int scalesPerOctaveCount, float minContrast);
+EXPORT_C Point3Fs* CALLING_MODE detectSIFT(Point3F points[], int length, float minScale, int octavesCount, int scalesPerOctaveCount, float minContrast);
 
 /// <summary>
-/// 计算Harris关键点
+/// 检测Harris关键点
 /// </summary>
 /// <param name="points">点集</param>
 /// <param name="length">点集长度</param>
@@ -54,10 +54,10 @@ EXPORT_C Point3Fs* CALLING_MODE computeSIFT(Point3F points[], int length, float 
 /// <param name="radius">搜索半径</param>
 /// <param name="threshold">感兴趣阈值</param>
 /// <returns>Harris关键点集</returns>
-EXPORT_C Point3Fs* CALLING_MODE computeHarris(Point3F points[], int length, bool nonMaxSupression, float radius, float threshold);
+EXPORT_C Point3Fs* CALLING_MODE detectHarris(Point3F points[], int length, bool nonMaxSupression, float radius, float threshold);
 
 /// <summary>
-/// 计算SUSAN关键点
+/// 检测SUSAN关键点
 /// </summary>
 /// <param name="points">点集</param>
 /// <param name="length">点集长度</param>
@@ -67,4 +67,4 @@ EXPORT_C Point3Fs* CALLING_MODE computeHarris(Point3F points[], int length, bool
 /// <param name="angularThreshold">角度阈值</param>
 /// <param name="intensityThreshold">强度阈值</param>
 /// <returns>SUSAN关键点集</returns>
-EXPORT_C Point3Fs* CALLING_MODE computeSUSAN(Point3F points[], int length, bool nonMaxSupression, float radius, float distanceThreshold, float angularThreshold, float intensityThreshold);
+EXPORT_C Point3Fs* CALLING_MODE detectSUSAN(Point3F points[], int length, bool nonMaxSupression, float radius, float distanceThreshold, float angularThreshold, float intensityThreshold);

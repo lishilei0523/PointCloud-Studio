@@ -8,9 +8,9 @@ namespace PCLSharp.Modules.Interfaces
     /// </summary>
     public interface ICloudKeyPoints
     {
-        #region # 计算NARF关键点 —— Point3F[] ComputeNARF(IEnumerable<Point3F> points...
+        #region # 检测NARF关键点 —— Point3F[] DetectNARF(IEnumerable<Point3F> points...
         /// <summary>
-        /// 计算NARF关键点
+        /// 检测NARF关键点
         /// </summary>
         /// <param name="points">点集</param>
         /// <param name="angularResolution">角度分辨率</param>
@@ -21,12 +21,12 @@ namespace PCLSharp.Modules.Interfaces
         /// <param name="borderSize">边界尺寸</param>
         /// <param name="supportSize">计算范围半径</param>
         /// <returns>NARF关键点集</returns>
-        Point3F[] ComputeNARF(IEnumerable<Point3F> points, float angularResolution, float maxAngleWidth, float maxAngleHeight, float noiseLevel, float minRange, int borderSize, float supportSize);
+        Point3F[] DetectNARF(IEnumerable<Point3F> points, float angularResolution, float maxAngleWidth, float maxAngleHeight, float noiseLevel, float minRange, int borderSize, float supportSize);
         #endregion
 
-        #region # 计算ISS关键点 —— Point3F[] ComputeISS(IEnumerable<Point3F> points...
+        #region # 检测ISS关键点 —— Point3F[] DetectISS(IEnumerable<Point3F> points...
         /// <summary>
-        /// 计算ISS关键点
+        /// 检测ISS关键点
         /// </summary>
         /// <param name="points">点集</param>
         /// <param name="salientRadius">显著半径</param>
@@ -36,12 +36,12 @@ namespace PCLSharp.Modules.Interfaces
         /// <param name="minNeighborsCount">最小邻域点数</param>
         /// <param name="threadsCount">线程数</param>
         /// <returns>ISS关键点集</returns>
-        Point3F[] ComputeISS(IEnumerable<Point3F> points, float salientRadius, float nonMaxRadius, float threshold21, float threshold32, int minNeighborsCount, int threadsCount);
+        Point3F[] DetectISS(IEnumerable<Point3F> points, float salientRadius, float nonMaxRadius, float threshold21, float threshold32, int minNeighborsCount, int threadsCount);
         #endregion
 
-        #region # 计算SIFT关键点 —— Point3F[] ComputeSIFT(IEnumerable<Point3F> points...
+        #region # 检测SIFT关键点 —— Point3F[] DetectSIFT(IEnumerable<Point3F> points...
         /// <summary>
-        /// 计算SIFT关键点
+        /// 检测SIFT关键点
         /// </summary>
         /// <param name="points">点集</param>
         /// <param name="minScale">尺度空间最小标准偏差</param>
@@ -49,24 +49,24 @@ namespace PCLSharp.Modules.Interfaces
         /// <param name="scalesPerOctaveCount">每组金字塔计算尺度</param>
         /// <param name="minContrast">限制关键点检测阈值</param>
         /// <returns>SIFT关键点集</returns>
-        Point3F[] ComputeSIFT(IEnumerable<Point3F> points, float minScale, int octavesCount, int scalesPerOctaveCount, float minContrast);
+        Point3F[] DetectSIFT(IEnumerable<Point3F> points, float minScale, int octavesCount, int scalesPerOctaveCount, float minContrast);
         #endregion
 
-        #region # 计算Harris关键点 —— Point3F[] ComputeHarris(IEnumerable<Point3F> points...
+        #region # 检测Harris关键点 —— Point3F[] DetectHarris(IEnumerable<Point3F> points...
         /// <summary>
-        /// 计算Harris关键点
+        /// 检测Harris关键点
         /// </summary>
         /// <param name="points">点集</param>
         /// <param name="nonMaxSupression">非极大值抑制</param>
         /// <param name="radius">搜索半径</param>
         /// <param name="threshold">感兴趣阈值</param>
         /// <returns>Harris关键点集</returns>
-        Point3F[] ComputeHarris(IEnumerable<Point3F> points, bool nonMaxSupression, float radius, float threshold);
+        Point3F[] DetectHarris(IEnumerable<Point3F> points, bool nonMaxSupression, float radius, float threshold);
         #endregion
 
-        #region # 计算SUSAN关键点 —— Point3F[] ComputeSUSAN(IEnumerable<Point3F> points...
+        #region # 检测SUSAN关键点 —— Point3F[] DetectSUSAN(IEnumerable<Point3F> points...
         /// <summary>
-        /// 计算SUSAN关键点
+        /// 检测SUSAN关键点
         /// </summary>
         /// <param name="points">点集</param>
         /// <param name="nonMaxSupression">非极大值抑制</param>
@@ -75,7 +75,7 @@ namespace PCLSharp.Modules.Interfaces
         /// <param name="angularThreshold">角度阈值</param>
         /// <param name="intensityThreshold">强度阈值</param>
         /// <returns>SUSAN关键点集</returns>
-        Point3F[] ComputeSUSAN(IEnumerable<Point3F> points, bool nonMaxSupression, float radius, float distanceThreshold, float angularThreshold, float intensityThreshold);
+        Point3F[] DetectSUSAN(IEnumerable<Point3F> points, bool nonMaxSupression, float radius, float distanceThreshold, float angularThreshold, float intensityThreshold);
         #endregion
     }
 }

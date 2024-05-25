@@ -977,11 +977,11 @@ namespace PCLSharp.Client.ViewModels.HomeContext
 
         //关键点
 
-        #region 计算NARF关键点 —— async void ComputeNARF()
+        #region 检测NARF关键点 —— async void DetectNARF()
         /// <summary>
-        /// 计算NARF关键点
+        /// 检测NARF关键点
         /// </summary>
-        public async void ComputeNARF()
+        public async void DetectNARF()
         {
             #region # 验证
 
@@ -1003,7 +1003,7 @@ namespace PCLSharp.Client.ViewModels.HomeContext
             if (result == true)
             {
                 IEnumerable<Point3F> points = this.EffectivePointCloud.Points.ToPoint3Fs();
-                Point3F[] keyPoints = await Task.Run(() => this._cloudKeyPoints.ComputeNARF(points, viewModel.AngularResolution!.Value, viewModel.MaxAngleWidth!.Value, viewModel.MaxAngleHeight!.Value, viewModel.NoiseLevel!.Value, viewModel.MinRange!.Value, viewModel.BorderSize!.Value, viewModel.SupportSize!.Value));
+                Point3F[] keyPoints = await Task.Run(() => this._cloudKeyPoints.DetectNARF(points, viewModel.AngularResolution!.Value, viewModel.MaxAngleWidth!.Value, viewModel.MaxAngleHeight!.Value, viewModel.NoiseLevel!.Value, viewModel.MinRange!.Value, viewModel.BorderSize!.Value, viewModel.SupportSize!.Value));
 
                 IEnumerable<Vector3> positions = keyPoints.ToVector3s();
                 this.EffectiveKeyPoints = new PointGeometry3D
@@ -1017,11 +1017,11 @@ namespace PCLSharp.Client.ViewModels.HomeContext
         }
         #endregion
 
-        #region 计算ISS关键点 —— async void ComputeISS()
+        #region 检测ISS关键点 —— async void DetectISS()
         /// <summary>
-        /// 计算ISS关键点
+        /// 检测ISS关键点
         /// </summary>
-        public async void ComputeISS()
+        public async void DetectISS()
         {
             #region # 验证
 
@@ -1043,7 +1043,7 @@ namespace PCLSharp.Client.ViewModels.HomeContext
             if (result == true)
             {
                 IEnumerable<Point3F> points = this.EffectivePointCloud.Points.ToPoint3Fs();
-                Point3F[] keyPoints = await Task.Run(() => this._cloudKeyPoints.ComputeISS(points, viewModel.SalientRadius!.Value, viewModel.NonMaxRadius!.Value, viewModel.Threshold21!.Value, viewModel.Threshold32!.Value, viewModel.MinNeighborsCount!.Value, viewModel.ThreadsCount!.Value));
+                Point3F[] keyPoints = await Task.Run(() => this._cloudKeyPoints.DetectISS(points, viewModel.SalientRadius!.Value, viewModel.NonMaxRadius!.Value, viewModel.Threshold21!.Value, viewModel.Threshold32!.Value, viewModel.MinNeighborsCount!.Value, viewModel.ThreadsCount!.Value));
 
                 IEnumerable<Vector3> positions = keyPoints.ToVector3s();
                 this.EffectiveKeyPoints = new PointGeometry3D
@@ -1057,11 +1057,11 @@ namespace PCLSharp.Client.ViewModels.HomeContext
         }
         #endregion
 
-        #region 计算SIFT关键点 —— async void ComputeSIFT()
+        #region 检测SIFT关键点 —— async void DetectSIFT()
         /// <summary>
-        /// 计算SIFT关键点
+        /// 检测SIFT关键点
         /// </summary>
-        public async void ComputeSIFT()
+        public async void DetectSIFT()
         {
             #region # 验证
 
@@ -1083,7 +1083,7 @@ namespace PCLSharp.Client.ViewModels.HomeContext
             if (result == true)
             {
                 IEnumerable<Point3F> points = this.EffectivePointCloud.Points.ToPoint3Fs();
-                Point3F[] keyPoints = await Task.Run(() => this._cloudKeyPoints.ComputeSIFT(points, viewModel.MinScale!.Value, viewModel.OctavesCount!.Value, viewModel.ScalesPerOctaveCount!.Value, viewModel.MinContrast!.Value));
+                Point3F[] keyPoints = await Task.Run(() => this._cloudKeyPoints.DetectSIFT(points, viewModel.MinScale!.Value, viewModel.OctavesCount!.Value, viewModel.ScalesPerOctaveCount!.Value, viewModel.MinContrast!.Value));
 
                 IEnumerable<Vector3> positions = keyPoints.ToVector3s();
                 this.EffectiveKeyPoints = new PointGeometry3D
@@ -1097,11 +1097,11 @@ namespace PCLSharp.Client.ViewModels.HomeContext
         }
         #endregion
 
-        #region 计算Harris关键点 —— async void ComputeHarris()
+        #region 检测Harris关键点 —— async void DetectHarris()
         /// <summary>
-        /// 计算Harris关键点
+        /// 检测Harris关键点
         /// </summary>
-        public async void ComputeHarris()
+        public async void DetectHarris()
         {
             #region # 验证
 
@@ -1123,7 +1123,7 @@ namespace PCLSharp.Client.ViewModels.HomeContext
             if (result == true)
             {
                 IEnumerable<Point3F> points = this.EffectivePointCloud.Points.ToPoint3Fs();
-                Point3F[] keyPoints = await Task.Run(() => this._cloudKeyPoints.ComputeHarris(points, viewModel.NonMaxSupression!.Value, viewModel.Radius!.Value, viewModel.Threshold!.Value));
+                Point3F[] keyPoints = await Task.Run(() => this._cloudKeyPoints.DetectHarris(points, viewModel.NonMaxSupression!.Value, viewModel.Radius!.Value, viewModel.Threshold!.Value));
 
                 IEnumerable<Vector3> positions = keyPoints.ToVector3s();
                 this.EffectiveKeyPoints = new PointGeometry3D
@@ -1137,11 +1137,11 @@ namespace PCLSharp.Client.ViewModels.HomeContext
         }
         #endregion
 
-        #region 计算SUSAN关键点 —— async void ComputeSUSAN()
+        #region 检测SUSAN关键点 —— async void DetectSUSAN()
         /// <summary>
-        /// 计算SUSAN关键点
+        /// 检测SUSAN关键点
         /// </summary>
-        public async void ComputeSUSAN()
+        public async void DetectSUSAN()
         {
             #region # 验证
 
@@ -1163,7 +1163,7 @@ namespace PCLSharp.Client.ViewModels.HomeContext
             if (result == true)
             {
                 IEnumerable<Point3F> points = this.EffectivePointCloud.Points.ToPoint3Fs();
-                Point3F[] keyPoints = await Task.Run(() => this._cloudKeyPoints.ComputeSUSAN(points, viewModel.NonMaxSupression!.Value, viewModel.Radius!.Value, viewModel.DistanceThreshold!.Value, viewModel.AngularThreshold!.Value, viewModel.IntensityThreshold!.Value));
+                Point3F[] keyPoints = await Task.Run(() => this._cloudKeyPoints.DetectSUSAN(points, viewModel.NonMaxSupression!.Value, viewModel.Radius!.Value, viewModel.DistanceThreshold!.Value, viewModel.AngularThreshold!.Value, viewModel.IntensityThreshold!.Value));
 
                 IEnumerable<Vector3> positions = keyPoints.ToVector3s();
                 this.EffectiveKeyPoints = new PointGeometry3D

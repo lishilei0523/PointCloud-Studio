@@ -58,11 +58,11 @@
                     <MenuItem Header="Radius估算法向量(OMP)(_S)" cm:Message.Attach="EstimateNormalsByRadiusP()" />
                 </MenuItem>
                 <MenuItem Header="关键点(_K)">
-                    <MenuItem Header="NARF关键点(_N)" cm:Message.Attach="ComputeNARF()" />
-                    <MenuItem Header="ISS关键点(_I)" cm:Message.Attach="ComputeISS()" />
-                    <MenuItem Header="SIFT关键点(_S)" cm:Message.Attach="ComputeSIFT()" />
-                    <MenuItem Header="Harris关键点(_H)" cm:Message.Attach="ComputeHarris()" />
-                    <MenuItem Header="SUSAN关键点(_U)" cm:Message.Attach="ComputeSUSAN()" />
+                    <MenuItem Header="NARF关键点(_N)" cm:Message.Attach="DetectNARF()" />
+                    <MenuItem Header="ISS关键点(_I)" cm:Message.Attach="DetectISS()" />
+                    <MenuItem Header="SIFT关键点(_S)" cm:Message.Attach="DetectSIFT()" />
+                    <MenuItem Header="Harris关键点(_H)" cm:Message.Attach="DetectHarris()" />
+                    <MenuItem Header="SUSAN关键点(_U)" cm:Message.Attach="DetectSUSAN()" />
                 </MenuItem>
             </Menu>
         </Border>

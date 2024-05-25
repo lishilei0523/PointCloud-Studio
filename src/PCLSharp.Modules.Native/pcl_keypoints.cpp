@@ -14,7 +14,7 @@ using namespace std;
 using namespace pcl;
 
 /// <summary>
-/// 计算NARF关键点
+/// 检测NARF关键点
 /// </summary>
 /// <param name="points">点集</param>
 /// <param name="length">点集长度</param>
@@ -26,7 +26,7 @@ using namespace pcl;
 /// <param name="borderSize">边界尺寸</param>
 /// <param name="supportSize">计算范围半径</param>
 /// <returns>NARF关键点集</returns>
-Point3Fs* computeNARF(Point3F points[], const int length, const float angularResolution, const float maxAngleWidth, const float maxAngleHeight, const float noiseLevel, const float minRange, const int borderSize, const float supportSize)
+Point3Fs* detectNARF(Point3F points[], const int length, const float angularResolution, const float maxAngleWidth, const float maxAngleHeight, const float noiseLevel, const float minRange, const int borderSize, const float supportSize)
 {
 	const PointCloud<PointXYZ>::Ptr cloud = pclsharp::toPointCloud(points, length);
 	const PointCloud<PointXYZ>::Ptr keyPoints = std::make_shared<PointCloud<PointXYZ>>();
@@ -59,7 +59,7 @@ Point3Fs* computeNARF(Point3F points[], const int length, const float angularRes
 }
 
 /// <summary>
-/// 计算ISS关键点
+/// 检测ISS关键点
 /// </summary>
 /// <param name="points">点集</param>
 /// <param name="length">点集长度</param>
@@ -70,7 +70,7 @@ Point3Fs* computeNARF(Point3F points[], const int length, const float angularRes
 /// <param name="minNeighborsCount">最小邻域点数</param>
 /// <param name="threadsCount">线程数</param>
 /// <returns>ISS关键点集</returns>
-Point3Fs* computeISS(Point3F points[], const int length, const float salientRadius, const float nonMaxRadius, const float threshold21, const float threshold32, const int minNeighborsCount, const int threadsCount)
+Point3Fs* detectISS(Point3F points[], const int length, const float salientRadius, const float nonMaxRadius, const float threshold21, const float threshold32, const int minNeighborsCount, const int threadsCount)
 {
 	const PointCloud<PointXYZ>::Ptr& cloud = pclsharp::toPointCloud(points, length);
 	const PointCloud<PointXYZ>::Ptr keyPoints = std::make_shared<PointCloud<PointXYZ>>();
@@ -107,7 +107,7 @@ namespace pcl
 }
 
 /// <summary>
-/// 计算SIFT关键点
+/// 检测SIFT关键点
 /// </summary>
 /// <param name="points">点集</param>
 /// <param name="length">点集长度</param>
@@ -116,7 +116,7 @@ namespace pcl
 /// <param name="scalesPerOctaveCount">每组金字塔计算尺度</param>
 /// <param name="minContrast">限制关键点检测阈值</param>
 /// <returns>SIFT关键点集</returns>
-Point3Fs* computeSIFT(Point3F points[], const int length, const float minScale, const int octavesCount, const int scalesPerOctaveCount, const float minContrast)
+Point3Fs* detectSIFT(Point3F points[], const int length, const float minScale, const int octavesCount, const int scalesPerOctaveCount, const float minContrast)
 {
 	const PointCloud<PointXYZ>::Ptr cloud = pclsharp::toPointCloud(points, length);
 	const PointCloud<PointXYZ>::Ptr keyPoints = std::make_shared<PointCloud<PointXYZ>>();
@@ -138,7 +138,7 @@ Point3Fs* computeSIFT(Point3F points[], const int length, const float minScale, 
 }
 
 /// <summary>
-/// 计算Harris关键点
+/// 检测Harris关键点
 /// </summary>
 /// <param name="points">点集</param>
 /// <param name="length">点集长度</param>
@@ -146,7 +146,7 @@ Point3Fs* computeSIFT(Point3F points[], const int length, const float minScale, 
 /// <param name="radius">搜索半径</param>
 /// <param name="threshold">感兴趣阈值</param>
 /// <returns>Harris关键点集</returns>
-Point3Fs* computeHarris(Point3F points[], const int length, const bool nonMaxSupression, const float radius, const float threshold)
+Point3Fs* detectHarris(Point3F points[], const int length, const bool nonMaxSupression, const float radius, const float threshold)
 {
 	const PointCloud<PointXYZ>::Ptr cloud = pclsharp::toPointCloud(points, length);
 	const PointCloud<PointXYZ>::Ptr keyPoints = std::make_shared<PointCloud<PointXYZ>>();
@@ -167,7 +167,7 @@ Point3Fs* computeHarris(Point3F points[], const int length, const bool nonMaxSup
 }
 
 /// <summary>
-/// 计算SUSAN关键点
+/// 检测SUSAN关键点
 /// </summary>
 /// <param name="points">点集</param>
 /// <param name="length">点集长度</param>
@@ -177,7 +177,7 @@ Point3Fs* computeHarris(Point3F points[], const int length, const bool nonMaxSup
 /// <param name="angularThreshold">角度阈值</param>
 /// <param name="intensityThreshold">强度阈值</param>
 /// <returns>SUSAN关键点集</returns>
-Point3Fs* computeSUSAN(Point3F points[], const int length, const bool nonMaxSupression, const float radius, const float distanceThreshold, const float angularThreshold, const float intensityThreshold)
+Point3Fs* detectSUSAN(Point3F points[], const int length, const bool nonMaxSupression, const float radius, const float distanceThreshold, const float angularThreshold, const float intensityThreshold)
 {
 	const PointCloud<PointXYZ>::Ptr cloud = pclsharp::toPointCloud(points, length);
 	const PointCloud<PointXYZ>::Ptr keyPoints = std::make_shared<PointCloud<PointXYZ>>();
