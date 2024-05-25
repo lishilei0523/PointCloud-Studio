@@ -53,6 +53,11 @@ namespace PCLSharp.Client.ViewModels.HomeContext
         private readonly ICloudNormals _cloudNormals;
 
         /// <summary>
+        /// 点云关键点接口
+        /// </summary>
+        private readonly ICloudKeyPoints _cloudKeyPoints;
+
+        /// <summary>
         /// 窗体管理器
         /// </summary>
         private readonly IWindowManager _windowManager;
@@ -60,11 +65,12 @@ namespace PCLSharp.Client.ViewModels.HomeContext
         /// <summary>
         /// 依赖注入构造器
         /// </summary>
-        public IndexViewModel(ICloudFiles cloudFiles, ICloudFilters cloudFilters, ICloudNormals cloudNormals, IWindowManager windowManager)
+        public IndexViewModel(ICloudFiles cloudFiles, ICloudFilters cloudFilters, ICloudNormals cloudNormals, ICloudKeyPoints cloudKeyPoints, IWindowManager windowManager)
         {
             this._cloudFiles = cloudFiles;
             this._cloudFilters = cloudFilters;
             this._cloudNormals = cloudNormals;
+            this._cloudKeyPoints = cloudKeyPoints;
             this._windowManager = windowManager;
         }
 

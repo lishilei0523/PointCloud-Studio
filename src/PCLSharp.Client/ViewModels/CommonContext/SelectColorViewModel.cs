@@ -1,5 +1,4 @@
-﻿using Caliburn.Micro;
-using SD.Infrastructure.WPF.Caliburn.Aspects;
+﻿using SD.Infrastructure.WPF.Caliburn.Aspects;
 using SD.Infrastructure.WPF.Caliburn.Base;
 using System.Windows;
 using System.Windows.Media;
@@ -14,22 +13,11 @@ namespace PCLSharp.Client.ViewModels.CommonContext
         #region # 字段及构造器
 
         /// <summary>
-        /// 窗体管理器
-        /// </summary>
-        private readonly IWindowManager _windowManager;
-
-        /// <summary>
-        /// 事件聚合器
-        /// </summary>
-        private readonly IEventAggregator _eventAggregator;
-
-        /// <summary>
         /// 依赖注入构造器
         /// </summary>
-        public SelectColorViewModel(IWindowManager windowManager, IEventAggregator eventAggregator)
+        public SelectColorViewModel()
         {
-            this._windowManager = windowManager;
-            this._eventAggregator = eventAggregator;
+
         }
 
         #endregion
