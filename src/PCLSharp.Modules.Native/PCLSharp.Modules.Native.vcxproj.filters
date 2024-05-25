@@ -1,0 +1,51 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Headers">
+      <UniqueIdentifier>{8dbd2e8d-2c29-4d8f-af63-a4b0753de837}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Sources">
+      <UniqueIdentifier>{f139d0cf-9110-40dc-913d-0e1bb6a54bf0}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="pcl_conductor.cpp">
+      <Filter>Sources</Filter>
+    </ClCompile>
+    <ClCompile Include="pcl_dispose.cpp">
+      <Filter>Sources</Filter>
+    </ClCompile>
+    <ClCompile Include="pcl_features.cpp">
+      <Filter>Sources</Filter>
+    </ClCompile>
+    <ClCompile Include="pcl_filters.cpp">
+      <Filter>Sources</Filter>
+    </ClCompile>
+    <ClCompile Include="pcl_keypoints.cpp">
+      <Filter>Sources</Filter>
+    </ClCompile>
+    <ClCompile Include="pcl_normals.cpp">
+      <Filter>Sources</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="pcl_conductor.h">
+      <Filter>Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="pcl_dispose.h">
+      <Filter>Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="pcl_features.h">
+      <Filter>Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="pcl_filters.h">
+      <Filter>Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="pcl_keypoints.h">
+      <Filter>Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="pcl_normals.h">
+      <Filter>Headers</Filter>
+    </ClInclude>
+  </ItemGroup>
+</Project>

@@ -44,11 +44,6 @@
     <ProjectReference Include="..\PCLSharp.Presentation\PCLSharp.Presentation.csproj" />
     <ProjectReference Include="..\PCLSharp.HelixDX.WPF\PCLSharp.HelixDX.WPF.csproj" />
     <ProjectReference Include="..\PCLSharp.Primitives\PCLSharp.Primitives.csproj" />
-    <ProjectReference Include="..\PCLSharp.FileIO\PCLSharp.FileIO.csproj" />
-    <ProjectReference Include="..\PCLSharp.Filters\PCLSharp.Filters.csproj" />
-    <ProjectReference Include="..\PCLSharp.Normals\PCLSharp.Normals.csproj" />
-    <ProjectReference Include="..\PCLSharp.Features\PCLSharp.Features.csproj" />
-    <ProjectReference Include="..\PCLSharp.Segmentations\PCLSharp.Segmentations.csproj" />
-    <ProjectReference Include="..\PCLSharp.Registrations\PCLSharp.Registrations.csproj" />
+    <ProjectReference Include="..\PCLSharp.Modules\PCLSharp.Modules.csproj" />
   </ItemGroup>
 </Project>

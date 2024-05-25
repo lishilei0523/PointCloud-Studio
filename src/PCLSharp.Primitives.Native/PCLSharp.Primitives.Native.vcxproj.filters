@@ -28,9 +28,6 @@
     <ClInclude Include="point3normal3s.h">
       <Filter>Models</Filter>
     </ClInclude>
-    <ClInclude Include="dispose.h">
-      <Filter>Headers</Filter>
-    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Models">
@@ -39,19 +36,10 @@
     <Filter Include="Maps">
       <UniqueIdentifier>{3ee507fb-ba89-4cf2-b4dc-6b1e367d6df0}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Headers">
-      <UniqueIdentifier>{1fd85e7a-2f9a-4837-9602-341a62be1357}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Sources">
-      <UniqueIdentifier>{4a409847-5954-495a-9946-8a6814184664}</UniqueIdentifier>
-    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="primitives_map.cpp">
       <Filter>Maps</Filter>
-    </ClCompile>
-    <ClCompile Include="dispose.cpp">
-      <Filter>Sources</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

@@ -4,10 +4,8 @@ using Microsoft.Win32;
 using PCLSharp.Client.ViewModels.CommonContext;
 using PCLSharp.Client.ViewModels.FilterContext;
 using PCLSharp.Client.ViewModels.NormalContext;
-using PCLSharp.FileIO.Interfaces;
-using PCLSharp.Filters.Interfaces;
 using PCLSharp.HelixDX.WPF;
-using PCLSharp.Normals.Interfaces;
+using PCLSharp.Modules.Interfaces;
 using PCLSharp.Primitives.Enums;
 using PCLSharp.Primitives.Extensions;
 using PCLSharp.Primitives.Models;
@@ -40,9 +38,9 @@ namespace PCLSharp.Client.ViewModels.HomeContext
         #region # 字段及构造器
 
         /// <summary>
-        /// 点云读写器接口
+        /// 点云文件接口
         /// </summary>
-        private readonly ICloudConductor _cloudConductor;
+        private readonly ICloudFiles _cloudFiles;
 
         /// <summary>
         /// 点云滤波接口
@@ -62,9 +60,9 @@ namespace PCLSharp.Client.ViewModels.HomeContext
         /// <summary>
         /// 依赖注入构造器
         /// </summary>
-        public IndexViewModel(ICloudConductor cloudConductor, ICloudFilters cloudFilters, ICloudNormals cloudNormals, IWindowManager windowManager)
+        public IndexViewModel(ICloudFiles cloudFiles, ICloudFilters cloudFilters, ICloudNormals cloudNormals, IWindowManager windowManager)
         {
-            this._cloudConductor = cloudConductor;
+            this._cloudFiles = cloudFiles;
             this._cloudFilters = cloudFilters;
             this._cloudNormals = cloudNormals;
             this._windowManager = windowManager;
@@ -294,16 +292,16 @@ namespace PCLSharp.Client.ViewModels.HomeContext
             IEnumerable<Point3F> points = this.EffectivePointCloud.Points.ToPoint3Fs();
             if (this.FileExtension == Constants.PCD)
             {
-                await Task.Run(() => this._cloudConductor.SaveTextPCD(points, this.FilePath));
+                await Task.Run(() => this._cloudFiles.SaveTextPCD(points, this.FilePath));
             }
             if (this.FileExtension == Constants.PLY)
             {
-                await Task.Run(() => this._cloudConductor.SaveTextPLY(points, this.FilePath));
+                await Task.Run(() => this._cloudFiles.SaveTextPLY(points, this.FilePath));
             }
             if (this.FileExtension == Constants.OBJ)
             {
                 this.FilePath = this.FilePath.Replace(Constants.OBJ, Constants.PCD);
-                await Task.Run(() => this._cloudConductor.SaveTextPCD(points, this.FilePath));
+                await Task.Run(() => this._cloudFiles.SaveTextPCD(points, this.FilePath));
             }
 
             await this.ReloadCloud();
@@ -345,11 +343,11 @@ namespace PCLSharp.Client.ViewModels.HomeContext
                 string fileExt = Path.GetExtension(filePath);
                 if (fileExt == Constants.PCD)
                 {
-                    await Task.Run(() => this._cloudConductor.SaveTextPCD(points, filePath));
+                    await Task.Run(() => this._cloudFiles.SaveTextPCD(points, filePath));
                 }
                 else if (fileExt == Constants.PLY)
                 {
-                    await Task.Run(() => this._cloudConductor.SaveTextPLY(points, filePath));
+                    await Task.Run(() => this._cloudFiles.SaveTextPLY(points, filePath));
                 }
                 else
                 {
@@ -1020,9 +1018,9 @@ namespace PCLSharp.Client.ViewModels.HomeContext
 
             Point3F[] points = this.FileExtension switch
             {
-                Constants.PCD => await Task.Run(() => this._cloudConductor.LoadPCD(this.FilePath)),
-                Constants.PLY => await Task.Run(() => this._cloudConductor.LoadPLY(this.FilePath)),
-                Constants.OBJ => await Task.Run(() => this._cloudConductor.LoadOBJ(this.FilePath)),
+                Constants.PCD => await Task.Run(() => this._cloudFiles.LoadPCD(this.FilePath)),
+                Constants.PLY => await Task.Run(() => this._cloudFiles.LoadPLY(this.FilePath)),
+                Constants.OBJ => await Task.Run(() => this._cloudFiles.LoadOBJ(this.FilePath)),
                 _ => throw new NotSupportedException("不支持的点云格式！")
             };
 
@@ -1062,9 +1060,9 @@ namespace PCLSharp.Client.ViewModels.HomeContext
 
             Point3Color4[] pointColors = this.FileExtension switch
             {
-                Constants.PCD => await Task.Run(() => this._cloudConductor.LoadColorPCD(this.FilePath)),
-                Constants.PLY => await Task.Run(() => this._cloudConductor.LoadColorPLY(this.FilePath)),
-                Constants.OBJ => await Task.Run(() => this._cloudConductor.LoadColorOBJ(this.FilePath)),
+                Constants.PCD => await Task.Run(() => this._cloudFiles.LoadColorPCD(this.FilePath)),
+                Constants.PLY => await Task.Run(() => this._cloudFiles.LoadColorPLY(this.FilePath)),
+                Constants.OBJ => await Task.Run(() => this._cloudFiles.LoadColorOBJ(this.FilePath)),
                 _ => throw new NotSupportedException("不支持的点云格式！")
             };
 
