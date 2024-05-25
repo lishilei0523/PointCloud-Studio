@@ -3,6 +3,7 @@ using HelixToolkit.Wpf.SharpDX;
 using Microsoft.Win32;
 using PCLSharp.Client.ViewModels.CommonContext;
 using PCLSharp.Client.ViewModels.FilterContext;
+using PCLSharp.Client.ViewModels.KeyPointContext;
 using PCLSharp.Client.ViewModels.NormalContext;
 using PCLSharp.HelixDX.WPF;
 using PCLSharp.Modules.Interfaces;
@@ -118,6 +119,14 @@ namespace PCLSharp.Client.ViewModels.HomeContext
         public Color BackgroundColor { get; set; }
         #endregion
 
+        #region 关键点颜色 —— Color KeyPointColor
+        /// <summary>
+        /// 关键点颜色
+        /// </summary>
+        [DependencyProperty]
+        public Color KeyPointColor { get; set; }
+        #endregion
+
         #region 点云颜色类型 —— PointColorType? CloudColorType
         /// <summary>
         /// 点云颜色类型
@@ -147,6 +156,14 @@ namespace PCLSharp.Client.ViewModels.HomeContext
         /// </summary>
         [DependencyProperty]
         public PointGeometry3D EffectiveCentroid { get; set; }
+        #endregion
+
+        #region 效果点云关键点 —— PointGeometry3D EffectiveKeyPoints
+        /// <summary>
+        /// 效果点云关键点
+        /// </summary>
+        [DependencyProperty]
+        public PointGeometry3D EffectiveKeyPoints { get; set; }
         #endregion
 
         #region 效果点云法向量列表 —— ObservableCollection<LineGeometryModel3D> EffectiveNormals
@@ -420,6 +437,21 @@ namespace PCLSharp.Client.ViewModels.HomeContext
             {
                 this.BackgroundColor = viewModel.Color!.Value;
                 this.LabelColor = this.BackgroundColor.Invert();
+            }
+        }
+        #endregion
+
+        #region 设置关键点颜色 —— async void SetKeyPointColor()
+        /// <summary>
+        /// 设置关键点颜色
+        /// </summary>
+        public async void SetKeyPointColor()
+        {
+            SelectColorViewModel viewModel = ResolveMediator.Resolve<SelectColorViewModel>();
+            bool? result = await this._windowManager.ShowDialogAsync(viewModel);
+            if (result == true)
+            {
+                this.KeyPointColor = viewModel.Color!.Value;
             }
         }
         #endregion
@@ -937,6 +969,46 @@ namespace PCLSharp.Client.ViewModels.HomeContext
                     lineGeometryModel3D.Thickness = viewModel.NormalThickness!.Value;
                     this.EffectiveNormals.Add(lineGeometryModel3D);
                 }
+            }
+
+            this.Idle();
+        }
+        #endregion
+
+
+        //关键点
+
+        #region 计算NARF关键点 —— async void ComputeNARF()
+        /// <summary>
+        /// 计算NARF关键点
+        /// </summary>
+        public async void ComputeNARF()
+        {
+            #region # 验证
+
+            if (this.EffectivePointCloud == null)
+            {
+                MessageBox.Show("点云未加载！", "错误", MessageBoxButton.OK, MessageBoxImage.Error);
+                return;
+            }
+
+            #endregion
+
+            this.Busy();
+
+            NarfViewModel viewModel = ResolveMediator.Resolve<NarfViewModel>();
+            bool? result = await this._windowManager.ShowDialogAsync(viewModel);
+            if (result == true)
+            {
+                IEnumerable<Point3F> points = this.EffectivePointCloud.Points.ToPoint3Fs();
+                Point3F[] keyPoints = await Task.Run(() => this._cloudKeyPoints.ComputeNARF(points, viewModel.AngularResolution!.Value, viewModel.MaxAngleWidth!.Value, viewModel.MaxAngleHeight!.Value, viewModel.NoiseLevel!.Value, viewModel.MinRange!.Value, viewModel.BorderSize!.Value, viewModel.SupportSize!.Value));
+
+                IEnumerable<Vector3> positions = keyPoints.ToVector3s();
+                this.EffectiveKeyPoints = new PointGeometry3D
+                {
+                    Positions = new Vector3Collection(positions)
+                };
+                this.KeyPointColor = viewModel.KeyPointColor!.Value;
             }
 
             this.Idle();

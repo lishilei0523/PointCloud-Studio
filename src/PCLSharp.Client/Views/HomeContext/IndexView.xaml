@@ -37,6 +37,7 @@
                     <MenuItem Header="刷新点云(_X)" cm:Message.Attach="RefreshCloud()" />
                     <MenuItem Header="点云颜色(_P)" cm:Message.Attach="SetCloudColor()" />
                     <MenuItem Header="背景颜色(_U)" cm:Message.Attach="SetBackgroundColor()" />
+                    <MenuItem Header="关键点颜色(_K)" cm:Message.Attach="SetKeyPointColor()" />
                     <MenuItem Header="指向质心(_O)" cm:Message.Attach="LookAtCentroid()" />
                     <MenuItem Header="重置相机(_C)" cm:Message.Attach="ResetCamera()" />
                 </MenuItem>
@@ -55,6 +56,13 @@
                     <MenuItem Header="K估算法向量(OMP)(_G)" cm:Message.Attach="EstimateNormalsByKP()" />
                     <MenuItem Header="Radius估算法向量(_R)" cm:Message.Attach="EstimateNormalsByRadius()" />
                     <MenuItem Header="Radius估算法向量(OMP)(_S)" cm:Message.Attach="EstimateNormalsByRadiusP()" />
+                </MenuItem>
+                <MenuItem Header="关键点(_K)">
+                    <MenuItem Header="NARF关键点(_N)" cm:Message.Attach="ComputeNARF()" />
+                    <MenuItem Header="ISS关键点(_I)" cm:Message.Attach="ComputeISS()" />
+                    <MenuItem Header="SIFT关键点(_S)" cm:Message.Attach="ComputeSIFT()" />
+                    <MenuItem Header="Harris关键点(_H)" cm:Message.Attach="ComputeHarris()" />
+                    <MenuItem Header="SUSAN关键点(_U)" cm:Message.Attach="ComputeSUSAN()" />
                 </MenuItem>
             </Menu>
         </Border>
@@ -128,6 +136,8 @@
                         <hx:PointGeometryModel3D Geometry="{Binding EffectiveCentroid}" Size="10,10" Color="Red" />
                         <!--法向量-->
                         <hx:ItemsModel3D ItemsSource="{Binding EffectiveNormals}" />
+                        <!--关键点-->
+                        <hx:PointGeometryModel3D Geometry="{Binding EffectiveKeyPoints}" Size="7,7" Color="{Binding KeyPointColor}" />
                     </hx:Viewport3DX>
                 </GroupBox>
             </Grid>

@@ -34,7 +34,7 @@ Point3Fs* computeNARF(Point3F points[], const int length, const float angularRes
 
 	//生成深度图
 	const Eigen::Affine3f sensorPose = Eigen::Affine3f(Eigen::Affine3f::Identity());
-	rangeImage->createFromPointCloud(*cloud, angularResolution, maxAngleWidth, maxAngleHeight, sensorPose, RangeImage::CAMERA_FRAME, noiseLevel, minRange, borderSize);
+	rangeImage->createFromPointCloud(*cloud, deg2rad(angularResolution), deg2rad(maxAngleWidth), deg2rad(maxAngleHeight), sensorPose, RangeImage::CAMERA_FRAME, noiseLevel, minRange, borderSize);
 
 	//提取NARF关键点索引
 	PointCloud<int> keyPointsIndices;
