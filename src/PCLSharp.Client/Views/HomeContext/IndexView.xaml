@@ -133,7 +133,7 @@
                         <!--点云-->
                         <hx:PointGeometryModel3D Geometry="{Binding EffectivePointCloud}" Color="{Binding PointColor}" />
                         <!--质心-->
-                        <hx:PointGeometryModel3D Geometry="{Binding EffectiveCentroid}" Size="10,10" Color="Red" />
+                        <hx:PointGeometryModel3D Geometry="{Binding EffectiveCentroid}" Size="10,10" Color="{Binding KeyPointColor}" />
                         <!--法向量-->
                         <hx:ItemsModel3D ItemsSource="{Binding EffectiveNormals}" />
                         <!--关键点-->
@@ -160,6 +160,9 @@
                     <TextBlock Text=" | " FontSize="12" />
                     <TextBlock Text="效果点云数量：" FontSize="12" />
                     <TextBlock Text="{Binding EffectivePointCloud.Positions.Count}" FontSize="12" />
+                    <TextBlock Text=" | " FontSize="12" />
+                    <TextBlock Text="关键点数量：" FontSize="12" />
+                    <TextBlock Text="{Binding EffectiveKeyPoints.Positions.Count}" FontSize="12" />
                 </WrapPanel>
             </Grid>
         </Border>

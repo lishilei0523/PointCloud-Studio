@@ -83,7 +83,6 @@ namespace PCLSharp.Client.ViewModels.HomeContext
         /// <summary>
         /// 文件路径
         /// </summary>
-        [DependencyProperty]
         public string FilePath { get; set; }
         #endregion
 
@@ -91,7 +90,6 @@ namespace PCLSharp.Client.ViewModels.HomeContext
         /// <summary>
         /// 文件格式
         /// </summary>
-        [DependencyProperty]
         public string FileExtension { get; set; }
         #endregion
 
@@ -166,9 +164,9 @@ namespace PCLSharp.Client.ViewModels.HomeContext
         public PointGeometry3D EffectiveKeyPoints { get; set; }
         #endregion
 
-        #region 效果点云法向量列表 —— ObservableCollection<LineGeometryModel3D> EffectiveNormals
+        #region 效果点云法向量 —— ObservableCollection<LineGeometryModel3D> EffectiveNormals
         /// <summary>
-        /// 效果点云法向量列表
+        /// 效果点云法向量
         /// </summary>
         [DependencyProperty]
         public ObservableCollection<LineGeometryModel3D> EffectiveNormals { get; set; }
@@ -197,6 +195,7 @@ namespace PCLSharp.Client.ViewModels.HomeContext
             //默认值
             this.LabelColor = Colors.Black;
             this.BackgroundColor = Colors.LightGray;
+            this.KeyPointColor = Colors.Red;
             this.EffectiveNormals = new ObservableCollection<LineGeometryModel3D>();
 
             //初始化相机
