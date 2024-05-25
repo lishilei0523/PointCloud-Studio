@@ -28,6 +28,9 @@
     <ClInclude Include="point3normal3s.h">
       <Filter>Models</Filter>
     </ClInclude>
+    <ClInclude Include="descriptors_mxn.h">
+      <Filter>Models</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Models">

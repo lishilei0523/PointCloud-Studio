@@ -153,6 +153,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="descriptors_mxn.h" />
     <ClInclude Include="normal3f.h" />
     <ClInclude Include="normal3fs.h" />
     <ClInclude Include="point3color4.h" />
