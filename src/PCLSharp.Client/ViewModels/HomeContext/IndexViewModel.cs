@@ -1138,6 +1138,46 @@ namespace PCLSharp.Client.ViewModels.HomeContext
         }
         #endregion
 
+        #region 计算SUSAN关键点 —— async void ComputeSUSAN()
+        /// <summary>
+        /// 计算SUSAN关键点
+        /// </summary>
+        public async void ComputeSUSAN()
+        {
+            #region # 验证
+
+            if (this.EffectivePointCloud == null)
+            {
+                MessageBox.Show("点云未加载！", "错误", MessageBoxButton.OK, MessageBoxImage.Error);
+                return;
+            }
+
+            #endregion
+
+            this.Busy();
+
+            //清理关键点
+            this.EffectiveKeyPoints = null;
+
+            SusanViewModel viewModel = ResolveMediator.Resolve<SusanViewModel>();
+            bool? result = await this._windowManager.ShowDialogAsync(viewModel);
+            if (result == true)
+            {
+                IEnumerable<Point3F> points = this.EffectivePointCloud.Points.ToPoint3Fs();
+                Point3F[] keyPoints = await Task.Run(() => this._cloudKeyPoints.ComputeSUSAN(points, viewModel.NonMaxSupression!.Value, viewModel.Radius!.Value, viewModel.DistanceThreshold!.Value, viewModel.AngularThreshold!.Value, viewModel.IntensityThreshold!.Value));
+
+                IEnumerable<Vector3> positions = keyPoints.ToVector3s();
+                this.EffectiveKeyPoints = new PointGeometry3D
+                {
+                    Positions = new Vector3Collection(positions)
+                };
+                this.KeyPointColor = viewModel.KeyPointColor!.Value;
+            }
+
+            this.Idle();
+        }
+        #endregion
+
 
         //事件
 
