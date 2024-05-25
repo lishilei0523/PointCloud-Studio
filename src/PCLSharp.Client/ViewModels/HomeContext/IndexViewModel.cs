@@ -996,6 +996,9 @@ namespace PCLSharp.Client.ViewModels.HomeContext
 
             this.Busy();
 
+            //清理关键点
+            this.EffectiveKeyPoints = null;
+
             NarfViewModel viewModel = ResolveMediator.Resolve<NarfViewModel>();
             bool? result = await this._windowManager.ShowDialogAsync(viewModel);
             if (result == true)
@@ -1033,6 +1036,9 @@ namespace PCLSharp.Client.ViewModels.HomeContext
 
             this.Busy();
 
+            //清理关键点
+            this.EffectiveKeyPoints = null;
+
             IssViewModel viewModel = ResolveMediator.Resolve<IssViewModel>();
             bool? result = await this._windowManager.ShowDialogAsync(viewModel);
             if (result == true)
@@ -1069,6 +1075,9 @@ namespace PCLSharp.Client.ViewModels.HomeContext
             #endregion
 
             this.Busy();
+
+            //清理关键点
+            this.EffectiveKeyPoints = null;
 
             SiftViewModel viewModel = ResolveMediator.Resolve<SiftViewModel>();
             bool? result = await this._windowManager.ShowDialogAsync(viewModel);
@@ -1185,9 +1194,10 @@ namespace PCLSharp.Client.ViewModels.HomeContext
             //随机颜色
             this.PointColor = ColorExtension.RandomColor();
 
-            //清理质心、法向量
+            //清理质心、法向量、关键点
             this.EffectiveCentroid = null;
             this.EffectiveNormals.Clear();
+            this.EffectiveKeyPoints = null;
         }
         #endregion
 
@@ -1227,9 +1237,10 @@ namespace PCLSharp.Client.ViewModels.HomeContext
             //白底
             this.PointColor = Colors.White;
 
-            //清理质心、法向量
+            //清理质心、法向量、关键点
             this.EffectiveCentroid = null;
             this.EffectiveNormals.Clear();
+            this.EffectiveKeyPoints = null;
         }
         #endregion
 
