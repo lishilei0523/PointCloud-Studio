@@ -58,7 +58,7 @@ Narf36Fs* pclsharp::toNarf36Fs(const PointCloud<Narf36>& pointCloud)
 /// </summary>
 /// <param name="pointCloud">µãÔÆ</param>
 /// <returns>PFHÌØÕ÷ÃèÊö×Ó</returns>
-PFHSignature125Fs* pclsharp::toDPFHSignature125Fs(const PointCloud<PFHSignature125>& pointCloud)
+PFHSignature125Fs* pclsharp::toPFHSignature125Fs(const PointCloud<PFHSignature125>& pointCloud)
 {
 	const size_t& rowsCount = pointCloud.size();
 	const size_t& colsCount = 125;

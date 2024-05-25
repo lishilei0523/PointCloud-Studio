@@ -35,7 +35,7 @@ namespace pclsharp
 	/// </summary>
 	/// <param name="pointCloud">点云</param>
 	/// <returns>PFH特征描述子</returns>
-	EXPORT_CPP PFHSignature125Fs* toDPFHSignature125Fs(const pcl::PointCloud<pcl::PFHSignature125>& pointCloud);
+	EXPORT_CPP PFHSignature125Fs* toPFHSignature125Fs(const pcl::PointCloud<pcl::PFHSignature125>& pointCloud);
 
 	/// <summary>
 	/// FPFH点云映射FPFH特征描述子
