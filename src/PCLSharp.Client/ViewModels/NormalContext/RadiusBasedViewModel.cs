@@ -17,7 +17,11 @@ namespace PCLSharp.Client.ViewModels.NormalContext
         /// </summary>
         public RadiusBasedViewModel()
         {
-
+            //默认值
+            this.Radius = 0.1f;
+            this.NormalLength = 0.02f;
+            this.NormalThickness = 0.5f;
+            this.NormalColor = Colors.Green;
         }
 
         #endregion
@@ -59,8 +63,6 @@ namespace PCLSharp.Client.ViewModels.NormalContext
         #endregion
 
         #region # 方法
-
-        //Actions
 
         #region 提交 —— async void Submit()
         /// <summary>

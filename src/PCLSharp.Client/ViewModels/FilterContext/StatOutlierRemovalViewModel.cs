@@ -16,7 +16,9 @@ namespace PCLSharp.Client.ViewModels.FilterContext
         /// </summary>
         public StatOutlierRemovalViewModel()
         {
-
+            //默认值
+            this.MeanK = 50;
+            this.StddevMult = 1.0f;
         }
 
         #endregion
@@ -31,7 +33,7 @@ namespace PCLSharp.Client.ViewModels.FilterContext
         public int? MeanK { get; set; }
         #endregion
 
-        #region 标准差系数 —— int? StddevMult
+        #region 标准差系数 —— float? StddevMult
         /// <summary>
         /// 标准差系数
         /// </summary>
@@ -42,8 +44,6 @@ namespace PCLSharp.Client.ViewModels.FilterContext
         #endregion
 
         #region # 方法
-
-        //Actions
 
         #region 提交 —— async void Submit()
         /// <summary>

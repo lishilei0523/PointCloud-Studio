@@ -1,5 +1,6 @@
 ﻿using SD.Infrastructure.WPF.Caliburn.Aspects;
 using SD.Infrastructure.WPF.Caliburn.Base;
+using System;
 using System.Windows;
 
 namespace PCLSharp.Client.ViewModels.FilterContext
@@ -16,7 +17,9 @@ namespace PCLSharp.Client.ViewModels.FilterContext
         /// </summary>
         public RandomSampleViewModel()
         {
-
+            //默认值
+            this.Seed = (int)Math.Abs(int.MaxValue - DateTime.Now.Ticks);
+            this.SamplesCount = 2000;
         }
 
         #endregion
@@ -42,8 +45,6 @@ namespace PCLSharp.Client.ViewModels.FilterContext
         #endregion
 
         #region # 方法
-
-        //Actions
 
         #region 提交 —— async void Submit()
         /// <summary>

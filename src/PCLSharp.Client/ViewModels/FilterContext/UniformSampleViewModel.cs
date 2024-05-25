@@ -16,7 +16,8 @@ namespace PCLSharp.Client.ViewModels.FilterContext
         /// </summary>
         public UniformSampleViewModel()
         {
-
+            //默认值
+            this.Radius = 0.05f;
         }
 
         #endregion
@@ -34,8 +35,6 @@ namespace PCLSharp.Client.ViewModels.FilterContext
         #endregion
 
         #region # 方法
-
-        //Actions
 
         #region 提交 —— async void Submit()
         /// <summary>

@@ -62,8 +62,6 @@ namespace PCLSharp.Client.ViewModels.FilterContext
 
         #region # 方法
 
-        //Initializations
-
         #region 初始化 —— override async Task OnInitializeAsync(CancellationToken cancellationToken)
         /// <summary>
         /// 初始化
@@ -78,12 +76,14 @@ namespace PCLSharp.Client.ViewModels.FilterContext
                 Constants.AxisZ
             };
 
+            //默认值
+            this.SelectedAxis = Constants.AxisX;
+            this.LimitMin = -1;
+            this.LimitMax = 0;
+
             return base.OnInitializeAsync(cancellationToken);
         }
         #endregion
-
-
-        //Actions
 
         #region 提交 —— async void Submit()
         /// <summary>

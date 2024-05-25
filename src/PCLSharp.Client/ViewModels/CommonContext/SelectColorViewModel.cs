@@ -17,7 +17,8 @@ namespace PCLSharp.Client.ViewModels.CommonContext
         /// </summary>
         public SelectColorViewModel()
         {
-
+            //默认值
+            this.Color = Colors.Red;
         }
 
         #endregion
@@ -35,8 +36,6 @@ namespace PCLSharp.Client.ViewModels.CommonContext
         #endregion
 
         #region # 方法
-
-        //Actions
 
         #region 提交 —— async void Submit()
         /// <summary>

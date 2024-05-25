@@ -16,7 +16,9 @@ namespace PCLSharp.Client.ViewModels.FilterContext
         /// </summary>
         public RadiusOutlierRemovalViewModel()
         {
-
+            //默认值
+            this.Radius = 0.4f;
+            this.MinNeighborsInRadius = 2;
         }
 
         #endregion
@@ -42,8 +44,6 @@ namespace PCLSharp.Client.ViewModels.FilterContext
         #endregion
 
         #region # 方法
-
-        //Actions
 
         #region 提交 —— async void Submit()
         /// <summary>
