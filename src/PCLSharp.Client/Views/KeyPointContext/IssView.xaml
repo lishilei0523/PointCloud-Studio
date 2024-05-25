@@ -1,0 +1,62 @@
+﻿<Window x:Class="PCLSharp.Client.Views.KeyPointContext.IssView"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:fluentWpf="clr-namespace:SourceChord.FluentWPF;assembly=FluentWPF"
+        xmlns:sd="https://github.com/lishilei0523/SD.Framework"
+        xmlns:cal="http://www.caliburnproject.org"
+        xmlns:mah="http://metro.mahapps.com/winfx/xaml/controls"
+        mc:Ignorable="d"
+        Title="ISS关键点"
+        Width="500" Height="530" ResizeMode="NoResize"
+        FontSize="14"
+        WindowStyle="ThreeDBorderWindow"
+        WindowStartupLocation="CenterOwner"
+        fluentWpf:AcrylicWindow.Enabled="True"
+        fluentWpf:AcrylicWindow.AcrylicWindowStyle="NoIcon">
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <!--表单区-->
+            <RowDefinition Height="430" />
+            <!--占位区-->
+            <RowDefinition Height="*" />
+            <!--控制区-->
+            <RowDefinition Height="50" />
+        </Grid.RowDefinitions>
+        <!--表单区-->
+        <StackPanel Grid.Row="0" Grid.IsSharedSizeScope="True" Margin="20,30">
+            <sd:FormItem Label="显著半径：">
+                <TextBox Text="{Binding SalientRadius}" Style="{StaticResource TextBoxRevealStyle}" />
+            </sd:FormItem>
+            <sd:FormItem Label="抑制半径：">
+                <TextBox Text="{Binding NonMaxRadius}" Style="{StaticResource TextBoxRevealStyle}" />
+            </sd:FormItem>
+            <sd:FormItem Label="二一比上限：">
+                <TextBox Text="{Binding Threshold21}" Style="{StaticResource TextBoxRevealStyle}" />
+            </sd:FormItem>
+            <sd:FormItem Label="三二比上限：">
+                <TextBox Text="{Binding Threshold32}" Style="{StaticResource TextBoxRevealStyle}" />
+            </sd:FormItem>
+            <sd:FormItem Label="最小邻域点数：">
+                <TextBox Text="{Binding MinNeighborsCount}" Style="{StaticResource TextBoxRevealStyle}" />
+            </sd:FormItem>
+            <sd:FormItem Label="线程数：">
+                <TextBox Text="{Binding ThreadsCount}" Style="{StaticResource TextBoxRevealStyle}" />
+            </sd:FormItem>
+            <sd:FormItem Label="关键点颜色：">
+                <mah:ColorPicker SelectedColor="{Binding KeyPointColor}" Style="{StaticResource ColorPicker.Styles.Fluent}" />
+            </sd:FormItem>
+        </StackPanel>
+        <!--占位区-->
+        <Grid Grid.Row="1" />
+        <!--控制区-->
+        <Grid Grid.Row="2" Style="{StaticResource Form.Styles.Submit.Grid}">
+            <WrapPanel Style="{StaticResource Form.Styles.Submit.WrapPanel}">
+                <Button Content="确定" cal:Message.Attach="Submit()" Style="{StaticResource Button.Styles.Fluent.Focus}" />
+                <Button Content="取消" cal:Message.Attach="TryCloseAsync('false')" Style="{StaticResource Button.Styles.Fluent.Default}" />
+            </WrapPanel>
+        </Grid>
+    </Grid>
+</Window>
