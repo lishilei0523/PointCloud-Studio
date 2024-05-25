@@ -153,7 +153,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="pcl_conductor.cpp" />
+    <ClCompile Include="pcl_files.cpp" />
     <ClCompile Include="pcl_dispose.cpp" />
     <ClCompile Include="pcl_features.cpp" />
     <ClCompile Include="pcl_filters.cpp" />
@@ -161,7 +161,7 @@
     <ClCompile Include="pcl_normals.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="pcl_conductor.h" />
+    <ClInclude Include="pcl_files.h" />
     <ClInclude Include="pcl_dispose.h" />
     <ClInclude Include="pcl_features.h" />
     <ClInclude Include="pcl_filters.h" />

@@ -9,7 +9,7 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="pcl_conductor.cpp">
+    <ClCompile Include="pcl_files.cpp">
       <Filter>Sources</Filter>
     </ClCompile>
     <ClCompile Include="pcl_dispose.cpp">
@@ -29,7 +29,7 @@
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="pcl_conductor.h">
+    <ClInclude Include="pcl_files.h">
       <Filter>Headers</Filter>
     </ClInclude>
     <ClInclude Include="pcl_dispose.h">

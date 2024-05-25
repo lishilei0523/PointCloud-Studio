@@ -5,7 +5,7 @@
 #include <pcl/io/ply_io.h>
 #include <pcl/io/obj_io.h>
 #include <primitives_map.h>
-#include "pcl_conductor.h"
+#include "pcl_files.h"
 using namespace std;
 using namespace pcl;
 
