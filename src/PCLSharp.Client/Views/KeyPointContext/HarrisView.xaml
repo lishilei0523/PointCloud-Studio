@@ -9,7 +9,7 @@
         xmlns:mah="http://metro.mahapps.com/winfx/xaml/controls"
         mc:Ignorable="d"
         Title="Harris关键点"
-        Width="500" Height="430" ResizeMode="NoResize"
+        Width="500" Height="360" ResizeMode="NoResize"
         FontSize="14"
         WindowStyle="ThreeDBorderWindow"
         WindowStartupLocation="CenterOwner"
@@ -19,7 +19,7 @@
     <Grid>
         <Grid.RowDefinitions>
             <!--表单区-->
-            <RowDefinition Height="330" />
+            <RowDefinition Height="260" />
             <!--占位区-->
             <RowDefinition Height="*" />
             <!--控制区-->
