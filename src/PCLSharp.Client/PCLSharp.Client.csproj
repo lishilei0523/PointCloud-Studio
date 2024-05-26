@@ -41,7 +41,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\PCLSharp.Presentation\PCLSharp.Presentation.csproj" />
     <ProjectReference Include="..\PCLSharp.HelixDX.WPF\PCLSharp.HelixDX.WPF.csproj" />
     <ProjectReference Include="..\PCLSharp.Primitives\PCLSharp.Primitives.csproj" />
     <ProjectReference Include="..\PCLSharp.Modules\PCLSharp.Modules.csproj" />
