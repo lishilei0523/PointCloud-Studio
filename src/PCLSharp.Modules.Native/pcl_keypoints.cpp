@@ -13,6 +13,19 @@
 using namespace std;
 using namespace pcl;
 
+/* SIFT关键点计算必须加这段 */
+namespace pcl
+{
+	template<>
+	struct SIFTKeypointFieldSelector<PointXYZ>
+	{
+		inline float operator()(const PointXYZ& point) const
+		{
+			return point.z;
+		}
+	};
+}
+
 /// <summary>
 /// 检测NARF关键点
 /// </summary>
@@ -39,11 +52,11 @@ Point3Fs* detectNARF(Point3F points[], const int length, const float angularReso
 	//提取NARF关键点索引
 	PointCloud<int> keyPointsIndices;
 	RangeImageBorderExtractor rangeImageBorderExtractor;
-	NarfKeypoint narfKeypointDetector = NarfKeypoint(&rangeImageBorderExtractor);
-	narfKeypointDetector.setRangeImage(&*rangeImage);
-	NarfKeypoint::Parameters& detectorParameters = narfKeypointDetector.getParameters();
+	NarfKeypoint narfDetector = NarfKeypoint(&rangeImageBorderExtractor);
+	narfDetector.setRangeImage(&*rangeImage);
+	NarfKeypoint::Parameters& detectorParameters = narfDetector.getParameters();
 	detectorParameters.support_size = supportSize;
-	narfKeypointDetector.compute(keyPointsIndices);
+	narfDetector.compute(keyPointsIndices);
 
 	//提取NARF关键点
 	const size_t& keyPointsCount = keyPointsIndices.points.size();
@@ -77,33 +90,20 @@ Point3Fs* detectISS(Point3F points[], const int length, const float salientRadiu
 
 	//提取ISS关键点
 	const search::KdTree<PointXYZ>::Ptr kdTree = std::make_shared<search::KdTree<PointXYZ>>();
-	ISSKeypoint3D<PointXYZ, PointXYZ> iss;
-	iss.setInputCloud(cloud);
-	iss.setSearchMethod(kdTree);
-	iss.setSalientRadius(salientRadius);
-	iss.setNonMaxRadius(nonMaxRadius);
-	iss.setThreshold21(threshold21);
-	iss.setThreshold32(threshold32);
-	iss.setMinNeighbors(minNeighborsCount);
-	iss.setNumberOfThreads(threadsCount);
-	iss.compute(*keyPoints);
+	ISSKeypoint3D<PointXYZ, PointXYZ> issDetector;
+	issDetector.setInputCloud(cloud);
+	issDetector.setSearchMethod(kdTree);
+	issDetector.setSalientRadius(salientRadius);
+	issDetector.setNonMaxRadius(nonMaxRadius);
+	issDetector.setThreshold21(threshold21);
+	issDetector.setThreshold32(threshold32);
+	issDetector.setMinNeighbors(minNeighborsCount);
+	issDetector.setNumberOfThreads(threadsCount);
+	issDetector.compute(*keyPoints);
 
 	Point3Fs* point3Fs = pclsharp::toPoint3Fs(*keyPoints);
 
 	return point3Fs;
-}
-
-/* SIFT关键点计算必须加这段 */
-namespace pcl
-{
-	template<>
-	struct SIFTKeypointFieldSelector<PointXYZ>
-	{
-		inline float operator()(const PointXYZ& point) const
-		{
-			return point.z;
-		}
-	};
 }
 
 /// <summary>
@@ -124,12 +124,12 @@ Point3Fs* detectSIFT(Point3F points[], const int length, const float minScale, c
 	//提取SIFT关键点
 	search::KdTree<PointXYZ>::Ptr kdTree = std::make_shared<search::KdTree<PointXYZ>>();
 	PointCloud<PointWithScale> result;
-	SIFTKeypoint<PointXYZ, PointWithScale> sift;
-	sift.setInputCloud(cloud);
-	sift.setSearchMethod(kdTree);
-	sift.setScales(minScale, octavesCount, scalesPerOctaveCount);
-	sift.setMinimumContrast(minContrast);
-	sift.compute(result);
+	SIFTKeypoint<PointXYZ, PointWithScale> siftDetector;
+	siftDetector.setInputCloud(cloud);
+	siftDetector.setSearchMethod(kdTree);
+	siftDetector.setScales(minScale, octavesCount, scalesPerOctaveCount);
+	siftDetector.setMinimumContrast(minContrast);
+	siftDetector.compute(result);
 	pcl::copyPointCloud(result, *keyPoints);
 
 	Point3Fs* point3Fs = pclsharp::toPoint3Fs(*keyPoints);
@@ -153,12 +153,12 @@ Point3Fs* detectHarris(Point3F points[], const int length, const bool nonMaxSupr
 
 	//提取Harris关键点
 	PointCloud<PointXYZI> result;
-	HarrisKeypoint3D<PointXYZ, PointXYZI> harris;
-	harris.setInputCloud(cloud);
-	harris.setNonMaxSupression(nonMaxSupression);
-	harris.setRadius(radius);
-	harris.setThreshold(threshold);
-	harris.compute(result);
+	HarrisKeypoint3D<PointXYZ, PointXYZI> harrisDetector;
+	harrisDetector.setInputCloud(cloud);
+	harrisDetector.setNonMaxSupression(nonMaxSupression);
+	harrisDetector.setRadius(radius);
+	harrisDetector.setThreshold(threshold);
+	harrisDetector.compute(result);
 	pcl::copyPointCloud(result, *keyPoints);
 
 	Point3Fs* point3Fs = pclsharp::toPoint3Fs(*keyPoints);
@@ -184,15 +184,15 @@ Point3Fs* detectSUSAN(Point3F points[], const int length, const bool nonMaxSupre
 
 	//提取SUSAN关键点
 	const search::KdTree<PointXYZ>::Ptr kdTree = std::make_shared<search::KdTree<PointXYZ>>();
-	SUSANKeypoint<PointXYZ, PointXYZ> susan;
-	susan.setInputCloud(cloud);
-	susan.setSearchMethod(kdTree);
-	susan.setNonMaxSupression(nonMaxSupression);
-	susan.setRadius(radius);
-	susan.setDistanceThreshold(distanceThreshold);
-	susan.setAngularThreshold(angularThreshold);
-	susan.setIntensityThreshold(intensityThreshold);
-	susan.compute(*keyPoints);
+	SUSANKeypoint<PointXYZ, PointXYZ> susanDetector;
+	susanDetector.setInputCloud(cloud);
+	susanDetector.setSearchMethod(kdTree);
+	susanDetector.setNonMaxSupression(nonMaxSupression);
+	susanDetector.setRadius(radius);
+	susanDetector.setDistanceThreshold(distanceThreshold);
+	susanDetector.setAngularThreshold(angularThreshold);
+	susanDetector.setIntensityThreshold(intensityThreshold);
+	susanDetector.compute(*keyPoints);
 
 	Point3Fs* point3Fs = pclsharp::toPoint3Fs(*keyPoints);
 
