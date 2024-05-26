@@ -2,7 +2,7 @@
 #include "point3f.h"
 
 /// <summary>
-/// 坐标点集结构体
+/// 坐标点集
 /// </summary>
 struct Point3Fs
 {
@@ -12,7 +12,7 @@ struct Point3Fs
 	Point3Fs() = default;
 
 	/// <summary>
-	/// 创建坐标点集结构体构造器
+	/// 创建坐标点集构造器
 	/// </summary>
 	/// <param name="points">点集指针</param>
 	/// <param name="length">长度</param>

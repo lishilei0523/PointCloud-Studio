@@ -36,7 +36,7 @@ namespace PCLSharp.Modules.Implements
 
             IntPtr pointer = NormalsNative.EstimateNormalsByK(points_, points_.Length, k);
             Normal3Fs normal3Fs = Marshal.PtrToStructure<Normal3Fs>(pointer);
-            Normal3F[] normals = normal3Fs.ToNormal3Fs();
+            Normal3F[] normals = normal3Fs.Recover();
             DisposeNative.DisposeNormal3Fs(pointer);
 
             return normals;
@@ -65,7 +65,7 @@ namespace PCLSharp.Modules.Implements
 
             IntPtr pointer = NormalsNative.EstimateNormalsByRadius(points_, points_.Length, radius);
             Normal3Fs normal3Fs = Marshal.PtrToStructure<Normal3Fs>(pointer);
-            Normal3F[] normals = normal3Fs.ToNormal3Fs();
+            Normal3F[] normals = normal3Fs.Recover();
             DisposeNative.DisposeNormal3Fs(pointer);
 
             return normals;
@@ -94,7 +94,7 @@ namespace PCLSharp.Modules.Implements
 
             IntPtr pointer = NormalsNative.EstimateNormalsByKP(points_, points_.Length, k);
             Normal3Fs normal3Fs = Marshal.PtrToStructure<Normal3Fs>(pointer);
-            Normal3F[] normals = normal3Fs.ToNormal3Fs();
+            Normal3F[] normals = normal3Fs.Recover();
             DisposeNative.DisposeNormal3Fs(pointer);
 
             return normals;
@@ -123,7 +123,7 @@ namespace PCLSharp.Modules.Implements
 
             IntPtr pointer = NormalsNative.EstimateNormalsByRadiusP(points_, points_.Length, radius);
             Normal3Fs normal3Fs = Marshal.PtrToStructure<Normal3Fs>(pointer);
-            Normal3F[] normals = normal3Fs.ToNormal3Fs();
+            Normal3F[] normals = normal3Fs.Recover();
             DisposeNative.DisposeNormal3Fs(pointer);
 
             return normals;

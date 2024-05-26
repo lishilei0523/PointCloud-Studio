@@ -2,7 +2,7 @@
 #include "point3color4.h"
 
 /// <summary>
-/// 坐标点颜色集结构体
+/// 坐标点颜色集
 /// </summary>
 struct Point3Color4s
 {
@@ -12,7 +12,7 @@ struct Point3Color4s
 	Point3Color4s() = default;
 
 	/// <summary>
-	/// 创建坐标点颜色集结构体构造器
+	/// 创建坐标点颜色集构造器
 	/// </summary>
 	/// <param name="pointColors">坐标点颜色集指针</param>
 	/// <param name="length">长度</param>

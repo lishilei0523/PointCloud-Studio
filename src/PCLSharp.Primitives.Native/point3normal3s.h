@@ -2,7 +2,7 @@
 #include "point3normal3.h"
 
 /// <summary>
-/// 坐标点法向量集结构体
+/// 坐标点法向量集
 /// </summary>
 struct Point3Normal3s
 {
@@ -12,7 +12,7 @@ struct Point3Normal3s
 	Point3Normal3s() = default;
 
 	/// <summary>
-	/// 创建坐标点法向量集结构体构造器
+	/// 创建坐标点法向量集构造器
 	/// </summary>
 	/// <param name="pointNormals">坐标点法向量集指针</param>
 	/// <param name="length">长度</param>

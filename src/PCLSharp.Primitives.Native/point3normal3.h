@@ -11,7 +11,7 @@ struct Point3Normal3
 	Point3Normal3() = default;
 
 	/// <summary>
-	/// 创建坐标点构造器
+	/// 创建坐标点法向量构造器
 	/// </summary>
 	/// <param name="x">X坐标</param>
 	/// <param name="y">Y坐标</param>

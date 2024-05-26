@@ -2,7 +2,7 @@
 #include "fpfh_signature33f.h"
 
 /// <summary>
-/// FPFH描述子集结构体
+/// FPFH描述子集
 /// </summary>
 struct FPFHSignature33Fs
 {
@@ -12,7 +12,7 @@ struct FPFHSignature33Fs
 	FPFHSignature33Fs() = default;
 
 	/// <summary>
-	/// 创建FPFH描述子集结构体构造器
+	/// 创建FPFH描述子集构造器
 	/// </summary>
 	/// <param name="descriptors">FPFH描述子集指针</param>
 	/// <param name="length">长度</param>

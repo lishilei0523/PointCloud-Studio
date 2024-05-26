@@ -7,7 +7,7 @@ using namespace pcl;
 /// </summary>
 /// <param name="point3Fs">坐标点集</param>
 /// <param name="length">长度</param>
-/// <returns>点云</returns>
+/// <returns>PointXYZ点云</returns>
 PointCloud<PointXYZ>::Ptr pclsharp::toPointCloud(Point3F point3Fs[], const int& length)
 {
 	const PointCloud<PointXYZ>::Ptr& pointCloud = std::make_shared<PointCloud<PointXYZ>>();
@@ -22,10 +22,10 @@ PointCloud<PointXYZ>::Ptr pclsharp::toPointCloud(Point3F point3Fs[], const int& 
 }
 
 /// <summary>
-/// 点云映射坐标点集结构体
+/// 点云映射坐标点集
 /// </summary>
-/// <param name="pointCloud">点云</param>
-/// <returns>坐标点集结构体</returns>
+/// <param name="pointCloud">PointXYZ点云</param>
+/// <returns>坐标点集</returns>
 Point3Fs* pclsharp::toPoint3Fs(const PointCloud<PointXYZ>& pointCloud)
 {
 	const size_t length = pointCloud.size();
@@ -46,7 +46,7 @@ Point3Fs* pclsharp::toPoint3Fs(const PointCloud<PointXYZ>& pointCloud)
 /// </summary>
 /// <param name="normal3Fs">法向量集</param>
 /// <param name="length">长度</param>
-/// <returns>点云</returns>
+/// <returns>Normal点云</returns>
 PointCloud<Normal>::Ptr pclsharp::toPointCloud(Normal3F normal3Fs[], const int& length)
 {
 	const PointCloud<Normal>::Ptr& pointCloud = std::make_shared<PointCloud<Normal>>();
@@ -61,10 +61,10 @@ PointCloud<Normal>::Ptr pclsharp::toPointCloud(Normal3F normal3Fs[], const int& 
 }
 
 /// <summary>
-/// 点云映射法向量集结构体
+/// 点云映射法向量集
 /// </summary>
-/// <param name="pointCloud">点云</param>
-/// <returns>法向量集结构体</returns>
+/// <param name="pointCloud">Normal点云</param>
+/// <returns>法向量集</returns>
 Normal3Fs* pclsharp::toNormal3Fs(const PointCloud<Normal>& pointCloud)
 {
 	const size_t& length = pointCloud.size();
@@ -85,7 +85,7 @@ Normal3Fs* pclsharp::toNormal3Fs(const PointCloud<Normal>& pointCloud)
 /// </summary>
 /// <param name="point3Normal3s">坐标点法向量集</param>
 /// <param name="length">长度</param>
-/// <returns>点云</returns>
+/// <returns>PointNormal点云</returns>
 PointCloud<PointNormal>::Ptr pclsharp::toPointCloud(Point3Normal3 point3Normal3s[], const int& length)
 {
 	const PointCloud<PointNormal>::Ptr& pointCloud = std::make_shared<PointCloud<PointNormal>>();
@@ -100,10 +100,10 @@ PointCloud<PointNormal>::Ptr pclsharp::toPointCloud(Point3Normal3 point3Normal3s
 }
 
 /// <summary>
-/// 点云映射坐标点法向量集结构体
+/// 点云映射坐标点法向量集
 /// </summary>
-/// <param name="pointCloud">点云</param>
-/// <returns>坐标点法向量集结构体</returns>
+/// <param name="pointCloud">PointNormal点云</param>
+/// <returns>坐标点法向量集</returns>
 Point3Normal3s* pclsharp::toPoint3Normal3s(const PointCloud<PointNormal>& pointCloud)
 {
 	const size_t& length = pointCloud.size();
@@ -124,7 +124,7 @@ Point3Normal3s* pclsharp::toPoint3Normal3s(const PointCloud<PointNormal>& pointC
 /// </summary>
 /// <param name="point3Color4s">坐标点颜色集</param>
 /// <param name="length">长度</param>
-/// <returns>点云</returns>
+/// <returns>PointXYZRGBA点云</returns>
 PointCloud<PointXYZRGBA>::Ptr pclsharp::toPointCloud(Point3Color4 point3Color4s[], const int& length)
 {
 	const PointCloud<PointXYZRGBA>::Ptr& pointCloud = std::make_shared<PointCloud<PointXYZRGBA>>();
@@ -139,10 +139,10 @@ PointCloud<PointXYZRGBA>::Ptr pclsharp::toPointCloud(Point3Color4 point3Color4s[
 }
 
 /// <summary>
-/// 点云映射坐标点颜色集结构体
+/// 点云映射坐标点颜色集
 /// </summary>
-/// <param name="pointCloud">点云</param>
-/// <returns>坐标点颜色集结构体</returns>
+/// <param name="pointCloud">PointXYZRGBA点云</param>
+/// <returns>坐标点颜色集</returns>
 Point3Color4s* pclsharp::toPoint3Color4s(const PointCloud<PointXYZRGBA>& pointCloud)
 {
 	const size_t& length = pointCloud.size();

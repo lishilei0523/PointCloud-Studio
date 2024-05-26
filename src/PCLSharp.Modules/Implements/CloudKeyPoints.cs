@@ -42,7 +42,7 @@ namespace PCLSharp.Modules.Implements
 
             IntPtr pointer = KeyPointsNative.DetectNARF(points_, points_.Length, angularResolution, maxAngleWidth, maxAngleHeight, noiseLevel, minRange, borderSize, supportSize);
             Point3Fs point3Fs = Marshal.PtrToStructure<Point3Fs>(pointer);
-            Point3F[] keyPoints = point3Fs.ToPoint3Fs();
+            Point3F[] keyPoints = point3Fs.Recover();
             DisposeNative.DisposePoint3Fs(pointer);
 
             return keyPoints;
@@ -76,7 +76,7 @@ namespace PCLSharp.Modules.Implements
 
             IntPtr pointer = KeyPointsNative.DetectISS(points_, points_.Length, salientRadius, nonMaxRadius, threshold21, threshold32, minNeighborsCount, threadsCount);
             Point3Fs point3Fs = Marshal.PtrToStructure<Point3Fs>(pointer);
-            Point3F[] keyPoints = point3Fs.ToPoint3Fs();
+            Point3F[] keyPoints = point3Fs.Recover();
             DisposeNative.DisposePoint3Fs(pointer);
 
             return keyPoints;
@@ -108,7 +108,7 @@ namespace PCLSharp.Modules.Implements
 
             IntPtr pointer = KeyPointsNative.DetectSIFT(points_, points_.Length, minScale, octavesCount, scalesPerOctaveCount, minContrast);
             Point3Fs point3Fs = Marshal.PtrToStructure<Point3Fs>(pointer);
-            Point3F[] keyPoints = point3Fs.ToPoint3Fs();
+            Point3F[] keyPoints = point3Fs.Recover();
             DisposeNative.DisposePoint3Fs(pointer);
 
             return keyPoints;
@@ -139,7 +139,7 @@ namespace PCLSharp.Modules.Implements
 
             IntPtr pointer = KeyPointsNative.DetectHarris(points_, points_.Length, nonMaxSupression, radius, threshold);
             Point3Fs point3Fs = Marshal.PtrToStructure<Point3Fs>(pointer);
-            Point3F[] keyPoints = point3Fs.ToPoint3Fs();
+            Point3F[] keyPoints = point3Fs.Recover();
             DisposeNative.DisposePoint3Fs(pointer);
 
             return keyPoints;
@@ -172,7 +172,7 @@ namespace PCLSharp.Modules.Implements
 
             IntPtr pointer = KeyPointsNative.DetectSUSAN(points_, points_.Length, nonMaxSupression, radius, distanceThreshold, angularThreshold, intensityThreshold);
             Point3Fs point3Fs = Marshal.PtrToStructure<Point3Fs>(pointer);
-            Point3F[] keyPoints = point3Fs.ToPoint3Fs();
+            Point3F[] keyPoints = point3Fs.Recover();
             DisposeNative.DisposePoint3Fs(pointer);
 
             return keyPoints;

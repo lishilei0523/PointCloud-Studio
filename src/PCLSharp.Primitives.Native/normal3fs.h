@@ -2,7 +2,7 @@
 #include "normal3f.h"
 
 /// <summary>
-/// 法向量集结构体
+/// 法向量集
 /// </summary>
 struct Normal3Fs
 {
@@ -12,7 +12,7 @@ struct Normal3Fs
 	Normal3Fs() = default;
 
 	/// <summary>
-	/// 创建法向量集结构体构造器
+	/// 创建法向量集构造器
 	/// </summary>
 	/// <param name="normals">法向量集指针</param>
 	/// <param name="length">长度</param>

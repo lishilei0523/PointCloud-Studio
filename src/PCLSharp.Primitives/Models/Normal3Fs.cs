@@ -4,13 +4,13 @@ using System.Runtime.InteropServices;
 namespace PCLSharp.Primitives.Models
 {
     /// <summary>
-    /// 法向量集结构体
+    /// 法向量集
     /// </summary>
     [StructLayout(LayoutKind.Sequential)]
     public readonly struct Normal3Fs
     {
         /// <summary>
-        /// 创建法向量集结构体构造器
+        /// 创建法向量集构造器
         /// </summary>
         /// <param name="normals">法向量集指针</param>
         /// <param name="length">长度</param>

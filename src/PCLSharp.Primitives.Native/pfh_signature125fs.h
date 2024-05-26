@@ -2,7 +2,7 @@
 #include "pfh_signature125f.h"
 
 /// <summary>
-/// PFH描述子集结构体
+/// PFH描述子集
 /// </summary>
 struct PFHSignature125Fs
 {
@@ -12,7 +12,7 @@ struct PFHSignature125Fs
 	PFHSignature125Fs() = default;
 
 	/// <summary>
-	/// 创建PFH描述子集结构体构造器
+	/// 创建PFH描述子集构造器
 	/// </summary>
 	/// <param name="descriptors">PFH描述子集指针</param>
 	/// <param name="length">长度</param>

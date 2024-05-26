@@ -2,7 +2,7 @@
 #include "narf36f.h"
 
 /// <summary>
-/// NARF描述子集结构体
+/// NARF描述子集
 /// </summary>
 struct Narf36Fs
 {
@@ -12,7 +12,7 @@ struct Narf36Fs
 	Narf36Fs() = default;
 
 	/// <summary>
-	/// 创建NARF描述子集结构体构造器
+	/// 创建NARF描述子集构造器
 	/// </summary>
 	/// <param name="descriptors">NARF描述子集指针</param>
 	/// <param name="length">长度</param>

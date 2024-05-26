@@ -2,7 +2,7 @@
 #include "shot352f.h"
 
 /// <summary>
-/// SHOT描述子集结构体
+/// SHOT描述子集
 /// </summary>
 struct Shot352Fs
 {
@@ -12,7 +12,7 @@ struct Shot352Fs
 	Shot352Fs() = default;
 
 	/// <summary>
-	/// 创建SHOT描述子集结构体构造器
+	/// 创建SHOT描述子集构造器
 	/// </summary>
 	/// <param name="descriptors">SHOT描述子集指针</param>
 	/// <param name="length">长度</param>

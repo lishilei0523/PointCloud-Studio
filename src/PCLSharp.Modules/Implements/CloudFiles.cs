@@ -38,7 +38,7 @@ namespace PCLSharp.Modules.Implements
 
             IntPtr pointer = FilesNative.LoadPCD(filePath);
             Point3Fs point3Fs = Marshal.PtrToStructure<Point3Fs>(pointer);
-            Point3F[] points = point3Fs.ToPoint3Fs();
+            Point3F[] points = point3Fs.Recover();
             DisposeNative.DisposePoint3Fs(pointer);
 
             return points;
@@ -68,7 +68,7 @@ namespace PCLSharp.Modules.Implements
 
             IntPtr pointer = FilesNative.LoadNormalPCD(filePath);
             Point3Normal3s point3Normal3s = Marshal.PtrToStructure<Point3Normal3s>(pointer);
-            Point3Normal3[] pointNormals = point3Normal3s.ToPoint3Normal3s();
+            Point3Normal3[] pointNormals = point3Normal3s.Recover();
             DisposeNative.DisposePoint3Normal3s(pointer);
 
             return pointNormals;
@@ -98,7 +98,7 @@ namespace PCLSharp.Modules.Implements
 
             IntPtr pointer = FilesNative.LoadColorPCD(filePath);
             Point3Color4s point3Color4s = Marshal.PtrToStructure<Point3Color4s>(pointer);
-            Point3Color4[] pointColors = point3Color4s.ToPoint3Color4s();
+            Point3Color4[] pointColors = point3Color4s.Recover();
             DisposeNative.DisposePoint3Color4s(pointer);
 
             return pointColors;
@@ -128,7 +128,7 @@ namespace PCLSharp.Modules.Implements
 
             IntPtr pointer = FilesNative.LoadPLY(filePath);
             Point3Fs point3Fs = Marshal.PtrToStructure<Point3Fs>(pointer);
-            Point3F[] points = point3Fs.ToPoint3Fs();
+            Point3F[] points = point3Fs.Recover();
             DisposeNative.DisposePoint3Fs(pointer);
 
             return points;
@@ -158,7 +158,7 @@ namespace PCLSharp.Modules.Implements
 
             IntPtr pointer = FilesNative.LoadNormalPLY(filePath);
             Point3Normal3s point3Normal3s = Marshal.PtrToStructure<Point3Normal3s>(pointer);
-            Point3Normal3[] pointNormals = point3Normal3s.ToPoint3Normal3s();
+            Point3Normal3[] pointNormals = point3Normal3s.Recover();
             DisposeNative.DisposePoint3Normal3s(pointer);
 
             return pointNormals;
@@ -188,7 +188,7 @@ namespace PCLSharp.Modules.Implements
 
             IntPtr pointer = FilesNative.LoadColorPLY(filePath);
             Point3Color4s point3Color4s = Marshal.PtrToStructure<Point3Color4s>(pointer);
-            Point3Color4[] pointColors = point3Color4s.ToPoint3Color4s();
+            Point3Color4[] pointColors = point3Color4s.Recover();
             DisposeNative.DisposePoint3Color4s(pointer);
 
             return pointColors;
@@ -218,7 +218,7 @@ namespace PCLSharp.Modules.Implements
 
             IntPtr pointer = FilesNative.LoadOBJ(filePath);
             Point3Fs point3Fs = Marshal.PtrToStructure<Point3Fs>(pointer);
-            Point3F[] points = point3Fs.ToPoint3Fs();
+            Point3F[] points = point3Fs.Recover();
             DisposeNative.DisposePoint3Fs(pointer);
 
             return points;
@@ -248,7 +248,7 @@ namespace PCLSharp.Modules.Implements
 
             IntPtr pointer = FilesNative.LoadNormalOBJ(filePath);
             Point3Normal3s point3Normal3s = Marshal.PtrToStructure<Point3Normal3s>(pointer);
-            Point3Normal3[] pointNormals = point3Normal3s.ToPoint3Normal3s();
+            Point3Normal3[] pointNormals = point3Normal3s.Recover();
             DisposeNative.DisposePoint3Normal3s(pointer);
 
             return pointNormals;
@@ -278,7 +278,7 @@ namespace PCLSharp.Modules.Implements
 
             IntPtr pointer = FilesNative.LoadColorOBJ(filePath);
             Point3Color4s point3Color4s = Marshal.PtrToStructure<Point3Color4s>(pointer);
-            Point3Color4[] pointColors = point3Color4s.ToPoint3Color4s();
+            Point3Color4[] pointColors = point3Color4s.Recover();
             DisposeNative.DisposePoint3Color4s(pointer);
 
             return pointColors;

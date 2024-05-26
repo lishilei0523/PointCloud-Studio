@@ -2,7 +2,7 @@
 #include "shape_context1980f.h"
 
 /// <summary>
-/// 3DSC描述子集结构体
+/// 3DSC描述子集
 /// </summary>
 struct ShapeContext1980Fs
 {
@@ -12,7 +12,7 @@ struct ShapeContext1980Fs
 	ShapeContext1980Fs() = default;
 
 	/// <summary>
-	/// 创建3DSC描述子集结构体构造器
+	/// 创建3DSC描述子集构造器
 	/// </summary>
 	/// <param name="descriptors">3DSC描述子集指针</param>
 	/// <param name="length">长度</param>

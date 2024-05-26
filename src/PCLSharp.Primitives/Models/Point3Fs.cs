@@ -4,13 +4,13 @@ using System.Runtime.InteropServices;
 namespace PCLSharp.Primitives.Models
 {
     /// <summary>
-    /// 坐标点集结构体
+    /// 坐标点集
     /// </summary>
     [StructLayout(LayoutKind.Sequential)]
     public readonly struct Point3Fs
     {
         /// <summary>
-        /// 创建坐标点集结构体
+        /// 创建坐标点集构造器
         /// </summary>
         /// <param name="points">坐标集指针</param>
         /// <param name="length">长度</param>
