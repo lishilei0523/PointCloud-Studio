@@ -80,5 +80,95 @@ namespace PCLSharp.Modules.Declarations
         [DllImport(AssemblyNames.Modules, EntryPoint = "disposePoint3Color4s")]
         public static extern void DisposePoint3Color4s(IntPtr pointer);
         #endregion
+
+        #region # 释放NARF描述子 —— static extern void DisposeNarf36F(IntPtr pointer)
+        /// <summary>
+        /// 释放NARF描述子
+        /// </summary>
+        /// <param name="pointer">指针</param>
+        [DllImport(AssemblyNames.Modules, EntryPoint = "disposeNarf36F")]
+        public static extern void DisposeNarf36F(IntPtr pointer);
+        #endregion
+
+        #region # 释放NARF描述子集 —— static extern void DisposeNarf36Fs(IntPtr pointer)
+        /// <summary>
+        /// 释放NARF描述子集
+        /// </summary>
+        /// <param name="pointer">指针</param>
+        [DllImport(AssemblyNames.Modules, EntryPoint = "disposeNarf36Fs")]
+        public static extern void DisposeNarf36Fs(IntPtr pointer);
+        #endregion
+
+        #region # 释放PFH描述子 —— static extern void DisposePFHSignature125F(IntPtr pointer)
+        /// <summary>
+        /// 释放PFH描述子
+        /// </summary>
+        /// <param name="pointer">指针</param>
+        [DllImport(AssemblyNames.Modules, EntryPoint = "disposePFHSignature125F")]
+        public static extern void DisposePFHSignature125F(IntPtr pointer);
+        #endregion
+
+        #region # 释放PFH描述子集 —— static extern void DisposePFHSignature125Fs(IntPtr pointer)
+        /// <summary>
+        /// 释放PFH描述子集
+        /// </summary>
+        /// <param name="pointer">指针</param>
+        [DllImport(AssemblyNames.Modules, EntryPoint = "disposePFHSignature125Fs")]
+        public static extern void DisposePFHSignature125Fs(IntPtr pointer);
+        #endregion
+
+        #region # 释放FPFH描述子 —— static extern void DisposeFPFHSignature33F(IntPtr pointer)
+        /// <summary>
+        /// 释放FPFH描述子
+        /// </summary>
+        /// <param name="pointer">指针</param>
+        [DllImport(AssemblyNames.Modules, EntryPoint = "disposeFPFHSignature33F")]
+        public static extern void DisposeFPFHSignature33F(IntPtr pointer);
+        #endregion
+
+        #region # 释放FPFH描述子集 —— static extern void DisposeFPFHSignature33Fs(IntPtr pointer)
+        /// <summary>
+        /// 释放FPFH描述子集
+        /// </summary>
+        /// <param name="pointer">指针</param>
+        [DllImport(AssemblyNames.Modules, EntryPoint = "disposeFPFHSignature33Fs")]
+        public static extern void DisposeFPFHSignature33Fs(IntPtr pointer);
+        #endregion
+
+        #region # 释放3DSC描述子 —— static extern void DisposeShapeContext1980F(IntPtr pointer)
+        /// <summary>
+        /// 释放3DSC描述子
+        /// </summary>
+        /// <param name="pointer">指针</param>
+        [DllImport(AssemblyNames.Modules, EntryPoint = "disposeShapeContext1980F")]
+        public static extern void DisposeShapeContext1980F(IntPtr pointer);
+        #endregion
+
+        #region # 释放3DSC描述子集 —— static extern void DisposeShapeContext1980Fs(IntPtr pointer)
+        /// <summary>
+        /// 释放3DSC描述子集
+        /// </summary>
+        /// <param name="pointer">指针</param>
+        [DllImport(AssemblyNames.Modules, EntryPoint = "disposeShapeContext1980Fs")]
+        public static extern void DisposeShapeContext1980Fs(IntPtr pointer);
+        #endregion
+
+        #region # 释放SHOT描述子 —— static extern void DisposeShot352F(IntPtr pointer)
+        /// <summary>
+        /// 释放SHOT描述子
+        /// </summary>
+        /// <param name="pointer">指针</param>
+        [DllImport(AssemblyNames.Modules, EntryPoint = "disposeShot352F")]
+        public static extern void DisposeShot352F(IntPtr pointer);
+        #endregion
+
+        #region # 释放SHOT描述子集 —— static extern void DisposeShot352Fs(IntPtr pointer)
+        /// <summary>
+        /// 释放SHOT描述子集
+        /// </summary>
+        /// <param name="pointer">指针</param>
+        [DllImport(AssemblyNames.Modules, EntryPoint = "disposeShot352Fs")]
+        public static extern void DisposeShot352Fs(IntPtr pointer);
+        #endregion
     }
 }
