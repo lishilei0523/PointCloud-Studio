@@ -5,7 +5,7 @@
 #include <pcl/features/range_image_border_extractor.h>
 #include <pcl/features/narf_descriptor.h>
 #include <pcl/features/pfh.h>
-#include <pcl/features/fpfh.h>
+#include <pcl/features/fpfh_omp.h>
 #include <pcl/features/3dsc.h>
 #include <pcl/features/shot_omp.h>
 #include <primitives_map.h>
@@ -132,11 +132,12 @@ FPFHSignature33Fs* computeFPFH(Point3F points[], const int length, const int nor
 	normalEstimator.compute(*normals);
 
 	//Ã·»°FPFH√Ë ˆ◊”
-	FPFHEstimation<PointXYZ, Normal> fpfhComputer;
+	FPFHEstimationOMP<PointXYZ, Normal, FPFHSignature33> fpfhComputer;
 	fpfhComputer.setInputCloud(cloud);
 	fpfhComputer.setInputNormals(normals);
 	fpfhComputer.setSearchMethod(kdTree);
 	fpfhComputer.setKSearch(featureK);
+	fpfhComputer.setNumberOfThreads(threadsCount);
 	fpfhComputer.compute(*descriptors);
 
 	FPFHSignature33Fs* signature33Fs = pclsharp::toFPFHSignature33Fs(*descriptors);
