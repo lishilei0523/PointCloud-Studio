@@ -64,6 +64,13 @@
                     <MenuItem Header="Harris关键点(_H)" cm:Message.Attach="DetectHarris()" />
                     <MenuItem Header="SUSAN关键点(_U)" cm:Message.Attach="DetectSUSAN()" />
                 </MenuItem>
+                <MenuItem Header="特征(_D)">
+                    <MenuItem Header="NARF特征(_N)" cm:Message.Attach="ComputeNARF()" />
+                    <MenuItem Header="PFH特征(_P)" cm:Message.Attach="ComputePFH()" />
+                    <MenuItem Header="FPFH特征(_F)" cm:Message.Attach="ComputeFPFH()" />
+                    <MenuItem Header="3DSC特征(_D)" cm:Message.Attach="Compute3DSC()" />
+                    <MenuItem Header="SHOT特征(_S)" cm:Message.Attach="ComputeSHOT()" />
+                </MenuItem>
             </Menu>
         </Border>
         <!--Body-->

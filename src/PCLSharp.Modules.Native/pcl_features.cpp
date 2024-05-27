@@ -35,7 +35,7 @@ Narf36Fs* computeNARF(Point3F points[], const int length, const float angularRes
 	const PointCloud<PointXYZ>::Ptr keyPoints = std::make_shared<PointCloud<PointXYZ>>();
 	const RangeImage::Ptr rangeImage = std::make_shared<RangeImage>();
 
-	//生成深度图
+	//创建深度图
 	const Eigen::Affine3f sensorPose = Eigen::Affine3f(Eigen::Affine3f::Identity());
 	rangeImage->createFromPointCloud(*cloud, deg2rad(angularResolution), deg2rad(maxAngleWidth), deg2rad(maxAngleHeight), sensorPose, RangeImage::CAMERA_FRAME, noiseLevel, minRange, borderSize);
 
@@ -199,7 +199,7 @@ ShapeContext1980Fs* compute3DSC(Point3F points[], const int length, const int no
 /// <param name="featureRadius">特征搜索半径</param>
 /// <param name="threadsCount">线程数</param>
 /// <returns>SHOT特征描述子集</returns>
-EXPORT_C Shot352Fs* CALLING_MODE computeSHOT(Point3F points[], const int length, const int normalK, const float featureRadius, const int threadsCount)
+Shot352Fs* computeSHOT(Point3F points[], const int length, const int normalK, const float featureRadius, const int threadsCount)
 {
 	const PointCloud<PointXYZ>::Ptr& cloud = pclsharp::toPointCloud(points, length);
 	const PointCloud<Normal>::Ptr normals = std::make_shared<PointCloud<Normal>>();
