@@ -9,7 +9,7 @@
         xmlns:mah="http://metro.mahapps.com/winfx/xaml/controls"
         mc:Ignorable="d"
         Title="NARF特征"
-        Width="500" Height="560" ResizeMode="NoResize"
+        Width="500" Height="700" ResizeMode="NoResize"
         FontSize="14"
         WindowStyle="ThreeDBorderWindow"
         WindowStartupLocation="CenterOwner"
@@ -19,7 +19,7 @@
     <Grid>
         <Grid.RowDefinitions>
             <!--表单区-->
-            <RowDefinition Height="460" />
+            <RowDefinition Height="600" />
             <!--占位区-->
             <RowDefinition Height="*" />
             <!--控制区-->
@@ -53,6 +53,12 @@
             </sd:FormItem>
             <sd:FormItem Label="关键点颜色：">
                 <mah:ColorPicker SelectedColor="{Binding KeyPointColor}" Style="{StaticResource ColorPicker.Styles.Fluent}" />
+            </sd:FormItem>
+            <sd:FormItem Label="直方图宽度：">
+                <TextBox Text="{Binding ImageWidth}" Style="{StaticResource TextBoxRevealStyle}" />
+            </sd:FormItem>
+            <sd:FormItem Label="直方图高度：">
+                <TextBox Text="{Binding ImageHeight}" Style="{StaticResource TextBoxRevealStyle}" />
             </sd:FormItem>
         </StackPanel>
         <!--占位区-->

@@ -27,6 +27,8 @@ namespace PCLSharp.Client.ViewModels.FeatureContext
             this.SupportSize = 0.2f;
             this.RotationInvariant = true;
             this.KeyPointColor = Colors.Red;
+            this.ImageWidth = 1920;
+            this.ImageHeight = 1080;
         }
 
         #endregion
@@ -105,6 +107,22 @@ namespace PCLSharp.Client.ViewModels.FeatureContext
         public Color? KeyPointColor { get; set; }
         #endregion
 
+        #region 直方图宽度 —— int? ImageWidth
+        /// <summary>
+        /// 直方图宽度
+        /// </summary>
+        [DependencyProperty]
+        public int? ImageWidth { get; set; }
+        #endregion
+
+        #region 直方图高度 —— int? ImageHeight
+        /// <summary>
+        /// 直方图高度
+        /// </summary>
+        [DependencyProperty]
+        public int? ImageHeight { get; set; }
+        #endregion
+
         #endregion
 
         #region # 方法
@@ -154,12 +172,22 @@ namespace PCLSharp.Client.ViewModels.FeatureContext
             }
             if (!this.RotationInvariant.HasValue)
             {
-                MessageBox.Show("旋转不变性径不可为空！", "错误", MessageBoxButton.OK, MessageBoxImage.Error);
+                MessageBox.Show("旋转不变性不可为空！", "错误", MessageBoxButton.OK, MessageBoxImage.Error);
                 return;
             }
             if (!this.KeyPointColor.HasValue)
             {
                 MessageBox.Show("关键点颜色不可为空！", "错误", MessageBoxButton.OK, MessageBoxImage.Error);
+                return;
+            }
+            if (!this.ImageWidth.HasValue)
+            {
+                MessageBox.Show("直方图宽度不可为空！", "错误", MessageBoxButton.OK, MessageBoxImage.Error);
+                return;
+            }
+            if (!this.ImageHeight.HasValue)
+            {
+                MessageBox.Show("直方图高度不可为空！", "错误", MessageBoxButton.OK, MessageBoxImage.Error);
                 return;
             }
 

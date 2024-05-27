@@ -45,5 +45,30 @@ namespace PCLSharp
         /// 保存点云文件扩展名过滤器
         /// </summary>
         public const string SaveCloudExtFilter = "(*.pcd)|*.pcd|(*.ply)|*.ply";
+
+        /// <summary>
+        /// NARF描述子长度
+        /// </summary>
+        public const int LengthOfNARF = 36;
+
+        /// <summary>
+        /// PFH描述子长度
+        /// </summary>
+        public const int LengthOfPFH = 125;
+
+        /// <summary>
+        /// FPFH描述子长度
+        /// </summary>
+        public const int LengthOfFPFH = 33;
+
+        /// <summary>
+        /// 3DSC描述子长度
+        /// </summary>
+        public const int LengthOf3DSC = 1980;
+
+        /// <summary>
+        /// SHOT描述子长度
+        /// </summary>
+        public const int LengthOfSHOT = 352;
     }
 }

@@ -6,6 +6,7 @@ using PCLSharp.Client.ViewModels.FilterContext;
 using PCLSharp.Client.ViewModels.KeyPointContext;
 using PCLSharp.Client.ViewModels.NormalContext;
 using PCLSharp.Extensions.Helix;
+using PCLSharp.Extensions.Plotter;
 using PCLSharp.Modules.Interfaces;
 using PCLSharp.Primitives.Enums;
 using PCLSharp.Primitives.Extensions;
@@ -24,7 +25,6 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.IO;
 using System.Linq;
-using System.Reflection;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
@@ -1219,16 +1219,8 @@ namespace PCLSharp.Client.ViewModels.HomeContext
 
                 //绘制直方图
                 using Plot plot = new Plot();
-                double[] positions = Enumerable.Range(1, 36).Select(x => (double)x).ToArray();
-                foreach (Narf36F descriptor in descriptors)
-                {
-                    double[] values = descriptor.Features.Select(x => (double)x).ToArray();
-                    plot.Add.ScatterLine(positions, values);
-                }
-                using Image image = plot.GetImage(1920, 1080);
-                Type imageType = image.GetType();
-                PropertyInfo propertyInfo = imageType.GetProperty("SKImage", BindingFlags.Instance | BindingFlags.NonPublic);
-                using SKImage skImage = (SKImage)propertyInfo!.GetValue(image);
+                plot.AddNARF(descriptors);
+                using SKImage skImage = plot.GetSKImage(viewModel.ImageWidth!.Value, viewModel.ImageHeight!.Value);
                 BitmapSource bitmapSource = skImage.ToWriteableBitmap();
 
                 ImageViewModel imageViewModel = ResolveMediator.Resolve<ImageViewModel>();

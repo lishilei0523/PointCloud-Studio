@@ -5,7 +5,7 @@
     <UseWPF>true</UseWPF>
     <Authors>Lee</Authors>
     <Company>SD</Company>
-    <Description>SD.Framework PCL 绘图扩展</Description>
+    <Description>SD.Framework PCL绘图扩展</Description>
     <Copyright>Copyright © SD 2024</Copyright>
     <Version>0.1.0</Version>
     <AssemblyVersion>0.1.0</AssemblyVersion>
