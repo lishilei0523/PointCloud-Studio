@@ -2,6 +2,7 @@
 using HelixToolkit.Wpf.SharpDX;
 using Microsoft.Win32;
 using PCLSharp.Client.ViewModels.CommonContext;
+using PCLSharp.Client.ViewModels.FeatureContext;
 using PCLSharp.Client.ViewModels.FilterContext;
 using PCLSharp.Client.ViewModels.KeyPointContext;
 using PCLSharp.Client.ViewModels.NormalContext;
@@ -1225,6 +1226,46 @@ namespace PCLSharp.Client.ViewModels.HomeContext
 
                 ImageViewModel imageViewModel = ResolveMediator.Resolve<ImageViewModel>();
                 imageViewModel.Load("NARF特征", bitmapSource);
+                await this._windowManager.ShowDialogAsync(imageViewModel);
+            }
+
+            this.Idle();
+        }
+        #endregion
+
+        #region 计算PFH特征 —— async void ComputePFH()
+        /// <summary>
+        /// 计算PFH特征
+        /// </summary>
+        public async void ComputePFH()
+        {
+            #region # 验证
+
+            if (this.EffectivePointCloud == null)
+            {
+                MessageBox.Show("点云未加载！", "错误", MessageBoxButton.OK, MessageBoxImage.Error);
+                return;
+            }
+
+            #endregion
+
+            this.Busy();
+
+            PfhViewModel viewModel = ResolveMediator.Resolve<PfhViewModel>();
+            bool? result = await this._windowManager.ShowDialogAsync(viewModel);
+            if (result == true)
+            {
+                IEnumerable<Point3F> points = this.EffectivePointCloud.Points.ToPoint3Fs();
+                PFHSignature125F[] descriptors = await Task.Run(() => this._cloudFeatures.ComputePFH(points, viewModel.NormalK!.Value, viewModel.FeatureK!.Value, viewModel.ThreadsCount!.Value));
+
+                //绘制直方图
+                using Plot plot = new Plot();
+                plot.AddPFH(descriptors);
+                using SKImage skImage = plot.GetSKImage(viewModel.ImageWidth!.Value, viewModel.ImageHeight!.Value);
+                BitmapSource bitmapSource = skImage.ToWriteableBitmap();
+
+                ImageViewModel imageViewModel = ResolveMediator.Resolve<ImageViewModel>();
+                imageViewModel.Load("PFH特征", bitmapSource);
                 await this._windowManager.ShowDialogAsync(imageViewModel);
             }
 

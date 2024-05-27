@@ -1,7 +1,6 @@
 ﻿using SD.Infrastructure.WPF.Caliburn.Aspects;
 using SD.Infrastructure.WPF.Caliburn.Base;
 using System.Windows;
-using System.Windows.Media;
 
 namespace PCLSharp.Client.ViewModels.FeatureContext
 {
@@ -26,7 +25,6 @@ namespace PCLSharp.Client.ViewModels.FeatureContext
             this.BorderSize = 1;
             this.SupportSize = 0.2f;
             this.RotationInvariant = true;
-            this.KeyPointColor = Colors.Red;
             this.ImageWidth = 1920;
             this.ImageHeight = 1080;
         }
@@ -99,14 +97,6 @@ namespace PCLSharp.Client.ViewModels.FeatureContext
         public bool? RotationInvariant { get; set; }
         #endregion
 
-        #region 关键点颜色 —— Color? KeyPointColor
-        /// <summary>
-        /// 关键点颜色
-        /// </summary>
-        [DependencyProperty]
-        public Color? KeyPointColor { get; set; }
-        #endregion
-
         #region 直方图宽度 —— int? ImageWidth
         /// <summary>
         /// 直方图宽度
@@ -173,11 +163,6 @@ namespace PCLSharp.Client.ViewModels.FeatureContext
             if (!this.RotationInvariant.HasValue)
             {
                 MessageBox.Show("旋转不变性不可为空！", "错误", MessageBoxButton.OK, MessageBoxImage.Error);
-                return;
-            }
-            if (!this.KeyPointColor.HasValue)
-            {
-                MessageBox.Show("关键点颜色不可为空！", "错误", MessageBoxButton.OK, MessageBoxImage.Error);
                 return;
             }
             if (!this.ImageWidth.HasValue)

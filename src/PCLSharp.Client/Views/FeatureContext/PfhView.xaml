@@ -1,4 +1,4 @@
-﻿<Window x:Class="PCLSharp.Client.Views.FeatureContext.NarfView"
+﻿<Window x:Class="PCLSharp.Client.Views.FeatureContext.PfhView"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
@@ -6,10 +6,9 @@
         xmlns:fluentWpf="clr-namespace:SourceChord.FluentWPF;assembly=FluentWPF"
         xmlns:sd="https://github.com/lishilei0523/SD.Framework"
         xmlns:cal="http://www.caliburnproject.org"
-        xmlns:mah="http://metro.mahapps.com/winfx/xaml/controls"
         mc:Ignorable="d"
-        Title="NARF特征"
-        Width="500" Height="650" ResizeMode="NoResize"
+        Title="PFH特征"
+        Width="500" Height="400" ResizeMode="NoResize"
         FontSize="14"
         WindowStyle="ThreeDBorderWindow"
         WindowStartupLocation="CenterOwner"
@@ -19,7 +18,7 @@
     <Grid>
         <Grid.RowDefinitions>
             <!--表单区-->
-            <RowDefinition Height="550" />
+            <RowDefinition Height="300" />
             <!--占位区-->
             <RowDefinition Height="*" />
             <!--控制区-->
@@ -27,29 +26,14 @@
         </Grid.RowDefinitions>
         <!--表单区-->
         <StackPanel Grid.Row="0" Grid.IsSharedSizeScope="True" Margin="20,30">
-            <sd:FormItem Label="角度分辨率：">
-                <TextBox Text="{Binding AngularResolution}" Style="{StaticResource TextBoxRevealStyle}" />
+            <sd:FormItem Label="法向量K：">
+                <TextBox Text="{Binding NormalK}" Style="{StaticResource TextBoxRevealStyle}" />
             </sd:FormItem>
-            <sd:FormItem Label="水平边界角度：">
-                <TextBox Text="{Binding MaxAngleWidth}" Style="{StaticResource TextBoxRevealStyle}" />
+            <sd:FormItem Label="特征K：">
+                <TextBox Text="{Binding FeatureK}" Style="{StaticResource TextBoxRevealStyle}" />
             </sd:FormItem>
-            <sd:FormItem Label="垂直边界角度：">
-                <TextBox Text="{Binding MaxAngleHeight}" Style="{StaticResource TextBoxRevealStyle}" />
-            </sd:FormItem>
-            <sd:FormItem Label="最近点最大距离：">
-                <TextBox Text="{Binding NoiseLevel}" Style="{StaticResource TextBoxRevealStyle}" />
-            </sd:FormItem>
-            <sd:FormItem Label="最小可见范围：">
-                <TextBox Text="{Binding MinRange}" Style="{StaticResource TextBoxRevealStyle}" />
-            </sd:FormItem>
-            <sd:FormItem Label="边界尺寸：">
-                <TextBox Text="{Binding BorderSize}" Style="{StaticResource TextBoxRevealStyle}" />
-            </sd:FormItem>
-            <sd:FormItem Label="计算范围半径：">
-                <TextBox Text="{Binding SupportSize}" Style="{StaticResource TextBoxRevealStyle}" />
-            </sd:FormItem>
-            <sd:FormItem Label="旋转不变性：">
-                <mah:ToggleSwitch IsOn="{Binding RotationInvariant}" OnContent="是" OffContent="否" Style="{StaticResource ToggleSwitch.Styles.Fluent}" />
+            <sd:FormItem Label="线程数：">
+                <TextBox Text="{Binding ThreadsCount}" Style="{StaticResource TextBoxRevealStyle}" />
             </sd:FormItem>
             <sd:FormItem Label="直方图宽度：">
                 <TextBox Text="{Binding ImageWidth}" Style="{StaticResource TextBoxRevealStyle}" />
