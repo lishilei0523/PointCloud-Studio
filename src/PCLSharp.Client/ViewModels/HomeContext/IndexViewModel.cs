@@ -1273,6 +1273,126 @@ namespace PCLSharp.Client.ViewModels.HomeContext
         }
         #endregion
 
+        #region 计算FPFH特征 —— async void ComputeFPFH()
+        /// <summary>
+        /// 计算FPFH特征
+        /// </summary>
+        public async void ComputeFPFH()
+        {
+            #region # 验证
+
+            if (this.EffectivePointCloud == null)
+            {
+                MessageBox.Show("点云未加载！", "错误", MessageBoxButton.OK, MessageBoxImage.Error);
+                return;
+            }
+
+            #endregion
+
+            this.Busy();
+
+            PfhViewModel viewModel = ResolveMediator.Resolve<PfhViewModel>();
+            bool? result = await this._windowManager.ShowDialogAsync(viewModel);
+            if (result == true)
+            {
+                IEnumerable<Point3F> points = this.EffectivePointCloud.Points.ToPoint3Fs();
+                FPFHSignature33F[] descriptors = await Task.Run(() => this._cloudFeatures.ComputeFPFH(points, viewModel.NormalK!.Value, viewModel.FeatureK!.Value, viewModel.ThreadsCount!.Value));
+
+                //绘制直方图
+                using Plot plot = new Plot();
+                plot.AddFPFH(descriptors);
+                using SKImage skImage = plot.GetSKImage(viewModel.ImageWidth!.Value, viewModel.ImageHeight!.Value);
+                BitmapSource bitmapSource = skImage.ToWriteableBitmap();
+
+                ImageViewModel imageViewModel = ResolveMediator.Resolve<ImageViewModel>();
+                imageViewModel.Load("FPFH特征", bitmapSource);
+                await this._windowManager.ShowDialogAsync(imageViewModel);
+            }
+
+            this.Idle();
+        }
+        #endregion
+
+        #region 计算3DSC特征 —— async void Compute3DSC()
+        /// <summary>
+        /// 计算3DSC特征
+        /// </summary>
+        public async void Compute3DSC()
+        {
+            #region # 验证
+
+            if (this.EffectivePointCloud == null)
+            {
+                MessageBox.Show("点云未加载！", "错误", MessageBoxButton.OK, MessageBoxImage.Error);
+                return;
+            }
+
+            #endregion
+
+            this.Busy();
+
+            Dsc3ViewModel viewModel = ResolveMediator.Resolve<Dsc3ViewModel>();
+            bool? result = await this._windowManager.ShowDialogAsync(viewModel);
+            if (result == true)
+            {
+                IEnumerable<Point3F> points = this.EffectivePointCloud.Points.ToPoint3Fs();
+                ShapeContext1980F[] descriptors = await Task.Run(() => this._cloudFeatures.Compute3DSC(points, viewModel.NormalK!.Value, viewModel.SearchRadius!.Value, viewModel.PointDensityRadius!.Value, viewModel.MinimalRadius!.Value, viewModel.ThreadsCount!.Value));
+
+                //绘制直方图
+                using Plot plot = new Plot();
+                plot.Add3DSC(descriptors);
+                using SKImage skImage = plot.GetSKImage(viewModel.ImageWidth!.Value, viewModel.ImageHeight!.Value);
+                BitmapSource bitmapSource = skImage.ToWriteableBitmap();
+
+                ImageViewModel imageViewModel = ResolveMediator.Resolve<ImageViewModel>();
+                imageViewModel.Load("3DSC特征", bitmapSource);
+                await this._windowManager.ShowDialogAsync(imageViewModel);
+            }
+
+            this.Idle();
+        }
+        #endregion
+
+        #region 计算SHOT特征 —— async void ComputeSHOT()
+        /// <summary>
+        /// 计算SHOT特征
+        /// </summary>
+        public async void ComputeSHOT()
+        {
+            #region # 验证
+
+            if (this.EffectivePointCloud == null)
+            {
+                MessageBox.Show("点云未加载！", "错误", MessageBoxButton.OK, MessageBoxImage.Error);
+                return;
+            }
+
+            #endregion
+
+            this.Busy();
+
+            ShotViewModel viewModel = ResolveMediator.Resolve<ShotViewModel>();
+            bool? result = await this._windowManager.ShowDialogAsync(viewModel);
+            if (result == true)
+            {
+                IEnumerable<Point3F> points = this.EffectivePointCloud.Points.ToPoint3Fs();
+                Shot352F[] descriptors = await Task.Run(() => this._cloudFeatures.ComputeSHOT(points, viewModel.NormalK!.Value, viewModel.FeatureRadius!.Value, viewModel.ThreadsCount!.Value));
+
+                //绘制直方图
+                using Plot plot = new Plot();
+                plot.AddSHOT(descriptors);
+                using SKImage skImage = plot.GetSKImage(viewModel.ImageWidth!.Value, viewModel.ImageHeight!.Value);
+                BitmapSource bitmapSource = skImage.ToWriteableBitmap();
+
+                ImageViewModel imageViewModel = ResolveMediator.Resolve<ImageViewModel>();
+                imageViewModel.Load("SHOT特征", bitmapSource);
+                await this._windowManager.ShowDialogAsync(imageViewModel);
+            }
+
+            this.Idle();
+        }
+        #endregion
+
 
         //事件
 
