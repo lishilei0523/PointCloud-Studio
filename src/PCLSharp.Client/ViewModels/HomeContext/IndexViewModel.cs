@@ -9,24 +9,30 @@ using PCLSharp.HelixDX.WPF;
 using PCLSharp.Modules.Interfaces;
 using PCLSharp.Primitives.Enums;
 using PCLSharp.Primitives.Extensions;
+using PCLSharp.Primitives.Features;
 using PCLSharp.Primitives.Models;
+using ScottPlot;
 using SD.Infrastructure.WPF.Caliburn.Aspects;
 using SD.Infrastructure.WPF.Caliburn.Base;
 using SD.Infrastructure.WPF.Extensions;
 using SD.IOC.Core.Mediators;
 using SharpDX;
+using SkiaSharp;
+using SkiaSharp.Views.WPF;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.IO;
 using System.Linq;
+using System.Reflection;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Input;
-using System.Windows.Media;
+using System.Windows.Media.Imaging;
 using System.Windows.Media.Media3D;
 using Color = System.Windows.Media.Color;
+using Colors = System.Windows.Media.Colors;
 using PerspectiveCamera = HelixToolkit.Wpf.SharpDX.PerspectiveCamera;
 
 namespace PCLSharp.Client.ViewModels.HomeContext
@@ -59,6 +65,11 @@ namespace PCLSharp.Client.ViewModels.HomeContext
         private readonly ICloudKeyPoints _cloudKeyPoints;
 
         /// <summary>
+        /// 点云特征接口
+        /// </summary>
+        private readonly ICloudFeatures _cloudFeatures;
+
+        /// <summary>
         /// 窗体管理器
         /// </summary>
         private readonly IWindowManager _windowManager;
@@ -66,12 +77,13 @@ namespace PCLSharp.Client.ViewModels.HomeContext
         /// <summary>
         /// 依赖注入构造器
         /// </summary>
-        public IndexViewModel(ICloudFiles cloudFiles, ICloudFilters cloudFilters, ICloudNormals cloudNormals, ICloudKeyPoints cloudKeyPoints, IWindowManager windowManager)
+        public IndexViewModel(ICloudFiles cloudFiles, ICloudFilters cloudFilters, ICloudNormals cloudNormals, ICloudKeyPoints cloudKeyPoints, ICloudFeatures cloudFeatures, IWindowManager windowManager)
         {
             this._cloudFiles = cloudFiles;
             this._cloudFilters = cloudFilters;
             this._cloudNormals = cloudNormals;
             this._cloudKeyPoints = cloudKeyPoints;
+            this._cloudFeatures = cloudFeatures;
             this._windowManager = windowManager;
         }
 
@@ -998,7 +1010,7 @@ namespace PCLSharp.Client.ViewModels.HomeContext
             //清理关键点
             this.EffectiveKeyPoints = null;
 
-            NarfViewModel viewModel = ResolveMediator.Resolve<NarfViewModel>();
+            KeyPointContext.NarfViewModel viewModel = ResolveMediator.Resolve<KeyPointContext.NarfViewModel>();
             bool? result = await this._windowManager.ShowDialogAsync(viewModel);
             if (result == true)
             {
@@ -1171,6 +1183,57 @@ namespace PCLSharp.Client.ViewModels.HomeContext
                     Positions = new Vector3Collection(positions)
                 };
                 this.KeyPointColor = viewModel.KeyPointColor!.Value;
+            }
+
+            this.Idle();
+        }
+        #endregion
+
+
+        //特征
+
+        #region 计算NARF特征 —— async void ComputeNARF()
+        /// <summary>
+        /// 计算NARF特征
+        /// </summary>
+        public async void ComputeNARF()
+        {
+            #region # 验证
+
+            if (this.EffectivePointCloud == null)
+            {
+                MessageBox.Show("点云未加载！", "错误", MessageBoxButton.OK, MessageBoxImage.Error);
+                return;
+            }
+
+            #endregion
+
+            this.Busy();
+
+            FeatureContext.NarfViewModel viewModel = ResolveMediator.Resolve<FeatureContext.NarfViewModel>();
+            bool? result = await this._windowManager.ShowDialogAsync(viewModel);
+            if (result == true)
+            {
+                IEnumerable<Point3F> points = this.EffectivePointCloud.Points.ToPoint3Fs();
+                Narf36F[] descriptors = await Task.Run(() => this._cloudFeatures.ComputeNARF(points, viewModel.AngularResolution!.Value, viewModel.MaxAngleWidth!.Value, viewModel.MaxAngleHeight!.Value, viewModel.NoiseLevel!.Value, viewModel.MinRange!.Value, viewModel.BorderSize!.Value, viewModel.SupportSize!.Value, viewModel.RotationInvariant!.Value));
+
+                //绘制直方图
+                using Plot plot = new Plot();
+                double[] positions = Enumerable.Range(1, 36).Select(x => (double)x).ToArray();
+                foreach (Narf36F descriptor in descriptors)
+                {
+                    double[] values = descriptor.Features.Select(x => (double)x).ToArray();
+                    plot.Add.ScatterLine(positions, values);
+                }
+                using Image image = plot.GetImage(1920, 1080);
+                Type imageType = image.GetType();
+                PropertyInfo propertyInfo = imageType.GetProperty("SKImage", BindingFlags.Instance | BindingFlags.NonPublic);
+                using SKImage skImage = (SKImage)propertyInfo!.GetValue(image);
+                BitmapSource bitmapSource = skImage.ToWriteableBitmap();
+
+                ImageViewModel imageViewModel = ResolveMediator.Resolve<ImageViewModel>();
+                imageViewModel.Load("NARF特征", bitmapSource);
+                await this._windowManager.ShowDialogAsync(imageViewModel);
             }
 
             this.Idle();

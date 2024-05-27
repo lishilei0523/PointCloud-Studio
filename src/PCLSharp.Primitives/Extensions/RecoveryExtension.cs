@@ -1,6 +1,7 @@
 ﻿using PCLSharp.Primitives.Features;
 using PCLSharp.Primitives.Models;
 using System;
+using System.Runtime.InteropServices;
 
 namespace PCLSharp.Primitives.Extensions
 {
@@ -67,8 +68,14 @@ namespace PCLSharp.Primitives.Extensions
         /// </summary>
         public static Narf36F[] Recover(this Narf36Fs narf36Fs)
         {
-            Span<Narf36F> span = new Span<Narf36F>(narf36Fs.Descriptors.ToPointer(), narf36Fs.Length);
-            Narf36F[] descriptors = span.ToArray();
+            Narf36F[] descriptors = new Narf36F[narf36Fs.Length];
+            int* index = (int*)narf36Fs.Descriptors.ToPointer();
+            for (int offset = 0; offset < narf36Fs.Length; offset++)
+            {
+                IntPtr pointer = new IntPtr(index + offset);
+                Narf36F narf36F = Marshal.PtrToStructure<Narf36F>(pointer);
+                descriptors[offset] = narf36F;
+            }
 
             return descriptors;
         }
@@ -80,8 +87,14 @@ namespace PCLSharp.Primitives.Extensions
         /// </summary>
         public static PFHSignature125F[] Recover(this PFHSignature125Fs signature125Fs)
         {
-            Span<PFHSignature125F> span = new Span<PFHSignature125F>(signature125Fs.Descriptors.ToPointer(), signature125Fs.Length);
-            PFHSignature125F[] descriptors = span.ToArray();
+            PFHSignature125F[] descriptors = new PFHSignature125F[signature125Fs.Length];
+            int* index = (int*)signature125Fs.Descriptors.ToPointer();
+            for (int offset = 0; offset < signature125Fs.Length; offset++)
+            {
+                IntPtr pointer = new IntPtr(index + offset);
+                PFHSignature125F signature125F = Marshal.PtrToStructure<PFHSignature125F>(pointer);
+                descriptors[offset] = signature125F;
+            }
 
             return descriptors;
         }
@@ -93,8 +106,14 @@ namespace PCLSharp.Primitives.Extensions
         /// </summary>
         public static FPFHSignature33F[] Recover(this FPFHSignature33Fs signature33Fs)
         {
-            Span<FPFHSignature33F> span = new Span<FPFHSignature33F>(signature33Fs.Descriptors.ToPointer(), signature33Fs.Length);
-            FPFHSignature33F[] descriptors = span.ToArray();
+            FPFHSignature33F[] descriptors = new FPFHSignature33F[signature33Fs.Length];
+            int* index = (int*)signature33Fs.Descriptors.ToPointer();
+            for (int offset = 0; offset < signature33Fs.Length; offset++)
+            {
+                IntPtr pointer = new IntPtr(index + offset);
+                FPFHSignature33F signature33F = Marshal.PtrToStructure<FPFHSignature33F>(pointer);
+                descriptors[offset] = signature33F;
+            }
 
             return descriptors;
         }
@@ -106,8 +125,14 @@ namespace PCLSharp.Primitives.Extensions
         /// </summary>
         public static ShapeContext1980F[] Recover(this ShapeContext1980Fs shapeContext1980Fs)
         {
-            Span<ShapeContext1980F> span = new Span<ShapeContext1980F>(shapeContext1980Fs.Descriptors.ToPointer(), shapeContext1980Fs.Length);
-            ShapeContext1980F[] descriptors = span.ToArray();
+            ShapeContext1980F[] descriptors = new ShapeContext1980F[shapeContext1980Fs.Length];
+            int* index = (int*)shapeContext1980Fs.Descriptors.ToPointer();
+            for (int offset = 0; offset < shapeContext1980Fs.Length; offset++)
+            {
+                IntPtr pointer = new IntPtr(index + offset);
+                ShapeContext1980F shapeContext1980F = Marshal.PtrToStructure<ShapeContext1980F>(pointer);
+                descriptors[offset] = shapeContext1980F;
+            }
 
             return descriptors;
         }
@@ -119,8 +144,14 @@ namespace PCLSharp.Primitives.Extensions
         /// </summary>
         public static Shot352F[] Recover(this Shot352Fs shot352Fs)
         {
-            Span<Shot352F> span = new Span<Shot352F>(shot352Fs.Descriptors.ToPointer(), shot352Fs.Length);
-            Shot352F[] descriptors = span.ToArray();
+            Shot352F[] descriptors = new Shot352F[shot352Fs.Length];
+            int* index = (int*)shot352Fs.Descriptors.ToPointer();
+            for (int offset = 0; offset < shot352Fs.Length; offset++)
+            {
+                IntPtr pointer = new IntPtr(index + offset);
+                Shot352F shot352F = Marshal.PtrToStructure<Shot352F>(pointer);
+                descriptors[offset] = shot352F;
+            }
 
             return descriptors;
         }
