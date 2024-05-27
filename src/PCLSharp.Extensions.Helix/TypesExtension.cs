@@ -11,7 +11,7 @@ using Geometry3D = HelixToolkit.Wpf.SharpDX.Geometry3D;
 using Geometry3D = HelixToolkit.SharpDX.Core.Geometry3D;
 #endif
 
-namespace PCLSharp.HelixDX.WPF
+namespace PCLSharp.Extensions.Helix
 {
     /// <summary>
     /// 类型扩展

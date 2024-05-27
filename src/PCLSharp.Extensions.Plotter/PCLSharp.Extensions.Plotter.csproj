@@ -5,7 +5,7 @@
     <UseWPF>true</UseWPF>
     <Authors>Lee</Authors>
     <Company>SD</Company>
-    <Description>SD.Framework PCL Helix-Toolkit.WPF扩展</Description>
+    <Description>SD.Framework PCL 绘图扩展</Description>
     <Copyright>Copyright © SD 2024</Copyright>
     <Version>0.1.0</Version>
     <AssemblyVersion>0.1.0</AssemblyVersion>
@@ -13,18 +13,15 @@
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
-    <DocumentationFile>bin\Debug\$(TargetFramework)\PCLSharp.HelixDX.WPF.xml</DocumentationFile>
+    <DocumentationFile>bin\Debug\$(TargetFramework)\PCLSharp.Extensions.Plotter.xml</DocumentationFile>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
-    <DocumentationFile>bin\Release\$(TargetFramework)\PCLSharp.HelixDX.WPF.xml</DocumentationFile>
+    <DocumentationFile>bin\Release\$(TargetFramework)\PCLSharp.Extensions.Plotter.xml</DocumentationFile>
   </PropertyGroup>
 
-  <ItemGroup Condition="$(TargetFramework.Equals('net462'))">
-    <PackageReference Include="HelixToolkit.Wpf.SharpDX" Version="2.25.0" />
-  </ItemGroup>
-
-  <ItemGroup Condition="$(TargetFramework.Equals('net6.0-windows')) Or $(TargetFramework.Equals('net8.0-windows'))">
-    <PackageReference Include="HelixToolkit.SharpDX.Core.Wpf" Version="2.25.0" />
+  <ItemGroup>
+    <PackageReference Include="SkiaSharp" Version="2.88.8" />
+    <PackageReference Include="ScottPlot" Version="5.0.34" />
   </ItemGroup>
 
   <ItemGroup>

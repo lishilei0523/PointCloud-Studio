@@ -12,7 +12,7 @@ using HelixToolkit.SharpDX.Core;
 using HelixToolkit.Wpf.SharpDX;
 #endif
 
-namespace PCLSharp.HelixDX.WPF
+namespace PCLSharp.Extensions.Helix
 {
     /// <summary>
     /// 几何扩展

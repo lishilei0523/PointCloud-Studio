@@ -5,7 +5,7 @@ using PCLSharp.Client.ViewModels.CommonContext;
 using PCLSharp.Client.ViewModels.FilterContext;
 using PCLSharp.Client.ViewModels.KeyPointContext;
 using PCLSharp.Client.ViewModels.NormalContext;
-using PCLSharp.HelixDX.WPF;
+using PCLSharp.Extensions.Helix;
 using PCLSharp.Modules.Interfaces;
 using PCLSharp.Primitives.Enums;
 using PCLSharp.Primitives.Extensions;
