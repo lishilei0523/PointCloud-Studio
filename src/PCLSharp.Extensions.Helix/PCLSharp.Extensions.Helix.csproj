@@ -13,10 +13,10 @@
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
-    <DocumentationFile>bin\Debug\$(TargetFramework)\PCLSharp.Extensions.HelixDX.xml</DocumentationFile>
+    <DocumentationFile>bin\Debug\$(TargetFramework)\PCLSharp.Extensions.Helix.xml</DocumentationFile>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
-    <DocumentationFile>bin\Release\$(TargetFramework)\PCLSharp.Extensions.HelixDX.xml</DocumentationFile>
+    <DocumentationFile>bin\Release\$(TargetFramework)\PCLSharp.Extensions.Helix.xml</DocumentationFile>
   </PropertyGroup>
 
   <ItemGroup Condition="$(TargetFramework.Equals('net462'))">
