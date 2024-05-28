@@ -47,6 +47,11 @@ namespace PCLSharp.Client.ViewModels.HomeContext
         #region # 字段及构造器
 
         /// <summary>
+        /// 点云通用操作接口;
+        /// </summary>
+        private readonly ICloudCommon _cloudCommon;
+
+        /// <summary>
         /// 点云文件接口
         /// </summary>
         private readonly ICloudFiles _cloudFiles;
@@ -84,8 +89,9 @@ namespace PCLSharp.Client.ViewModels.HomeContext
         /// <summary>
         /// 依赖注入构造器
         /// </summary>
-        public IndexViewModel(ICloudFiles cloudFiles, ICloudSearch cloudSearch, ICloudFilters cloudFilters, ICloudNormals cloudNormals, ICloudKeyPoints cloudKeyPoints, ICloudFeatures cloudFeatures, IWindowManager windowManager)
+        public IndexViewModel(ICloudCommon cloudCommon, ICloudFiles cloudFiles, ICloudSearch cloudSearch, ICloudFilters cloudFilters, ICloudNormals cloudNormals, ICloudKeyPoints cloudKeyPoints, ICloudFeatures cloudFeatures, IWindowManager windowManager)
         {
+            this._cloudCommon = cloudCommon;
             this._cloudFiles = cloudFiles;
             this._cloudSearch = cloudSearch;
             this._cloudFilters = cloudFilters;
@@ -502,7 +508,7 @@ namespace PCLSharp.Client.ViewModels.HomeContext
             else
             {
                 IEnumerable<Point3F> points = this.EffectivePointCloud.Points.ToPoint3Fs();
-                centroid = await Task.Run(() => this._cloudNormals.EstimateCentroid(points));
+                centroid = await Task.Run(() => this._cloudCommon.EstimateCentroid(points));
                 this.EffectiveCentroid = new[] { centroid }.ToPointGeometry3D();
             }
 
@@ -527,6 +533,72 @@ namespace PCLSharp.Client.ViewModels.HomeContext
                 FarPlaneDistance = double.PositiveInfinity,
                 FieldOfView = 30
             };
+        }
+        #endregion
+
+
+        //常用
+
+        #region 估算质心 —— async void EstimateCentroid()
+        /// <summary>
+        /// 估算质心
+        /// </summary>
+        public async void EstimateCentroid()
+        {
+            #region # 验证
+
+            if (this.EffectivePointCloud == null)
+            {
+                MessageBox.Show("点云未加载！", "错误", MessageBoxButton.OK, MessageBoxImage.Error);
+                return;
+            }
+
+            #endregion
+
+            this.Busy();
+
+            IEnumerable<Point3F> points = this.EffectivePointCloud.Points.ToPoint3Fs();
+            Point3F centroid = await Task.Run(() => this._cloudCommon.EstimateCentroid(points));
+            this.EffectiveCentroid = new[] { centroid }.ToPointGeometry3D();
+
+            this.Idle();
+        }
+        #endregion
+
+        #region 仿射变换 —— async void AffineTransform()
+        /// <summary>
+        /// 仿射变换
+        /// </summary>
+        public async void AffineTransform()
+        {
+            #region # 验证
+
+            if (this.EffectivePointCloud == null)
+            {
+                MessageBox.Show("点云未加载！", "错误", MessageBoxButton.OK, MessageBoxImage.Error);
+                return;
+            }
+
+            #endregion
+
+            this.Busy();
+
+            AffineViewModel viewModel = ResolveMediator.Resolve<AffineViewModel>();
+            bool? result = await this._windowManager.ShowDialogAsync(viewModel);
+            if (result == true)
+            {
+                IEnumerable<Point3F> points = this.EffectivePointCloud.Points.ToPoint3Fs();
+                Pose pose = new Pose(viewModel.X!.Value, viewModel.Y!.Value, viewModel.Z!.Value, viewModel.RX!.Value, viewModel.RY!.Value, viewModel.RZ!.Value);
+                Point3F[] transformedPoints = await Task.Run(() => this._cloudCommon.AffineTransform(points, pose));
+
+                IEnumerable<Vector3> positions = transformedPoints.ToVector3s();
+                this.EffectivePointCloud = new PointGeometry3D
+                {
+                    Positions = new Vector3Collection(positions)
+                };
+            }
+
+            this.Idle();
         }
         #endregion
 
@@ -913,32 +985,6 @@ namespace PCLSharp.Client.ViewModels.HomeContext
 
 
         //法向量
-
-        #region 估算质心 —— async void EstimateCentroid()
-        /// <summary>
-        /// 估算质心
-        /// </summary>
-        public async void EstimateCentroid()
-        {
-            #region # 验证
-
-            if (this.EffectivePointCloud == null)
-            {
-                MessageBox.Show("点云未加载！", "错误", MessageBoxButton.OK, MessageBoxImage.Error);
-                return;
-            }
-
-            #endregion
-
-            this.Busy();
-
-            IEnumerable<Point3F> points = this.EffectivePointCloud.Points.ToPoint3Fs();
-            Point3F centroid = await Task.Run(() => this._cloudNormals.EstimateCentroid(points));
-            this.EffectiveCentroid = new[] { centroid }.ToPointGeometry3D();
-
-            this.Idle();
-        }
-        #endregion
 
         #region K估算法向量 —— async void EstimateNormalsByK()
         /// <summary>

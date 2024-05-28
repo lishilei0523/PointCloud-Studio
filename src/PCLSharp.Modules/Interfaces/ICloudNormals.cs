@@ -47,14 +47,5 @@ namespace PCLSharp.Modules.Interfaces
         /// <returns>法向量集</returns>
         Normal3F[] EstimateNormalsByRadiusP(IEnumerable<Point3F> points, float radius);
         #endregion
-
-        #region # 估算质心 —— Point3F EstimateCentroid(IEnumerable<Point3F> points)
-        /// <summary>
-        /// 估算质心
-        /// </summary>
-        /// <param name="points">点集</param>
-        /// <returns>质心坐标点</returns>
-        Point3F EstimateCentroid(IEnumerable<Point3F> points);
-        #endregion
     }
 }

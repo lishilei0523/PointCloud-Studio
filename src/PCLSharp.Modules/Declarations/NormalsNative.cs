@@ -57,16 +57,5 @@ namespace PCLSharp.Modules.Declarations
         [DllImport(AssemblyNames.Modules, EntryPoint = "estimateNormalsByRadiusP")]
         public static extern IntPtr EstimateNormalsByRadiusP(Point3F[] points, int length, float radius);
         #endregion
-
-        #region # 估算质心 —— static extern IntPtr EstimateCentroid(Point3F[] points...
-        /// <summary>
-        /// 估算质心
-        /// </summary>
-        /// <param name="points">点集</param>
-        /// <param name="length">点集长度</param>
-        /// <returns>质心坐标点</returns>
-        [DllImport(AssemblyNames.Modules, EntryPoint = "estimateCentroid")]
-        public static extern IntPtr EstimateCentroid(Point3F[] points, int length);
-        #endregion
     }
 }

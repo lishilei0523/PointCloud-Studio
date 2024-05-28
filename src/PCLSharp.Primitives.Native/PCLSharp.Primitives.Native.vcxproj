@@ -168,6 +168,7 @@
     <ClInclude Include="point3fs.h" />
     <ClInclude Include="point3normal3.h" />
     <ClInclude Include="point3normal3s.h" />
+    <ClInclude Include="pose.h" />
     <ClInclude Include="primitives_map.h" />
     <ClInclude Include="shape_context1980f.h" />
     <ClInclude Include="shape_context1980fs.h" />

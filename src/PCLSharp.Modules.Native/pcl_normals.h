@@ -39,11 +39,3 @@ EXPORT_C Normal3Fs* CALLING_MODE estimateNormalsByKP(Point3F points[], int lengt
 /// <param name="radius">搜索半径</param>
 /// <returns>法向量集</returns>
 EXPORT_C Normal3Fs* CALLING_MODE estimateNormalsByRadiusP(Point3F points[], int length, float radius);
-
-/// <summary>
-/// 估算质心
-/// </summary>
-/// <param name="points">点集</param>
-/// <param name="length">点集长度</param>
-/// <returns>质心坐标点</returns>
-EXPORT_C Point3F* CALLING_MODE estimateCentroid(Point3F points[], int length);

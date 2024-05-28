@@ -153,6 +153,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="pcl_common.cpp" />
     <ClCompile Include="pcl_files.cpp" />
     <ClCompile Include="pcl_dispose.cpp" />
     <ClCompile Include="pcl_features.cpp" />
@@ -162,6 +163,7 @@
     <ClCompile Include="pcl_search.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="pcl_common.h" />
     <ClInclude Include="pcl_files.h" />
     <ClInclude Include="pcl_dispose.h" />
     <ClInclude Include="pcl_features.h" />

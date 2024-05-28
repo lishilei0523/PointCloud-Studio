@@ -61,6 +61,9 @@
     <ClInclude Include="fpfh_signature33fs.h">
       <Filter>Features</Filter>
     </ClInclude>
+    <ClInclude Include="pose.h">
+      <Filter>Models</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Maps">
