@@ -44,9 +44,9 @@ Point3Fs* affineTransform(Point3F points[], const int length, const Pose pose)
 	affine.translation() << pose.X, pose.Y, pose.Z;
 
 	//Ðý×ª
-	const Eigen::AngleAxisf rotationX = Eigen::AngleAxisf(pose.RX, Eigen::Vector3f::UnitX());
-	const Eigen::AngleAxisf rotationY = Eigen::AngleAxisf(pose.RY, Eigen::Vector3f::UnitY());
-	const Eigen::AngleAxisf rotationZ = Eigen::AngleAxisf(pose.RZ, Eigen::Vector3f::UnitZ());
+	const Eigen::AngleAxisf& rotationX = Eigen::AngleAxisf(pose.RX, Eigen::Vector3f::UnitX());
+	const Eigen::AngleAxisf& rotationY = Eigen::AngleAxisf(pose.RY, Eigen::Vector3f::UnitY());
+	const Eigen::AngleAxisf& rotationZ = Eigen::AngleAxisf(pose.RZ, Eigen::Vector3f::UnitZ());
 	affine.rotate(rotationX);
 	affine.rotate(rotationY);
 	affine.rotate(rotationZ);
