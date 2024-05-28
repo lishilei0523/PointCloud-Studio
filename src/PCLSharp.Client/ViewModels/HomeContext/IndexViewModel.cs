@@ -6,6 +6,7 @@ using PCLSharp.Client.ViewModels.FeatureContext;
 using PCLSharp.Client.ViewModels.FilterContext;
 using PCLSharp.Client.ViewModels.KeyPointContext;
 using PCLSharp.Client.ViewModels.NormalContext;
+using PCLSharp.Client.ViewModels.SearchContext;
 using PCLSharp.Extensions.Helix;
 using PCLSharp.Extensions.Plotter;
 using PCLSharp.Modules.Interfaces;
@@ -51,6 +52,11 @@ namespace PCLSharp.Client.ViewModels.HomeContext
         private readonly ICloudFiles _cloudFiles;
 
         /// <summary>
+        /// 点云搜索接口
+        /// </summary>
+        private readonly ICloudSearch _cloudSearch;
+
+        /// <summary>
         /// 点云滤波接口
         /// </summary>
         private readonly ICloudFilters _cloudFilters;
@@ -78,9 +84,10 @@ namespace PCLSharp.Client.ViewModels.HomeContext
         /// <summary>
         /// 依赖注入构造器
         /// </summary>
-        public IndexViewModel(ICloudFiles cloudFiles, ICloudFilters cloudFilters, ICloudNormals cloudNormals, ICloudKeyPoints cloudKeyPoints, ICloudFeatures cloudFeatures, IWindowManager windowManager)
+        public IndexViewModel(ICloudFiles cloudFiles, ICloudSearch cloudSearch, ICloudFilters cloudFilters, ICloudNormals cloudNormals, ICloudKeyPoints cloudKeyPoints, ICloudFeatures cloudFeatures, IWindowManager windowManager)
         {
             this._cloudFiles = cloudFiles;
+            this._cloudSearch = cloudSearch;
             this._cloudFilters = cloudFilters;
             this._cloudNormals = cloudNormals;
             this._cloudKeyPoints = cloudKeyPoints;
@@ -520,6 +527,132 @@ namespace PCLSharp.Client.ViewModels.HomeContext
                 FarPlaneDistance = double.PositiveInfinity,
                 FieldOfView = 30
             };
+        }
+        #endregion
+
+
+        //搜索
+
+        #region K近邻搜索 —— async void KSearch()
+        /// <summary>
+        /// K近邻搜索
+        /// </summary>
+        public async void KSearch()
+        {
+            #region # 验证
+
+            if (this.EffectivePointCloud == null)
+            {
+                MessageBox.Show("点云未加载！", "错误", MessageBoxButton.OK, MessageBoxImage.Error);
+                return;
+            }
+
+            #endregion
+
+            this.Busy();
+
+            //清理关键点
+            this.EffectiveKeyPoints = null;
+
+            KSearchViewModel viewModel = ResolveMediator.Resolve<KSearchViewModel>();
+            bool? result = await this._windowManager.ShowDialogAsync(viewModel);
+            if (result == true)
+            {
+                IEnumerable<Point3F> points = this.EffectivePointCloud.Points.ToPoint3Fs();
+                Point3F referencePoint = new Point3F(viewModel.ReferencePointX!.Value, viewModel.ReferencePointY!.Value, viewModel.ReferencePointZ!.Value);
+                Point3F[] keyPoints = await Task.Run(() => this._cloudSearch.KSearch(points, referencePoint, viewModel.K!.Value));
+
+                IEnumerable<Vector3> positions = keyPoints.ToVector3s();
+                this.EffectiveKeyPoints = new PointGeometry3D
+                {
+                    Positions = new Vector3Collection(positions)
+                };
+                this.KeyPointColor = Colors.Red;
+            }
+
+            this.Idle();
+        }
+        #endregion
+
+        #region 半径搜索 —— async void RadiusSearch()
+        /// <summary>
+        /// 半径搜索
+        /// </summary>
+        public async void RadiusSearch()
+        {
+            #region # 验证
+
+            if (this.EffectivePointCloud == null)
+            {
+                MessageBox.Show("点云未加载！", "错误", MessageBoxButton.OK, MessageBoxImage.Error);
+                return;
+            }
+
+            #endregion
+
+            this.Busy();
+
+            //清理关键点
+            this.EffectiveKeyPoints = null;
+
+            RadiusSearchViewModel viewModel = ResolveMediator.Resolve<RadiusSearchViewModel>();
+            bool? result = await this._windowManager.ShowDialogAsync(viewModel);
+            if (result == true)
+            {
+                IEnumerable<Point3F> points = this.EffectivePointCloud.Points.ToPoint3Fs();
+                Point3F referencePoint = new Point3F(viewModel.ReferencePointX!.Value, viewModel.ReferencePointY!.Value, viewModel.ReferencePointZ!.Value);
+                Point3F[] keyPoints = await Task.Run(() => this._cloudSearch.RadiusSearch(points, referencePoint, viewModel.Radius!.Value));
+
+                IEnumerable<Vector3> positions = keyPoints.ToVector3s();
+                this.EffectiveKeyPoints = new PointGeometry3D
+                {
+                    Positions = new Vector3Collection(positions)
+                };
+                this.KeyPointColor = Colors.Red;
+            }
+
+            this.Idle();
+        }
+        #endregion
+
+        #region 八叉树搜索 —— async void OctreeSearch()
+        /// <summary>
+        /// 八叉树搜索
+        /// </summary>
+        public async void OctreeSearch()
+        {
+            #region # 验证
+
+            if (this.EffectivePointCloud == null)
+            {
+                MessageBox.Show("点云未加载！", "错误", MessageBoxButton.OK, MessageBoxImage.Error);
+                return;
+            }
+
+            #endregion
+
+            this.Busy();
+
+            //清理关键点
+            this.EffectiveKeyPoints = null;
+
+            OctreeSearchViewModel viewModel = ResolveMediator.Resolve<OctreeSearchViewModel>();
+            bool? result = await this._windowManager.ShowDialogAsync(viewModel);
+            if (result == true)
+            {
+                IEnumerable<Point3F> points = this.EffectivePointCloud.Points.ToPoint3Fs();
+                Point3F referencePoint = new Point3F(viewModel.ReferencePointX!.Value, viewModel.ReferencePointY!.Value, viewModel.ReferencePointZ!.Value);
+                Point3F[] keyPoints = await Task.Run(() => this._cloudSearch.OctreeSearch(points, referencePoint, viewModel.Resolution!.Value));
+
+                IEnumerable<Vector3> positions = keyPoints.ToVector3s();
+                this.EffectiveKeyPoints = new PointGeometry3D
+                {
+                    Positions = new Vector3Collection(positions)
+                };
+                this.KeyPointColor = Colors.Red;
+            }
+
+            this.Idle();
         }
         #endregion
 
