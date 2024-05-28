@@ -3,6 +3,18 @@ using namespace std;
 using namespace pcl;
 
 /// <summary>
+/// 坐标点映射PointXYZ
+/// </summary>
+/// <param name="point3F">坐标点</param>
+/// <returns>PointXYZ</returns>
+PointXYZ pclsharp::toPointXYZ(const Point3F& point3F)
+{
+	const PointXYZ pointXYZ = PointXYZ(point3F.X, point3F.Y, point3F.Z);
+
+	return pointXYZ;
+}
+
+/// <summary>
 /// 坐标点集映射点云
 /// </summary>
 /// <param name="point3Fs">坐标点集</param>

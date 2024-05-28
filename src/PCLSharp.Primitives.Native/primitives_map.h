@@ -14,6 +14,13 @@
 namespace pclsharp
 {
 	/// <summary>
+	/// 坐标点映射PointXYZ
+	/// </summary>
+	/// <param name="point3F">坐标点</param>
+	/// <returns>PointXYZ</returns>
+	EXPORT_CPP pcl::PointXYZ toPointXYZ(const Point3F& point3F);
+
+	/// <summary>
 	/// 坐标点集映射点云
 	/// </summary>
 	/// <param name="point3Fs">坐标点集</param>

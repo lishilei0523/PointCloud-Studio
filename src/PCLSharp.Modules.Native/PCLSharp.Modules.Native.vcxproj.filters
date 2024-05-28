@@ -27,6 +27,9 @@
     <ClCompile Include="pcl_normals.cpp">
       <Filter>Sources</Filter>
     </ClCompile>
+    <ClCompile Include="pcl_search.cpp">
+      <Filter>Sources</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="pcl_files.h">
@@ -45,6 +48,9 @@
       <Filter>Headers</Filter>
     </ClInclude>
     <ClInclude Include="pcl_normals.h">
+      <Filter>Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="pcl_search.h">
       <Filter>Headers</Filter>
     </ClInclude>
   </ItemGroup>
