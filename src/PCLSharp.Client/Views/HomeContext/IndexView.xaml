@@ -41,7 +41,7 @@
                     <MenuItem Header="指向质心(_O)" cm:Message.Attach="LookAtCentroid()" />
                     <MenuItem Header="重置相机(_C)" cm:Message.Attach="ResetCamera()" />
                 </MenuItem>
-                <MenuItem Header="搜索(__S)">
+                <MenuItem Header="搜索(_S)">
                     <MenuItem Header="K近邻搜索(_K)" cm:Message.Attach="KSearch()" />
                     <MenuItem Header="半径搜索(_R)" cm:Message.Attach="RadiusSearch()" />
                     <MenuItem Header="八叉树搜索(_O)" cm:Message.Attach="OctreeSearch()" />
