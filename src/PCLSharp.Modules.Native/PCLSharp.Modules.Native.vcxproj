@@ -161,6 +161,7 @@
     <ClCompile Include="pcl_keypoints.cpp" />
     <ClCompile Include="pcl_normals.cpp" />
     <ClCompile Include="pcl_search.cpp" />
+    <ClCompile Include="pcl_shapes.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="pcl_common.h" />
@@ -171,6 +172,7 @@
     <ClInclude Include="pcl_keypoints.h" />
     <ClInclude Include="pcl_normals.h" />
     <ClInclude Include="pcl_search.h" />
+    <ClInclude Include="pcl_shapes.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
