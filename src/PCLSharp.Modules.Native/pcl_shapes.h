@@ -35,7 +35,7 @@ EXPORT_C Point3Fs* CALLING_MODE cropConvexHull(Point3F points[], int length, Poi
 /// <param name="b">平面方程系数b</param>
 /// <param name="c">平面方程系数c</param>
 /// <param name="d">平面方程系数d</param>
-/// <returns>剪裁后点云</returns>
+/// <returns>投射后点云</returns>
 /// <remarks>平面方程: ax + by +cz + d = 0</remarks>
 EXPORT_C Point3Fs* CALLING_MODE projectPlane(Point3F points[], int length, float a, float b, float c, float d);
 
@@ -56,5 +56,5 @@ EXPORT_C Point3Fs* CALLING_MODE extractBorder(Point3F points[], int length);
 /// <param name="featureRadius">特征半径</param>
 /// <param name="angleThreshold">角度阈值</param>
 /// <param name="threadsCount">线程数</param>
-/// <returns>边框点云</returns>
+/// <returns>边界点云</returns>
 EXPORT_C Point3Fs* CALLING_MODE extractBoundary(Point3F points[], int length, int normalK, float featureRadius, float angleThreshold, int threadsCount);

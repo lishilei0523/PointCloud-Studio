@@ -93,7 +93,7 @@ Point3Fs* cropConvexHull(Point3F points[], int length, Point3F contourPoints[], 
 /// <param name="b">平面方程系数b</param>
 /// <param name="c">平面方程系数c</param>
 /// <param name="d">平面方程系数d</param>
-/// <returns>剪裁后点云</returns>
+/// <returns>投射后点云</returns>
 /// <remarks>平面方程: ax + by +cz + d = 0</remarks>
 Point3Fs* projectPlane(Point3F points[], const int length, const float a, const float b, const float c, const float d)
 {
@@ -179,7 +179,7 @@ Point3Fs* extractBorder(Point3F points[], const int length)
 /// <param name="featureRadius">特征半径</param>
 /// <param name="angleThreshold">角度阈值</param>
 /// <param name="threadsCount">线程数</param>
-/// <returns>边框点云</returns>
+/// <returns>边界点云</returns>
 Point3Fs* extractBoundary(Point3F points[], const  int length, const  int normalK, const  float featureRadius, const  float angleThreshold, const int threadsCount)
 {
 	const PointCloud<PointXYZ>::Ptr& sourceCloud = pclsharp::toPointCloud(points, length);
