@@ -180,7 +180,7 @@ Point3Fs* extractBorder(Point3F points[], const int length)
 /// <param name="angleThreshold">角度阈值</param>
 /// <param name="threadsCount">线程数</param>
 /// <returns>边框点云</returns>
-Point3Fs* extractBoundary(Point3F points[], int length, int normalK, float featureRadius, float angleThreshold, int threadsCount)
+Point3Fs* extractBoundary(Point3F points[], const  int length, const  int normalK, const  float featureRadius, const  float angleThreshold, const int threadsCount)
 {
 	const PointCloud<PointXYZ>::Ptr& sourceCloud = pclsharp::toPointCloud(points, length);
 	const PointCloud<PointXYZ>::Ptr targetCloud = std::make_shared<PointCloud<PointXYZ>>();
