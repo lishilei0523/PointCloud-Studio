@@ -89,10 +89,10 @@ Point3Fs* cropConvexHull(Point3F points[], int length, Point3F contourPoints[], 
 /// </summary>
 /// <param name="points">点集</param>
 /// <param name="length">点集长度</param>
-/// <param name="a">平面方程参数a</param>
-/// <param name="b">平面方程参数b</param>
-/// <param name="c">平面方程参数c</param>
-/// <param name="d">平面方程参数d</param>
+/// <param name="a">平面方程系数a</param>
+/// <param name="b">平面方程系数b</param>
+/// <param name="c">平面方程系数c</param>
+/// <param name="d">平面方程系数d</param>
 /// <returns>剪裁后点云</returns>
 /// <remarks>平面方程: ax + by +cz + d = 0</remarks>
 Point3Fs* projectPlane(Point3F points[], const int length, const float a, const float b, const float c, const float d)

@@ -31,10 +31,10 @@ EXPORT_C Point3Fs* CALLING_MODE cropConvexHull(Point3F points[], int length, Poi
 /// </summary>
 /// <param name="points">点集</param>
 /// <param name="length">点集长度</param>
-/// <param name="a">平面方程参数a</param>
-/// <param name="b">平面方程参数b</param>
-/// <param name="c">平面方程参数c</param>
-/// <param name="d">平面方程参数d</param>
+/// <param name="a">平面方程系数a</param>
+/// <param name="b">平面方程系数b</param>
+/// <param name="c">平面方程系数c</param>
+/// <param name="d">平面方程系数d</param>
 /// <returns>剪裁后点云</returns>
 /// <remarks>平面方程: ax + by +cz + d = 0</remarks>
 EXPORT_C Point3Fs* CALLING_MODE projectPlane(Point3F points[], int length, float a, float b, float c, float d);
