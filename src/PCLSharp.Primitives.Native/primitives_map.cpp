@@ -136,8 +136,27 @@ Point3Normal3s* pclsharp::toPoint3Normal3s(const PointCloud<PointNormal>& pointC
 /// </summary>
 /// <param name="point3Color4s">坐标点颜色集</param>
 /// <param name="length">长度</param>
+/// <returns>PointXYZRGB点云</returns>
+PointCloud<PointXYZRGB>::Ptr pclsharp::toPointCloudRGB(Point3Color4 point3Color4s[], const int& length)
+{
+	const PointCloud<PointXYZRGB>::Ptr& pointCloud = std::make_shared<PointCloud<PointXYZRGB>>();
+	for (int i = 0; i < length; i++)
+	{
+		const Point3Color4& point3Color4 = point3Color4s[i];
+		const PointXYZRGB& pointColor = PointXYZRGB(point3Color4.X, point3Color4.Y, point3Color4.Z, point3Color4.R, point3Color4.G, point3Color4.B);
+		pointCloud->push_back(pointColor);
+	}
+
+	return pointCloud;
+}
+
+/// <summary>
+/// 坐标点颜色集映射点云
+/// </summary>
+/// <param name="point3Color4s">坐标点颜色集</param>
+/// <param name="length">长度</param>
 /// <returns>PointXYZRGBA点云</returns>
-PointCloud<PointXYZRGBA>::Ptr pclsharp::toPointCloud(Point3Color4 point3Color4s[], const int& length)
+PointCloud<PointXYZRGBA>::Ptr pclsharp::toPointCloudRGBA(Point3Color4 point3Color4s[], const int& length)
 {
 	const PointCloud<PointXYZRGBA>::Ptr& pointCloud = std::make_shared<PointCloud<PointXYZRGBA>>();
 	for (int i = 0; i < length; i++)
@@ -148,6 +167,26 @@ PointCloud<PointXYZRGBA>::Ptr pclsharp::toPointCloud(Point3Color4 point3Color4s[
 	}
 
 	return pointCloud;
+}
+
+/// <summary>
+/// 点云映射坐标点颜色集
+/// </summary>
+/// <param name="pointCloud">PointXYZRGB点云</param>
+/// <returns>坐标点颜色集</returns>
+Point3Color4s* pclsharp::toPoint3Color4s(const pcl::PointCloud<pcl::PointXYZRGB>& pointCloud)
+{
+	const size_t& length = pointCloud.size();
+	Point3Color4* pointColors = new Point3Color4[length];
+	for (int i = 0; i < length; i++)
+	{
+		const PointXYZRGB& pointColor = pointCloud.points[i];
+		pointColors[i] = Point3Color4(pointColor.x, pointColor.y, pointColor.z, pointColor.r, pointColor.g, pointColor.b, 255);
+	}
+
+	Point3Color4s* point3Color4s = new Point3Color4s(pointColors, static_cast<int>(length));
+
+	return point3Color4s;
 }
 
 /// <summary>

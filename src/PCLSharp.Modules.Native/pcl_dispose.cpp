@@ -19,6 +19,20 @@ void disposePoint3Fs(const Point3Fs* pointer)
 }
 
 /// <summary>
+/// 释放坐标点集分组
+/// </summary>
+/// <param name="pointer">二级指针</param>
+/// <param name="groupCount">分组数</param>
+void disposePoint3FsGroup(const Point3Fs** pointer, const int groupCount)
+{
+	for (int groupIndex = 0; groupIndex < groupCount; groupIndex++)
+	{
+		delete pointer[groupIndex];
+	}
+	delete pointer;
+}
+
+/// <summary>
 /// 释放法向量
 /// </summary>
 /// <param name="pointer">指针</param>
@@ -33,6 +47,20 @@ void disposeNormal3F(const Normal3F* pointer)
 /// <param name="pointer">指针</param>
 void disposeNormal3Fs(const Normal3Fs* pointer)
 {
+	delete pointer;
+}
+
+/// <summary>
+/// 释放法向量集分组
+/// </summary>
+/// <param name="pointer">二级指针</param>
+/// <param name="groupCount">分组数</param>
+void disposeNormal3FsGroup(const Point3Fs** pointer, const int groupCount)
+{
+	for (int groupIndex = 0; groupIndex < groupCount; groupIndex++)
+	{
+		delete pointer[groupIndex];
+	}
 	delete pointer;
 }
 
@@ -55,6 +83,20 @@ void disposePoint3Normal3s(const Point3Normal3s* pointer)
 }
 
 /// <summary>
+/// 释放坐标点法向量集分组
+/// </summary>
+/// <param name="pointer">二级指针</param>
+/// <param name="groupCount">分组数</param>
+void disposePoint3Normal3sGroup(const Point3Fs** pointer, const int groupCount)
+{
+	for (int groupIndex = 0; groupIndex < groupCount; groupIndex++)
+	{
+		delete pointer[groupIndex];
+	}
+	delete pointer;
+}
+
+/// <summary>
 /// 释放坐标点颜色
 /// </summary>
 /// <param name="pointer">指针</param>
@@ -69,6 +111,20 @@ void disposePoint3Color4(const Point3Color4* pointer)
 /// <param name="pointer">指针</param>
 void disposePoint3Color4s(const Point3Color4s* pointer)
 {
+	delete pointer;
+}
+
+/// <summary>
+/// 释放坐标点颜色集分组
+/// </summary>
+/// <param name="pointer">二级指针</param>
+/// <param name="groupCount">分组数</param>
+void disposePoint3Color4sGroup(const Point3Fs** pointer, const int groupCount)
+{
+	for (int groupIndex = 0; groupIndex < groupCount; groupIndex++)
+	{
+		delete pointer[groupIndex];
+	}
 	delete pointer;
 }
 

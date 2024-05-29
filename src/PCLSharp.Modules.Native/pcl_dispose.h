@@ -33,6 +33,13 @@ EXPORT_C void CALLING_MODE disposePoint3F(const Point3F* pointer);
 EXPORT_C void CALLING_MODE disposePoint3Fs(const Point3Fs* pointer);
 
 /// <summary>
+/// 释放坐标点集分组
+/// </summary>
+/// <param name="pointer">二级指针</param>
+/// <param name="groupCount">分组数</param>
+EXPORT_C void CALLING_MODE disposePoint3FsGroup(const Point3Fs** pointer, int groupCount);
+
+/// <summary>
 /// 释放法向量
 /// </summary>
 /// <param name="pointer">指针</param>
@@ -43,6 +50,13 @@ EXPORT_C void CALLING_MODE disposeNormal3F(const Normal3F* pointer);
 /// </summary>
 /// <param name="pointer">指针</param>
 EXPORT_C void CALLING_MODE disposeNormal3Fs(const Normal3Fs* pointer);
+
+/// <summary>
+/// 释放法向量集分组
+/// </summary>
+/// <param name="pointer">二级指针</param>
+/// <param name="groupCount">分组数</param>
+EXPORT_C void CALLING_MODE disposeNormal3FsGroup(const Point3Fs** pointer, int groupCount);
 
 /// <summary>
 /// 释放坐标点法向量
@@ -57,6 +71,13 @@ EXPORT_C void CALLING_MODE disposePoint3Normal3(const Point3Normal3* pointer);
 EXPORT_C void CALLING_MODE disposePoint3Normal3s(const Point3Normal3s* pointer);
 
 /// <summary>
+/// 释放坐标点法向量集分组
+/// </summary>
+/// <param name="pointer">二级指针</param>
+/// <param name="groupCount">分组数</param>
+EXPORT_C void CALLING_MODE disposePoint3Normal3sGroup(const Point3Fs** pointer, int groupCount);
+
+/// <summary>
 /// 释放坐标点颜色
 /// </summary>
 /// <param name="pointer">指针</param>
@@ -67,6 +88,13 @@ EXPORT_C void CALLING_MODE disposePoint3Color4(const Point3Color4* pointer);
 /// </summary>
 /// <param name="pointer">指针</param>
 EXPORT_C void CALLING_MODE disposePoint3Color4s(const Point3Color4s* pointer);
+
+/// <summary>
+/// 释放坐标点颜色集分组
+/// </summary>
+/// <param name="pointer">二级指针</param>
+/// <param name="groupCount">分组数</param>
+EXPORT_C void CALLING_MODE disposePoint3Color4sGroup(const Point3Fs** pointer, int groupCount);
 
 /// <summary>
 /// 释放NARF描述子

@@ -70,8 +70,23 @@ namespace pclsharp
 	/// </summary>
 	/// <param name="point3Color4s">坐标点颜色集</param>
 	/// <param name="length">长度</param>
+	/// <returns>PointXYZRGB点云</returns>
+	EXPORT_CPP pcl::PointCloud<pcl::PointXYZRGB>::Ptr toPointCloudRGB(Point3Color4 point3Color4s[], const int& length);
+
+	/// <summary>
+	/// 坐标点颜色集映射点云
+	/// </summary>
+	/// <param name="point3Color4s">坐标点颜色集</param>
+	/// <param name="length">长度</param>
 	/// <returns>PointXYZRGBA点云</returns>
-	EXPORT_CPP pcl::PointCloud<pcl::PointXYZRGBA>::Ptr toPointCloud(Point3Color4 point3Color4s[], const int& length);
+	EXPORT_CPP pcl::PointCloud<pcl::PointXYZRGBA>::Ptr toPointCloudRGBA(Point3Color4 point3Color4s[], const int& length);
+
+	/// <summary>
+	/// 点云映射坐标点颜色集
+	/// </summary>
+	/// <param name="pointCloud">PointXYZRGB点云</param>
+	/// <returns>坐标点颜色集</returns>
+	EXPORT_CPP Point3Color4s* toPoint3Color4s(const pcl::PointCloud<pcl::PointXYZRGB>& pointCloud);
 
 	/// <summary>
 	/// 点云映射坐标点颜色集

@@ -261,7 +261,7 @@ void saveNormalBinaryPCD(Point3Normal3 pointNormals[], int length, const char* f
 /// <returns>点集</returns>
 void saveColorTextPCD(Point3Color4 pointColors[], int length, const char* filePath)
 {
-	const PointCloud<PointXYZRGBA>::Ptr& cloud = pclsharp::toPointCloud(pointColors, length);
+	const PointCloud<PointXYZRGBA>::Ptr& cloud = pclsharp::toPointCloudRGBA(pointColors, length);
 	const int& saveStatus = pcl::io::savePCDFileASCII(filePath, *cloud);
 	if (saveStatus != 0)
 	{
@@ -279,7 +279,7 @@ void saveColorTextPCD(Point3Color4 pointColors[], int length, const char* filePa
 /// <returns>点集</returns>
 void saveColorBinaryPCD(Point3Color4 pointColors[], int length, const char* filePath)
 {
-	const PointCloud<PointXYZRGBA>::Ptr& cloud = pclsharp::toPointCloud(pointColors, length);
+	const PointCloud<PointXYZRGBA>::Ptr& cloud = pclsharp::toPointCloudRGBA(pointColors, length);
 	const int& saveStatus = pcl::io::savePCDFileBinaryCompressed(filePath, *cloud);
 	if (saveStatus != 0)
 	{
@@ -369,7 +369,7 @@ void saveNormalBinaryPLY(Point3Normal3 pointNormals[], int length, const char* f
 /// <returns>点集</returns>
 void saveColorTextPLY(Point3Color4 pointColors[], int length, const char* filePath)
 {
-	const PointCloud<PointXYZRGBA>::Ptr& cloud = pclsharp::toPointCloud(pointColors, length);
+	const PointCloud<PointXYZRGBA>::Ptr& cloud = pclsharp::toPointCloudRGBA(pointColors, length);
 	const int& saveStatus = pcl::io::savePLYFileASCII(filePath, *cloud);
 	if (saveStatus != 0)
 	{
@@ -387,7 +387,7 @@ void saveColorTextPLY(Point3Color4 pointColors[], int length, const char* filePa
 /// <returns>点集</returns>
 void saveColorBinaryPLY(Point3Color4 pointColors[], int length, const char* filePath)
 {
-	const PointCloud<PointXYZRGBA>::Ptr& cloud = pclsharp::toPointCloud(pointColors, length);
+	const PointCloud<PointXYZRGBA>::Ptr& cloud = pclsharp::toPointCloudRGBA(pointColors, length);
 	const int& saveStatus = pcl::io::savePLYFileBinary(filePath, *cloud);
 	if (saveStatus != 0)
 	{
