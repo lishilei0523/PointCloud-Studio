@@ -153,7 +153,6 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClInclude Include="boxf.h" />
     <ClInclude Include="features_map.h" />
     <ClInclude Include="fpfh_signature33f.h" />
     <ClInclude Include="fpfh_signature33fs.h" />
