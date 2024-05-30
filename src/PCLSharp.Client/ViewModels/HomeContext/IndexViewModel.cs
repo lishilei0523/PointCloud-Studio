@@ -1836,7 +1836,49 @@ namespace PCLSharp.Client.ViewModels.HomeContext
         /// </summary>
         public async void RegionGrowingSegment()
         {
-            //TODO 实现
+            #region # 验证
+
+            if (this.EffectivePointCloud == null)
+            {
+                MessageBox.Show("点云未加载！", "错误", MessageBoxButton.OK, MessageBoxImage.Error);
+                return;
+            }
+
+            #endregion
+
+            this.Busy();
+
+            RegionGrowViewModel viewModel = ResolveMediator.Resolve<RegionGrowViewModel>();
+            bool? result = await this._windowManager.ShowDialogAsync(viewModel);
+            if (result == true)
+            {
+                IEnumerable<Point3F> points = this.EffectivePointCloud.Points.ToPoint3Fs();
+                Point3F[][] pointsClusters = await Task.Run(() => this._cloudSegmentations.RegionGrowingSegment(points, viewModel.NormalK!.Value, viewModel.ClusterK!.Value, viewModel.SmoothnessThreshold!.Value, viewModel.CurvatureThreshold!.Value, viewModel.MinClusterSize!.Value, viewModel.MaxClusterSize!.Value, viewModel.ThreadsCount!.Value));
+
+                Vector3Collection positions = new Vector3Collection();
+                Color4Collection colors = new Color4Collection();
+                for (int clusterIndex = 0; clusterIndex < pointsClusters.Length; clusterIndex++)
+                {
+                    Point3F[] pointsCluster = pointsClusters[clusterIndex];
+                    Color color = ColorExtension.RandomColor();
+                    if (clusterIndex % 2 == 0)
+                    {
+                        color = color.Invert();
+                    }
+                    IEnumerable<Vector3> clusterPositions = pointsCluster.ToVector3s();
+                    IEnumerable<Color4> clusterColors = pointsCluster.Select(x => color.ToColor4());
+                    positions.AddRange(clusterPositions);
+                    colors.AddRange(clusterColors);
+                }
+
+                this.EffectivePointCloud = new PointGeometry3D
+                {
+                    Positions = positions,
+                    Colors = colors
+                };
+            }
+
+            this.Idle();
         }
         #endregion
 
