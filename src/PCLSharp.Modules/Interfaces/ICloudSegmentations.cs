@@ -17,8 +17,12 @@ namespace PCLSharp.Modules.Interfaces
         /// <param name="probability">概率</param>
         /// <param name="distanceThreshold">距离阈值</param>
         /// <param name="maxIterationsCount">最大迭代次数</param>
+        /// <param name="a">平面方程系数a</param>
+        /// <param name="b">平面方程系数b</param>
+        /// <param name="c">平面方程系数c</param>
+        /// <param name="d">平面方程系数d</param>
         /// <returns>平面点云</returns>
-        Point3F[] SegmentPlane(IEnumerable<Point3F> points, bool optimizeCoefficients, float probability, float distanceThreshold, int maxIterationsCount);
+        Point3F[] SegmentPlane(IEnumerable<Point3F> points, bool optimizeCoefficients, float probability, float distanceThreshold, int maxIterationsCount, out int a, out int b, out int c, out int d);
         #endregion
 
         #region # 分割球体 —— Point3F[] SegmentSphere(IEnumerable<Point3F> points...

@@ -23,8 +23,12 @@ namespace PCLSharp.Modules.Implements
         /// <param name="probability">概率</param>
         /// <param name="distanceThreshold">距离阈值</param>
         /// <param name="maxIterationsCount">最大迭代次数</param>
+        /// <param name="a">平面方程系数a</param>
+        /// <param name="b">平面方程系数b</param>
+        /// <param name="c">平面方程系数c</param>
+        /// <param name="d">平面方程系数d</param>
         /// <returns>平面点云</returns>
-        public Point3F[] SegmentPlane(IEnumerable<Point3F> points, bool optimizeCoefficients, float probability, float distanceThreshold, int maxIterationsCount)
+        public Point3F[] SegmentPlane(IEnumerable<Point3F> points, bool optimizeCoefficients, float probability, float distanceThreshold, int maxIterationsCount, out int a, out int b, out int c, out int d)
         {
             Point3F[] points_ = points?.ToArray() ?? Array.Empty<Point3F>();
 
@@ -32,12 +36,13 @@ namespace PCLSharp.Modules.Implements
 
             if (!points_.Any())
             {
+                a = b = c = d = 0;
                 return Array.Empty<Point3F>();
             }
 
             #endregion
 
-            IntPtr pointer = SegmentationsNative.SegmentPlane(points_, points_.Length, optimizeCoefficients, probability, distanceThreshold, maxIterationsCount);
+            IntPtr pointer = SegmentationsNative.SegmentPlane(points_, points_.Length, optimizeCoefficients, probability, distanceThreshold, maxIterationsCount, out a, out b, out c, out d);
             Point3Fs point3Fs = Marshal.PtrToStructure<Point3Fs>(pointer);
             Point3F[] segmentedPoints = point3Fs.Recover();
             DisposeNative.DisposePoint3Fs(pointer);
@@ -112,6 +117,7 @@ namespace PCLSharp.Modules.Implements
                 Span<Point3F> span = new Span<Point3F>(pointsPtr->Points.ToPointer(), pointsPtr->Length);
                 pointsGroup[clusterIndex] = span.ToArray();
             }
+            DisposeNative.DisposePoint3FsGroup(pointer, clustersCount);
 
             return pointsGroup;
         }
@@ -153,6 +159,7 @@ namespace PCLSharp.Modules.Implements
                 Span<Point3F> span = new Span<Point3F>(pointsPtr->Points.ToPointer(), pointsPtr->Length);
                 pointsGroup[clusterIndex] = span.ToArray();
             }
+            DisposeNative.DisposePoint3FsGroup(pointer, clustersCount);
 
             return pointsGroup;
         }
@@ -197,6 +204,7 @@ namespace PCLSharp.Modules.Implements
                 Span<Point3Color4> span = new Span<Point3Color4>(pointsPtr->PointColors.ToPointer(), pointsPtr->Length);
                 pointsGroup[clusterIndex] = span.ToArray();
             }
+            DisposeNative.DisposePoint3Color4sGroup(pointer, clustersCount);
 
             return pointsGroup;
         }

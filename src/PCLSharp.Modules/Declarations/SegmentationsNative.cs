@@ -20,9 +20,13 @@ namespace PCLSharp.Modules.Declarations
         /// <param name="probability">概率</param>
         /// <param name="distanceThreshold">距离阈值</param>
         /// <param name="maxIterationsCount">最大迭代次数</param>
+        /// <param name="a">平面方程系数a</param>
+        /// <param name="b">平面方程系数b</param>
+        /// <param name="c">平面方程系数c</param>
+        /// <param name="d">平面方程系数d</param>
         /// <returns>平面点云</returns>
         [DllImport(AssemblyNames.Modules, EntryPoint = "segmentPlane")]
-        public static extern IntPtr SegmentPlane(Point3F[] points, int length, bool optimizeCoefficients, float probability, float distanceThreshold, int maxIterationsCount);
+        public static extern IntPtr SegmentPlane(Point3F[] points, int length, bool optimizeCoefficients, float probability, float distanceThreshold, int maxIterationsCount, out int a, out int b, out int c, out int d);
         #endregion
 
         #region # 分割球体 —— static extern IntPtr SegmentSphere(Point3F[] points...

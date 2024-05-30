@@ -23,8 +23,12 @@ using namespace pcl::search;
 /// <param name="probability">概率</param>
 /// <param name="distanceThreshold">距离阈值</param>
 /// <param name="maxIterationsCount">最大迭代次数</param>
+/// <param name="a">平面方程系数a</param>
+/// <param name="b">平面方程系数b</param>
+/// <param name="c">平面方程系数c</param>
+/// <param name="d">平面方程系数d</param>
 /// <returns>平面点云</returns>
-Point3Fs* segmentPlane(Point3F points[], const int length, const bool optimizeCoefficients, const float probability, const float distanceThreshold, const int maxIterationsCount)
+Point3Fs* segmentPlane(Point3F points[], const int length, const bool optimizeCoefficients, const float probability, const float distanceThreshold, const int maxIterationsCount, int& a, int& b, int& c, int& d)
 {
 	const PointCloud<PointXYZ>::Ptr sourceCloud = pclsharp::toPointCloud(points, length);
 	const PointCloud<PointXYZ>::Ptr targetCloud = std::make_shared<PointCloud<PointXYZ>>();
@@ -42,6 +46,13 @@ Point3Fs* segmentPlane(Point3F points[], const int length, const bool optimizeCo
 	sacSegmenter.setMaxIterations(maxIterationsCount);
 	sacSegmenter.segment(inliers, coefficients);
 	pcl::copyPointCloud(*sourceCloud, inliers, *targetCloud);
+	if (!coefficients.values.empty())
+	{
+		a = coefficients.values[0];
+		b = coefficients.values[1];
+		c = coefficients.values[2];
+		d = coefficients.values[3];
+	}
 
 	Point3Fs* point3Fs = pclsharp::toPoint3Fs(*targetCloud);
 

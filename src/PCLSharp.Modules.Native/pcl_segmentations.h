@@ -15,8 +15,12 @@
 /// <param name="probability">概率</param>
 /// <param name="distanceThreshold">距离阈值</param>
 /// <param name="maxIterationsCount">最大迭代次数</param>
+/// <param name="a">平面方程系数a</param>
+/// <param name="b">平面方程系数b</param>
+/// <param name="c">平面方程系数c</param>
+/// <param name="d">平面方程系数d</param>
 /// <returns>平面点云</returns>
-EXPORT_C Point3Fs* CALLING_MODE segmentPlane(Point3F points[], int length, bool optimizeCoefficients, float probability, float distanceThreshold, int maxIterationsCount);
+EXPORT_C Point3Fs* CALLING_MODE segmentPlane(Point3F points[], int length, bool optimizeCoefficients, float probability, float distanceThreshold, int maxIterationsCount, int& a, int& b, int& c, int& d);
 
 /// <summary>
 /// 分割球体
