@@ -27,7 +27,7 @@ namespace PCLSharp.Client.ViewModels.CommonContext
 
         #region # 属性
 
-        #region 平面方程系数a —— int? A
+        #region 平面方程系数a —— float? A
         /// <summary>
         /// 平面方程系数a
         /// </summary>
@@ -35,7 +35,7 @@ namespace PCLSharp.Client.ViewModels.CommonContext
         public float? A { get; set; }
         #endregion
 
-        #region 平面方程系数b —— int? B
+        #region 平面方程系数b —— float? B
         /// <summary>
         /// 平面方程系数a
         /// </summary>
@@ -43,7 +43,7 @@ namespace PCLSharp.Client.ViewModels.CommonContext
         public float? B { get; set; }
         #endregion
 
-        #region 平面方程系数c —— int? C
+        #region 平面方程系数c —— float? C
         /// <summary>
         /// 平面方程系数c
         /// </summary>
@@ -51,7 +51,7 @@ namespace PCLSharp.Client.ViewModels.CommonContext
         public float? C { get; set; }
         #endregion
 
-        #region 平面方程系数d —— int? D
+        #region 平面方程系数d —— float? D
         /// <summary>
         /// 平面方程系数d
         /// </summary>

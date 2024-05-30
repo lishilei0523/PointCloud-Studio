@@ -666,8 +666,27 @@ namespace PCLSharp.Client.ViewModels.HomeContext
         /// </summary>
         public async void ExtractBorder()
         {
-            //TODO 实现
-            MessageBox.Show("未实现！");
+            #region # 验证
+
+            if (this.EffectivePointCloud == null)
+            {
+                MessageBox.Show("点云未加载！", "错误", MessageBoxButton.OK, MessageBoxImage.Error);
+                return;
+            }
+
+            #endregion
+
+            this.Busy();
+            IEnumerable<Point3F> points = this.EffectivePointCloud.Points.ToPoint3Fs();
+            Point3F[] borderPoints = await Task.Run(() => this._cloudCommon.ExtractBorder(points));
+
+            IEnumerable<Vector3> positions = borderPoints.ToVector3s();
+            this.EffectivePointCloud = new PointGeometry3D
+            {
+                Positions = new Vector3Collection(positions)
+            };
+
+            this.Idle();
         }
         #endregion
 
@@ -677,8 +696,33 @@ namespace PCLSharp.Client.ViewModels.HomeContext
         /// </summary>
         public async void ExtractBoundary()
         {
-            //TODO 实现
-            MessageBox.Show("未实现！");
+            #region # 验证
+
+            if (this.EffectivePointCloud == null)
+            {
+                MessageBox.Show("点云未加载！", "错误", MessageBoxButton.OK, MessageBoxImage.Error);
+                return;
+            }
+
+            #endregion
+
+            this.Busy();
+
+            BoundaryViewModel viewModel = ResolveMediator.Resolve<BoundaryViewModel>();
+            bool? result = await this._windowManager.ShowDialogAsync(viewModel);
+            if (result == true)
+            {
+                IEnumerable<Point3F> points = this.EffectivePointCloud.Points.ToPoint3Fs();
+                Point3F[] projectedPoints = await Task.Run(() => this._cloudCommon.ExtractBoundary(points, viewModel.NormalK!.Value, viewModel.FeatureRadius!.Value, viewModel.AngleThreshold!.Value, viewModel.ThreadsCount!.Value));
+
+                IEnumerable<Vector3> positions = projectedPoints.ToVector3s();
+                this.EffectivePointCloud = new PointGeometry3D
+                {
+                    Positions = new Vector3Collection(positions)
+                };
+            }
+
+            this.Idle();
         }
         #endregion
 
