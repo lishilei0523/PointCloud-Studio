@@ -8,7 +8,7 @@ namespace PCLSharp.Modules.Declarations
     /// <summary>
     /// 点云文件声明
     /// </summary>
-    public static class FilesNative
+    internal static class FilesNative
     {
         #region # 加载PCD文件 —— static extern IntPtr LoadPCD(string filePath)
         /// <summary>

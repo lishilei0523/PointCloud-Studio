@@ -8,7 +8,7 @@ namespace PCLSharp.Modules.Declarations
     /// <summary>
     /// 点云通用操作声明
     /// </summary>
-    public static class CommonNative
+    internal static class CommonNative
     {
         #region # 估算质心 —— static extern IntPtr EstimateCentroid(Point3F[] points...
         /// <summary>

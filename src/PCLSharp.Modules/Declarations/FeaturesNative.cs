@@ -8,7 +8,7 @@ namespace PCLSharp.Modules.Declarations
     /// <summary>
     /// 点云特征声明
     /// </summary>
-    public static class FeaturesNative
+    internal static class FeaturesNative
     {
         #region # 计算NARF特征 —— static extern IntPtr ComputeNARF(Point3F[] points, int length...
         /// <summary>

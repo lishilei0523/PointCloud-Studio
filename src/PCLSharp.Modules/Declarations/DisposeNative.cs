@@ -7,7 +7,7 @@ namespace PCLSharp.Modules.Declarations
     /// <summary>
     /// 点云释放声明
     /// </summary>
-    public static class DisposeNative
+    internal static class DisposeNative
     {
         #region # 释放坐标点 —— static extern void DisposePoint3F(IntPtr pointer)
         /// <summary>

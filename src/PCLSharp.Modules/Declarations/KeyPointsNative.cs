@@ -8,7 +8,7 @@ namespace PCLSharp.Modules.Declarations
     /// <summary>
     /// 点云关键点声明
     /// </summary>
-    public static class KeyPointsNative
+    internal static class KeyPointsNative
     {
         #region # 检测NARF关键点 —— static extern IntPtr DetectNARF(Point3F[] points...
         /// <summary>

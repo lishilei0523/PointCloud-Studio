@@ -8,7 +8,7 @@ namespace PCLSharp.Modules.Declarations
     /// <summary>
     /// 点云滤波声明
     /// </summary>
-    public static class FiltersNative
+    internal static class FiltersNative
     {
         #region # 适用直通滤波 —— static extern IntPtr ApplyPassThrogh(Point3F[] points...
         /// <summary>

@@ -8,7 +8,7 @@ namespace PCLSharp.Modules.Declarations
     /// <summary>
     /// 点云搜索声明
     /// </summary>
-    public static class SearchNative
+    internal static class SearchNative
     {
         #region # K近邻搜索 —— static extern IntPtr KSearch(Point3F[] points...
         /// <summary>

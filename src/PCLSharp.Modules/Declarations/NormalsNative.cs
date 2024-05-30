@@ -8,7 +8,7 @@ namespace PCLSharp.Modules.Declarations
     /// <summary>
     /// 点云法向量声明
     /// </summary>
-    public static class NormalsNative
+    internal static class NormalsNative
     {
         #region # 估算法向量 —— static extern IntPtr EstimateNormalsByK(Point3F[] points...
         /// <summary>
