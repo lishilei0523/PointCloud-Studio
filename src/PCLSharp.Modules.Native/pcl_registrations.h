@@ -103,10 +103,10 @@ EXPORT_C AlignmentResult* CALLING_MODE SaciaAlignNARF(Point3F sourcePoints[], Na
 /// SAC-IA&PFH配准
 /// </summary>
 /// <param name="sourcePoints">源点集</param>
-/// <param name="sourceDescriptors">源NARF描述子集</param>
+/// <param name="sourceDescriptors">源PFH描述子集</param>
 /// <param name="sourceLength">源点集长度</param>
 /// <param name="targetPoints">目标点集</param>
-/// <param name="targetDescriptors">目标NARF描述子集</param>
+/// <param name="targetDescriptors">目标PFH描述子集</param>
 /// <param name="targetLength">目标点集长度</param>
 /// <param name="minSampleDistance">采样点最小距离</param>
 /// <param name="samplesCount">采样数量</param>
@@ -118,10 +118,10 @@ EXPORT_C AlignmentResult* CALLING_MODE SaciaAlignPFH(Point3F sourcePoints[], PFH
 /// SAC-IA&FPFH配准
 /// </summary>
 /// <param name="sourcePoints">源点集</param>
-/// <param name="sourceDescriptors">源NARF描述子集</param>
+/// <param name="sourceDescriptors">源FPFH描述子集</param>
 /// <param name="sourceLength">源点集长度</param>
 /// <param name="targetPoints">目标点集</param>
-/// <param name="targetDescriptors">目标NARF描述子集</param>
+/// <param name="targetDescriptors">目标FPFH描述子集</param>
 /// <param name="targetLength">目标点集长度</param>
 /// <param name="minSampleDistance">采样点最小距离</param>
 /// <param name="samplesCount">采样数量</param>
@@ -133,10 +133,10 @@ EXPORT_C AlignmentResult* CALLING_MODE SaciaAlignFPFH(Point3F sourcePoints[], FP
 /// SAC-IA&3DSC配准
 /// </summary>
 /// <param name="sourcePoints">源点集</param>
-/// <param name="sourceDescriptors">源NARF描述子集</param>
+/// <param name="sourceDescriptors">源3DSC描述子集</param>
 /// <param name="sourceLength">源点集长度</param>
 /// <param name="targetPoints">目标点集</param>
-/// <param name="targetDescriptors">目标NARF描述子集</param>
+/// <param name="targetDescriptors">目标3DSC描述子集</param>
 /// <param name="targetLength">目标点集长度</param>
 /// <param name="minSampleDistance">采样点最小距离</param>
 /// <param name="samplesCount">采样数量</param>
@@ -148,10 +148,10 @@ EXPORT_C AlignmentResult* CALLING_MODE SaciaAlign3DSC(Point3F sourcePoints[], Sh
 /// SAC-IA&SHOT配准
 /// </summary>
 /// <param name="sourcePoints">源点集</param>
-/// <param name="sourceDescriptors">源NARF描述子集</param>
+/// <param name="sourceDescriptors">源SHOT描述子集</param>
 /// <param name="sourceLength">源点集长度</param>
 /// <param name="targetPoints">目标点集</param>
-/// <param name="targetDescriptors">目标NARF描述子集</param>
+/// <param name="targetDescriptors">目标SHOT描述子集</param>
 /// <param name="targetLength">目标点集长度</param>
 /// <param name="minSampleDistance">采样点最小距离</param>
 /// <param name="samplesCount">采样数量</param>
