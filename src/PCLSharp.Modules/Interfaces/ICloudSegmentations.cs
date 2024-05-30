@@ -44,9 +44,8 @@ namespace PCLSharp.Modules.Interfaces
         /// <param name="clusterTolerance">簇搜索容差</param>
         /// <param name="minClusterSize">簇最小尺寸</param>
         /// <param name="maxClusterSize">簇最大尺寸</param>
-        /// <param name="clustersCount">点云簇数</param>
         /// <returns>点云簇列表</returns>
-        Point3F[][] EuclidClusterSegment(IEnumerable<Point3F> points, float clusterTolerance, int minClusterSize, int maxClusterSize, out int clustersCount);
+        Point3F[][] EuclidClusterSegment(IEnumerable<Point3F> points, float clusterTolerance, int minClusterSize, int maxClusterSize);
         #endregion
 
         #region # 区域生长分割 —— Point3F[][] RegionGrowingSegment(IEnumerable<Point3F> points...
@@ -61,9 +60,8 @@ namespace PCLSharp.Modules.Interfaces
         /// <param name="minClusterSize">簇最小尺寸</param>
         /// <param name="maxClusterSize">簇最大尺寸</param>
         /// <param name="threadsCount">线程数</param>
-        /// <param name="clustersCount">点云簇数</param>
         /// <returns>点云簇列表</returns>
-        Point3F[][] RegionGrowingSegment(IEnumerable<Point3F> points, int normalK, int clusterK, float smoothnessThreshold, float curvatureThreshold, int minClusterSize, int maxClusterSize, int threadsCount, out int clustersCount);
+        Point3F[][] RegionGrowingSegment(IEnumerable<Point3F> points, int normalK, int clusterK, float smoothnessThreshold, float curvatureThreshold, int minClusterSize, int maxClusterSize, int threadsCount);
         #endregion
 
         #region # 区域生长颜色分割 —— Point3F[][] RegionGrowingColorSegment(IEnumerable<Point3Color4> points...
@@ -81,9 +79,8 @@ namespace PCLSharp.Modules.Interfaces
         /// <param name="minClusterSize">簇最小尺寸</param>
         /// <param name="maxClusterSize">簇最大尺寸</param>
         /// <param name="threadsCount">线程数</param>
-        /// <param name="clustersCount">点云簇数</param>
         /// <returns>点云簇列表</returns>
-        Point3Color4[][] RegionGrowingColorSegment(IEnumerable<Point3Color4> points, int normalK, int clusterK, float distanceThreshold, float smoothnessThreshold, float curvatureThreshold, float pointColorThreshold, float regionColorThreshold, int minClusterSize, int maxClusterSize, int threadsCount, out int clustersCount);
+        Point3Color4[][] RegionGrowingColorSegment(IEnumerable<Point3Color4> points, int normalK, int clusterK, float distanceThreshold, float smoothnessThreshold, float curvatureThreshold, float pointColorThreshold, float regionColorThreshold, int minClusterSize, int maxClusterSize, int threadsCount);
         #endregion
     }
 }

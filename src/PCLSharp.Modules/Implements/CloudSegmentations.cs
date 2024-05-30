@@ -88,9 +88,8 @@ namespace PCLSharp.Modules.Implements
         /// <param name="clusterTolerance">簇搜索容差</param>
         /// <param name="minClusterSize">簇最小尺寸</param>
         /// <param name="maxClusterSize">簇最大尺寸</param>
-        /// <param name="clustersCount">点云簇数</param>
         /// <returns>点云簇列表</returns>
-        public unsafe Point3F[][] EuclidClusterSegment(IEnumerable<Point3F> points, float clusterTolerance, int minClusterSize, int maxClusterSize, out int clustersCount)
+        public unsafe Point3F[][] EuclidClusterSegment(IEnumerable<Point3F> points, float clusterTolerance, int minClusterSize, int maxClusterSize)
         {
             Point3F[] points_ = points?.ToArray() ?? Array.Empty<Point3F>();
 
@@ -98,13 +97,12 @@ namespace PCLSharp.Modules.Implements
 
             if (!points_.Any())
             {
-                clustersCount = 0;
                 return Array.Empty<Point3F[]>();
             }
 
             #endregion
 
-            IntPtr pointer = SegmentationsNative.EuclidClusterSegment(points_, points_.Length, clusterTolerance, minClusterSize, maxClusterSize, out clustersCount);
+            IntPtr pointer = SegmentationsNative.EuclidClusterSegment(points_, points_.Length, clusterTolerance, minClusterSize, maxClusterSize, out int clustersCount);
             Point3F[][] pointsGroup = new Point3F[clustersCount][];
 
             Point3Fs** pointsGroupPtr = (Point3Fs**)pointer.ToPointer();
@@ -131,9 +129,8 @@ namespace PCLSharp.Modules.Implements
         /// <param name="minClusterSize">簇最小尺寸</param>
         /// <param name="maxClusterSize">簇最大尺寸</param>
         /// <param name="threadsCount">线程数</param>
-        /// <param name="clustersCount">点云簇数</param>
         /// <returns>点云簇列表</returns>
-        public unsafe Point3F[][] RegionGrowingSegment(IEnumerable<Point3F> points, int normalK, int clusterK, float smoothnessThreshold, float curvatureThreshold, int minClusterSize, int maxClusterSize, int threadsCount, out int clustersCount)
+        public unsafe Point3F[][] RegionGrowingSegment(IEnumerable<Point3F> points, int normalK, int clusterK, float smoothnessThreshold, float curvatureThreshold, int minClusterSize, int maxClusterSize, int threadsCount)
         {
             Point3F[] points_ = points?.ToArray() ?? Array.Empty<Point3F>();
 
@@ -141,13 +138,12 @@ namespace PCLSharp.Modules.Implements
 
             if (!points_.Any())
             {
-                clustersCount = 0;
                 return Array.Empty<Point3F[]>();
             }
 
             #endregion
 
-            IntPtr pointer = SegmentationsNative.RegionGrowingSegment(points_, points_.Length, normalK, clusterK, smoothnessThreshold, curvatureThreshold, minClusterSize, maxClusterSize, threadsCount, out clustersCount);
+            IntPtr pointer = SegmentationsNative.RegionGrowingSegment(points_, points_.Length, normalK, clusterK, smoothnessThreshold, curvatureThreshold, minClusterSize, maxClusterSize, threadsCount, out int clustersCount);
             Point3F[][] pointsGroup = new Point3F[clustersCount][];
 
             Point3Fs** pointsGroupPtr = (Point3Fs**)pointer.ToPointer();
@@ -177,9 +173,8 @@ namespace PCLSharp.Modules.Implements
         /// <param name="minClusterSize">簇最小尺寸</param>
         /// <param name="maxClusterSize">簇最大尺寸</param>
         /// <param name="threadsCount">线程数</param>
-        /// <param name="clustersCount">点云簇数</param>
         /// <returns>点云簇列表</returns>
-        public unsafe Point3Color4[][] RegionGrowingColorSegment(IEnumerable<Point3Color4> points, int normalK, int clusterK, float distanceThreshold, float smoothnessThreshold, float curvatureThreshold, float pointColorThreshold, float regionColorThreshold, int minClusterSize, int maxClusterSize, int threadsCount, out int clustersCount)
+        public unsafe Point3Color4[][] RegionGrowingColorSegment(IEnumerable<Point3Color4> points, int normalK, int clusterK, float distanceThreshold, float smoothnessThreshold, float curvatureThreshold, float pointColorThreshold, float regionColorThreshold, int minClusterSize, int maxClusterSize, int threadsCount)
         {
             Point3Color4[] points_ = points?.ToArray() ?? Array.Empty<Point3Color4>();
 
@@ -187,13 +182,12 @@ namespace PCLSharp.Modules.Implements
 
             if (!points_.Any())
             {
-                clustersCount = 0;
                 return Array.Empty<Point3Color4[]>();
             }
 
             #endregion
 
-            IntPtr pointer = SegmentationsNative.RegionGrowingColorSegment(points_, points_.Length, normalK, clusterK, distanceThreshold, smoothnessThreshold, curvatureThreshold, pointColorThreshold, regionColorThreshold, minClusterSize, maxClusterSize, threadsCount, out clustersCount);
+            IntPtr pointer = SegmentationsNative.RegionGrowingColorSegment(points_, points_.Length, normalK, clusterK, distanceThreshold, smoothnessThreshold, curvatureThreshold, pointColorThreshold, regionColorThreshold, minClusterSize, maxClusterSize, threadsCount, out int clustersCount);
             Point3Color4[][] pointsGroup = new Point3Color4[clustersCount][];
 
             Point3Color4s** pointsGroupPtr = (Point3Color4s**)pointer.ToPointer();
