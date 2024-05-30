@@ -64,6 +64,9 @@
     <ClInclude Include="pose.h">
       <Filter>Models</Filter>
     </ClInclude>
+    <ClInclude Include="alignment_result.h">
+      <Filter>Models</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Maps">

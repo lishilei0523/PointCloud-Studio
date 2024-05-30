@@ -217,3 +217,12 @@ void disposeShot352Fs(const Shot352Fs* pointer)
 {
 	delete pointer;
 }
+
+/// <summary>
+/// 释放配准结果
+/// </summary>
+/// <param name="pointer">指针</param>
+void disposeAlignmentResult(const AlignmentResult* pointer)
+{
+	delete pointer;
+}

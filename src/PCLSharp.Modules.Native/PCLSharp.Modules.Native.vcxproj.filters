@@ -36,6 +36,9 @@
     <ClCompile Include="pcl_segmentations.cpp">
       <Filter>Sources</Filter>
     </ClCompile>
+    <ClCompile Include="pcl_registrations.cpp">
+      <Filter>Sources</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="pcl_files.h">
@@ -63,6 +66,9 @@
       <Filter>Headers</Filter>
     </ClInclude>
     <ClInclude Include="pcl_segmentations.h">
+      <Filter>Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="pcl_registrations.h">
       <Filter>Headers</Filter>
     </ClInclude>
   </ItemGroup>

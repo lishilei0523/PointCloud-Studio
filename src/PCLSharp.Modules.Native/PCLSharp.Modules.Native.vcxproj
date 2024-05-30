@@ -160,6 +160,7 @@
     <ClCompile Include="pcl_filters.cpp" />
     <ClCompile Include="pcl_keypoints.cpp" />
     <ClCompile Include="pcl_normals.cpp" />
+    <ClCompile Include="pcl_registrations.cpp" />
     <ClCompile Include="pcl_search.cpp" />
     <ClCompile Include="pcl_segmentations.cpp" />
   </ItemGroup>
@@ -171,6 +172,7 @@
     <ClInclude Include="pcl_filters.h" />
     <ClInclude Include="pcl_keypoints.h" />
     <ClInclude Include="pcl_normals.h" />
+    <ClInclude Include="pcl_registrations.h" />
     <ClInclude Include="pcl_search.h" />
     <ClInclude Include="pcl_segmentations.h" />
   </ItemGroup>

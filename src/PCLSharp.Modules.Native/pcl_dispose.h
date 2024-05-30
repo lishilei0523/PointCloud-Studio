@@ -19,6 +19,7 @@
 #include <shape_context1980fs.h>
 #include <shot352f.h>
 #include <shot352fs.h>
+#include <alignment_result.h>
 
 /// <summary>
 /// 释放坐标点
@@ -155,3 +156,9 @@ EXPORT_C void CALLING_MODE disposeShot352F(const Shot352F* pointer);
 /// </summary>
 /// <param name="pointer">指针</param>
 EXPORT_C void CALLING_MODE disposeShot352Fs(const Shot352Fs* pointer);
+
+/// <summary>
+/// 释放配准结果
+/// </summary>
+/// <param name="pointer">指针</param>
+EXPORT_C void CALLING_MODE disposeAlignmentResult(const AlignmentResult* pointer);
