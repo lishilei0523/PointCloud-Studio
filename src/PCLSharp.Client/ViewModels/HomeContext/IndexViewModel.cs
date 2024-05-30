@@ -602,6 +602,86 @@ namespace PCLSharp.Client.ViewModels.HomeContext
         }
         #endregion
 
+        #region 长方体裁剪 —— async void CropBox()
+        /// <summary>
+        /// 长方体裁剪
+        /// </summary>
+        public async void CropBox()
+        {
+            //TODO 实现
+            MessageBox.Show("未实现！");
+        }
+        #endregion
+
+        #region 凸包裁剪 —— async void CropConvexHull()
+        /// <summary>
+        /// 凸包裁剪
+        /// </summary>
+        public async void CropConvexHull()
+        {
+            //TODO 实现
+            MessageBox.Show("未实现！");
+        }
+        #endregion
+
+        #region 投射平面 —— async void ProjectPlane()
+        /// <summary>
+        /// 投射平面
+        /// </summary>
+        public async void ProjectPlane()
+        {
+            #region # 验证
+
+            if (this.EffectivePointCloud == null)
+            {
+                MessageBox.Show("点云未加载！", "错误", MessageBoxButton.OK, MessageBoxImage.Error);
+                return;
+            }
+
+            #endregion
+
+            this.Busy();
+
+            ProjectViewModel viewModel = ResolveMediator.Resolve<ProjectViewModel>();
+            bool? result = await this._windowManager.ShowDialogAsync(viewModel);
+            if (result == true)
+            {
+                IEnumerable<Point3F> points = this.EffectivePointCloud.Points.ToPoint3Fs();
+                Point3F[] projectedPoints = await Task.Run(() => this._cloudCommon.ProjectPlane(points, viewModel.A!.Value, viewModel.B!.Value, viewModel.C!.Value, viewModel.D!.Value));
+
+                IEnumerable<Vector3> positions = projectedPoints.ToVector3s();
+                this.EffectivePointCloud = new PointGeometry3D
+                {
+                    Positions = new Vector3Collection(positions)
+                };
+            }
+
+            this.Idle();
+        }
+        #endregion
+
+        #region 提取边框 —— async void ExtractBorder()
+        /// <summary>
+        /// 提取边框
+        /// </summary>
+        public async void ExtractBorder()
+        {
+            //TODO 实现
+            MessageBox.Show("未实现！");
+        }
+        #endregion
+
+        #region 提取边界 —— async void ExtractBoundary()
+        /// <summary>
+        /// 提取边界
+        /// </summary>
+        public async void ExtractBoundary()
+        {
+            //TODO 实现
+            MessageBox.Show("未实现！");
+        }
+        #endregion
+
 
         //搜索
 

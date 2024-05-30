@@ -44,6 +44,11 @@
                 <MenuItem Header="常用(_G)">
                     <MenuItem Header="估算质心(_C)" cm:Message.Attach="EstimateCentroid()" />
                     <MenuItem Header="仿射变换(_A)" cm:Message.Attach="AffineTransform()" />
+                    <MenuItem Header="长方体裁剪(_B)" cm:Message.Attach="CropBox()" />
+                    <MenuItem Header="凸包裁剪(_H)" cm:Message.Attach="CropConvexHull()" />
+                    <MenuItem Header="投射平面(_P)" cm:Message.Attach="ProjectPlane()" />
+                    <MenuItem Header="提取边框(_R)" cm:Message.Attach="ExtractBorder()" />
+                    <MenuItem Header="提取边界(_Y)" cm:Message.Attach="ExtractBoundary()" />
                 </MenuItem>
                 <MenuItem Header="搜索(_S)">
                     <MenuItem Header="K近邻搜索(_K)" cm:Message.Attach="KSearch()" />
