@@ -1888,7 +1888,49 @@ namespace PCLSharp.Client.ViewModels.HomeContext
         /// </summary>
         public async void RegionGrowingColorSegment()
         {
-            //TODO 实现
+            #region # 验证
+
+            if (this.EffectivePointCloud == null)
+            {
+                MessageBox.Show("点云未加载！", "错误", MessageBoxButton.OK, MessageBoxImage.Error);
+                return;
+            }
+
+            #endregion
+
+            this.Busy();
+
+            RegionGrowColorViewModel viewModel = ResolveMediator.Resolve<RegionGrowColorViewModel>();
+            bool? result = await this._windowManager.ShowDialogAsync(viewModel);
+            if (result == true)
+            {
+                Point3Color4[] pointColors = this.EffectivePointCloud.ToPoint3Color4s();
+                Point3Color4[][] pointsClusters = await Task.Run(() => this._cloudSegmentations.RegionGrowingColorSegment(pointColors, viewModel.NormalK!.Value, viewModel.ClusterK!.Value, viewModel.DistanceThreshold!.Value, viewModel.SmoothnessThreshold!.Value, viewModel.CurvatureThreshold!.Value, viewModel.PointColorThreshold!.Value, viewModel.RegionColorThreshold!.Value, viewModel.MinClusterSize!.Value, viewModel.MaxClusterSize!.Value, viewModel.ThreadsCount!.Value));
+
+                Vector3Collection positions = new Vector3Collection();
+                Color4Collection colors = new Color4Collection();
+                for (int clusterIndex = 0; clusterIndex < pointsClusters.Length; clusterIndex++)
+                {
+                    Point3Color4[] pointsCluster = pointsClusters[clusterIndex];
+                    Color color = ColorExtension.RandomColor();
+                    if (clusterIndex % 2 == 0)
+                    {
+                        color = color.Invert();
+                    }
+                    IEnumerable<Vector3> clusterPositions = pointsCluster.Select(x => x.GetPoint()).ToVector3s();
+                    IEnumerable<Color4> clusterColors = pointsCluster.Select(x => color.ToColor4());
+                    positions.AddRange(clusterPositions);
+                    colors.AddRange(clusterColors);
+                }
+
+                this.EffectivePointCloud = new PointGeometry3D
+                {
+                    Positions = positions,
+                    Colors = colors
+                };
+            }
+
+            this.Idle();
         }
         #endregion
 

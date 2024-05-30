@@ -76,6 +76,25 @@ namespace PCLSharp.Extensions.Helix
         }
         #endregion
 
+        #region # 点几何映射颜色坐标点集 —— static Point3Color4[] ToPoint3Color4s(this PointGeometry3D pointGeometry3D)
+        /// <summary>
+        /// 点几何映射颜色坐标点集
+        /// </summary>
+        public static Point3Color4[] ToPoint3Color4s(this PointGeometry3D pointGeometry3D)
+        {
+            Point3Color4[] point3Color4s = new Point3Color4[pointGeometry3D.Positions.Count];
+            for (int index = 0; index < pointGeometry3D.Positions.Count; index++)
+            {
+                Vector3 position = pointGeometry3D.Positions[index];
+                Color4 color4 = pointGeometry3D.Colors[index];
+                Color4F color4F = color4.ToColor4F();
+                point3Color4s[index] = new Point3Color4(position.X, position.Y, position.Z, color4F.R, color4F.G, color4F.B, color4F.A);
+            }
+
+            return point3Color4s;
+        }
+        #endregion
+
         #region # 法向量映射线几何 —— static LineGeometry3D ToLineGeometry3D(this Normal3F normal3F, Point3F point3F...
         /// <summary>
         /// 法向量映射线几何
