@@ -1,0 +1,53 @@
+﻿<Window x:Class="PCLSharp.Client.Views.SegmentationContext.PlaneView"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:fluentWpf="clr-namespace:SourceChord.FluentWPF;assembly=FluentWPF"
+        xmlns:sd="https://github.com/lishilei0523/SD.Framework"
+        xmlns:cal="http://www.caliburnproject.org"
+        xmlns:mah="http://metro.mahapps.com/winfx/xaml/controls"
+        mc:Ignorable="d"
+        Title="分割平面"
+        Width="500" Height="360" ResizeMode="NoResize"
+        FontSize="14"
+        WindowStyle="ThreeDBorderWindow"
+        WindowStartupLocation="CenterOwner"
+        fluentWpf:AcrylicWindow.Enabled="True"
+        fluentWpf:AcrylicWindow.AcrylicWindowStyle="NoIcon">
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <!--表单区-->
+            <RowDefinition Height="260" />
+            <!--占位区-->
+            <RowDefinition Height="*" />
+            <!--控制区-->
+            <RowDefinition Height="50" />
+        </Grid.RowDefinitions>
+        <!--表单区-->
+        <StackPanel Grid.Row="0" Grid.IsSharedSizeScope="True" Margin="20,30">
+            <sd:FormItem Label="是否优化模型系数：">
+                <mah:ToggleSwitch IsOn="{Binding OptimizeCoefficients}" OnContent="是" OffContent="否" Style="{StaticResource ToggleSwitch.Styles.Fluent}" />
+            </sd:FormItem>
+            <sd:FormItem Label="概率：">
+                <TextBox Text="{Binding Probability}" Style="{StaticResource TextBoxRevealStyle}" />
+            </sd:FormItem>
+            <sd:FormItem Label="距离阈值：">
+                <TextBox Text="{Binding DistanceThreshold}" Style="{StaticResource TextBoxRevealStyle}" />
+            </sd:FormItem>
+            <sd:FormItem Label="最大迭代次数：">
+                <TextBox Text="{Binding MaxIterationsCount}" Style="{StaticResource TextBoxRevealStyle}" />
+            </sd:FormItem>
+        </StackPanel>
+        <!--占位区-->
+        <Grid Grid.Row="1" />
+        <!--控制区-->
+        <Grid Grid.Row="2" Style="{StaticResource Form.Styles.Submit.Grid}">
+            <WrapPanel Style="{StaticResource Form.Styles.Submit.WrapPanel}">
+                <Button Content="确定" cal:Message.Attach="Submit()" Style="{StaticResource Button.Styles.Fluent.Focus}" />
+                <Button Content="取消" cal:Message.Attach="TryCloseAsync('false')" Style="{StaticResource Button.Styles.Fluent.Default}" />
+            </WrapPanel>
+        </Grid>
+    </Grid>
+</Window>

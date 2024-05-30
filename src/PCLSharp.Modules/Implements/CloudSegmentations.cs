@@ -1,4 +1,5 @@
 ﻿using PCLSharp.Modules.Declarations;
+using PCLSharp.Modules.Interfaces;
 using PCLSharp.Primitives.Extensions;
 using PCLSharp.Primitives.Models;
 using System;
@@ -11,7 +12,7 @@ namespace PCLSharp.Modules.Implements
     /// <summary>
     /// 点云分割实现
     /// </summary>
-    public unsafe class CloudSegmentations
+    public class CloudSegmentations : ICloudSegmentations
     {
         #region # 分割平面 —— Point3F[] SegmentPlane(IEnumerable<Point3F> points...
         /// <summary>
@@ -89,7 +90,7 @@ namespace PCLSharp.Modules.Implements
         /// <param name="maxClusterSize">簇最大尺寸</param>
         /// <param name="clustersCount">点云簇数</param>
         /// <returns>点云簇列表</returns>
-        public Point3F[][] EuclidClusterSegment(IEnumerable<Point3F> points, float clusterTolerance, int minClusterSize, int maxClusterSize, out int clustersCount)
+        public unsafe Point3F[][] EuclidClusterSegment(IEnumerable<Point3F> points, float clusterTolerance, int minClusterSize, int maxClusterSize, out int clustersCount)
         {
             Point3F[] points_ = points?.ToArray() ?? Array.Empty<Point3F>();
 
@@ -132,7 +133,7 @@ namespace PCLSharp.Modules.Implements
         /// <param name="threadsCount">线程数</param>
         /// <param name="clustersCount">点云簇数</param>
         /// <returns>点云簇列表</returns>
-        public Point3F[][] RegionGrowingSegment(IEnumerable<Point3F> points, int normalK, int clusterK, float smoothnessThreshold, float curvatureThreshold, int minClusterSize, int maxClusterSize, int threadsCount, out int clustersCount)
+        public unsafe Point3F[][] RegionGrowingSegment(IEnumerable<Point3F> points, int normalK, int clusterK, float smoothnessThreshold, float curvatureThreshold, int minClusterSize, int maxClusterSize, int threadsCount, out int clustersCount)
         {
             Point3F[] points_ = points?.ToArray() ?? Array.Empty<Point3F>();
 
@@ -178,7 +179,7 @@ namespace PCLSharp.Modules.Implements
         /// <param name="threadsCount">线程数</param>
         /// <param name="clustersCount">点云簇数</param>
         /// <returns>点云簇列表</returns>
-        public Point3Color4[][] RegionGrowingColorSegment(IEnumerable<Point3Color4> points, int normalK, int clusterK, float distanceThreshold, float smoothnessThreshold, float curvatureThreshold, float pointColorThreshold, float regionColorThreshold, int minClusterSize, int maxClusterSize, int threadsCount, out int clustersCount)
+        public unsafe Point3Color4[][] RegionGrowingColorSegment(IEnumerable<Point3Color4> points, int normalK, int clusterK, float distanceThreshold, float smoothnessThreshold, float curvatureThreshold, float pointColorThreshold, float regionColorThreshold, int minClusterSize, int maxClusterSize, int threadsCount, out int clustersCount)
         {
             Point3Color4[] points_ = points?.ToArray() ?? Array.Empty<Point3Color4>();
 

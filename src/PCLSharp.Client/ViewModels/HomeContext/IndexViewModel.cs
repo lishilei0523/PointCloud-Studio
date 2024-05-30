@@ -7,6 +7,7 @@ using PCLSharp.Client.ViewModels.FilterContext;
 using PCLSharp.Client.ViewModels.KeyPointContext;
 using PCLSharp.Client.ViewModels.NormalContext;
 using PCLSharp.Client.ViewModels.SearchContext;
+using PCLSharp.Client.ViewModels.SegmentationContext;
 using PCLSharp.Extensions.Helix;
 using PCLSharp.Extensions.Plotter;
 using PCLSharp.Modules.Interfaces;
@@ -82,6 +83,11 @@ namespace PCLSharp.Client.ViewModels.HomeContext
         private readonly ICloudFeatures _cloudFeatures;
 
         /// <summary>
+        /// 点云分割接口
+        /// </summary>
+        private readonly ICloudSegmentations _cloudSegmentations;
+
+        /// <summary>
         /// 窗体管理器
         /// </summary>
         private readonly IWindowManager _windowManager;
@@ -89,7 +95,7 @@ namespace PCLSharp.Client.ViewModels.HomeContext
         /// <summary>
         /// 依赖注入构造器
         /// </summary>
-        public IndexViewModel(ICloudCommon cloudCommon, ICloudFiles cloudFiles, ICloudSearch cloudSearch, ICloudFilters cloudFilters, ICloudNormals cloudNormals, ICloudKeyPoints cloudKeyPoints, ICloudFeatures cloudFeatures, IWindowManager windowManager)
+        public IndexViewModel(ICloudCommon cloudCommon, ICloudFiles cloudFiles, ICloudSearch cloudSearch, ICloudFilters cloudFilters, ICloudNormals cloudNormals, ICloudKeyPoints cloudKeyPoints, ICloudFeatures cloudFeatures, ICloudSegmentations cloudSegmentations, IWindowManager windowManager)
         {
             this._cloudCommon = cloudCommon;
             this._cloudFiles = cloudFiles;
@@ -98,6 +104,7 @@ namespace PCLSharp.Client.ViewModels.HomeContext
             this._cloudNormals = cloudNormals;
             this._cloudKeyPoints = cloudKeyPoints;
             this._cloudFeatures = cloudFeatures;
+            this._cloudSegmentations = cloudSegmentations;
             this._windowManager = windowManager;
         }
 
@@ -1693,6 +1700,111 @@ namespace PCLSharp.Client.ViewModels.HomeContext
             }
 
             this.Idle();
+        }
+        #endregion
+
+
+        //分割
+
+        #region 分割平面 —— async void SegmentPlane()
+        /// <summary>
+        /// 分割平面
+        /// </summary>
+        public async void SegmentPlane()
+        {
+            #region # 验证
+
+            if (this.EffectivePointCloud == null)
+            {
+                MessageBox.Show("点云未加载！", "错误", MessageBoxButton.OK, MessageBoxImage.Error);
+                return;
+            }
+
+            #endregion
+
+            this.Busy();
+
+            PlaneViewModel viewModel = ResolveMediator.Resolve<PlaneViewModel>();
+            bool? result = await this._windowManager.ShowDialogAsync(viewModel);
+            if (result == true)
+            {
+                IEnumerable<Point3F> points = this.EffectivePointCloud.Points.ToPoint3Fs();
+                Point3F[] segmentedPoints = await Task.Run(() => this._cloudSegmentations.SegmentPlane(points, viewModel.OptimizeCoefficients!.Value, viewModel.Probability!.Value, viewModel.DistanceThreshold!.Value, viewModel.MaxIterationsCount!.Value));
+
+                IEnumerable<Vector3> positions = segmentedPoints.ToVector3s();
+                this.EffectivePointCloud = new PointGeometry3D
+                {
+                    Positions = new Vector3Collection(positions)
+                };
+            }
+
+            this.Idle();
+        }
+        #endregion
+
+        #region 分割球体 —— async void SegmentSphere()
+        /// <summary>
+        /// 分割球体
+        /// </summary>
+        public async void SegmentSphere()
+        {
+            #region # 验证
+
+            if (this.EffectivePointCloud == null)
+            {
+                MessageBox.Show("点云未加载！", "错误", MessageBoxButton.OK, MessageBoxImage.Error);
+                return;
+            }
+
+            #endregion
+
+            this.Busy();
+
+            SphereViewModel viewModel = ResolveMediator.Resolve<SphereViewModel>();
+            bool? result = await this._windowManager.ShowDialogAsync(viewModel);
+            if (result == true)
+            {
+                IEnumerable<Point3F> points = this.EffectivePointCloud.Points.ToPoint3Fs();
+                Point3F[] segmentedPoints = await Task.Run(() => this._cloudSegmentations.SegmentSphere(points, viewModel.OptimizeCoefficients!.Value, viewModel.Probability!.Value, viewModel.DistanceThreshold!.Value, viewModel.MinRadius!.Value, viewModel.MaxRadius!.Value, viewModel.MaxIterationsCount!.Value));
+
+                IEnumerable<Vector3> positions = segmentedPoints.ToVector3s();
+                this.EffectivePointCloud = new PointGeometry3D
+                {
+                    Positions = new Vector3Collection(positions)
+                };
+            }
+
+            this.Idle();
+        }
+        #endregion
+
+        #region 欧几里得聚类分割 —— async void EuclidClusterSegment()
+        /// <summary>
+        /// 欧几里得聚类分割
+        /// </summary>
+        public async void EuclidClusterSegment()
+        {
+            //TODO 实现
+        }
+        #endregion
+
+        #region 区域生长分割 —— async void RegionGrowingSegment()
+        /// <summary>
+        /// 区域生长分割
+        /// </summary>
+        public async void RegionGrowingSegment()
+        {
+            //TODO 实现
+        }
+        #endregion
+
+        #region 区域生长颜色分割 —— async void RegionGrowingColorSegment()
+        /// <summary>
+        /// 区域生长颜色分割
+        /// </summary>
+        public async void RegionGrowingColorSegment()
+        {
+            //TODO 实现
         }
         #endregion
 

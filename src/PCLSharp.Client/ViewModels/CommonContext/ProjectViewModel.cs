@@ -37,7 +37,7 @@ namespace PCLSharp.Client.ViewModels.CommonContext
 
         #region 平面方程系数b —— float? B
         /// <summary>
-        /// 平面方程系数a
+        /// 平面方程系数b
         /// </summary>
         [DependencyProperty]
         public float? B { get; set; }

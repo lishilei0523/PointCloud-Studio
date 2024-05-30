@@ -84,6 +84,13 @@
                     <MenuItem Header="3DSC特征(_D)" cm:Message.Attach="Compute3DSC()" />
                     <MenuItem Header="SHOT特征(_S)" cm:Message.Attach="ComputeSHOT()" />
                 </MenuItem>
+                <MenuItem Header="分割(_C)">
+                    <MenuItem Header="分割平面(_P)" cm:Message.Attach="SegmentPlane()" />
+                    <MenuItem Header="分割球体(_S)" cm:Message.Attach="SegmentSphere()" />
+                    <MenuItem Header="欧几里得聚类分割(_E)" cm:Message.Attach="EuclidClusterSegment()" />
+                    <MenuItem Header="区域生长分割(_R)" cm:Message.Attach="RegionGrowingSegment()" />
+                    <MenuItem Header="区域生长颜色分割(_G)" cm:Message.Attach="RegionGrowingColorSegment()" />
+                </MenuItem>
             </Menu>
         </Border>
         <!--Body-->
