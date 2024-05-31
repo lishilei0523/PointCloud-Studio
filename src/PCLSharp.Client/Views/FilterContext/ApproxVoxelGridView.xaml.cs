@@ -5,9 +5,9 @@ namespace PCLSharp.Client.Views.FilterContext
     /// <summary>
     /// 近似体素降采样视图
     /// </summary>
-    public partial class ApprVoxelGridView : Window
+    public partial class ApproxVoxelGridView : Window
     {
-        public ApprVoxelGridView()
+        public ApproxVoxelGridView()
         {
             this.InitializeComponent();
         }

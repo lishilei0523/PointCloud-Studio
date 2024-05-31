@@ -116,16 +116,16 @@ Point3Fs* applyVoxelGrid(Point3F points[], const int length, const float leafSiz
 /// <param name="length">点集长度</param>
 /// <param name="leafSize">叶尺寸</param>
 /// <returns>过滤后点集</returns>
-Point3Fs* applyApproximateVoxelGrid(Point3F points[], int length, float leafSize)
+Point3Fs* applyApproxVoxelGrid(Point3F points[], int length, float leafSize)
 {
 	const PointCloud<PointXYZ>::Ptr& sourceCloud = pclsharp::toPointCloud(points, length);
 	const PointCloud<PointXYZ>::Ptr targetCloud = std::make_shared<PointCloud<PointXYZ>>();
 
 	//近似体素降采样
-	ApproximateVoxelGrid<PointXYZ> approximateVoxelGrid;
-	approximateVoxelGrid.setInputCloud(sourceCloud);
-	approximateVoxelGrid.setLeafSize(leafSize, leafSize, leafSize);
-	approximateVoxelGrid.filter(*targetCloud);
+	ApproximateVoxelGrid<PointXYZ> voxelGrid;
+	voxelGrid.setInputCloud(sourceCloud);
+	voxelGrid.setLeafSize(leafSize, leafSize, leafSize);
+	voxelGrid.filter(*targetCloud);
 
 	Point3Fs* point3Fs = pclsharp::toPoint3Fs(*targetCloud);
 

@@ -61,7 +61,7 @@ namespace PCLSharp.Modules.Declarations
         public static extern IntPtr ApplyVoxelGrid(Point3F[] points, int length, float leafSize);
         #endregion
 
-        #region # 适用近似体素降采样 —— static extern IntPtr ApplyApproximateVoxelGrid(Point3F[] points...
+        #region # 适用近似体素降采样 —— static extern IntPtr ApplyApproxVoxelGrid(Point3F[] points...
         /// <summary>
         /// 适用近似体素降采样
         /// </summary>
@@ -69,8 +69,8 @@ namespace PCLSharp.Modules.Declarations
         /// <param name="length">点集长度</param>
         /// <param name="leafSize">叶尺寸</param>
         /// <returns>过滤后点集</returns>
-        [DllImport(AssemblyNames.Modules, EntryPoint = "applyApproximateVoxelGrid")]
-        public static extern IntPtr ApplyApproximateVoxelGrid(Point3F[] points, int length, float leafSize);
+        [DllImport(AssemblyNames.Modules, EntryPoint = "applyApproxVoxelGrid")]
+        public static extern IntPtr ApplyApproxVoxelGrid(Point3F[] points, int length, float leafSize);
         #endregion
 
         #region # 适用统计离群点移除 —— static extern IntPtr ApplyStatisticalOutlierRemoval(Point3F[] points...

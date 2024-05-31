@@ -133,14 +133,14 @@ namespace PCLSharp.Modules.Implements
         }
         #endregion
 
-        #region # 适用近似体素降采样 —— Point3F[] ApplyApproximateVoxelGrid(IEnumerable<Point3F> points...
+        #region # 适用近似体素降采样 —— Point3F[] ApplyApproxVoxelGrid(IEnumerable<Point3F> points...
         /// <summary>
         /// 适用近似体素降采样
         /// </summary>
         /// <param name="points">点集</param>
         /// <param name="leafSize">叶尺寸</param>
         /// <returns>过滤后点集</returns>
-        public Point3F[] ApplyApproximateVoxelGrid(IEnumerable<Point3F> points, float leafSize)
+        public Point3F[] ApplyApproxVoxelGrid(IEnumerable<Point3F> points, float leafSize)
         {
             Point3F[] points_ = points?.ToArray() ?? Array.Empty<Point3F>();
 
@@ -153,7 +153,7 @@ namespace PCLSharp.Modules.Implements
 
             #endregion
 
-            IntPtr pointer = FiltersNative.ApplyApproximateVoxelGrid(points_, points_.Length, leafSize);
+            IntPtr pointer = FiltersNative.ApplyApproxVoxelGrid(points_, points_.Length, leafSize);
             Point3Fs point3Fs = Marshal.PtrToStructure<Point3Fs>(pointer);
             Point3F[] filteredPoints = point3Fs.Recover();
             DisposeNative.DisposePoint3Fs(pointer);

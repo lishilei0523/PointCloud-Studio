@@ -67,7 +67,7 @@
                     <MenuItem Header="随机采样(_D)" cm:Message.Attach="ApplyRandomSampling()" />
                     <MenuItem Header="均匀采样(_U)" cm:Message.Attach="ApplyUniformSampling()" />
                     <MenuItem Header="体素降采样(_V)" cm:Message.Attach="ApplyVoxelGrid()" />
-                    <MenuItem Header="近似体素降采样(_A)" cm:Message.Attach="ApplyApproximateVoxelGrid()" />
+                    <MenuItem Header="近似体素降采样(_A)" cm:Message.Attach="ApplyApproxVoxelGrid()" />
                     <MenuItem Header="统计离群点移除(_S)" cm:Message.Attach="ApplyStatisticalOutlierRemoval()" />
                     <MenuItem Header="半径离群点移除(_R)" cm:Message.Attach="ApplyRadiusOutlierRemoval()" />
                 </MenuItem>

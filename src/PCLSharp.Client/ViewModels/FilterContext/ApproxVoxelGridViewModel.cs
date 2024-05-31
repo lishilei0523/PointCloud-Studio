@@ -7,14 +7,14 @@ namespace PCLSharp.Client.ViewModels.FilterContext
     /// <summary>
     /// 近似体素降采样视图模型
     /// </summary>
-    public class ApprVoxelGridViewModel : ScreenBase
+    public class ApproxVoxelGridViewModel : ScreenBase
     {
         #region # 字段及构造器
 
         /// <summary>
         /// 依赖注入构造器
         /// </summary>
-        public ApprVoxelGridViewModel()
+        public ApproxVoxelGridViewModel()
         {
             //默认值
             this.LeafSize = 0.01f;

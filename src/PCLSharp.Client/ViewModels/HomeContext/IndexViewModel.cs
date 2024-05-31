@@ -1006,11 +1006,11 @@ namespace PCLSharp.Client.ViewModels.HomeContext
         }
         #endregion
 
-        #region 适用近似体素降采样 —— async void ApplyApproximateVoxelGrid()
+        #region 适用近似体素降采样 —— async void ApplyApproxVoxelGrid()
         /// <summary>
         /// 适用近似体素降采样
         /// </summary>
-        public async void ApplyApproximateVoxelGrid()
+        public async void ApplyApproxVoxelGrid()
         {
             #region # 验证
 
@@ -1024,12 +1024,12 @@ namespace PCLSharp.Client.ViewModels.HomeContext
 
             this.Busy();
 
-            ApprVoxelGridViewModel viewModel = ResolveMediator.Resolve<ApprVoxelGridViewModel>();
+            ApproxVoxelGridViewModel viewModel = ResolveMediator.Resolve<ApproxVoxelGridViewModel>();
             bool? result = await this._windowManager.ShowDialogAsync(viewModel);
             if (result == true)
             {
                 IEnumerable<Point3F> points = this.EffectivePointCloud.Points.ToPoint3Fs();
-                Point3F[] filterdPoints = await Task.Run(() => this._cloudFilters.ApplyApproximateVoxelGrid(points, viewModel.LeafSize!.Value));
+                Point3F[] filterdPoints = await Task.Run(() => this._cloudFilters.ApplyApproxVoxelGrid(points, viewModel.LeafSize!.Value));
 
                 IEnumerable<Vector3> positions = filterdPoints.ToVector3s();
                 this.EffectivePointCloud = new PointGeometry3D
