@@ -47,7 +47,7 @@
                     <!--配准参数-->
                     <ColumnDefinition Width="240" />
                     <!--点云视口-->
-                    <ColumnDefinition />
+                    <ColumnDefinition Width="*" />
                     <!--配准结果-->
                     <ColumnDefinition Width="240" />
                 </Grid.ColumnDefinitions>
@@ -161,28 +161,30 @@
                 </hx:Viewport3DX>
                 <!--配准结果-->
                 <GroupBox Grid.Column="2" Header="配准结果" Margin="0">
-                    <StackPanel Grid.IsSharedSizeScope="True" Margin="0,5">
-                        <TextBlock Text="----------------粗配准----------------" Foreground="Red" />
-                        <sd:FormItem Label="是否收敛：">
-                            <TextBlock Text="{Binding CoarseHasConverged, Converter={StaticResource Converters.YesNoDescriptionConverter}}" />
-                        </sd:FormItem>
-                        <sd:FormItem Label="拟合分数：">
-                            <TextBlock Text="{Binding CoarseFitnessScore}" />
-                        </sd:FormItem>
-                        <sd:FormItem Label="RT矩阵：" />
-                        <TextBlock Text="{Binding CoarseMatrix}" Margin="15,0,0,0" />
-                        <TextBlock Text="----------------精配准----------------" Foreground="Red" />
-                        <sd:FormItem Label="是否收敛：">
-                            <TextBlock Text="{Binding FineHasConverged, Converter={StaticResource Converters.YesNoDescriptionConverter}}" />
-                        </sd:FormItem>
-                        <sd:FormItem Label="拟合分数：">
-                            <TextBlock Text="{Binding FineFitnessScore}" />
-                        </sd:FormItem>
-                        <sd:FormItem Label="RT矩阵：" />
-                        <TextBlock Text="{Binding FineMatrix}" Margin="15,0,0,0" />
-                        <TextBlock Text="--------------最终RT矩阵--------------" Foreground="Red" />
-                        <TextBlock Text="{Binding FinalMatrix}" Margin="15,10,0,0" />
-                    </StackPanel>
+                    <ScrollViewer HorizontalScrollBarVisibility="Disabled">
+                        <StackPanel Grid.IsSharedSizeScope="True" Margin="0,5">
+                            <TextBlock Text="---------------粗配准---------------" Margin="0,0,0,10" Foreground="Red" />
+                            <sd:FormItem Label="是否收敛：">
+                                <TextBlock Text="{Binding CoarseHasConverged, Converter={StaticResource Converters.YesNoDescriptionConverter}}" />
+                            </sd:FormItem>
+                            <sd:FormItem Label="拟合分数：">
+                                <TextBlock Text="{Binding CoarseFitnessScore}" />
+                            </sd:FormItem>
+                            <sd:FormItem Label="RT矩阵：" />
+                            <TextBlock Text="{Binding CoarseMatrix}" Margin="15,0,0,0" />
+                            <TextBlock Text="---------------精配准---------------" Margin="0,0,0,10" Foreground="Red" />
+                            <sd:FormItem Label="是否收敛：">
+                                <TextBlock Text="{Binding FineHasConverged, Converter={StaticResource Converters.YesNoDescriptionConverter}}" />
+                            </sd:FormItem>
+                            <sd:FormItem Label="拟合分数：">
+                                <TextBlock Text="{Binding FineFitnessScore}" />
+                            </sd:FormItem>
+                            <sd:FormItem Label="RT矩阵：" />
+                            <TextBlock Text="{Binding FineMatrix}" Margin="15,0,0,0" />
+                            <TextBlock Text="-------------最终RT矩阵-------------" Margin="0,0,0,10" Foreground="Red" />
+                            <TextBlock Text="{Binding FinalMatrix}" Margin="15,10,0,0" />
+                        </StackPanel>
+                    </ScrollViewer>
                 </GroupBox>
             </Grid>
         </busyIndicator:BusyMask>

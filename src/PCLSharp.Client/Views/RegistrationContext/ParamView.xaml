@@ -31,7 +31,7 @@
                 <ColumnDefinition />
             </Grid.ColumnDefinitions>
             <StackPanel Grid.Column="0">
-                <GroupBox Header="预处理" Margin="4,4,2,4" Height="353">
+                <GroupBox Header="预处理" Margin="4,4,2,2" Height="351">
                     <StackPanel Grid.IsSharedSizeScope="True" Margin="0,10">
                         <sd:FormItem Label="叶子尺寸：">
                             <TextBox Text="{Binding LeafSize}" Style="{StaticResource TextBoxRevealStyle}" />
@@ -74,7 +74,7 @@
                 </GroupBox>
             </StackPanel>
             <StackPanel Grid.Column="1">
-                <GroupBox Header="特征" Margin="2,4,4,4">
+                <GroupBox Header="特征" Margin="2,4,4,2">
                     <StackPanel Grid.IsSharedSizeScope="True" Margin="0,10">
                         <sd:FormItem Label="法向量K：">
                             <TextBox Text="{Binding NormalK}" Style="{StaticResource TextBoxRevealStyle}" />
@@ -84,7 +84,7 @@
                         </sd:FormItem>
                     </StackPanel>
                 </GroupBox>
-                <GroupBox Header="粗配准" Margin="2,2,4,4">
+                <GroupBox Header="粗配准" Margin="2,2,4,2">
                     <StackPanel Grid.IsSharedSizeScope="True" Margin="0,10">
                         <sd:FormItem Label="采样点最小距离：">
                             <TextBox Text="{Binding MinSampleDistance}" Style="{StaticResource TextBoxRevealStyle}" />
