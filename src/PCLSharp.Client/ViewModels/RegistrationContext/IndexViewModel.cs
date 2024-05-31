@@ -7,6 +7,7 @@ using PCLSharp.Primitives.Extensions;
 using PCLSharp.Primitives.Models;
 using SD.Infrastructure.WPF.Caliburn.Aspects;
 using SD.Infrastructure.WPF.Caliburn.Base;
+using SD.IOC.Core.Mediators;
 using SharpDX;
 using System;
 using System.Collections.Generic;
@@ -152,6 +153,14 @@ namespace PCLSharp.Client.ViewModels.RegistrationContext
         public PerspectiveCamera Camera { get; set; }
         #endregion
 
+        #region 参数视图模型 —— ParamViewModel ParamViewModel
+        /// <summary>
+        /// 参数视图模型
+        /// </summary>
+        [DependencyProperty]
+        public ParamViewModel ParamViewModel { get; set; }
+        #endregion
+
         #endregion
 
         #region # 方法
@@ -221,6 +230,31 @@ namespace PCLSharp.Client.ViewModels.RegistrationContext
 
                 this.Idle();
             }
+        }
+        #endregion
+
+        #region 设置参数 —— async void SetParameters()
+        /// <summary>
+        /// 设置参数
+        /// </summary>
+        public async void SetParameters()
+        {
+            ParamViewModel paramViewModel = ResolveMediator.Resolve<ParamViewModel>();
+            bool? result = await this._windowManager.ShowDialogAsync(paramViewModel);
+            if (result == true)
+            {
+                this.ParamViewModel = paramViewModel;
+            }
+        }
+        #endregion
+
+        #region 执行配准 —— async void ExecuteAlignment()
+        /// <summary>
+        /// 执行配准
+        /// </summary>
+        public async void ExecuteAlignment()
+        {
+            //TODO 实现
         }
         #endregion
 

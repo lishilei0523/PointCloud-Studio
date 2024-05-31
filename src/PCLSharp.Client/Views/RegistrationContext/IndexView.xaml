@@ -7,6 +7,7 @@
         xmlns:cm="http://caliburnmicro.com"
         xmlns:hx="http://helix-toolkit.org/wpf/SharpDX"
         xmlns:busyIndicator="https://github.com/Peoky/BusyIndicator"
+        xmlns:sd="https://github.com/lishilei0523/SD.Framework"
         mc:Ignorable="d"
         Title="点云配准" 
         Width="1280" Height="800" FontSize="14"
@@ -35,20 +36,98 @@
                 <MenuItem Header="打开源点云(_S)" cm:Message.Attach="OpenSourceCloud()" />
                 <MenuItem Header="打开目标点云(_T)" cm:Message.Attach="OpenTargetCloud()" />
                 <MenuItem Header="设置参数(_P)" cm:Message.Attach="SetParameters()" />
-                <MenuItem Header="执行配准(_P)" cm:Message.Attach="ApplyRegistration()" />
+                <MenuItem Header="执行配准(_P)" cm:Message.Attach="ExecuteAlignment()" />
             </Menu>
         </Border>
         <!--Body-->
         <busyIndicator:BusyMask Grid.Row="1" IndicatorType="Cupertino" IsBusy="{Binding IsBusy}">
             <Grid>
                 <Grid.ColumnDefinitions>
+                    <!--配准参数-->
+                    <ColumnDefinition Width="240" />
                     <!--点云视口-->
                     <ColumnDefinition />
                     <!--配准结果-->
                     <ColumnDefinition Width="240" />
                 </Grid.ColumnDefinitions>
+                <!--配准参数-->
+                <GroupBox Grid.Column="0" Header="配准参数" Margin="0">
+                    <ScrollViewer HorizontalScrollBarVisibility="Disabled">
+                        <StackPanel Grid.IsSharedSizeScope="True" Margin="0,5">
+                            <TextBlock Text="---------------预处理---------------" Foreground="Red" />
+                            <sd:FormItem Label="叶子尺寸：">
+                                <TextBlock Text="{Binding ParamViewModel.LeafSize}" />
+                            </sd:FormItem>
+                            <sd:FormItem Label="簇搜索容差：">
+                                <TextBlock Text="{Binding ParamViewModel.ClusterTolerance}" />
+                            </sd:FormItem>
+                            <sd:FormItem Label="簇最小尺寸：">
+                                <TextBlock Text="{Binding ParamViewModel.MinClusterSize}" />
+                            </sd:FormItem>
+                            <sd:FormItem Label="簇最大尺寸：">
+                                <TextBlock Text="{Binding ParamViewModel.MaxClusterSize}" />
+                            </sd:FormItem>
+                            <sd:FormItem Label="平均近邻K：">
+                                <TextBlock Text="{Binding ParamViewModel.MeanK}" />
+                            </sd:FormItem>
+                            <sd:FormItem Label="标准差系数：">
+                                <TextBlock Text="{Binding ParamViewModel.StddevMult}" />
+                            </sd:FormItem>
+                            <TextBlock Text="---------------关键点---------------" Foreground="Red" />
+
+                            <sd:FormItem Label="显著半径：">
+                                <TextBlock Text="{Binding ParamViewModel.SalientRadius}" />
+                            </sd:FormItem>
+                            <sd:FormItem Label="抑制半径：">
+                                <TextBlock Text="{Binding ParamViewModel.NonMaxRadius}" />
+                            </sd:FormItem>
+                            <sd:FormItem Label="二一比上限：">
+                                <TextBlock Text="{Binding ParamViewModel.Threshold21}" />
+                            </sd:FormItem>
+                            <sd:FormItem Label="三二比上限：">
+                                <TextBlock Text="{Binding ParamViewModel.Threshold32}" />
+                            </sd:FormItem>
+                            <sd:FormItem Label="最小邻域点数：">
+                                <TextBlock Text="{Binding ParamViewModel.MinNeighborsCount}" />
+                            </sd:FormItem>
+                            <TextBlock Text="---------------特    征---------------" Foreground="Red" />
+                            <sd:FormItem Label="法向量K：">
+                                <TextBlock Text="{Binding ParamViewModel.NormalK}" />
+                            </sd:FormItem>
+                            <sd:FormItem Label="特征K：">
+                                <TextBlock Text="{Binding ParamViewModel.FeatureK}" />
+                            </sd:FormItem>
+                            <TextBlock Text="---------------粗配准---------------" Foreground="Red" />
+                            <sd:FormItem Label="采样点最小距离：">
+                                <TextBlock Text="{Binding ParamViewModel.MinSampleDistance}" />
+                            </sd:FormItem>
+                            <sd:FormItem Label="采样数量：">
+                                <TextBlock Text="{Binding ParamViewModel.SamplesCount}" />
+                            </sd:FormItem>
+                            <sd:FormItem Label="随机特征邻域点数：">
+                                <TextBlock Text="{Binding ParamViewModel.CorrespondenceRandomness}" />
+                            </sd:FormItem>
+                            <TextBlock Text="---------------精配准---------------" Foreground="Red" />
+                            <sd:FormItem Label="分辨率：">
+                                <TextBlock Text="{Binding ParamViewModel.MaxCorrespondenceDistance}" />
+                            </sd:FormItem>
+                            <sd:FormItem Label="变换最大差值：">
+                                <TextBlock Text="{Binding ParamViewModel.TransformationEpsilon}" />
+                            </sd:FormItem>
+                            <sd:FormItem Label="均方误差阈值：">
+                                <TextBlock Text="{Binding ParamViewModel.EuclideanFitnessEpsilon}" />
+                            </sd:FormItem>
+                            <sd:FormItem Label="最大迭代次数：">
+                                <TextBlock Text="{Binding ParamViewModel.MaximumIterations}" />
+                            </sd:FormItem>
+                            <sd:FormItem Label="线程数：">
+                                <TextBlock Text="{Binding ParamViewModel.ThreadsCount}" />
+                            </sd:FormItem>
+                        </StackPanel>
+                    </ScrollViewer>
+                </GroupBox>
                 <!--点云视口-->
-                <hx:Viewport3DX Grid.Column="0" 
+                <hx:Viewport3DX Grid.Column="1" 
                                 BackgroundColor="LightGray"
                                 MSAA="Maximum"
                                 ShowCoordinateSystem="True"
@@ -81,7 +160,7 @@
                     <hx:PointGeometryModel3D Geometry="{Binding TargetCloud}" Color="Green" />
                 </hx:Viewport3DX>
                 <!--配准结果-->
-                <GroupBox Grid.Column="1" Header="配准结果" Margin="0">
+                <GroupBox Grid.Column="2" Header="配准结果" Margin="0">
                 </GroupBox>
             </Grid>
         </busyIndicator:BusyMask>

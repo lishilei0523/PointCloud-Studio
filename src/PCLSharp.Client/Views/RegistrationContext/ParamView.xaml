@@ -1,0 +1,131 @@
+﻿<Window x:Class="PCLSharp.Client.Views.RegistrationContext.ParamView"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:fluentWpf="clr-namespace:SourceChord.FluentWPF;assembly=FluentWPF"
+        xmlns:sd="https://github.com/lishilei0523/SD.Framework"
+        xmlns:cal="http://www.caliburnproject.org"
+        mc:Ignorable="d"
+        Title="配准参数" 
+        Width="1024" Height="768" ResizeMode="NoResize" 
+        FontSize="14"
+        WindowStyle="ThreeDBorderWindow"
+        WindowStartupLocation="CenterOwner"
+        fluentWpf:AcrylicWindow.Enabled="True"
+        fluentWpf:AcrylicWindow.AcrylicWindowStyle="NoIcon">
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <!--表单区-->
+            <RowDefinition Height="*" />
+            <!--占位区-->
+            <RowDefinition Height="20" />
+            <!--控制区-->
+            <RowDefinition Height="50" />
+        </Grid.RowDefinitions>
+        <!--表单区-->
+        <Grid Grid.Row="0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition />
+                <ColumnDefinition />
+            </Grid.ColumnDefinitions>
+            <StackPanel Grid.Column="0">
+                <GroupBox Header="预处理" Margin="4,4,2,4" Height="353">
+                    <StackPanel Grid.IsSharedSizeScope="True" Margin="0,10">
+                        <sd:FormItem Label="叶子尺寸：">
+                            <TextBox Text="{Binding LeafSize}" Style="{StaticResource TextBoxRevealStyle}" />
+                        </sd:FormItem>
+                        <sd:FormItem Label="簇搜索容差：">
+                            <TextBox Text="{Binding ClusterTolerance}" Style="{StaticResource TextBoxRevealStyle}" />
+                        </sd:FormItem>
+                        <sd:FormItem Label="簇最小尺寸：">
+                            <TextBox Text="{Binding MinClusterSize}" Style="{StaticResource TextBoxRevealStyle}" />
+                        </sd:FormItem>
+                        <sd:FormItem Label="簇最大尺寸：">
+                            <TextBox Text="{Binding MaxClusterSize}" Style="{StaticResource TextBoxRevealStyle}" />
+                        </sd:FormItem>
+                        <sd:FormItem Label="平均近邻K：">
+                            <TextBox Text="{Binding MeanK}" Style="{StaticResource TextBoxRevealStyle}" />
+                        </sd:FormItem>
+                        <sd:FormItem Label="标准差系数：">
+                            <TextBox Text="{Binding StddevMult}" Style="{StaticResource TextBoxRevealStyle}" />
+                        </sd:FormItem>
+                    </StackPanel>
+                </GroupBox>
+                <GroupBox Header="关键点" Margin="4,2,2,4">
+                    <StackPanel Grid.IsSharedSizeScope="True" Margin="0,10">
+                        <sd:FormItem Label="显著半径：">
+                            <TextBox Text="{Binding SalientRadius}" Style="{StaticResource TextBoxRevealStyle}" />
+                        </sd:FormItem>
+                        <sd:FormItem Label="抑制半径：">
+                            <TextBox Text="{Binding NonMaxRadius}" Style="{StaticResource TextBoxRevealStyle}" />
+                        </sd:FormItem>
+                        <sd:FormItem Label="二一比上限：">
+                            <TextBox Text="{Binding Threshold21}" Style="{StaticResource TextBoxRevealStyle}" />
+                        </sd:FormItem>
+                        <sd:FormItem Label="三二比上限：">
+                            <TextBox Text="{Binding Threshold32}" Style="{StaticResource TextBoxRevealStyle}" />
+                        </sd:FormItem>
+                        <sd:FormItem Label="最小邻域点数：">
+                            <TextBox Text="{Binding MinNeighborsCount}" Style="{StaticResource TextBoxRevealStyle}" />
+                        </sd:FormItem>
+                    </StackPanel>
+                </GroupBox>
+            </StackPanel>
+            <StackPanel Grid.Column="1">
+                <GroupBox Header="特征" Margin="2,4,4,4">
+                    <StackPanel Grid.IsSharedSizeScope="True" Margin="0,10">
+                        <sd:FormItem Label="法向量K：">
+                            <TextBox Text="{Binding NormalK}" Style="{StaticResource TextBoxRevealStyle}" />
+                        </sd:FormItem>
+                        <sd:FormItem Label="特征K：">
+                            <TextBox Text="{Binding FeatureK}" Style="{StaticResource TextBoxRevealStyle}" />
+                        </sd:FormItem>
+                    </StackPanel>
+                </GroupBox>
+                <GroupBox Header="粗配准" Margin="2,2,4,4">
+                    <StackPanel Grid.IsSharedSizeScope="True" Margin="0,10">
+                        <sd:FormItem Label="采样点最小距离：">
+                            <TextBox Text="{Binding MinSampleDistance}" Style="{StaticResource TextBoxRevealStyle}" />
+                        </sd:FormItem>
+                        <sd:FormItem Label="采样数量：">
+                            <TextBox Text="{Binding SamplesCount}" Style="{StaticResource TextBoxRevealStyle}" />
+                        </sd:FormItem>
+                        <sd:FormItem Label="随机特征邻域点数：">
+                            <TextBox Text="{Binding CorrespondenceRandomness}" Style="{StaticResource TextBoxRevealStyle}" />
+                        </sd:FormItem>
+                    </StackPanel>
+                </GroupBox>
+                <GroupBox Header="精配准" Margin="2,2,4,4">
+                    <StackPanel Grid.IsSharedSizeScope="True" Margin="0,10">
+                        <sd:FormItem Label="分辨率：">
+                            <TextBox Text="{Binding MaxCorrespondenceDistance}" Style="{StaticResource TextBoxRevealStyle}" />
+                        </sd:FormItem>
+                        <sd:FormItem Label="变换最大差值：">
+                            <TextBox Text="{Binding TransformationEpsilon}" Style="{StaticResource TextBoxRevealStyle}" />
+                        </sd:FormItem>
+                        <sd:FormItem Label="均方误差阈值：">
+                            <TextBox Text="{Binding EuclideanFitnessEpsilon}" Style="{StaticResource TextBoxRevealStyle}" />
+                        </sd:FormItem>
+                        <sd:FormItem Label="最大迭代次数：">
+                            <TextBox Text="{Binding MaximumIterations}" Style="{StaticResource TextBoxRevealStyle}" />
+                        </sd:FormItem>
+                        <sd:FormItem Label="线程数：">
+                            <TextBox Text="{Binding ThreadsCount}" Style="{StaticResource TextBoxRevealStyle}" />
+                        </sd:FormItem>
+                    </StackPanel>
+                </GroupBox>
+            </StackPanel>
+        </Grid>
+        <!--占位区-->
+        <Grid Grid.Row="1" />
+        <!--控制区-->
+        <Grid Grid.Row="2" Style="{StaticResource Form.Styles.Submit.Grid}">
+            <WrapPanel Style="{StaticResource Form.Styles.Submit.WrapPanel}">
+                <Button Content="确定" cal:Message.Attach="Submit()" Style="{StaticResource Button.Styles.Fluent.Focus}" />
+                <Button Content="取消" cal:Message.Attach="TryCloseAsync('false')" Style="{StaticResource Button.Styles.Fluent.Default}" />
+            </WrapPanel>
+        </Grid>
+    </Grid>
+</Window>
