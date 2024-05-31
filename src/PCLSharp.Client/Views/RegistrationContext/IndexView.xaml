@@ -154,7 +154,7 @@
                     <!--光源-->
                     <hx:DirectionalLight3D Color="White" Direction="{Binding Camera.LookDirection}" />
                     <!--源点云-->
-                    <hx:PointGeometryModel3D Geometry="{Binding SourceCloud, UpdateSourceTrigger=PropertyChanged}" Color="Red" />
+                    <hx:PointGeometryModel3D Geometry="{Binding SourceCloud}" Color="Red" />
                     <!--目标点云-->
                     <hx:PointGeometryModel3D Geometry="{Binding TargetCloud}" Color="Green" />
                 </hx:Viewport3DX>
