@@ -14,6 +14,7 @@ using SD.IOC.Core.Mediators;
 using SharpDX;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Threading;
@@ -140,6 +141,134 @@ namespace PCLSharp.Client.ViewModels.RegistrationContext
         /// </summary>
         [DependencyProperty]
         public PointGeometry3D SourceCentroid { get; set; }
+        #endregion
+
+        #region 降采样耗时 —— TimeSpan? SampleDuration
+        /// <summary>
+        /// 降采样耗时
+        /// </summary>
+        [DependencyProperty]
+        public TimeSpan? SampleDuration { get; set; }
+        #endregion
+
+        #region 分割耗时 —— TimeSpan? SegmentDuration
+        /// <summary>
+        /// 分割耗时
+        /// </summary>
+        [DependencyProperty]
+        public TimeSpan? SegmentDuration { get; set; }
+        #endregion
+
+        #region 离群点耗时 —— TimeSpan? OuterRemovalDuration
+        /// <summary>
+        /// 离群点耗时
+        /// </summary>
+        [DependencyProperty]
+        public TimeSpan? OuterRemovalDuration { get; set; }
+        #endregion
+
+        #region 关键点耗时 —— TimeSpan? KeyPointDuration
+        /// <summary>
+        /// 关键点耗时
+        /// </summary>
+        [DependencyProperty]
+        public TimeSpan? KeyPointDuration { get; set; }
+        #endregion
+
+        #region 特征耗时 —— TimeSpan? FeatureDuration
+        /// <summary>
+        /// 特征耗时
+        /// </summary>
+        [DependencyProperty]
+        public TimeSpan? FeatureDuration { get; set; }
+        #endregion
+
+        #region 粗配准耗时 —— TimeSpan? CoarseAlignmentDuration
+        /// <summary>
+        /// 粗配准耗时
+        /// </summary>
+        [DependencyProperty]
+        public TimeSpan? CoarseAlignmentDuration { get; set; }
+        #endregion
+
+        #region 精配准耗时 —— TimeSpan? FineAlignmentDuration
+        /// <summary>
+        /// 精配准耗时
+        /// </summary>
+        [DependencyProperty]
+        public TimeSpan? FineAlignmentDuration { get; set; }
+        #endregion
+
+        #region 合计耗时 —— TimeSpan? TotalDuration
+        /// <summary>
+        /// 合计耗时
+        /// </summary>
+        [DependencyProperty]
+        public TimeSpan? TotalDuration { get; set; }
+        #endregion
+
+        #region 源点云采样数 —— int? SourceSampledCount
+        /// <summary>
+        /// 源点云采样数
+        /// </summary>
+        [DependencyProperty]
+        public int? SourceSampledCount { get; set; }
+        #endregion
+
+        #region 目标点云采样数 —— int? TargetSampledCount
+        /// <summary>
+        /// 目标点云采样数
+        /// </summary>
+        [DependencyProperty]
+        public int? TargetSampledCount { get; set; }
+        #endregion
+
+        #region 源点云分割数 —— int? SourceSegmentedCount
+        /// <summary>
+        /// 源点云分割数
+        /// </summary>
+        [DependencyProperty]
+        public int? SourceSegmentedCount { get; set; }
+        #endregion
+
+        #region 目标点云分割数 —— int? TargetSegmentedCount
+        /// <summary>
+        /// 目标点云分割数
+        /// </summary>
+        [DependencyProperty]
+        public int? TargetSegmentedCount { get; set; }
+        #endregion
+
+        #region 源点云离群数 —— int? SourceOuterCount
+        /// <summary>
+        /// 源点云离群数
+        /// </summary>
+        [DependencyProperty]
+        public int? SourceOuterCount { get; set; }
+        #endregion
+
+        #region 目标点云离群数 —— int? TargetOuterCount
+        /// <summary>
+        /// 目标点云离群数
+        /// </summary>
+        [DependencyProperty]
+        public int? TargetOuterCount { get; set; }
+        #endregion
+
+        #region 源点云关键点数 —— int? SourceKeyPointsCount
+        /// <summary>
+        /// 源点云关键点数
+        /// </summary>
+        [DependencyProperty]
+        public int? SourceKeyPointsCount { get; set; }
+        #endregion
+
+        #region 目标点云关键点数 —— int? TargetKeyPointsCount
+        /// <summary>
+        /// 目标点云关键点数
+        /// </summary>
+        [DependencyProperty]
+        public int? TargetKeyPointsCount { get; set; }
         #endregion
 
         #region 粗配准是否收敛 —— bool? CoarseHasConverged
@@ -292,6 +421,21 @@ namespace PCLSharp.Client.ViewModels.RegistrationContext
         /// </summary>
         public async void SetParameters()
         {
+            #region # 验证
+
+            if (this.SourceCloud == null)
+            {
+                MessageBox.Show("源点云未加载！", "错误", MessageBoxButton.OK, MessageBoxImage.Error);
+                return;
+            }
+            if (this.TargetCloud == null)
+            {
+                MessageBox.Show("目标点云未加载！", "错误", MessageBoxButton.OK, MessageBoxImage.Error);
+                return;
+            }
+
+            #endregion
+
             ParamViewModel paramViewModel = ResolveMediator.Resolve<ParamViewModel>();
             bool? result = await this._windowManager.ShowDialogAsync(paramViewModel);
             if (result == true)
@@ -314,7 +458,7 @@ namespace PCLSharp.Client.ViewModels.RegistrationContext
                 MessageBox.Show("源点云未加载！", "错误", MessageBoxButton.OK, MessageBoxImage.Error);
                 return;
             }
-            if (this.SourceCloud == null)
+            if (this.TargetCloud == null)
             {
                 MessageBox.Show("目标点云未加载！", "错误", MessageBoxButton.OK, MessageBoxImage.Error);
                 return;
@@ -333,17 +477,33 @@ namespace PCLSharp.Client.ViewModels.RegistrationContext
 
             #endregion
 
+            Stopwatch sampleWatch = new Stopwatch();
+            Stopwatch segmentWatch = new Stopwatch();
+            Stopwatch outerRemovalWatch = new Stopwatch();
+            Stopwatch keyPointWatch = new Stopwatch();
+            Stopwatch featureWatch = new Stopwatch();
+            Stopwatch coarseWatch = new Stopwatch();
+            Stopwatch fineWatch = new Stopwatch();
+            Stopwatch totalWatch = new Stopwatch();
+
             this.Busy();
+            totalWatch.Start();
 
             //提取原始点云
             IEnumerable<Point3F> originalSourcePoints = this.SourceCloud.Points.ToPoint3Fs();
             IEnumerable<Point3F> originalTargetPoints = this.TargetCloud.Points.ToPoint3Fs();
 
             //体素降采样
+            sampleWatch.Start();
             Point3F[] sourceBufferPoints = await Task.Run(() => this._cloudFilters.ApplyVoxelGrid(originalSourcePoints, this.ParamViewModel.LeafSize!.Value));
             Point3F[] targetBufferPoints = await Task.Run(() => this._cloudFilters.ApplyVoxelGrid(originalTargetPoints, this.ParamViewModel.LeafSize!.Value));
+            sampleWatch.Stop();
+            this.SampleDuration = sampleWatch.Elapsed;
+            this.SourceSampledCount = sourceBufferPoints.Length;
+            this.TargetSampledCount = targetBufferPoints.Length;
 
             //欧几里得聚类分割
+            segmentWatch.Start();
             Point3F[][] sourceClusters = await Task.Run(() => this._cloudSegmentations.EuclidClusterSegment(sourceBufferPoints, this.ParamViewModel.ClusterTolerance!.Value, this.ParamViewModel.MinClusterSize!.Value, this.ParamViewModel.MaxClusterSize!.Value));
             Point3F[][] targetClusters = await Task.Run(() => this._cloudSegmentations.EuclidClusterSegment(targetBufferPoints, this.ParamViewModel.ClusterTolerance!.Value, this.ParamViewModel.MinClusterSize!.Value, this.ParamViewModel.MaxClusterSize!.Value));
             if (sourceClusters.Any())
@@ -354,25 +514,48 @@ namespace PCLSharp.Client.ViewModels.RegistrationContext
             {
                 targetBufferPoints = targetClusters[0];
             }
+            segmentWatch.Stop();
+            this.SegmentDuration = segmentWatch.Elapsed;
+            this.SourceSegmentedCount = sourceBufferPoints.Length;
+            this.TargetSegmentedCount = targetBufferPoints.Length;
 
             //统计离群点移除
+            outerRemovalWatch.Start();
             sourceBufferPoints = await Task.Run(() => this._cloudFilters.ApplyStatisticalOutlierRemoval(sourceBufferPoints, this.ParamViewModel.MeanK!.Value, this.ParamViewModel.StddevMult!.Value));
             targetBufferPoints = await Task.Run(() => this._cloudFilters.ApplyStatisticalOutlierRemoval(targetBufferPoints, this.ParamViewModel.MeanK!.Value, this.ParamViewModel.StddevMult!.Value));
+            outerRemovalWatch.Stop();
+            this.OuterRemovalDuration = outerRemovalWatch.Elapsed;
+            this.SourceOuterCount = sourceBufferPoints.Length;
+            this.TargetOuterCount = targetBufferPoints.Length;
 
             //ISS关键点
+            keyPointWatch.Start();
             sourceBufferPoints = await Task.Run(() => this._cloudKeyPoints.DetectISS(sourceBufferPoints, this.ParamViewModel.SalientRadius!.Value, this.ParamViewModel.NonMaxRadius!.Value, this.ParamViewModel.Threshold21!.Value, this.ParamViewModel.Threshold32!.Value, this.ParamViewModel.MinNeighborsCount!.Value, this.ParamViewModel.ThreadsCount!.Value));
             targetBufferPoints = await Task.Run(() => this._cloudKeyPoints.DetectISS(targetBufferPoints, this.ParamViewModel.SalientRadius!.Value, this.ParamViewModel.NonMaxRadius!.Value, this.ParamViewModel.Threshold21!.Value, this.ParamViewModel.Threshold32!.Value, this.ParamViewModel.MinNeighborsCount!.Value, this.ParamViewModel.ThreadsCount!.Value));
+            keyPointWatch.Stop();
+            this.KeyPointDuration = keyPointWatch.Elapsed;
+            this.SourceKeyPointsCount = sourceBufferPoints.Length;
+            this.TargetKeyPointsCount = targetBufferPoints.Length;
 
             //FPFH特征
+            featureWatch.Start();
             FPFHSignature33F[] sourceDescriptors = await Task.Run(() => this._cloudFeatures.ComputeFPFH(sourceBufferPoints, this.ParamViewModel.NormalK!.Value, this.ParamViewModel.FeatureK!.Value, this.ParamViewModel.ThreadsCount!.Value));
             FPFHSignature33F[] targetDescriptors = await Task.Run(() => this._cloudFeatures.ComputeFPFH(targetBufferPoints, this.ParamViewModel.NormalK!.Value, this.ParamViewModel.FeatureK!.Value, this.ParamViewModel.ThreadsCount!.Value));
+            featureWatch.Stop();
+            this.FeatureDuration = featureWatch.Elapsed;
 
             //SAC-IA粗配准
+            coarseWatch.Start();
             AlignmentResult coarseAlignmentResult = this._cloudRegistrations.AlignSACIA(sourceBufferPoints, sourceDescriptors, targetBufferPoints, targetDescriptors, this.ParamViewModel.MinSampleDistance!.Value, this.ParamViewModel.SamplesCount!.Value, this.ParamViewModel.CorrespondenceRandomness!.Value);
             sourceBufferPoints = await Task.Run(() => this._cloudCommon.MatrixTransform(sourceBufferPoints, coarseAlignmentResult.Matrix));
+            coarseWatch.Stop();
+            this.CoarseAlignmentDuration = coarseWatch.Elapsed;
 
             //GICP精配准
+            fineWatch.Start();
             AlignmentResult fineAlignmentResult = this._cloudRegistrations.AlignGICP(sourceBufferPoints, targetBufferPoints, this.ParamViewModel.MaxCorrespondenceDistance!.Value, this.ParamViewModel.TransformationEpsilon!.Value, this.ParamViewModel.EuclideanFitnessEpsilon!.Value, this.ParamViewModel.MaximumIterations!.Value);
+            fineWatch.Stop();
+            this.FineAlignmentDuration = fineWatch.Elapsed;
 
             //解析配准结果
             const int rowsCount = 4;
@@ -396,6 +579,9 @@ namespace PCLSharp.Client.ViewModels.RegistrationContext
             this.FineFitnessScore = fineAlignmentResult.FitnessScore;
             this.FineMatrix = fineMatrix.ToString("F3");
             this.FinalMatrix = finalMatrix.ToString("F3");
+
+            totalWatch.Stop();
+            this.TotalDuration = totalWatch.Elapsed;
 
             //原始点云转换
             originalSourcePoints = await Task.Run(() => this._cloudCommon.MatrixTransform(originalSourcePoints, coarseAlignmentResult.Matrix));

@@ -54,75 +54,85 @@
                 <!--配准参数-->
                 <GroupBox Grid.Column="0" Header="配准参数" Margin="0">
                     <ScrollViewer HorizontalScrollBarVisibility="Disabled">
-                        <StackPanel Grid.IsSharedSizeScope="True" Margin="0,5">
-                            <TextBlock Text="---------------预处理---------------" Margin="0,0,0,10" Foreground="Red" />
-                            <sd:FormItem Label="叶子尺寸：">
-                                <TextBlock Text="{Binding ParamViewModel.LeafSize}" />
-                            </sd:FormItem>
-                            <sd:FormItem Label="簇搜索容差：">
-                                <TextBlock Text="{Binding ParamViewModel.ClusterTolerance}" />
-                            </sd:FormItem>
-                            <sd:FormItem Label="簇最小尺寸：">
-                                <TextBlock Text="{Binding ParamViewModel.MinClusterSize}" />
-                            </sd:FormItem>
-                            <sd:FormItem Label="簇最大尺寸：">
-                                <TextBlock Text="{Binding ParamViewModel.MaxClusterSize}" />
-                            </sd:FormItem>
-                            <sd:FormItem Label="平均近邻K：">
-                                <TextBlock Text="{Binding ParamViewModel.MeanK}" />
-                            </sd:FormItem>
-                            <sd:FormItem Label="标准差系数：">
-                                <TextBlock Text="{Binding ParamViewModel.StddevMult}" />
-                            </sd:FormItem>
-                            <TextBlock Text="---------------关键点---------------" Margin="0,0,0,10" Foreground="Red" />
-                            <sd:FormItem Label="显著半径：">
-                                <TextBlock Text="{Binding ParamViewModel.SalientRadius}" />
-                            </sd:FormItem>
-                            <sd:FormItem Label="抑制半径：">
-                                <TextBlock Text="{Binding ParamViewModel.NonMaxRadius}" />
-                            </sd:FormItem>
-                            <sd:FormItem Label="二一比上限：">
-                                <TextBlock Text="{Binding ParamViewModel.Threshold21}" />
-                            </sd:FormItem>
-                            <sd:FormItem Label="三二比上限：">
-                                <TextBlock Text="{Binding ParamViewModel.Threshold32}" />
-                            </sd:FormItem>
-                            <sd:FormItem Label="最小邻域点数：">
-                                <TextBlock Text="{Binding ParamViewModel.MinNeighborsCount}" />
-                            </sd:FormItem>
-                            <TextBlock Text="---------------特    征---------------" Margin="0,0,0,10" Foreground="Red" />
-                            <sd:FormItem Label="法向量K：">
-                                <TextBlock Text="{Binding ParamViewModel.NormalK}" />
-                            </sd:FormItem>
-                            <sd:FormItem Label="特征K：">
-                                <TextBlock Text="{Binding ParamViewModel.FeatureK}" />
-                            </sd:FormItem>
-                            <TextBlock Text="---------------粗配准---------------" Margin="0,0,0,10" Foreground="Red" />
-                            <sd:FormItem Label="采样点最小距离：">
-                                <TextBlock Text="{Binding ParamViewModel.MinSampleDistance}" />
-                            </sd:FormItem>
-                            <sd:FormItem Label="采样数量：">
-                                <TextBlock Text="{Binding ParamViewModel.SamplesCount}" />
-                            </sd:FormItem>
-                            <sd:FormItem Label="随机特征邻域点数：">
-                                <TextBlock Text="{Binding ParamViewModel.CorrespondenceRandomness}" />
-                            </sd:FormItem>
-                            <TextBlock Text="---------------精配准---------------" Margin="0,0,0,10" Foreground="Red" />
-                            <sd:FormItem Label="分辨率：">
-                                <TextBlock Text="{Binding ParamViewModel.MaxCorrespondenceDistance}" />
-                            </sd:FormItem>
-                            <sd:FormItem Label="变换最大差值：">
-                                <TextBlock Text="{Binding ParamViewModel.TransformationEpsilon}" />
-                            </sd:FormItem>
-                            <sd:FormItem Label="均方误差阈值：">
-                                <TextBlock Text="{Binding ParamViewModel.EuclideanFitnessEpsilon}" />
-                            </sd:FormItem>
-                            <sd:FormItem Label="最大迭代次数：">
-                                <TextBlock Text="{Binding ParamViewModel.MaximumIterations}" />
-                            </sd:FormItem>
-                            <sd:FormItem Label="线程数：">
-                                <TextBlock Text="{Binding ParamViewModel.ThreadsCount}" />
-                            </sd:FormItem>
+                        <StackPanel>
+                            <StackPanel Grid.IsSharedSizeScope="True" Margin="0,5">
+                                <TextBlock Text="---------------预处理---------------" Margin="0,0,0,10" Foreground="Red" />
+                                <sd:FormItem Label="叶子尺寸：">
+                                    <TextBlock Text="{Binding ParamViewModel.LeafSize}" />
+                                </sd:FormItem>
+                                <sd:FormItem Label="簇搜索容差：">
+                                    <TextBlock Text="{Binding ParamViewModel.ClusterTolerance}" />
+                                </sd:FormItem>
+                                <sd:FormItem Label="簇最小尺寸：">
+                                    <TextBlock Text="{Binding ParamViewModel.MinClusterSize}" />
+                                </sd:FormItem>
+                                <sd:FormItem Label="簇最大尺寸：">
+                                    <TextBlock Text="{Binding ParamViewModel.MaxClusterSize}" />
+                                </sd:FormItem>
+                                <sd:FormItem Label="平均K近邻：">
+                                    <TextBlock Text="{Binding ParamViewModel.MeanK}" />
+                                </sd:FormItem>
+                                <sd:FormItem Label="标准差系数：">
+                                    <TextBlock Text="{Binding ParamViewModel.StddevMult}" />
+                                </sd:FormItem>
+                            </StackPanel>
+                            <StackPanel Grid.IsSharedSizeScope="True" Margin="0,5">
+                                <TextBlock Text="---------------关键点---------------" Margin="0,0,0,10" Foreground="Red" />
+                                <sd:FormItem Label="显著半径：">
+                                    <TextBlock Text="{Binding ParamViewModel.SalientRadius}" />
+                                </sd:FormItem>
+                                <sd:FormItem Label="抑制半径：">
+                                    <TextBlock Text="{Binding ParamViewModel.NonMaxRadius}" />
+                                </sd:FormItem>
+                                <sd:FormItem Label="二一比上限：">
+                                    <TextBlock Text="{Binding ParamViewModel.Threshold21}" />
+                                </sd:FormItem>
+                                <sd:FormItem Label="三二比上限：">
+                                    <TextBlock Text="{Binding ParamViewModel.Threshold32}" />
+                                </sd:FormItem>
+                                <sd:FormItem Label="最小邻域数：">
+                                    <TextBlock Text="{Binding ParamViewModel.MinNeighborsCount}" />
+                                </sd:FormItem>
+                            </StackPanel>
+                            <StackPanel Grid.IsSharedSizeScope="True" Margin="0,5">
+                                <TextBlock Text="---------------特    征---------------" Margin="0,0,0,10" Foreground="Red" />
+                                <sd:FormItem Label="法向量K近邻：">
+                                    <TextBlock Text="{Binding ParamViewModel.NormalK}" />
+                                </sd:FormItem>
+                                <sd:FormItem Label="特征K近邻：">
+                                    <TextBlock Text="{Binding ParamViewModel.FeatureK}" />
+                                </sd:FormItem>
+                            </StackPanel>
+                            <StackPanel Grid.IsSharedSizeScope="True" Margin="0,5">
+                                <TextBlock Text="---------------粗配准---------------" Margin="0,0,0,10" Foreground="Red" />
+                                <sd:FormItem Label="采样最小距离：">
+                                    <TextBlock Text="{Binding ParamViewModel.MinSampleDistance}" />
+                                </sd:FormItem>
+                                <sd:FormItem Label="采样数量：">
+                                    <TextBlock Text="{Binding ParamViewModel.SamplesCount}" />
+                                </sd:FormItem>
+                                <sd:FormItem Label="随机邻域点数：">
+                                    <TextBlock Text="{Binding ParamViewModel.CorrespondenceRandomness}" />
+                                </sd:FormItem>
+                            </StackPanel>
+                            <StackPanel Grid.IsSharedSizeScope="True" Margin="0,5">
+                                <TextBlock Text="---------------精配准---------------" Margin="0,0,0,10" Foreground="Red" />
+                                <sd:FormItem Label="分辨率：">
+                                    <TextBlock Text="{Binding ParamViewModel.MaxCorrespondenceDistance}" />
+                                </sd:FormItem>
+                                <sd:FormItem Label="变换最大差值：">
+                                    <TextBlock Text="{Binding ParamViewModel.TransformationEpsilon}" />
+                                </sd:FormItem>
+                                <sd:FormItem Label="均方误差阈值：">
+                                    <TextBlock Text="{Binding ParamViewModel.EuclideanFitnessEpsilon}" />
+                                </sd:FormItem>
+                                <sd:FormItem Label="最大迭代次数：">
+                                    <TextBlock Text="{Binding ParamViewModel.MaximumIterations}" />
+                                </sd:FormItem>
+                                <sd:FormItem Label="线程数：">
+                                    <TextBlock Text="{Binding ParamViewModel.ThreadsCount}" />
+                                </sd:FormItem>
+                            </StackPanel>
                         </StackPanel>
                     </ScrollViewer>
                 </GroupBox>
@@ -162,27 +172,87 @@
                 <!--配准结果-->
                 <GroupBox Grid.Column="2" Header="配准结果" Margin="0">
                     <ScrollViewer HorizontalScrollBarVisibility="Disabled">
-                        <StackPanel Grid.IsSharedSizeScope="True" Margin="0,5">
-                            <TextBlock Text="---------------粗配准---------------" Margin="0,0,0,10" Foreground="Red" />
-                            <sd:FormItem Label="是否收敛：">
-                                <TextBlock Text="{Binding CoarseHasConverged, Converter={StaticResource Converters.YesNoDescriptionConverter}}" />
-                            </sd:FormItem>
-                            <sd:FormItem Label="拟合分数：">
-                                <TextBlock Text="{Binding CoarseFitnessScore}" />
-                            </sd:FormItem>
-                            <sd:FormItem Label="RT矩阵：" />
-                            <TextBlock Text="{Binding CoarseMatrix}" Margin="15,0,0,0" />
-                            <TextBlock Text="---------------精配准---------------" Margin="0,0,0,10" Foreground="Red" />
-                            <sd:FormItem Label="是否收敛：">
-                                <TextBlock Text="{Binding FineHasConverged, Converter={StaticResource Converters.YesNoDescriptionConverter}}" />
-                            </sd:FormItem>
-                            <sd:FormItem Label="拟合分数：">
-                                <TextBlock Text="{Binding FineFitnessScore}" />
-                            </sd:FormItem>
-                            <sd:FormItem Label="RT矩阵：" />
-                            <TextBlock Text="{Binding FineMatrix}" Margin="15,0,0,0" />
-                            <TextBlock Text="-------------最终RT矩阵-------------" Margin="0,0,0,10" Foreground="Red" />
-                            <TextBlock Text="{Binding FinalMatrix}" Margin="15,10,0,0" />
+                        <StackPanel>
+                            <StackPanel Grid.IsSharedSizeScope="True" Margin="0,5">
+                                <TextBlock Text="----------------耗时----------------" Margin="0,0,0,10" Foreground="Red" />
+                                <sd:FormItem Label="降采样耗时：">
+                                    <TextBlock Text="{Binding SampleDuration, StringFormat={}{0:mm}:{0:ss}.{0:fff}}" />
+                                </sd:FormItem>
+                                <sd:FormItem Label="聚类分割耗时：">
+                                    <TextBlock Text="{Binding SegmentDuration, StringFormat={}{0:mm}:{0:ss}.{0:fff}}" />
+                                </sd:FormItem>
+                                <sd:FormItem Label="离群点耗时：">
+                                    <TextBlock Text="{Binding OuterRemovalDuration, StringFormat={}{0:mm}:{0:ss}.{0:fff}}" />
+                                </sd:FormItem>
+                                <sd:FormItem Label="关键点耗时：">
+                                    <TextBlock Text="{Binding KeyPointDuration, StringFormat={}{0:mm}:{0:ss}.{0:fff}}" />
+                                </sd:FormItem>
+                                <sd:FormItem Label="特征耗时：">
+                                    <TextBlock Text="{Binding FeatureDuration, StringFormat={}{0:mm}:{0:ss}.{0:fff}}" />
+                                </sd:FormItem>
+                                <sd:FormItem Label="粗配准耗时：">
+                                    <TextBlock Text="{Binding CoarseAlignmentDuration, StringFormat={}{0:mm}:{0:ss}.{0:fff}}" />
+                                </sd:FormItem>
+                                <sd:FormItem Label="精配准耗时：">
+                                    <TextBlock Text="{Binding FineAlignmentDuration, StringFormat={}{0:mm}:{0:ss}.{0:fff}}" />
+                                </sd:FormItem>
+                                <sd:FormItem Label="合计耗时：">
+                                    <TextBlock Text="{Binding TotalDuration, StringFormat={}{0:mm}:{0:ss}.{0:fff}}" />
+                                </sd:FormItem>
+                            </StackPanel>
+                            <StackPanel Grid.IsSharedSizeScope="True" Margin="0,5">
+                                <TextBlock Text="----------------过程----------------" Margin="0,0,0,10" Foreground="Red" />
+                                <sd:FormItem Label="降采样(源)：">
+                                    <TextBlock Text="{Binding SourceSampledCount}" />
+                                </sd:FormItem>
+                                <sd:FormItem Label="降采样(标)：">
+                                    <TextBlock Text="{Binding TargetSampledCount}" />
+                                </sd:FormItem>
+                                <sd:FormItem Label="聚类分割(源)：">
+                                    <TextBlock Text="{Binding SourceSegmentedCount}" />
+                                </sd:FormItem>
+                                <sd:FormItem Label="聚类分割(标)：">
+                                    <TextBlock Text="{Binding TargetSegmentedCount}" />
+                                </sd:FormItem>
+                                <sd:FormItem Label="离群点移除(源)：">
+                                    <TextBlock Text="{Binding SourceOuterCount}" />
+                                </sd:FormItem>
+                                <sd:FormItem Label="离群点移除(标)：">
+                                    <TextBlock Text="{Binding TargetOuterCount}" />
+                                </sd:FormItem>
+                                <sd:FormItem Label="关键点(源)：">
+                                    <TextBlock Text="{Binding SourceKeyPointsCount}" />
+                                </sd:FormItem>
+                                <sd:FormItem Label="关键点(标)：">
+                                    <TextBlock Text="{Binding TargetKeyPointsCount}" />
+                                </sd:FormItem>
+                            </StackPanel>
+                            <StackPanel Grid.IsSharedSizeScope="True" Margin="0,5">
+                                <TextBlock Text="---------------粗配准---------------" Margin="0,0,0,10" Foreground="Red" />
+                                <sd:FormItem Label="是否收敛：">
+                                    <TextBlock Text="{Binding CoarseHasConverged, Converter={StaticResource Converters.YesNoDescriptionConverter}}" />
+                                </sd:FormItem>
+                                <sd:FormItem Label="拟合分数：">
+                                    <TextBlock Text="{Binding CoarseFitnessScore}" />
+                                </sd:FormItem>
+                                <sd:FormItem Label="RT矩阵：" />
+                                <TextBlock Text="{Binding CoarseMatrix}" Margin="15,0,0,0" />
+                            </StackPanel>
+                            <StackPanel Grid.IsSharedSizeScope="True" Margin="0,5">
+                                <TextBlock Text="---------------精配准---------------" Margin="0,0,0,10" Foreground="Red" />
+                                <sd:FormItem Label="是否收敛：">
+                                    <TextBlock Text="{Binding FineHasConverged, Converter={StaticResource Converters.YesNoDescriptionConverter}}" />
+                                </sd:FormItem>
+                                <sd:FormItem Label="拟合分数：">
+                                    <TextBlock Text="{Binding FineFitnessScore}" />
+                                </sd:FormItem>
+                                <sd:FormItem Label="RT矩阵：" />
+                                <TextBlock Text="{Binding FineMatrix}" Margin="15,0,0,0" />
+                            </StackPanel>
+                            <StackPanel Grid.IsSharedSizeScope="True" Margin="0,5">
+                                <TextBlock Text="-------------最终RT矩阵-------------" Margin="0,0,0,10" Foreground="Red" />
+                                <TextBlock Text="{Binding FinalMatrix}" Margin="15,5,0,0" />
+                            </StackPanel>
                         </StackPanel>
                     </ScrollViewer>
                 </GroupBox>
