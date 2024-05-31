@@ -143,12 +143,12 @@ namespace PCLSharp.Client.ViewModels.RegistrationContext
         public PointGeometry3D SourceCentroid { get; set; }
         #endregion
 
-        #region 降采样耗时 —— TimeSpan? SampleDuration
+        #region 降采样I耗时 —— TimeSpan? SampleIDuration
         /// <summary>
-        /// 降采样耗时
+        /// 降采样I耗时
         /// </summary>
         [DependencyProperty]
-        public TimeSpan? SampleDuration { get; set; }
+        public TimeSpan? SampleIDuration { get; set; }
         #endregion
 
         #region 分割耗时 —— TimeSpan? SegmentDuration
@@ -191,6 +191,14 @@ namespace PCLSharp.Client.ViewModels.RegistrationContext
         public TimeSpan? CoarseAlignmentDuration { get; set; }
         #endregion
 
+        #region 降采样II耗时 —— TimeSpan? SampleIIDuration
+        /// <summary>
+        /// 降采样II耗时
+        /// </summary>
+        [DependencyProperty]
+        public TimeSpan? SampleIIDuration { get; set; }
+        #endregion
+
         #region 精配准耗时 —— TimeSpan? FineAlignmentDuration
         /// <summary>
         /// 精配准耗时
@@ -207,20 +215,36 @@ namespace PCLSharp.Client.ViewModels.RegistrationContext
         public TimeSpan? TotalDuration { get; set; }
         #endregion
 
-        #region 源点云采样数 —— int? SourceSampledCount
+        #region 源点云采样数I —— int? SourceSampledCountI
         /// <summary>
-        /// 源点云采样数
+        /// 源点云采样数I
         /// </summary>
         [DependencyProperty]
-        public int? SourceSampledCount { get; set; }
+        public int? SourceSampledCountI { get; set; }
         #endregion
 
-        #region 目标点云采样数 —— int? TargetSampledCount
+        #region 目标点云采样数I —— int? TargetSampledCountI
         /// <summary>
-        /// 目标点云采样数
+        /// 目标点云采样数I
         /// </summary>
         [DependencyProperty]
-        public int? TargetSampledCount { get; set; }
+        public int? TargetSampledCountI { get; set; }
+        #endregion
+
+        #region 源点云采样数II —— int? SourceSampledCountII
+        /// <summary>
+        /// 源点云采样数I
+        /// </summary>
+        [DependencyProperty]
+        public int? SourceSampledCountII { get; set; }
+        #endregion
+
+        #region 目标点云采样数II —— int? TargetSampledCountII
+        /// <summary>
+        /// 目标点云采样数II
+        /// </summary>
+        [DependencyProperty]
+        public int? TargetSampledCountII { get; set; }
         #endregion
 
         #region 源点云分割数 —— int? SourceSegmentedCount
@@ -477,7 +501,8 @@ namespace PCLSharp.Client.ViewModels.RegistrationContext
 
             #endregion
 
-            Stopwatch sampleWatch = new Stopwatch();
+            Stopwatch sampleIWatch = new Stopwatch();
+            Stopwatch sampleIIWatch = new Stopwatch();
             Stopwatch segmentWatch = new Stopwatch();
             Stopwatch outerRemovalWatch = new Stopwatch();
             Stopwatch keyPointWatch = new Stopwatch();
@@ -493,14 +518,14 @@ namespace PCLSharp.Client.ViewModels.RegistrationContext
             IEnumerable<Point3F> originalSourcePoints = this.SourceCloud.Points.ToPoint3Fs();
             IEnumerable<Point3F> originalTargetPoints = this.TargetCloud.Points.ToPoint3Fs();
 
-            //体素降采样
-            sampleWatch.Start();
+            //体素降采样I
+            sampleIWatch.Start();
             Point3F[] sourceBufferPoints = await Task.Run(() => this._cloudFilters.ApplyVoxelGrid(originalSourcePoints, this.ParamViewModel.LeafSize!.Value));
             Point3F[] targetBufferPoints = await Task.Run(() => this._cloudFilters.ApplyVoxelGrid(originalTargetPoints, this.ParamViewModel.LeafSize!.Value));
-            sampleWatch.Stop();
-            this.SampleDuration = sampleWatch.Elapsed;
-            this.SourceSampledCount = sourceBufferPoints.Length;
-            this.TargetSampledCount = targetBufferPoints.Length;
+            sampleIWatch.Stop();
+            this.SampleIDuration = sampleIWatch.Elapsed;
+            this.SourceSampledCountI = sourceBufferPoints.Length;
+            this.TargetSampledCountI = targetBufferPoints.Length;
 
             //欧几里得聚类分割
             segmentWatch.Start();
@@ -530,26 +555,35 @@ namespace PCLSharp.Client.ViewModels.RegistrationContext
 
             //ISS关键点
             keyPointWatch.Start();
-            sourceBufferPoints = await Task.Run(() => this._cloudKeyPoints.DetectISS(sourceBufferPoints, this.ParamViewModel.SalientRadius!.Value, this.ParamViewModel.NonMaxRadius!.Value, this.ParamViewModel.Threshold21!.Value, this.ParamViewModel.Threshold32!.Value, this.ParamViewModel.MinNeighborsCount!.Value, this.ParamViewModel.ThreadsCount!.Value));
-            targetBufferPoints = await Task.Run(() => this._cloudKeyPoints.DetectISS(targetBufferPoints, this.ParamViewModel.SalientRadius!.Value, this.ParamViewModel.NonMaxRadius!.Value, this.ParamViewModel.Threshold21!.Value, this.ParamViewModel.Threshold32!.Value, this.ParamViewModel.MinNeighborsCount!.Value, this.ParamViewModel.ThreadsCount!.Value));
+            Point3F[] sourceKeyPoints = await Task.Run(() => this._cloudKeyPoints.DetectISS(sourceBufferPoints, this.ParamViewModel.SalientRadius!.Value, this.ParamViewModel.NonMaxRadius!.Value, this.ParamViewModel.Threshold21!.Value, this.ParamViewModel.Threshold32!.Value, this.ParamViewModel.MinNeighborsCount!.Value, this.ParamViewModel.ThreadsCount!.Value));
+            Point3F[] targetKeyPoints = await Task.Run(() => this._cloudKeyPoints.DetectISS(targetBufferPoints, this.ParamViewModel.SalientRadius!.Value, this.ParamViewModel.NonMaxRadius!.Value, this.ParamViewModel.Threshold21!.Value, this.ParamViewModel.Threshold32!.Value, this.ParamViewModel.MinNeighborsCount!.Value, this.ParamViewModel.ThreadsCount!.Value));
             keyPointWatch.Stop();
             this.KeyPointDuration = keyPointWatch.Elapsed;
-            this.SourceKeyPointsCount = sourceBufferPoints.Length;
-            this.TargetKeyPointsCount = targetBufferPoints.Length;
+            this.SourceKeyPointsCount = sourceKeyPoints.Length;
+            this.TargetKeyPointsCount = targetKeyPoints.Length;
 
             //FPFH特征
             featureWatch.Start();
-            FPFHSignature33F[] sourceDescriptors = await Task.Run(() => this._cloudFeatures.ComputeFPFH(sourceBufferPoints, this.ParamViewModel.NormalK!.Value, this.ParamViewModel.FeatureK!.Value, this.ParamViewModel.ThreadsCount!.Value));
-            FPFHSignature33F[] targetDescriptors = await Task.Run(() => this._cloudFeatures.ComputeFPFH(targetBufferPoints, this.ParamViewModel.NormalK!.Value, this.ParamViewModel.FeatureK!.Value, this.ParamViewModel.ThreadsCount!.Value));
+            FPFHSignature33F[] sourceDescriptors = await Task.Run(() => this._cloudFeatures.ComputeFPFH(sourceKeyPoints, this.ParamViewModel.NormalK!.Value, this.ParamViewModel.FeatureK!.Value, this.ParamViewModel.ThreadsCount!.Value));
+            FPFHSignature33F[] targetDescriptors = await Task.Run(() => this._cloudFeatures.ComputeFPFH(targetKeyPoints, this.ParamViewModel.NormalK!.Value, this.ParamViewModel.FeatureK!.Value, this.ParamViewModel.ThreadsCount!.Value));
             featureWatch.Stop();
             this.FeatureDuration = featureWatch.Elapsed;
 
             //SAC-IA粗配准
             coarseWatch.Start();
-            AlignmentResult coarseAlignmentResult = this._cloudRegistrations.AlignSACIA(sourceBufferPoints, sourceDescriptors, targetBufferPoints, targetDescriptors, this.ParamViewModel.MinSampleDistance!.Value, this.ParamViewModel.SamplesCount!.Value, this.ParamViewModel.CorrespondenceRandomness!.Value);
+            AlignmentResult coarseAlignmentResult = this._cloudRegistrations.AlignSACIA(sourceKeyPoints, sourceDescriptors, targetKeyPoints, targetDescriptors, this.ParamViewModel.MinSampleDistance!.Value, this.ParamViewModel.SamplesCount!.Value, this.ParamViewModel.CorrespondenceRandomness!.Value);
             sourceBufferPoints = await Task.Run(() => this._cloudCommon.MatrixTransform(sourceBufferPoints, coarseAlignmentResult.Matrix));
             coarseWatch.Stop();
             this.CoarseAlignmentDuration = coarseWatch.Elapsed;
+
+            //体素降采样II
+            sampleIIWatch.Start();
+            sourceBufferPoints = await Task.Run(() => this._cloudFilters.ApplyVoxelGrid(sourceBufferPoints, this.ParamViewModel.LeafSize!.Value * this.ParamViewModel.SampleIIRate!.Value));
+            targetBufferPoints = await Task.Run(() => this._cloudFilters.ApplyVoxelGrid(targetBufferPoints, this.ParamViewModel.LeafSize!.Value * this.ParamViewModel.SampleIIRate!.Value));
+            sampleIIWatch.Stop();
+            this.SampleIIDuration = sampleIIWatch.Elapsed;
+            this.SourceSampledCountII = sourceBufferPoints.Length;
+            this.TargetSampledCountII = targetBufferPoints.Length;
 
             //GICP精配准
             fineWatch.Start();

@@ -8,7 +8,7 @@
         xmlns:cal="http://www.caliburnproject.org"
         mc:Ignorable="d"
         Title="配准参数" 
-        Width="1024" Height="768" ResizeMode="NoResize" 
+        Width="1024" Height="805" ResizeMode="NoResize" 
         FontSize="14"
         WindowStyle="ThreeDBorderWindow"
         WindowStartupLocation="CenterOwner"
@@ -31,10 +31,13 @@
                 <ColumnDefinition />
             </Grid.ColumnDefinitions>
             <StackPanel Grid.Column="0">
-                <GroupBox Header="预处理" Margin="4,4,2,2" Height="351">
+                <GroupBox Header="预处理" Margin="4,4,2,2">
                     <StackPanel Grid.IsSharedSizeScope="True" Margin="0,10">
                         <sd:FormItem Label="叶子尺寸：">
                             <TextBox Text="{Binding LeafSize}" Style="{StaticResource TextBoxRevealStyle}" />
+                        </sd:FormItem>
+                        <sd:FormItem Label="二次采样率：">
+                            <TextBox Text="{Binding SampleIIRate}" Style="{StaticResource TextBoxRevealStyle}" />
                         </sd:FormItem>
                         <sd:FormItem Label="簇搜索容差：">
                             <TextBox Text="{Binding ClusterTolerance}" Style="{StaticResource TextBoxRevealStyle}" />
@@ -75,7 +78,7 @@
             </StackPanel>
             <StackPanel Grid.Column="1">
                 <GroupBox Header="特征" Margin="2,4,4,2">
-                    <StackPanel Grid.IsSharedSizeScope="True" Margin="0,10">
+                    <StackPanel Grid.IsSharedSizeScope="True" Margin="0,20">
                         <sd:FormItem Label="法向量K近邻：">
                             <TextBox Text="{Binding NormalK}" Style="{StaticResource TextBoxRevealStyle}" />
                         </sd:FormItem>
@@ -85,7 +88,7 @@
                     </StackPanel>
                 </GroupBox>
                 <GroupBox Header="粗配准" Margin="2,2,4,2">
-                    <StackPanel Grid.IsSharedSizeScope="True" Margin="0,10">
+                    <StackPanel Grid.IsSharedSizeScope="True" Height="155" Margin="0,20">
                         <sd:FormItem Label="采样最小距离：">
                             <TextBox Text="{Binding MinSampleDistance}" Style="{StaticResource TextBoxRevealStyle}" />
                         </sd:FormItem>

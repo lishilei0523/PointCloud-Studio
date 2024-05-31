@@ -60,6 +60,9 @@
                                 <sd:FormItem Label="叶子尺寸：">
                                     <TextBlock Text="{Binding ParamViewModel.LeafSize}" />
                                 </sd:FormItem>
+                                <sd:FormItem Label="二次采样率：">
+                                    <TextBlock Text="{Binding ParamViewModel.SampleIIRate}" />
+                                </sd:FormItem>
                                 <sd:FormItem Label="簇搜索容差：">
                                     <TextBlock Text="{Binding ParamViewModel.ClusterTolerance}" />
                                 </sd:FormItem>
@@ -175,8 +178,8 @@
                         <StackPanel>
                             <StackPanel Grid.IsSharedSizeScope="True" Margin="0,5">
                                 <TextBlock Text="----------------耗时----------------" Margin="0,0,0,10" Foreground="Red" />
-                                <sd:FormItem Label="降采样耗时：">
-                                    <TextBlock Text="{Binding SampleDuration, StringFormat={}{0:mm}:{0:ss}.{0:fff}}" />
+                                <sd:FormItem Label="一次采样耗时：">
+                                    <TextBlock Text="{Binding SampleIDuration, StringFormat={}{0:mm}:{0:ss}.{0:fff}}" />
                                 </sd:FormItem>
                                 <sd:FormItem Label="聚类分割耗时：">
                                     <TextBlock Text="{Binding SegmentDuration, StringFormat={}{0:mm}:{0:ss}.{0:fff}}" />
@@ -193,6 +196,9 @@
                                 <sd:FormItem Label="粗配准耗时：">
                                     <TextBlock Text="{Binding CoarseAlignmentDuration, StringFormat={}{0:mm}:{0:ss}.{0:fff}}" />
                                 </sd:FormItem>
+                                <sd:FormItem Label="二次采样耗时：">
+                                    <TextBlock Text="{Binding SampleIIDuration, StringFormat={}{0:mm}:{0:ss}.{0:fff}}" />
+                                </sd:FormItem>
                                 <sd:FormItem Label="精配准耗时：">
                                     <TextBlock Text="{Binding FineAlignmentDuration, StringFormat={}{0:mm}:{0:ss}.{0:fff}}" />
                                 </sd:FormItem>
@@ -202,11 +208,11 @@
                             </StackPanel>
                             <StackPanel Grid.IsSharedSizeScope="True" Margin="0,5">
                                 <TextBlock Text="----------------过程----------------" Margin="0,0,0,10" Foreground="Red" />
-                                <sd:FormItem Label="降采样(源)：">
-                                    <TextBlock Text="{Binding SourceSampledCount}" />
+                                <sd:FormItem Label="一次采样(源)：">
+                                    <TextBlock Text="{Binding SourceSampledCountI}" />
                                 </sd:FormItem>
-                                <sd:FormItem Label="降采样(标)：">
-                                    <TextBlock Text="{Binding TargetSampledCount}" />
+                                <sd:FormItem Label="一次采样(标)：">
+                                    <TextBlock Text="{Binding TargetSampledCountI}" />
                                 </sd:FormItem>
                                 <sd:FormItem Label="聚类分割(源)：">
                                     <TextBlock Text="{Binding SourceSegmentedCount}" />
@@ -225,6 +231,12 @@
                                 </sd:FormItem>
                                 <sd:FormItem Label="关键点(标)：">
                                     <TextBlock Text="{Binding TargetKeyPointsCount}" />
+                                </sd:FormItem>
+                                <sd:FormItem Label="二次采样(源)：">
+                                    <TextBlock Text="{Binding SourceSampledCountII}" />
+                                </sd:FormItem>
+                                <sd:FormItem Label="二次采样(标)：">
+                                    <TextBlock Text="{Binding TargetSampledCountII}" />
                                 </sd:FormItem>
                             </StackPanel>
                             <StackPanel Grid.IsSharedSizeScope="True" Margin="0,5">

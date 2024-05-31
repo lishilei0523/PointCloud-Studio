@@ -18,6 +18,7 @@ namespace PCLSharp.Client.ViewModels.RegistrationContext
         {
             //降采样
             this.LeafSize = 1.0f;
+            this.SampleIIRate = 2.0f;
 
             //分割
             this.ClusterTolerance = 1.5f;
@@ -66,6 +67,14 @@ namespace PCLSharp.Client.ViewModels.RegistrationContext
         /// </summary>
         [DependencyProperty]
         public float? LeafSize { get; set; }
+        #endregion
+
+        #region 二次采样率 —— float? SampleIIRate
+        /// <summary>
+        /// 二次采样率
+        /// </summary>
+        [DependencyProperty]
+        public float? SampleIIRate { get; set; }
         #endregion
 
 
@@ -265,6 +274,11 @@ namespace PCLSharp.Client.ViewModels.RegistrationContext
             if (!this.LeafSize.HasValue)
             {
                 MessageBox.Show("叶子尺寸不可为空！", "错误", MessageBoxButton.OK, MessageBoxImage.Error);
+                return;
+            }
+            if (!this.SampleIIRate.HasValue)
+            {
+                MessageBox.Show("二次采样率不可为空！", "错误", MessageBoxButton.OK, MessageBoxImage.Error);
                 return;
             }
             //分割
