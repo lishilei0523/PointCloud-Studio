@@ -16,6 +16,7 @@
 
     <mah:MetroWindow.RightWindowCommands>
         <mah:WindowCommands>
+            <Button Content="刷新点云" cm:Message.Attach="RefreshCloud()" />
             <Button Content="指向质心" cm:Message.Attach="LookAtCentroid()" />
             <Button Content="重置相机" cm:Message.Attach="ResetCamera()" />
         </mah:WindowCommands>
@@ -36,7 +37,7 @@
                 <MenuItem Header="打开源点云(_S)" cm:Message.Attach="OpenSourceCloud()" />
                 <MenuItem Header="打开目标点云(_T)" cm:Message.Attach="OpenTargetCloud()" />
                 <MenuItem Header="设置参数(_P)" cm:Message.Attach="SetParameters()" />
-                <MenuItem Header="执行配准(_P)" cm:Message.Attach="ExecuteAlignment()" />
+                <MenuItem Header="执行配准(_R)" cm:Message.Attach="ExecuteAlignment()" />
             </Menu>
         </Border>
         <!--Body-->
@@ -54,7 +55,7 @@
                 <GroupBox Grid.Column="0" Header="配准参数" Margin="0">
                     <ScrollViewer HorizontalScrollBarVisibility="Disabled">
                         <StackPanel Grid.IsSharedSizeScope="True" Margin="0,5">
-                            <TextBlock Text="---------------预处理---------------" Foreground="Red" />
+                            <TextBlock Text="---------------预处理---------------" Margin="0,0,0,10" Foreground="Red" />
                             <sd:FormItem Label="叶子尺寸：">
                                 <TextBlock Text="{Binding ParamViewModel.LeafSize}" />
                             </sd:FormItem>
@@ -73,7 +74,7 @@
                             <sd:FormItem Label="标准差系数：">
                                 <TextBlock Text="{Binding ParamViewModel.StddevMult}" />
                             </sd:FormItem>
-                            <TextBlock Text="---------------关键点---------------" Foreground="Red" />
+                            <TextBlock Text="---------------关键点---------------" Margin="0,0,0,10" Foreground="Red" />
                             <sd:FormItem Label="显著半径：">
                                 <TextBlock Text="{Binding ParamViewModel.SalientRadius}" />
                             </sd:FormItem>
@@ -89,14 +90,14 @@
                             <sd:FormItem Label="最小邻域点数：">
                                 <TextBlock Text="{Binding ParamViewModel.MinNeighborsCount}" />
                             </sd:FormItem>
-                            <TextBlock Text="---------------特    征---------------" Foreground="Red" />
+                            <TextBlock Text="---------------特    征---------------" Margin="0,0,0,10" Foreground="Red" />
                             <sd:FormItem Label="法向量K：">
                                 <TextBlock Text="{Binding ParamViewModel.NormalK}" />
                             </sd:FormItem>
                             <sd:FormItem Label="特征K：">
                                 <TextBlock Text="{Binding ParamViewModel.FeatureK}" />
                             </sd:FormItem>
-                            <TextBlock Text="---------------粗配准---------------" Foreground="Red" />
+                            <TextBlock Text="---------------粗配准---------------" Margin="0,0,0,10" Foreground="Red" />
                             <sd:FormItem Label="采样点最小距离：">
                                 <TextBlock Text="{Binding ParamViewModel.MinSampleDistance}" />
                             </sd:FormItem>
@@ -106,7 +107,7 @@
                             <sd:FormItem Label="随机特征邻域点数：">
                                 <TextBlock Text="{Binding ParamViewModel.CorrespondenceRandomness}" />
                             </sd:FormItem>
-                            <TextBlock Text="---------------精配准---------------" Foreground="Red" />
+                            <TextBlock Text="---------------精配准---------------" Margin="0,0,0,10" Foreground="Red" />
                             <sd:FormItem Label="分辨率：">
                                 <TextBlock Text="{Binding ParamViewModel.MaxCorrespondenceDistance}" />
                             </sd:FormItem>
