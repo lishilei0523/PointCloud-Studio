@@ -608,11 +608,11 @@ namespace PCLSharp.Client.ViewModels.RegistrationContext
             Matrix<float> finalMatrix = fineMatrix * coarseMatrix;
             this.CoarseHasConverged = coarseAlignmentResult.HasConverged;
             this.CoarseFitnessScore = coarseAlignmentResult.FitnessScore;
-            this.CoarseMatrix = coarseMatrix.ToString("F3");
+            this.CoarseMatrix = coarseMatrix.ToMatrixString(Constants.MatrixFormat);
             this.FineHasConverged = fineAlignmentResult.HasConverged;
             this.FineFitnessScore = fineAlignmentResult.FitnessScore;
-            this.FineMatrix = fineMatrix.ToString("F3");
-            this.FinalMatrix = finalMatrix.ToString("F3");
+            this.FineMatrix = fineMatrix.ToMatrixString(Constants.MatrixFormat);
+            this.FinalMatrix = finalMatrix.ToMatrixString(Constants.MatrixFormat);
 
             totalWatch.Stop();
             this.TotalDuration = totalWatch.Elapsed.ToString(Constants.DurationFormat);

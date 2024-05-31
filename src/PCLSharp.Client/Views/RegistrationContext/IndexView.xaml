@@ -57,7 +57,7 @@
                         <StackPanel>
                             <StackPanel Grid.IsSharedSizeScope="True" Margin="0,5">
                                 <TextBlock Text="---------------预处理---------------" Margin="0,0,0,10" Foreground="Red" />
-                                <sd:FormItem Label="叶子尺寸：">
+                                <sd:FormItem Label="网格尺寸：">
                                     <TextBlock Text="{Binding ParamViewModel.LeafSize}" />
                                 </sd:FormItem>
                                 <sd:FormItem Label="二次采样率：">

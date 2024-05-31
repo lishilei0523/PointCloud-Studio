@@ -33,7 +33,7 @@
             <StackPanel Grid.Column="0">
                 <GroupBox Header="预处理" Margin="4,4,2,2">
                     <StackPanel Grid.IsSharedSizeScope="True" Margin="0,10">
-                        <sd:FormItem Label="叶子尺寸：">
+                        <sd:FormItem Label="网格尺寸：">
                             <TextBox Text="{Binding LeafSize}" Style="{StaticResource TextBoxRevealStyle}" />
                         </sd:FormItem>
                         <sd:FormItem Label="二次采样率：">

@@ -12,6 +12,11 @@ namespace PCLSharp
         public const string DurationFormat = @"ss\.fff";
 
         /// <summary>
+        /// 耗时格式
+        /// </summary>
+        public const string MatrixFormat = "F3";
+
+        /// <summary>
         /// X轴
         /// </summary>
         public const string AxisX = "x";
