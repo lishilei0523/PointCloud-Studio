@@ -7,6 +7,11 @@ namespace PCLSharp
     public static class Constants
     {
         /// <summary>
+        /// 耗时格式
+        /// </summary>
+        public const string DurationFormat = @"ss\.fff";
+
+        /// <summary>
         /// X轴
         /// </summary>
         public const string AxisX = "x";

@@ -179,31 +179,31 @@
                             <StackPanel Grid.IsSharedSizeScope="True" Margin="0,5">
                                 <TextBlock Text="----------------耗时----------------" Margin="0,0,0,10" Foreground="Red" />
                                 <sd:FormItem Label="一次采样耗时：">
-                                    <TextBlock Text="{Binding SampleIDuration, StringFormat={}{0:mm}:{0:ss}.{0:fff}}" />
+                                    <TextBlock Text="{Binding SampleIDuration}" />
                                 </sd:FormItem>
                                 <sd:FormItem Label="聚类分割耗时：">
-                                    <TextBlock Text="{Binding SegmentDuration, StringFormat={}{0:mm}:{0:ss}.{0:fff}}" />
+                                    <TextBlock Text="{Binding SegmentDuration}" />
                                 </sd:FormItem>
                                 <sd:FormItem Label="离群点耗时：">
-                                    <TextBlock Text="{Binding OuterRemovalDuration, StringFormat={}{0:mm}:{0:ss}.{0:fff}}" />
+                                    <TextBlock Text="{Binding OuterRemovalDuration}" />
                                 </sd:FormItem>
                                 <sd:FormItem Label="关键点耗时：">
-                                    <TextBlock Text="{Binding KeyPointDuration, StringFormat={}{0:mm}:{0:ss}.{0:fff}}" />
+                                    <TextBlock Text="{Binding KeyPointDuration}" />
                                 </sd:FormItem>
                                 <sd:FormItem Label="特征耗时：">
-                                    <TextBlock Text="{Binding FeatureDuration, StringFormat={}{0:mm}:{0:ss}.{0:fff}}" />
+                                    <TextBlock Text="{Binding FeatureDuration}" />
                                 </sd:FormItem>
                                 <sd:FormItem Label="粗配准耗时：">
-                                    <TextBlock Text="{Binding CoarseAlignmentDuration, StringFormat={}{0:mm}:{0:ss}.{0:fff}}" />
+                                    <TextBlock Text="{Binding CoarseAlignmentDuration}" />
                                 </sd:FormItem>
                                 <sd:FormItem Label="二次采样耗时：">
-                                    <TextBlock Text="{Binding SampleIIDuration, StringFormat={}{0:mm}:{0:ss}.{0:fff}}" />
+                                    <TextBlock Text="{Binding SampleIIDuration}" />
                                 </sd:FormItem>
                                 <sd:FormItem Label="精配准耗时：">
-                                    <TextBlock Text="{Binding FineAlignmentDuration, StringFormat={}{0:mm}:{0:ss}.{0:fff}}" />
+                                    <TextBlock Text="{Binding FineAlignmentDuration}" />
                                 </sd:FormItem>
                                 <sd:FormItem Label="合计耗时：">
-                                    <TextBlock Text="{Binding TotalDuration, StringFormat={}{0:mm}:{0:ss}.{0:fff}}" />
+                                    <TextBlock Text="{Binding TotalDuration}" />
                                 </sd:FormItem>
                             </StackPanel>
                             <StackPanel Grid.IsSharedSizeScope="True" Margin="0,5">
