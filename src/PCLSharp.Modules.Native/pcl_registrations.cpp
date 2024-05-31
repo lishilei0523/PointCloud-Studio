@@ -180,7 +180,7 @@ AlignmentResult* alignNDT(Point3F sourcePoints[], const int sourceLength, Point3
 /// <param name="euclideanFitnessEpsilon">均方误差阈值</param>
 /// <param name="maximumIterations">最大迭代次数</param>
 /// <returns>配准结果</returns>
-AlignmentResult* CALLING_MODE alignICP(Point3F sourcePoints[], const int sourceLength, Point3F targetPoints[], const int targetLength, const float maxCorrespondenceDistance, const float transformationEpsilon, const float euclideanFitnessEpsilon, const int maximumIterations)
+AlignmentResult* alignICP(Point3F sourcePoints[], const int sourceLength, Point3F targetPoints[], const int targetLength, const float maxCorrespondenceDistance, const float transformationEpsilon, const float euclideanFitnessEpsilon, const int maximumIterations)
 {
 	const PointCloud<PointXYZ>::Ptr& sourceCloud = pclsharp::toPointCloud(sourcePoints, sourceLength);
 	const PointCloud<PointXYZ>::Ptr& targetCloud = pclsharp::toPointCloud(targetPoints, targetLength);
@@ -229,7 +229,7 @@ AlignmentResult* CALLING_MODE alignICP(Point3F sourcePoints[], const int sourceL
 /// <param name="euclideanFitnessEpsilon">均方误差阈值</param>
 /// <param name="maximumIterations">最大迭代次数</param>
 /// <returns>配准结果</returns>
-AlignmentResult* CALLING_MODE alignGICP(Point3F sourcePoints[], const int sourceLength, Point3F targetPoints[], const int targetLength, const float maxCorrespondenceDistance, const float transformationEpsilon, const float euclideanFitnessEpsilon, const int maximumIterations)
+AlignmentResult* alignGICP(Point3F sourcePoints[], const int sourceLength, Point3F targetPoints[], const int targetLength, const float maxCorrespondenceDistance, const float transformationEpsilon, const float euclideanFitnessEpsilon, const int maximumIterations)
 {
 	const PointCloud<PointXYZ>::Ptr& sourceCloud = pclsharp::toPointCloud(sourcePoints, sourceLength);
 	const PointCloud<PointXYZ>::Ptr& targetCloud = pclsharp::toPointCloud(targetPoints, targetLength);
@@ -267,7 +267,7 @@ AlignmentResult* CALLING_MODE alignGICP(Point3F sourcePoints[], const int source
 }
 
 /// <summary>
-/// SAC-IA&NARF配准
+/// SAC-IA-NARF配准
 /// </summary>
 /// <param name="sourcePoints">源点集</param>
 /// <param name="sourceDescriptors">源NARF描述子集</param>
@@ -279,7 +279,7 @@ AlignmentResult* CALLING_MODE alignGICP(Point3F sourcePoints[], const int source
 /// <param name="samplesCount">采样数量</param>
 /// <param name="correspondenceRandomness">随机特征邻域点数</param>
 /// <returns>配准结果</returns>
-AlignmentResult* SaciaAlignNARF(Point3F sourcePoints[], Narf36F sourceDescriptors[], const int sourceLength, Point3F targetPoints[], Narf36F targetDescriptors[], const int targetLength, const float minSampleDistance, const int samplesCount, const int correspondenceRandomness)
+AlignmentResult* saciaAlignNARF(Point3F sourcePoints[], Narf36F sourceDescriptors[], const int sourceLength, Point3F targetPoints[], Narf36F targetDescriptors[], const int targetLength, const float minSampleDistance, const int samplesCount, const int correspondenceRandomness)
 {
 	const PointCloud<PointXYZ>::Ptr& sourceCloud = pclsharp::toPointCloud(sourcePoints, sourceLength);
 	const PointCloud<PointXYZ>::Ptr& targetCloud = pclsharp::toPointCloud(targetPoints, targetLength);
@@ -320,7 +320,7 @@ AlignmentResult* SaciaAlignNARF(Point3F sourcePoints[], Narf36F sourceDescriptor
 }
 
 /// <summary>
-/// SAC-IA&PFH配准
+/// SAC-IA-PFH配准
 /// </summary>
 /// <param name="sourcePoints">源点集</param>
 /// <param name="sourceDescriptors">源PFH描述子集</param>
@@ -332,7 +332,7 @@ AlignmentResult* SaciaAlignNARF(Point3F sourcePoints[], Narf36F sourceDescriptor
 /// <param name="samplesCount">采样数量</param>
 /// <param name="correspondenceRandomness">随机特征邻域点数</param>
 /// <returns>配准结果</returns>
-AlignmentResult* SaciaAlignPFH(Point3F sourcePoints[], PFHSignature125F sourceDescriptors[], const int sourceLength, Point3F targetPoints[], PFHSignature125F targetDescriptors[], const int targetLength, const float minSampleDistance, const int samplesCount, const int correspondenceRandomness)
+AlignmentResult* saciaAlignPFH(Point3F sourcePoints[], PFHSignature125F sourceDescriptors[], const int sourceLength, Point3F targetPoints[], PFHSignature125F targetDescriptors[], const int targetLength, const float minSampleDistance, const int samplesCount, const int correspondenceRandomness)
 {
 	const PointCloud<PointXYZ>::Ptr& sourceCloud = pclsharp::toPointCloud(sourcePoints, sourceLength);
 	const PointCloud<PointXYZ>::Ptr& targetCloud = pclsharp::toPointCloud(targetPoints, targetLength);
@@ -373,7 +373,7 @@ AlignmentResult* SaciaAlignPFH(Point3F sourcePoints[], PFHSignature125F sourceDe
 }
 
 /// <summary>
-/// SAC-IA&FPFH配准
+/// SAC-IA-FPFH配准
 /// </summary>
 /// <param name="sourcePoints">源点集</param>
 /// <param name="sourceDescriptors">源FPFH描述子集</param>
@@ -385,7 +385,7 @@ AlignmentResult* SaciaAlignPFH(Point3F sourcePoints[], PFHSignature125F sourceDe
 /// <param name="samplesCount">采样数量</param>
 /// <param name="correspondenceRandomness">随机特征邻域点数</param>
 /// <returns>配准结果</returns>
-AlignmentResult* CALLING_MODE SaciaAlignFPFH(Point3F sourcePoints[], FPFHSignature33F sourceDescriptors[], const int sourceLength, Point3F targetPoints[], FPFHSignature33F targetDescriptors[], const int targetLength, const float minSampleDistance, const int samplesCount, const int correspondenceRandomness)
+AlignmentResult* saciaAlignFPFH(Point3F sourcePoints[], FPFHSignature33F sourceDescriptors[], const int sourceLength, Point3F targetPoints[], FPFHSignature33F targetDescriptors[], const int targetLength, const float minSampleDistance, const int samplesCount, const int correspondenceRandomness)
 {
 	const PointCloud<PointXYZ>::Ptr& sourceCloud = pclsharp::toPointCloud(sourcePoints, sourceLength);
 	const PointCloud<PointXYZ>::Ptr& targetCloud = pclsharp::toPointCloud(targetPoints, targetLength);
@@ -426,7 +426,7 @@ AlignmentResult* CALLING_MODE SaciaAlignFPFH(Point3F sourcePoints[], FPFHSignatu
 }
 
 /// <summary>
-/// SAC-IA&3DSC配准
+/// SAC-IA-3DSC配准
 /// </summary>
 /// <param name="sourcePoints">源点集</param>
 /// <param name="sourceDescriptors">源3DSC描述子集</param>
@@ -438,7 +438,7 @@ AlignmentResult* CALLING_MODE SaciaAlignFPFH(Point3F sourcePoints[], FPFHSignatu
 /// <param name="samplesCount">采样数量</param>
 /// <param name="correspondenceRandomness">随机特征邻域点数</param>
 /// <returns>配准结果</returns>
-AlignmentResult* SaciaAlign3DSC(Point3F sourcePoints[], ShapeContext1980F sourceDescriptors[], const int sourceLength, Point3F targetPoints[], ShapeContext1980F targetDescriptors[], const int targetLength, const float minSampleDistance, const int samplesCount, const int correspondenceRandomness)
+AlignmentResult* saciaAlign3DSC(Point3F sourcePoints[], ShapeContext1980F sourceDescriptors[], const int sourceLength, Point3F targetPoints[], ShapeContext1980F targetDescriptors[], const int targetLength, const float minSampleDistance, const int samplesCount, const int correspondenceRandomness)
 {
 	const PointCloud<PointXYZ>::Ptr& sourceCloud = pclsharp::toPointCloud(sourcePoints, sourceLength);
 	const PointCloud<PointXYZ>::Ptr& targetCloud = pclsharp::toPointCloud(targetPoints, targetLength);
@@ -479,7 +479,7 @@ AlignmentResult* SaciaAlign3DSC(Point3F sourcePoints[], ShapeContext1980F source
 }
 
 /// <summary>
-/// SAC-IA&SHOT配准
+/// SAC-IA-SHOT配准
 /// </summary>
 /// <param name="sourcePoints">源点集</param>
 /// <param name="sourceDescriptors">源SHOT描述子集</param>
@@ -491,7 +491,7 @@ AlignmentResult* SaciaAlign3DSC(Point3F sourcePoints[], ShapeContext1980F source
 /// <param name="samplesCount">采样数量</param>
 /// <param name="correspondenceRandomness">随机特征邻域点数</param>
 /// <returns>配准结果</returns>
-AlignmentResult* SaciaAlignSHOT(Point3F sourcePoints[], Shot352F sourceDescriptors[], const int sourceLength, Point3F targetPoints[], Shot352F targetDescriptors[], const int targetLength, const float minSampleDistance, const int samplesCount, const int correspondenceRandomness)
+AlignmentResult* saciaAlignSHOT(Point3F sourcePoints[], Shot352F sourceDescriptors[], const int sourceLength, Point3F targetPoints[], Shot352F targetDescriptors[], const int targetLength, const float minSampleDistance, const int samplesCount, const int correspondenceRandomness)
 {
 	const PointCloud<PointXYZ>::Ptr& sourceCloud = pclsharp::toPointCloud(sourcePoints, sourceLength);
 	const PointCloud<PointXYZ>::Ptr& targetCloud = pclsharp::toPointCloud(targetPoints, targetLength);

@@ -210,5 +210,14 @@ namespace PCLSharp.Modules.Declarations
         [DllImport(AssemblyNames.Modules, EntryPoint = "disposeShot352Fs")]
         public static extern void DisposeShot352Fs(IntPtr pointer);
         #endregion
+
+        #region # 释放配准结果 —— static extern void DisposeAlignmentResult(IntPtr pointer)
+        /// <summary>
+        /// 释放配准结果
+        /// </summary>
+        /// <param name="pointer">指针</param>
+        [DllImport(AssemblyNames.Modules, EntryPoint = "disposeAlignmentResult")]
+        public static extern void DisposeAlignmentResult(IntPtr pointer);
+        #endregion
     }
 }

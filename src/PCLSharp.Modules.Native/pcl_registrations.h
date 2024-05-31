@@ -85,7 +85,7 @@ EXPORT_C AlignmentResult* CALLING_MODE alignICP(Point3F sourcePoints[], int sour
 EXPORT_C AlignmentResult* CALLING_MODE alignGICP(Point3F sourcePoints[], int sourceLength, Point3F targetPoints[], int targetLength, float maxCorrespondenceDistance, float transformationEpsilon, float euclideanFitnessEpsilon, int maximumIterations);
 
 /// <summary>
-/// SAC-IA&NARF配准
+/// SAC-IA-NARF配准
 /// </summary>
 /// <param name="sourcePoints">源点集</param>
 /// <param name="sourceDescriptors">源NARF描述子集</param>
@@ -97,10 +97,10 @@ EXPORT_C AlignmentResult* CALLING_MODE alignGICP(Point3F sourcePoints[], int sou
 /// <param name="samplesCount">采样数量</param>
 /// <param name="correspondenceRandomness">随机特征邻域点数</param>
 /// <returns>配准结果</returns>
-EXPORT_C AlignmentResult* CALLING_MODE SaciaAlignNARF(Point3F sourcePoints[], Narf36F sourceDescriptors[], int sourceLength, Point3F targetPoints[], Narf36F targetDescriptors[], int targetLength, float minSampleDistance, int samplesCount, int correspondenceRandomness);
+EXPORT_C AlignmentResult* CALLING_MODE saciaAlignNARF(Point3F sourcePoints[], Narf36F sourceDescriptors[], int sourceLength, Point3F targetPoints[], Narf36F targetDescriptors[], int targetLength, float minSampleDistance, int samplesCount, int correspondenceRandomness);
 
 /// <summary>
-/// SAC-IA&PFH配准
+/// SAC-IA-PFH配准
 /// </summary>
 /// <param name="sourcePoints">源点集</param>
 /// <param name="sourceDescriptors">源PFH描述子集</param>
@@ -112,10 +112,10 @@ EXPORT_C AlignmentResult* CALLING_MODE SaciaAlignNARF(Point3F sourcePoints[], Na
 /// <param name="samplesCount">采样数量</param>
 /// <param name="correspondenceRandomness">随机特征邻域点数</param>
 /// <returns>配准结果</returns>
-EXPORT_C AlignmentResult* CALLING_MODE SaciaAlignPFH(Point3F sourcePoints[], PFHSignature125F sourceDescriptors[], int sourceLength, Point3F targetPoints[], PFHSignature125F targetDescriptors[], int targetLength, float minSampleDistance, int samplesCount, int correspondenceRandomness);
+EXPORT_C AlignmentResult* CALLING_MODE saciaAlignPFH(Point3F sourcePoints[], PFHSignature125F sourceDescriptors[], int sourceLength, Point3F targetPoints[], PFHSignature125F targetDescriptors[], int targetLength, float minSampleDistance, int samplesCount, int correspondenceRandomness);
 
 /// <summary>
-/// SAC-IA&FPFH配准
+/// SAC-IA-FPFH配准
 /// </summary>
 /// <param name="sourcePoints">源点集</param>
 /// <param name="sourceDescriptors">源FPFH描述子集</param>
@@ -127,10 +127,10 @@ EXPORT_C AlignmentResult* CALLING_MODE SaciaAlignPFH(Point3F sourcePoints[], PFH
 /// <param name="samplesCount">采样数量</param>
 /// <param name="correspondenceRandomness">随机特征邻域点数</param>
 /// <returns>配准结果</returns>
-EXPORT_C AlignmentResult* CALLING_MODE SaciaAlignFPFH(Point3F sourcePoints[], FPFHSignature33F sourceDescriptors[], int sourceLength, Point3F targetPoints[], FPFHSignature33F targetDescriptors[], int targetLength, float minSampleDistance, int samplesCount, int correspondenceRandomness);
+EXPORT_C AlignmentResult* CALLING_MODE saciaAlignFPFH(Point3F sourcePoints[], FPFHSignature33F sourceDescriptors[], int sourceLength, Point3F targetPoints[], FPFHSignature33F targetDescriptors[], int targetLength, float minSampleDistance, int samplesCount, int correspondenceRandomness);
 
 /// <summary>
-/// SAC-IA&3DSC配准
+/// SAC-IA-3DSC配准
 /// </summary>
 /// <param name="sourcePoints">源点集</param>
 /// <param name="sourceDescriptors">源3DSC描述子集</param>
@@ -142,10 +142,10 @@ EXPORT_C AlignmentResult* CALLING_MODE SaciaAlignFPFH(Point3F sourcePoints[], FP
 /// <param name="samplesCount">采样数量</param>
 /// <param name="correspondenceRandomness">随机特征邻域点数</param>
 /// <returns>配准结果</returns>
-EXPORT_C AlignmentResult* CALLING_MODE SaciaAlign3DSC(Point3F sourcePoints[], ShapeContext1980F sourceDescriptors[], int sourceLength, Point3F targetPoints[], ShapeContext1980F targetDescriptors[], int targetLength, float minSampleDistance, int samplesCount, int correspondenceRandomness);
+EXPORT_C AlignmentResult* CALLING_MODE saciaAlign3DSC(Point3F sourcePoints[], ShapeContext1980F sourceDescriptors[], int sourceLength, Point3F targetPoints[], ShapeContext1980F targetDescriptors[], int targetLength, float minSampleDistance, int samplesCount, int correspondenceRandomness);
 
 /// <summary>
-/// SAC-IA&SHOT配准
+/// SAC-IA-SHOT配准
 /// </summary>
 /// <param name="sourcePoints">源点集</param>
 /// <param name="sourceDescriptors">源SHOT描述子集</param>
@@ -157,4 +157,4 @@ EXPORT_C AlignmentResult* CALLING_MODE SaciaAlign3DSC(Point3F sourcePoints[], Sh
 /// <param name="samplesCount">采样数量</param>
 /// <param name="correspondenceRandomness">随机特征邻域点数</param>
 /// <returns>配准结果</returns>
-EXPORT_C AlignmentResult* CALLING_MODE SaciaAlignSHOT(Point3F sourcePoints[], Shot352F sourceDescriptors[], int sourceLength, Point3F targetPoints[], Shot352F targetDescriptors[], int targetLength, float minSampleDistance, int samplesCount, int correspondenceRandomness);
+EXPORT_C AlignmentResult* CALLING_MODE saciaAlignSHOT(Point3F sourcePoints[], Shot352F sourceDescriptors[], int sourceLength, Point3F targetPoints[], Shot352F targetDescriptors[], int targetLength, float minSampleDistance, int samplesCount, int correspondenceRandomness);
