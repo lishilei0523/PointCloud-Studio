@@ -9,4 +9,9 @@
         <TextBlock>已停用</TextBlock>
         <TextBlock>已启用</TextBlock>
     </sd:BooleanDescriptionConverter>
+    <!--是/否描述转换器-->
+    <sd:BooleanDescriptionConverter x:Key="Converters.YesNoDescriptionConverter">
+        <TextBlock>否</TextBlock>
+        <TextBlock>是</TextBlock>
+    </sd:BooleanDescriptionConverter>
 </ResourceDictionary>

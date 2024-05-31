@@ -27,6 +27,16 @@ namespace PCLSharp.Modules.Interfaces
         Point3F[] AffineTransform(IEnumerable<Point3F> points, Pose pose);
         #endregion
 
+        #region # 矩阵变换 —— Point3F[] MatrixTransform(IEnumerable<Point3F> points...
+        /// <summary>
+        /// 矩阵变换
+        /// </summary>
+        /// <param name="points">点集</param>
+        /// <param name="matrixArray">矩阵数组(长度: 16)</param>
+        /// <returns>变换后点云</returns>
+        Point3F[] MatrixTransform(IEnumerable<Point3F> points, float[] matrixArray);
+        #endregion
+
         #region # 长方体剪裁 —— Point3F[] CropBox(IEnumerable<Point3F> points...
         /// <summary>
         /// 长方体剪裁

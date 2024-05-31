@@ -33,6 +33,18 @@ namespace PCLSharp.Modules.Declarations
         public static extern IntPtr AffineTransform(Point3F[] points, int length, Pose pose);
         #endregion
 
+        #region # 矩阵变换 —— static extern IntPtr MatrixTransform(Point3F[] points...
+        /// <summary>
+        /// 矩阵变换
+        /// </summary>
+        /// <param name="points">点集</param>
+        /// <param name="length">点集长度</param>
+        /// <param name="matrixArray">矩阵数组(长度: 16)</param>
+        /// <returns>变换后点云</returns>
+        [DllImport(AssemblyNames.Modules, EntryPoint = "matrixTransform")]
+        public static extern IntPtr MatrixTransform(Point3F[] points, int length, float[] matrixArray);
+        #endregion
+
         #region # 长方体剪裁 —— static extern IntPtr CropBox(Point3F[] points...
         /// <summary>
         /// 长方体剪裁

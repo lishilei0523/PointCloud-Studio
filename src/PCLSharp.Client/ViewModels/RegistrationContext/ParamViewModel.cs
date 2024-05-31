@@ -17,7 +17,7 @@ namespace PCLSharp.Client.ViewModels.RegistrationContext
         public ParamViewModel()
         {
             //降采样
-            this.LeafSize = 0.01f;
+            this.LeafSize = 1.0f;
 
             //分割
             this.ClusterTolerance = 1.5f;

@@ -74,7 +74,6 @@
                                 <TextBlock Text="{Binding ParamViewModel.StddevMult}" />
                             </sd:FormItem>
                             <TextBlock Text="---------------关键点---------------" Foreground="Red" />
-
                             <sd:FormItem Label="显著半径：">
                                 <TextBlock Text="{Binding ParamViewModel.SalientRadius}" />
                             </sd:FormItem>
@@ -155,12 +154,34 @@
                     <!--光源-->
                     <hx:DirectionalLight3D Color="White" Direction="{Binding Camera.LookDirection}" />
                     <!--源点云-->
-                    <hx:PointGeometryModel3D Geometry="{Binding SourceCloud}" Color="Red" />
+                    <hx:PointGeometryModel3D Geometry="{Binding SourceCloud, UpdateSourceTrigger=PropertyChanged}" Color="Red" />
                     <!--目标点云-->
                     <hx:PointGeometryModel3D Geometry="{Binding TargetCloud}" Color="Green" />
                 </hx:Viewport3DX>
                 <!--配准结果-->
                 <GroupBox Grid.Column="2" Header="配准结果" Margin="0">
+                    <StackPanel Grid.IsSharedSizeScope="True" Margin="0,5">
+                        <TextBlock Text="----------------粗配准----------------" Foreground="Red" />
+                        <sd:FormItem Label="是否收敛：">
+                            <TextBlock Text="{Binding CoarseHasConverged, Converter={StaticResource Converters.YesNoDescriptionConverter}}" />
+                        </sd:FormItem>
+                        <sd:FormItem Label="拟合分数：">
+                            <TextBlock Text="{Binding CoarseFitnessScore}" />
+                        </sd:FormItem>
+                        <sd:FormItem Label="RT矩阵：" />
+                        <TextBlock Text="{Binding CoarseMatrix}" Margin="15,0,0,0" />
+                        <TextBlock Text="----------------精配准----------------" Foreground="Red" />
+                        <sd:FormItem Label="是否收敛：">
+                            <TextBlock Text="{Binding FineHasConverged, Converter={StaticResource Converters.YesNoDescriptionConverter}}" />
+                        </sd:FormItem>
+                        <sd:FormItem Label="拟合分数：">
+                            <TextBlock Text="{Binding FineFitnessScore}" />
+                        </sd:FormItem>
+                        <sd:FormItem Label="RT矩阵：" />
+                        <TextBlock Text="{Binding FineMatrix}" Margin="15,0,0,0" />
+                        <TextBlock Text="--------------最终RT矩阵--------------" Foreground="Red" />
+                        <TextBlock Text="{Binding FinalMatrix}" Margin="15,10,0,0" />
+                    </StackPanel>
                 </GroupBox>
             </Grid>
         </busyIndicator:BusyMask>

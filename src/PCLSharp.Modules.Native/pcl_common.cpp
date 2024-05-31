@@ -67,6 +67,38 @@ Point3Fs* affineTransform(Point3F points[], const int length, const Pose pose)
 }
 
 /// <summary>
+/// 矩阵变换
+/// </summary>
+/// <param name="points">点集</param>
+/// <param name="length">点集长度</param>
+/// <param name="matrixArray">矩阵数组(长度: 16)</param>
+/// <returns>变换后点云</returns>
+Point3Fs* matrixTransform(Point3F points[], const int length, float matrixArray[])
+{
+	const PointCloud<PointXYZ>::Ptr sourceCloud = pclsharp::toPointCloud(points, length);
+	const PointCloud<PointXYZ>::Ptr targetCloud = std::make_shared<PointCloud<PointXYZ>>();
+
+	Eigen::Matrix4f rtMatrix = Eigen::Matrix4f::Identity();
+	const int& rowsCount = rtMatrix.rows();
+	const int& colsCount = rtMatrix.cols();
+	for (int rowIndex = 0; rowIndex < rowsCount; rowIndex++)
+	{
+		for (int colIndex = 0; colIndex < colsCount; colIndex++)
+		{
+			const int& index = rowIndex * colsCount + colIndex;
+			rtMatrix(rowIndex, colIndex) = matrixArray[index];
+		}
+	}
+
+	//执行变换
+	pcl::transformPointCloud(*sourceCloud, *targetCloud, rtMatrix);
+
+	Point3Fs* point3Fs = pclsharp::toPoint3Fs(*targetCloud);
+
+	return point3Fs;
+}
+
+/// <summary>
 /// 长方体剪裁
 /// </summary>
 /// <param name="points">点集</param>

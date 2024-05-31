@@ -1,9 +1,12 @@
 ﻿using Caliburn.Micro;
 using HelixToolkit.Wpf.SharpDX;
+using MathNet.Numerics.LinearAlgebra;
+using MathNet.Numerics.LinearAlgebra.Double;
 using Microsoft.Win32;
 using PCLSharp.Extensions.Helix;
 using PCLSharp.Modules.Interfaces;
 using PCLSharp.Primitives.Extensions;
+using PCLSharp.Primitives.Features;
 using PCLSharp.Primitives.Models;
 using SD.Infrastructure.WPF.Caliburn.Aspects;
 using SD.Infrastructure.WPF.Caliburn.Base;
@@ -28,6 +31,9 @@ namespace PCLSharp.Client.ViewModels.RegistrationContext
     {
         #region # 字段及构造器
 
+        private const int rowsCount = 4;
+        private const int colsCount = 4;
+
         /// <summary>
         /// 点云通用操作接口;
         /// </summary>
@@ -39,19 +45,9 @@ namespace PCLSharp.Client.ViewModels.RegistrationContext
         private readonly ICloudFiles _cloudFiles;
 
         /// <summary>
-        /// 点云搜索接口
-        /// </summary>
-        private readonly ICloudSearch _cloudSearch;
-
-        /// <summary>
         /// 点云滤波接口
         /// </summary>
         private readonly ICloudFilters _cloudFilters;
-
-        /// <summary>
-        /// 点云法向量接口
-        /// </summary>
-        private readonly ICloudNormals _cloudNormals;
 
         /// <summary>
         /// 点云关键点接口
@@ -69,6 +65,11 @@ namespace PCLSharp.Client.ViewModels.RegistrationContext
         private readonly ICloudSegmentations _cloudSegmentations;
 
         /// <summary>
+        /// 点云配准接口
+        /// </summary>
+        private readonly ICloudRegistrations _cloudRegistrations;
+
+        /// <summary>
         /// 窗体管理器
         /// </summary>
         private readonly IWindowManager _windowManager;
@@ -76,16 +77,15 @@ namespace PCLSharp.Client.ViewModels.RegistrationContext
         /// <summary>
         /// 依赖注入构造器
         /// </summary>
-        public IndexViewModel(ICloudCommon cloudCommon, ICloudFiles cloudFiles, ICloudSearch cloudSearch, ICloudFilters cloudFilters, ICloudNormals cloudNormals, ICloudKeyPoints cloudKeyPoints, ICloudFeatures cloudFeatures, ICloudSegmentations cloudSegmentations, IWindowManager windowManager)
+        public IndexViewModel(ICloudCommon cloudCommon, ICloudFiles cloudFiles, ICloudFilters cloudFilters, ICloudKeyPoints cloudKeyPoints, ICloudFeatures cloudFeatures, ICloudSegmentations cloudSegmentations, ICloudRegistrations cloudRegistrations, IWindowManager windowManager)
         {
             this._cloudCommon = cloudCommon;
             this._cloudFiles = cloudFiles;
-            this._cloudSearch = cloudSearch;
             this._cloudFilters = cloudFilters;
-            this._cloudNormals = cloudNormals;
             this._cloudKeyPoints = cloudKeyPoints;
             this._cloudFeatures = cloudFeatures;
             this._cloudSegmentations = cloudSegmentations;
+            this._cloudRegistrations = cloudRegistrations;
             this._windowManager = windowManager;
         }
 
@@ -143,6 +143,62 @@ namespace PCLSharp.Client.ViewModels.RegistrationContext
         /// </summary>
         [DependencyProperty]
         public PointGeometry3D SourceCentroid { get; set; }
+        #endregion
+
+        #region 粗配准是否收敛 —— bool? CoarseHasConverged
+        /// <summary>
+        /// 粗配准是否收敛
+        /// </summary>
+        [DependencyProperty]
+        public bool? CoarseHasConverged { get; set; }
+        #endregion
+
+        #region 粗配准拟合分数 —— float? CoarseFitnessScore
+        /// <summary>
+        /// 粗配准拟合分数
+        /// </summary>
+        [DependencyProperty]
+        public float? CoarseFitnessScore { get; set; }
+        #endregion
+
+        #region 粗配准RT矩阵 —— string CoarseMatrix
+        /// <summary>
+        /// 粗配准RT矩阵
+        /// </summary>
+        [DependencyProperty]
+        public string CoarseMatrix { get; set; }
+        #endregion
+
+        #region 精配准是否收敛 —— bool? FineHasConverged
+        /// <summary>
+        /// 精配准是否收敛
+        /// </summary>
+        [DependencyProperty]
+        public bool? FineHasConverged { get; set; }
+        #endregion
+
+        #region 精配准拟合分数 —— float? FineFitnessScore
+        /// <summary>
+        /// 精配准拟合分数
+        /// </summary>
+        [DependencyProperty]
+        public float? FineFitnessScore { get; set; }
+        #endregion
+
+        #region 精配准RT矩阵 —— string FineMatrix
+        /// <summary>
+        /// 精配准RT矩阵
+        /// </summary>
+        [DependencyProperty]
+        public string FineMatrix { get; set; }
+        #endregion
+
+        #region 最终RT矩阵 —— string FinalMatrix
+        /// <summary>
+        /// 最终RT矩阵
+        /// </summary>
+        [DependencyProperty]
+        public string FinalMatrix { get; set; }
         #endregion
 
         #region 相机 —— PerspectiveCamera Camera
@@ -254,7 +310,92 @@ namespace PCLSharp.Client.ViewModels.RegistrationContext
         /// </summary>
         public async void ExecuteAlignment()
         {
-            //TODO 实现
+            #region # 验证
+
+            if (this.SourceCloud == null)
+            {
+                MessageBox.Show("源点云未加载！", "错误", MessageBoxButton.OK, MessageBoxImage.Error);
+                return;
+            }
+            if (this.SourceCloud == null)
+            {
+                MessageBox.Show("目标点云未加载！", "错误", MessageBoxButton.OK, MessageBoxImage.Error);
+                return;
+            }
+            if (this.ParamViewModel == null)
+            {
+                MessageBox.Show("配准参数未设置！", "错误", MessageBoxButton.OK, MessageBoxImage.Error);
+                return;
+            }
+
+            #endregion
+
+            this.Busy();
+
+            IEnumerable<Point3F> originalSourcePoints = this.SourceCloud.Points.ToPoint3Fs();
+            IEnumerable<Point3F> originalTargetPoints = this.TargetCloud.Points.ToPoint3Fs();
+
+            //降采样
+            IEnumerable<Point3F> sourceBufferPoints = await Task.Run(() => this._cloudFilters.ApplyVoxelGrid(originalSourcePoints, this.ParamViewModel.LeafSize!.Value));
+            IEnumerable<Point3F> targetBufferPoints = await Task.Run(() => this._cloudFilters.ApplyVoxelGrid(originalTargetPoints, this.ParamViewModel.LeafSize!.Value));
+
+            //聚类分割
+            Point3F[][] sourceClusters = await Task.Run(() => this._cloudSegmentations.EuclidClusterSegment(sourceBufferPoints, this.ParamViewModel.ClusterTolerance!.Value, this.ParamViewModel.MinClusterSize!.Value, this.ParamViewModel.MaxClusterSize!.Value));
+            Point3F[][] targetClusters = await Task.Run(() => this._cloudSegmentations.EuclidClusterSegment(targetBufferPoints, this.ParamViewModel.ClusterTolerance!.Value, this.ParamViewModel.MinClusterSize!.Value, this.ParamViewModel.MaxClusterSize!.Value));
+            if (sourceClusters.Any())
+            {
+                sourceBufferPoints = sourceClusters[0];
+            }
+            if (targetClusters.Any())
+            {
+                targetBufferPoints = targetClusters[0];
+            }
+
+            //离群点移除
+            sourceBufferPoints = await Task.Run(() => this._cloudFilters.ApplyStatisticalOutlierRemoval(sourceBufferPoints, this.ParamViewModel.MeanK!.Value, this.ParamViewModel.StddevMult!.Value));
+            targetBufferPoints = await Task.Run(() => this._cloudFilters.ApplyStatisticalOutlierRemoval(targetBufferPoints, this.ParamViewModel.MeanK!.Value, this.ParamViewModel.StddevMult!.Value));
+
+            //关键点
+            sourceBufferPoints = await Task.Run(() => this._cloudKeyPoints.DetectISS(sourceBufferPoints, this.ParamViewModel.SalientRadius!.Value, this.ParamViewModel.NonMaxRadius!.Value, this.ParamViewModel.Threshold21!.Value, this.ParamViewModel.Threshold32!.Value, this.ParamViewModel.MinNeighborsCount!.Value, this.ParamViewModel.ThreadsCount!.Value));
+            targetBufferPoints = await Task.Run(() => this._cloudKeyPoints.DetectISS(targetBufferPoints, this.ParamViewModel.SalientRadius!.Value, this.ParamViewModel.NonMaxRadius!.Value, this.ParamViewModel.Threshold21!.Value, this.ParamViewModel.Threshold32!.Value, this.ParamViewModel.MinNeighborsCount!.Value, this.ParamViewModel.ThreadsCount!.Value));
+
+            //特征
+            FPFHSignature33F[] sourceDescriptors = await Task.Run(() => this._cloudFeatures.ComputeFPFH(sourceBufferPoints, this.ParamViewModel.NormalK!.Value, this.ParamViewModel.FeatureK!.Value, this.ParamViewModel.ThreadsCount!.Value));
+            FPFHSignature33F[] targetDescriptors = await Task.Run(() => this._cloudFeatures.ComputeFPFH(targetBufferPoints, this.ParamViewModel.NormalK!.Value, this.ParamViewModel.FeatureK!.Value, this.ParamViewModel.ThreadsCount!.Value));
+
+            //粗配准
+            AlignmentResult coarseAlignmentResult = this._cloudRegistrations.AlignSACIA(sourceBufferPoints, sourceDescriptors, targetBufferPoints, targetDescriptors, this.ParamViewModel.MinSampleDistance!.Value, this.ParamViewModel.SamplesCount!.Value, this.ParamViewModel.CorrespondenceRandomness!.Value);
+            sourceBufferPoints = await Task.Run(() => this._cloudCommon.MatrixTransform(sourceBufferPoints, coarseAlignmentResult.Matrix));
+
+            //精配准
+            AlignmentResult fineAlignmentResult = this._cloudRegistrations.AlignGICP(sourceBufferPoints, targetBufferPoints, this.ParamViewModel.MaxCorrespondenceDistance!.Value, this.ParamViewModel.TransformationEpsilon!.Value, this.ParamViewModel.EuclideanFitnessEpsilon!.Value, this.ParamViewModel.MaximumIterations!.Value);
+
+            //解析配准结果
+            Matrix<double> coarseMatrix = DenseMatrix.Create(rowsCount, colsCount, 0);
+            Matrix<double> fineMatrix = DenseMatrix.Create(rowsCount, colsCount, 0);
+            for (int rowIndex = 0; rowIndex < rowsCount; rowIndex++)
+            {
+                for (int colIndex = 0; colIndex < colsCount; colIndex++)
+                {
+                    int index = rowIndex * colsCount + colIndex;
+                    coarseMatrix[rowIndex, colIndex] = coarseAlignmentResult.Matrix[index];
+                    fineMatrix[rowIndex, colIndex] = fineAlignmentResult.Matrix[index];
+                }
+            }
+            this.CoarseHasConverged = coarseAlignmentResult.HasConverged;
+            this.CoarseFitnessScore = coarseAlignmentResult.FitnessScore;
+            this.CoarseMatrix = coarseMatrix.ToString("F3");
+            this.FineHasConverged = fineAlignmentResult.HasConverged;
+            this.FineFitnessScore = fineAlignmentResult.FitnessScore;
+            this.FineMatrix = fineMatrix.ToString("F3");
+            this.FinalMatrix = (fineMatrix * coarseMatrix).ToString("F3");
+
+            //原始点云转换
+            originalSourcePoints = await Task.Run(() => this._cloudCommon.MatrixTransform(originalSourcePoints, coarseAlignmentResult.Matrix));
+            originalSourcePoints = await Task.Run(() => this._cloudCommon.MatrixTransform(originalSourcePoints, fineAlignmentResult.Matrix));
+            this.SourceCloud = originalSourcePoints.ToPointGeometry3D();
+
+            this.Idle();
         }
         #endregion
 

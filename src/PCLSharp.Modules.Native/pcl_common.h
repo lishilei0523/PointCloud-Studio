@@ -23,6 +23,15 @@ EXPORT_C Point3F* CALLING_MODE estimateCentroid(Point3F points[], int length);
 EXPORT_C Point3Fs* CALLING_MODE affineTransform(Point3F points[], int length, Pose pose);
 
 /// <summary>
+/// 矩阵变换
+/// </summary>
+/// <param name="points">点集</param>
+/// <param name="length">点集长度</param>
+/// <param name="matrixArray">矩阵数组(长度: 16)</param>
+/// <returns>变换后点云</returns>
+EXPORT_C Point3Fs* CALLING_MODE matrixTransform(Point3F points[], int length, float matrixArray[]);
+
+/// <summary>
 /// 长方体剪裁
 /// </summary>
 /// <param name="points">点集</param>
