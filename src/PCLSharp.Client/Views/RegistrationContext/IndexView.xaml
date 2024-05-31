@@ -1,0 +1,110 @@
+﻿<mah:MetroWindow x:Class="PCLSharp.Client.Views.RegistrationContext.IndexView"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:mah="http://metro.mahapps.com/winfx/xaml/controls"
+        xmlns:cm="http://caliburnmicro.com"
+        xmlns:hx="http://helix-toolkit.org/wpf/SharpDX"
+        xmlns:busyIndicator="https://github.com/Peoky/BusyIndicator"
+        mc:Ignorable="d"
+        Title="点云配准" 
+        Width="1280" Height="800" FontSize="14"
+        WindowStartupLocation="CenterScreen"
+        Style="{StaticResource MetroWindow.Styles.Clean}">
+
+    <mah:MetroWindow.RightWindowCommands>
+        <mah:WindowCommands>
+            <Button Content="指向质心" cm:Message.Attach="LookAtCentroid()" />
+            <Button Content="重置相机" cm:Message.Attach="ResetCamera()" />
+        </mah:WindowCommands>
+    </mah:MetroWindow.RightWindowCommands>
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <!--Header-->
+            <RowDefinition Height="Auto" />
+            <!--Body-->
+            <RowDefinition Height="*" />
+            <!--Footer-->
+            <RowDefinition Height="25" />
+        </Grid.RowDefinitions>
+        <!--Header-->
+        <Border Grid.Row="0" Style="{StaticResource Panel.Styles.Function.Border}">
+            <Menu Margin="4,2">
+                <MenuItem Header="打开源点云(_S)" cm:Message.Attach="OpenSourceCloud()" />
+                <MenuItem Header="打开目标点云(_T)" cm:Message.Attach="OpenTargetCloud()" />
+                <MenuItem Header="设置参数(_P)" cm:Message.Attach="SetParameters()" />
+                <MenuItem Header="执行配准(_P)" cm:Message.Attach="ApplyRegistration()" />
+            </Menu>
+        </Border>
+        <!--Body-->
+        <busyIndicator:BusyMask Grid.Row="1" IndicatorType="Cupertino" IsBusy="{Binding IsBusy}">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <!--点云视口-->
+                    <ColumnDefinition />
+                    <!--配准结果-->
+                    <ColumnDefinition Width="240" />
+                </Grid.ColumnDefinitions>
+                <!--点云视口-->
+                <hx:Viewport3DX Grid.Column="0" 
+                                BackgroundColor="LightGray"
+                                MSAA="Maximum"
+                                ShowCoordinateSystem="True"
+                                CoordinateSystemSize="2"
+                                CoordinateSystemHorizontalPosition="-1"
+                                CoordinateSystemVerticalPosition="1"
+                                CoordinateSystemLabelForeground="Black"
+                                Camera="{Binding Camera}">
+                    <!--效果器-->
+                    <hx:Viewport3DX.EffectsManager>
+                        <hx:DefaultEffectsManager />
+                    </hx:Viewport3DX.EffectsManager>
+                    <!--键盘鼠标-->
+                    <hx:Viewport3DX.InputBindings>
+                        <KeyBinding Key="U" Command="hx:ViewportCommands.TopView" />
+                        <KeyBinding Key="F" Command="hx:ViewportCommands.FrontView" />
+                        <KeyBinding Key="R" Command="hx:ViewportCommands.RightView" />
+                        <KeyBinding Key="B" Command="hx:ViewportCommands.BackView" />
+                        <KeyBinding Key="L" Command="hx:ViewportCommands.LeftView" />
+                        <KeyBinding Key="D" Command="hx:ViewportCommands.BottomView" />
+                        <KeyBinding Command="hx:ViewportCommands.ZoomExtents" Gesture="Control+E" />
+                        <MouseBinding Command="hx:ViewportCommands.Pan" Gesture="MiddleClick" />
+                        <MouseBinding Command="hx:ViewportCommands.Rotate" Gesture="RightClick" />
+                    </hx:Viewport3DX.InputBindings>
+                    <!--光源-->
+                    <hx:DirectionalLight3D Color="White" Direction="{Binding Camera.LookDirection}" />
+                    <!--源点云-->
+                    <hx:PointGeometryModel3D Geometry="{Binding SourceCloud}" Color="Red" />
+                    <!--目标点云-->
+                    <hx:PointGeometryModel3D Geometry="{Binding TargetCloud}" Color="Green" />
+                </hx:Viewport3DX>
+                <!--配准结果-->
+                <GroupBox Grid.Column="1" Header="配准结果" Margin="0">
+                </GroupBox>
+            </Grid>
+        </busyIndicator:BusyMask>
+        <!--Footer-->
+        <Border Grid.Row="2" Style="{StaticResource Panel.Styles.Function.Border}" BorderThickness="0,1,0,0">
+            <Grid>
+                <WrapPanel Margin="10,0,0,0" HorizontalAlignment="Left" VerticalAlignment="Center">
+                    <TextBlock Text="{Binding Camera.LookDirection, StringFormat=LookDirection: \{0:0.0\}}" FontSize="12" />
+                    <TextBlock Text=" | " FontSize="12" />
+                    <TextBlock Text="{Binding Camera.UpDirection, StringFormat=UpDirection: \{0:0.0\}}" FontSize="12" />
+                    <TextBlock Text=" | " FontSize="12" />
+                    <TextBlock Text="{Binding Camera.Position, StringFormat=Position: \{0:0.0\}}" FontSize="12" />
+                    <TextBlock Text=" | " FontSize="12" />
+                    <TextBlock Text="{Binding Camera.FieldOfView, StringFormat=FieldOfView: \{0:0.0\}}" FontSize="12" />
+                </WrapPanel>
+                <WrapPanel Margin="0,0,10,0" HorizontalAlignment="Right" VerticalAlignment="Center">
+                    <TextBlock Text="源点云数量：" FontSize="12" />
+                    <TextBlock Text="{Binding SourceCloud.Positions.Count}" FontSize="12" />
+                    <TextBlock Text=" | " FontSize="12" />
+                    <TextBlock Text="目标点云数量：" FontSize="12" />
+                    <TextBlock Text="{Binding TargetCloud.Positions.Count}" FontSize="12" />
+                </WrapPanel>
+            </Grid>
+        </Border>
+    </Grid>
+</mah:MetroWindow>

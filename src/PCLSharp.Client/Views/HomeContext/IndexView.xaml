@@ -15,9 +15,8 @@
         cm:Message.Attach="[Event KeyDown] = [Action OnKeyDown()]">
 
     <mah:MetroWindow.RightWindowCommands>
-        <mah:WindowCommands  Margin="0,0,-35,0">
-            <mah:ToggleSwitch Content="预处理模式" VerticalAlignment="Center" Height="32" FontSize="12" FontFamily="微软雅黑"
-                              ToolTip="Enable quit confirmation dialog on exit" />
+        <mah:WindowCommands Margin="0,0,-35,0">
+            <mah:ToggleSwitch Content="高画质模式" VerticalAlignment="Center" Height="32" FontSize="12" FontFamily="微软雅黑" />
         </mah:WindowCommands>
     </mah:MetroWindow.RightWindowCommands>
 
@@ -98,6 +97,7 @@
                     <MenuItem Header="区域生长分割(_R)" cm:Message.Attach="RegionGrowingSegment()" />
                     <MenuItem Header="区域生长颜色分割(_G)" cm:Message.Attach="RegionGrowingColorSegment()" />
                 </MenuItem>
+                <MenuItem Header="配准(_P)" cm:Message.Attach="AlignCloud()" />
             </Menu>
         </Border>
         <!--Body-->

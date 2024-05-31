@@ -1935,6 +1935,20 @@ namespace PCLSharp.Client.ViewModels.HomeContext
         #endregion
 
 
+        //配准
+
+        #region 配准点云 —— async void AlignCloud()
+        /// <summary>
+        /// 配准点云
+        /// </summary>
+        public async void AlignCloud()
+        {
+            RegistrationContext.IndexViewModel viewModel = ResolveMediator.Resolve<RegistrationContext.IndexViewModel>();
+            await this._windowManager.ShowWindowAsync(viewModel);
+        }
+        #endregion
+
+
         //事件
 
         #region 键盘按下事件 —— void OnKeyDown()
