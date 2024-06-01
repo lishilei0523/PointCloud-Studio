@@ -53,7 +53,6 @@
                     <MenuItem Header="估算质心(_C)" cm:Message.Attach="EstimateCentroid()" />
                     <MenuItem Header="仿射变换(_A)" cm:Message.Attach="AffineTransform()" />
                     <MenuItem Header="长方体裁剪(_B)" cm:Message.Attach="CropBox()" />
-                    <MenuItem Header="凸包裁剪(_H)" cm:Message.Attach="CropConvexHull()" />
                     <MenuItem Header="投射平面(_P)" cm:Message.Attach="ProjectPlane()" />
                     <MenuItem Header="提取边框(_R)" cm:Message.Attach="ExtractBorder()" />
                     <MenuItem Header="提取边界(_Y)" cm:Message.Attach="ExtractBoundary()" />
@@ -99,7 +98,7 @@
                     <MenuItem Header="区域生长分割(_R)" cm:Message.Attach="RegionGrowingSegment()" />
                     <MenuItem Header="区域生长颜色分割(_G)" cm:Message.Attach="RegionGrowingColorSegment()" />
                 </MenuItem>
-                <MenuItem Header="配准(_P)" cm:Message.Attach="AlignCloud()" />
+                <MenuItem Header="配准(_R)" cm:Message.Attach="AlignCloud()" />
             </Menu>
         </Border>
         <!--Body-->

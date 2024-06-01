@@ -279,20 +279,20 @@ namespace PCLSharp.Client.ViewModels.RegistrationContext
         public int? TargetSegmentedCount { get; set; }
         #endregion
 
-        #region 源点云离群数 —— int? SourceOuterCount
+        #region 源点云离群数 —— int? SourceOutlierCount
         /// <summary>
         /// 源点云离群数
         /// </summary>
         [DependencyProperty]
-        public int? SourceOuterCount { get; set; }
+        public int? SourceOutlierCount { get; set; }
         #endregion
 
-        #region 目标点云离群数 —— int? TargetOuterCount
+        #region 目标点云离群数 —— int? TargetOutlierCount
         /// <summary>
         /// 目标点云离群数
         /// </summary>
         [DependencyProperty]
-        public int? TargetOuterCount { get; set; }
+        public int? TargetOutlierCount { get; set; }
         #endregion
 
         #region 源点云关键点数 —— int? SourceKeyPointsCount
@@ -524,7 +524,7 @@ namespace PCLSharp.Client.ViewModels.RegistrationContext
             Stopwatch sampleIWatch = new Stopwatch();
             Stopwatch sampleIIWatch = new Stopwatch();
             Stopwatch segmentWatch = new Stopwatch();
-            Stopwatch outerRemovalWatch = new Stopwatch();
+            Stopwatch outlierRemovalWatch = new Stopwatch();
             Stopwatch keyPointWatch = new Stopwatch();
             Stopwatch featureWatch = new Stopwatch();
             Stopwatch coarseWatch = new Stopwatch();
@@ -565,13 +565,13 @@ namespace PCLSharp.Client.ViewModels.RegistrationContext
             this.TargetSegmentedCount = targetBufferPoints.Length;
 
             //统计离群点移除
-            outerRemovalWatch.Start();
+            outlierRemovalWatch.Start();
             sourceBufferPoints = await Task.Run(() => this._cloudFilters.ApplyStatisticalOutlierRemoval(sourceBufferPoints, this.ParamViewModel.MeanK!.Value, this.ParamViewModel.StddevMult!.Value));
             targetBufferPoints = await Task.Run(() => this._cloudFilters.ApplyStatisticalOutlierRemoval(targetBufferPoints, this.ParamViewModel.MeanK!.Value, this.ParamViewModel.StddevMult!.Value));
-            outerRemovalWatch.Stop();
-            this.OuterRemovalDuration = outerRemovalWatch.Elapsed.ToString(Constants.DurationFormat);
-            this.SourceOuterCount = sourceBufferPoints.Length;
-            this.TargetOuterCount = targetBufferPoints.Length;
+            outlierRemovalWatch.Stop();
+            this.OuterRemovalDuration = outlierRemovalWatch.Elapsed.ToString(Constants.DurationFormat);
+            this.SourceOutlierCount = sourceBufferPoints.Length;
+            this.TargetOutlierCount = targetBufferPoints.Length;
 
             //ISS关键点
             keyPointWatch.Start();

@@ -670,17 +670,6 @@ namespace PCLSharp.Client.ViewModels.HomeContext
         }
         #endregion
 
-        #region 凸包裁剪 —— async void CropConvexHull()
-        /// <summary>
-        /// 凸包裁剪
-        /// </summary>
-        public async void CropConvexHull()
-        {
-            //TODO 实现
-            MessageBox.Show("未实现！");
-        }
-        #endregion
-
         #region 投射平面 —— async void ProjectPlane()
         /// <summary>
         /// 投射平面

@@ -1,5 +1,4 @@
-﻿using Caliburn.Micro;
-using HelixToolkit.Wpf.SharpDX;
+﻿using HelixToolkit.Wpf.SharpDX;
 using HelixToolkit.Wpf.SharpDX.Model.Scene;
 using MathNet.Numerics.LinearAlgebra;
 using PCLSharp.Extensions.Helix;
@@ -50,53 +49,11 @@ namespace PCLSharp.Client.ViewModels.CommonContext
         private readonly ICloudCommon _cloudCommon;
 
         /// <summary>
-        /// 点云文件接口
-        /// </summary>
-        private readonly ICloudFiles _cloudFiles;
-
-        /// <summary>
-        /// 点云滤波接口
-        /// </summary>
-        private readonly ICloudFilters _cloudFilters;
-
-        /// <summary>
-        /// 点云关键点接口
-        /// </summary>
-        private readonly ICloudKeyPoints _cloudKeyPoints;
-
-        /// <summary>
-        /// 点云特征接口
-        /// </summary>
-        private readonly ICloudFeatures _cloudFeatures;
-
-        /// <summary>
-        /// 点云分割接口
-        /// </summary>
-        private readonly ICloudSegmentations _cloudSegmentations;
-
-        /// <summary>
-        /// 点云配准接口
-        /// </summary>
-        private readonly ICloudRegistrations _cloudRegistrations;
-
-        /// <summary>
-        /// 窗体管理器
-        /// </summary>
-        private readonly IWindowManager _windowManager;
-
-        /// <summary>
         /// 依赖注入构造器
         /// </summary>
-        public CropBoxViewModel(ICloudCommon cloudCommon, ICloudFiles cloudFiles, ICloudFilters cloudFilters, ICloudKeyPoints cloudKeyPoints, ICloudFeatures cloudFeatures, ICloudSegmentations cloudSegmentations, ICloudRegistrations cloudRegistrations, IWindowManager windowManager)
+        public CropBoxViewModel(ICloudCommon cloudCommon)
         {
             this._cloudCommon = cloudCommon;
-            this._cloudFiles = cloudFiles;
-            this._cloudFilters = cloudFilters;
-            this._cloudKeyPoints = cloudKeyPoints;
-            this._cloudFeatures = cloudFeatures;
-            this._cloudSegmentations = cloudSegmentations;
-            this._cloudRegistrations = cloudRegistrations;
-            this._windowManager = windowManager;
         }
 
         #endregion
@@ -334,7 +291,9 @@ namespace PCLSharp.Client.ViewModels.CommonContext
         public void ViewportOnMouseLeftDown(Viewport3DX viewport3D, MouseButtonEventArgs eventArgs)
         {
             Point mousePos2D = eventArgs.GetPosition(viewport3D);
-            bool success = viewport3D.FindNearest(mousePos2D, out Point3D mousePos3D, out Vector3D normal, out Element3D element3D, out SceneNode sceneNode);
+            Point3D mousePos3D;
+            Element3D visual3D;
+            bool success = viewport3D.FindNearest(mousePos2D, out mousePos3D, out Vector3D _, out visual3D, out SceneNode _);
 
             //获得焦点
             if (success && Keyboard.IsKeyDown(Key.LeftShift))
@@ -345,7 +304,7 @@ namespace PCLSharp.Client.ViewModels.CommonContext
                 return;
             }
             //选中元素
-            if (success && element3D is BoxVisual3D boxVisual3D)
+            if (success && visual3D is BoxVisual3D)
             {
                 this._isSelectedBox = true;
                 this._selectedPoint2D = mousePos2D;
@@ -365,7 +324,7 @@ namespace PCLSharp.Client.ViewModels.CommonContext
             if (this._isSelectedBox)
             {
                 //计算模型位置
-                Matrix3D rtMatrix3D = this.BoundingBox.Transform.Value;        //模型的变换矩阵
+                Matrix3D rtMatrix3D = this.BoundingBox.Transform.Value;         //模型的变换矩阵
                 Point3D oldVisualPos3D = rtMatrix3D.GetLocation();              //模型位置
 
                 //计算模型新位置
@@ -376,7 +335,7 @@ namespace PCLSharp.Client.ViewModels.CommonContext
                 Vector3 normal = lookDirction.ToVector3();
                 bool success = ray3D.PlaneIntersection(position, normal, out Vector3 newVisualPos3D);//移动平面上的交点
 
-                //改变尺寸
+                //缩放
                 if (success && eventArgs.LeftButton == MouseButtonState.Pressed && Keyboard.IsKeyDown(Key.LeftCtrl))
                 {
                     //设置光标
@@ -446,8 +405,7 @@ namespace PCLSharp.Client.ViewModels.CommonContext
 
                     Matrix<double> newMatrix = newPose.ToRotationTranslationMatrix();
                     Matrix3D newMatrix3D = newMatrix.ToMatrix3D();
-                    Transform3D transform3D = new MatrixTransform3D(newMatrix3D);
-                    this.BoundingBox.Transform = transform3D;
+                    this.BoundingBox.Transform = new MatrixTransform3D(newMatrix3D); ;
 
                     eventArgs.Handled = true;
                     return;
@@ -462,8 +420,7 @@ namespace PCLSharp.Client.ViewModels.CommonContext
                     rtMatrix3D.OffsetX = newVisualPos3D.X;
                     rtMatrix3D.OffsetY = newVisualPos3D.Y;
                     rtMatrix3D.OffsetZ = newVisualPos3D.Z;
-                    Transform3D transform3D = new MatrixTransform3D(rtMatrix3D);
-                    this.BoundingBox.Transform = transform3D;
+                    this.BoundingBox.Transform = new MatrixTransform3D(rtMatrix3D); ;
 
                     eventArgs.Handled = true;
                     return;

@@ -226,10 +226,10 @@
                                     <TextBlock Text="{Binding TargetSegmentedCount}" />
                                 </sd:FormItem>
                                 <sd:FormItem Label="离群点移除(源)：">
-                                    <TextBlock Text="{Binding SourceOuterCount}" />
+                                    <TextBlock Text="{Binding SourceOutlierCount}" />
                                 </sd:FormItem>
                                 <sd:FormItem Label="离群点移除(标)：">
-                                    <TextBlock Text="{Binding TargetOuterCount}" />
+                                    <TextBlock Text="{Binding TargetOutlierCount}" />
                                 </sd:FormItem>
                                 <sd:FormItem Label="关键点(源)：">
                                     <TextBlock Text="{Binding SourceKeyPointsCount}" />
