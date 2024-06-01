@@ -36,8 +36,10 @@ namespace PCLSharp.Modules.Interfaces
         /// <param name="minRadius">球体最小半径</param>
         /// <param name="maxRadius">球体最大半径</param>
         /// <param name="maxIterationsCount">最大迭代次数</param>
+        /// <param name="center">球心</param>
+        /// <param name="radius">半径</param>
         /// <returns>球体点云</returns>
-        Point3F[] SegmentSphere(IEnumerable<Point3F> points, bool optimizeCoefficients, float probability, float distanceThreshold, float minRadius, float maxRadius, int maxIterationsCount);
+        Point3F[] SegmentSphere(IEnumerable<Point3F> points, bool optimizeCoefficients, float probability, float distanceThreshold, float minRadius, float maxRadius, int maxIterationsCount, out Point3F center, out float radius);
         #endregion
 
         #region # 欧几里得聚类分割 —— Point3F[][] EuclidClusterSegment(IEnumerable<Point3F> points...

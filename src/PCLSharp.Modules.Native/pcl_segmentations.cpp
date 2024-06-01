@@ -70,8 +70,10 @@ Point3Fs* segmentPlane(Point3F points[], const int length, const bool optimizeCo
 /// <param name="minRadius">球体最小半径</param>
 /// <param name="maxRadius">球体最大半径</param>
 /// <param name="maxIterationsCount">最大迭代次数</param>
+/// <param name="center">球心</param>
+/// <param name="radius">半径</param>
 /// <returns>球体点云</returns>
-Point3Fs* segmentSphere(Point3F points[], const int length, const bool optimizeCoefficients, const float probability, const float distanceThreshold, const float minRadius, const float maxRadius, const int maxIterationsCount)
+Point3Fs* segmentSphere(Point3F points[], const int length, const bool optimizeCoefficients, const float probability, const float distanceThreshold, const float minRadius, const float maxRadius, const int maxIterationsCount, Point3F& center, float& radius)
 {
 	const PointCloud<PointXYZ>::Ptr sourceCloud = pclsharp::toPointCloud(points, length);
 	const PointCloud<PointXYZ>::Ptr targetCloud = std::make_shared<PointCloud<PointXYZ>>();
@@ -90,6 +92,11 @@ Point3Fs* segmentSphere(Point3F points[], const int length, const bool optimizeC
 	sacSegmenter.setMaxIterations(maxIterationsCount);
 	sacSegmenter.segment(inliers, coefficients);
 	pcl::copyPointCloud(*sourceCloud, inliers, *targetCloud);
+	if (!coefficients.values.empty())
+	{
+		center = Point3F(coefficients.values[0], coefficients.values[1], coefficients.values[2]);
+		radius = coefficients.values[3];
+	}
 
 	Point3Fs* point3Fs = pclsharp::toPoint3Fs(*targetCloud);
 

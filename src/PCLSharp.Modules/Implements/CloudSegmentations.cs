@@ -62,8 +62,10 @@ namespace PCLSharp.Modules.Implements
         /// <param name="minRadius">球体最小半径</param>
         /// <param name="maxRadius">球体最大半径</param>
         /// <param name="maxIterationsCount">最大迭代次数</param>
+        /// <param name="center">球心</param>
+        /// <param name="radius">半径</param>
         /// <returns>球体点云</returns>
-        public Point3F[] SegmentSphere(IEnumerable<Point3F> points, bool optimizeCoefficients, float probability, float distanceThreshold, float minRadius, float maxRadius, int maxIterationsCount)
+        public Point3F[] SegmentSphere(IEnumerable<Point3F> points, bool optimizeCoefficients, float probability, float distanceThreshold, float minRadius, float maxRadius, int maxIterationsCount, out Point3F center, out float radius)
         {
             Point3F[] points_ = points?.ToArray() ?? Array.Empty<Point3F>();
 
@@ -71,12 +73,14 @@ namespace PCLSharp.Modules.Implements
 
             if (!points_.Any())
             {
+                center = new Point3F();
+                radius = 0;
                 return Array.Empty<Point3F>();
             }
 
             #endregion
 
-            IntPtr pointer = SegmentationsNative.SegmentSphere(points_, points_.Length, optimizeCoefficients, probability, distanceThreshold, minRadius, maxRadius, maxIterationsCount);
+            IntPtr pointer = SegmentationsNative.SegmentSphere(points_, points_.Length, optimizeCoefficients, probability, distanceThreshold, minRadius, maxRadius, maxIterationsCount, out center, out radius);
             Point3Fs point3Fs = Marshal.PtrToStructure<Point3Fs>(pointer);
             Point3F[] segmentedPoints = point3Fs.Recover();
             DisposeNative.DisposePoint3Fs(pointer);

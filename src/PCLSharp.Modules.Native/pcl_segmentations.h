@@ -33,8 +33,10 @@ EXPORT_C Point3Fs* CALLING_MODE segmentPlane(Point3F points[], int length, bool 
 /// <param name="minRadius">球体最小半径</param>
 /// <param name="maxRadius">球体最大半径</param>
 /// <param name="maxIterationsCount">最大迭代次数</param>
+/// <param name="center">球心</param>
+/// <param name="radius">半径</param>
 /// <returns>球体点云</returns>
-EXPORT_C Point3Fs* CALLING_MODE segmentSphere(Point3F points[], int length, bool optimizeCoefficients, float probability, float distanceThreshold, float minRadius, float maxRadius, int maxIterationsCount);
+EXPORT_C Point3Fs* CALLING_MODE segmentSphere(Point3F points[], int length, bool optimizeCoefficients, float probability, float distanceThreshold, float minRadius, float maxRadius, int maxIterationsCount, Point3F& center, float& radius);
 
 /// <summary>
 /// 欧几里得聚类分割

@@ -1804,7 +1804,7 @@ namespace PCLSharp.Client.ViewModels.HomeContext
             if (result == true)
             {
                 IEnumerable<Point3F> points = this.EffectivePointCloud.Points.ToPoint3Fs();
-                Point3F[] segmentedPoints = await Task.Run(() => this._cloudSegmentations.SegmentSphere(points, viewModel.OptimizeCoefficients!.Value, viewModel.Probability!.Value, viewModel.DistanceThreshold!.Value, viewModel.MinRadius!.Value, viewModel.MaxRadius!.Value, viewModel.MaxIterationsCount!.Value));
+                Point3F[] segmentedPoints = await Task.Run(() => this._cloudSegmentations.SegmentSphere(points, viewModel.OptimizeCoefficients!.Value, viewModel.Probability!.Value, viewModel.DistanceThreshold!.Value, viewModel.MinRadius!.Value, viewModel.MaxRadius!.Value, viewModel.MaxIterationsCount!.Value, out Point3F center, out float radius));
 
                 IEnumerable<Vector3> positions = segmentedPoints.ToVector3s();
                 this.EffectivePointCloud = new PointGeometry3D
