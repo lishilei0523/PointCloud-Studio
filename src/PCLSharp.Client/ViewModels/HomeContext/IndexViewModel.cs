@@ -643,8 +643,30 @@ namespace PCLSharp.Client.ViewModels.HomeContext
         /// </summary>
         public async void CropBox()
         {
-            //TODO 实现
-            MessageBox.Show("未实现！");
+            #region # 验证
+
+            if (this.EffectivePointCloud == null)
+            {
+                MessageBox.Show("点云未加载！", "错误", MessageBoxButton.OK, MessageBoxImage.Error);
+                return;
+            }
+
+            #endregion
+
+            this.Busy();
+
+            CropBoxViewModel viewModel = ResolveMediator.Resolve<CropBoxViewModel>();
+            viewModel.Load(this.EffectivePointCloud.Positions);
+            bool? result = await this._windowManager.ShowDialogAsync(viewModel);
+            if (result == true)
+            {
+                this.EffectivePointCloud = new PointGeometry3D
+                {
+                    Positions = viewModel.PointCloud.Positions
+                };
+            }
+
+            this.Idle();
         }
         #endregion
 

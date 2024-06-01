@@ -1,0 +1,111 @@
+﻿<mah:MetroWindow x:Class="PCLSharp.Client.Views.CommonContext.CropBoxView"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:mah="http://metro.mahapps.com/winfx/xaml/controls"
+        xmlns:cm="http://caliburnmicro.com"
+        xmlns:hx="http://helix-toolkit.org/wpf/SharpDX"
+        xmlns:busyIndicator="https://github.com/Peoky/BusyIndicator"
+        mc:Ignorable="d"
+        Title="长方体剪裁" 
+        Width="1280" Height="800" FontSize="14"
+        WindowStartupLocation="CenterScreen"
+        Style="{StaticResource MetroWindow.Styles.Clean}">
+
+    <mah:MetroWindow.RightWindowCommands>
+        <mah:WindowCommands>
+            <mah:WindowCommands Margin="0,0,-20,0">
+                <mah:ToggleSwitch OnContent="高画质模式" OffContent="流畅模式" Height="34" FontSize="14" FontFamily="微软雅黑"
+                                  IsOn="{Binding HighImageQuality}"
+                                  cm:Message.Attach="[Event Toggled] = [Action SwitchImageQuality()]" />
+            </mah:WindowCommands>
+            <Button Content="指向质心" cm:Message.Attach="LookAtCentroid()" />
+            <Button Content="重置相机" cm:Message.Attach="ResetCamera()" />
+        </mah:WindowCommands>
+    </mah:MetroWindow.RightWindowCommands>
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <!--Header-->
+            <RowDefinition Height="Auto" />
+            <!--Body-->
+            <RowDefinition Height="*" />
+            <!--Footer-->
+            <RowDefinition Height="25" />
+            <!--Controller-->
+            <RowDefinition Height="50" />
+        </Grid.RowDefinitions>
+        <!--Header-->
+        <Border Grid.Row="0" Style="{StaticResource Panel.Styles.Function.Border}">
+            <Menu Margin="4,2">
+                <MenuItem Header="剪切(_C)" cm:Message.Attach="Crop()" />
+                <MenuItem Header="保留(_R)" cm:Message.Attach="Reserve()" />
+            </Menu>
+        </Border>
+        <!--Body-->
+        <busyIndicator:BusyMask Grid.Row="1" IndicatorType="Cupertino" IsBusy="{Binding IsBusy}">
+            <!--点云视口-->
+            <hx:Viewport3DX BackgroundColor="LightGray"
+                            MSAA="{Binding MSAALevel}"
+                            ShowCoordinateSystem="True"
+                            CoordinateSystemSize="2"
+                            CoordinateSystemHorizontalPosition="-1"
+                            CoordinateSystemVerticalPosition="1"
+                            CoordinateSystemLabelForeground="Black"
+                            Camera="{Binding Camera}"
+                            cm:Message.Attach="
+                            [Event MouseLeftButtonDown] = [Action ViewportOnMouseLeftDown($source, $eventArgs)];
+                            [Event MouseMove] = [Action ViewportOnMouseMove($source, $eventArgs)];
+                            [Event MouseUp] = [Action ViewportOnMouseUp()]">
+                <!--效果器-->
+                <hx:Viewport3DX.EffectsManager>
+                    <hx:DefaultEffectsManager />
+                </hx:Viewport3DX.EffectsManager>
+                <!--键盘鼠标-->
+                <hx:Viewport3DX.InputBindings>
+                    <KeyBinding Key="U" Command="hx:ViewportCommands.TopView" />
+                    <KeyBinding Key="F" Command="hx:ViewportCommands.FrontView" />
+                    <KeyBinding Key="R" Command="hx:ViewportCommands.RightView" />
+                    <KeyBinding Key="B" Command="hx:ViewportCommands.BackView" />
+                    <KeyBinding Key="L" Command="hx:ViewportCommands.LeftView" />
+                    <KeyBinding Key="D" Command="hx:ViewportCommands.BottomView" />
+                    <KeyBinding Command="hx:ViewportCommands.ZoomExtents" Gesture="Control+E" />
+                    <MouseBinding Command="hx:ViewportCommands.Pan" Gesture="MiddleClick" />
+                    <MouseBinding Command="hx:ViewportCommands.Rotate" Gesture="RightClick" />
+                </hx:Viewport3DX.InputBindings>
+                <!--光源-->
+                <hx:DirectionalLight3D Color="White" Direction="{Binding Camera.LookDirection}" />
+                <!--点云-->
+                <hx:PointGeometryModel3D Geometry="{Binding PointCloud}" Color="Green" />
+                <!--边界长方体-->
+                <hx:Element3DPresenter Content="{Binding BoundingBox}" />
+            </hx:Viewport3DX>
+        </busyIndicator:BusyMask>
+        <!--Footer-->
+        <Border Grid.Row="2" Style="{StaticResource Panel.Styles.Function.Border}" BorderThickness="0,1,0,0">
+            <Grid>
+                <WrapPanel Margin="10,0,0,0" HorizontalAlignment="Left" VerticalAlignment="Center">
+                    <TextBlock Text="{Binding Camera.LookDirection, StringFormat=LookDirection: \{0:0.0\}}" FontSize="12" />
+                    <TextBlock Text=" | " FontSize="12" />
+                    <TextBlock Text="{Binding Camera.UpDirection, StringFormat=UpDirection: \{0:0.0\}}" FontSize="12" />
+                    <TextBlock Text=" | " FontSize="12" />
+                    <TextBlock Text="{Binding Camera.Position, StringFormat=Position: \{0:0.0\}}" FontSize="12" />
+                    <TextBlock Text=" | " FontSize="12" />
+                    <TextBlock Text="{Binding Camera.FieldOfView, StringFormat=FieldOfView: \{0:0.0\}}" FontSize="12" />
+                </WrapPanel>
+                <WrapPanel Margin="0,0,10,0" HorizontalAlignment="Right" VerticalAlignment="Center">
+                    <TextBlock Text="点云数量：" FontSize="12" />
+                    <TextBlock Text="{Binding PointCloud.Positions.Count}" FontSize="12" />
+                </WrapPanel>
+            </Grid>
+        </Border>
+        <!--Controller-->
+        <Grid Grid.Row="3" Style="{StaticResource Form.Styles.Submit.Grid}">
+            <WrapPanel Style="{StaticResource Form.Styles.Submit.WrapPanel}">
+                <Button Content="确定" cm:Message.Attach="Submit()" Style="{StaticResource Button.Styles.Fluent.Focus}" />
+                <Button Content="取消" cm:Message.Attach="TryCloseAsync('false')" Style="{StaticResource Button.Styles.Fluent.Default}" />
+            </WrapPanel>
+        </Grid>
+    </Grid>
+</mah:MetroWindow>
