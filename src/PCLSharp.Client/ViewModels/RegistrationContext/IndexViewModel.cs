@@ -91,6 +91,22 @@ namespace PCLSharp.Client.ViewModels.RegistrationContext
 
         #region # 属性
 
+        #region MSAA等级 —— MSAALevel MSAALevel
+        /// <summary>
+        /// MSAA等级
+        /// </summary>
+        [DependencyProperty]
+        public MSAALevel MSAALevel { get; set; }
+        #endregion
+
+        #region 是否高画质 —— bool HighImageQuality
+        /// <summary>
+        /// 是否高画质
+        /// </summary>
+        [DependencyProperty]
+        public bool HighImageQuality { get; set; }
+        #endregion
+
         #region 源文件路径 —— string SourceFilePath
         /// <summary>
         /// 源文件路径
@@ -379,6 +395,10 @@ namespace PCLSharp.Client.ViewModels.RegistrationContext
         /// </summary>
         protected override Task OnInitializeAsync(CancellationToken cancellationToken)
         {
+            //默认值
+            this.MSAALevel = MSAALevel.Maximum;
+            this.HighImageQuality = true;
+
             //初始化相机
             this.ResetCamera();
 
@@ -460,7 +480,7 @@ namespace PCLSharp.Client.ViewModels.RegistrationContext
 
             #endregion
 
-            ParamViewModel paramViewModel = ResolveMediator.Resolve<ParamViewModel>();
+            ParamViewModel paramViewModel = this.ParamViewModel ?? ResolveMediator.Resolve<ParamViewModel>();
             bool? result = await this._windowManager.ShowDialogAsync(paramViewModel);
             if (result == true)
             {
@@ -623,6 +643,16 @@ namespace PCLSharp.Client.ViewModels.RegistrationContext
             this.SourceCloud = originalSourcePoints.ToPointGeometry3D();
 
             this.Idle();
+        }
+        #endregion
+
+        #region 切换画质 —— void SwitchImageQuality()
+        /// <summary>
+        /// 切换画质
+        /// </summary>
+        public void SwitchImageQuality()
+        {
+            this.MSAALevel = this.HighImageQuality ? MSAALevel.Maximum : MSAALevel.Disable;
         }
         #endregion
 

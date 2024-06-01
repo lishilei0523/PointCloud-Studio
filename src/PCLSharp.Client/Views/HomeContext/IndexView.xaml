@@ -16,7 +16,9 @@
 
     <mah:MetroWindow.RightWindowCommands>
         <mah:WindowCommands Margin="0,0,-35,0">
-            <mah:ToggleSwitch Content="高画质模式" VerticalAlignment="Center" Height="32" FontSize="12" FontFamily="微软雅黑" />
+            <mah:ToggleSwitch OnContent="高画质模式" OffContent="流畅模式" Height="32" FontSize="12" FontFamily="微软雅黑"
+                              IsOn="{Binding HighImageQuality}"
+                              cm:Message.Attach="[Event Toggled] = [Action SwitchImageQuality()]" />
         </mah:WindowCommands>
     </mah:MetroWindow.RightWindowCommands>
 
@@ -110,7 +112,7 @@
                 <!--原始点云-->
                 <GroupBox Header="原始点云" Grid.Column="0" Margin="4,4,2,4">
                     <hx:Viewport3DX BackgroundColor="{Binding BackgroundColor}"
-                                    MSAA="Maximum"
+                                    MSAA="{Binding MSAALevel}"
                                     ShowViewCube="False"
                                     ShowCoordinateSystem="True"
                                     CoordinateSystemSize="2"
@@ -143,7 +145,7 @@
                 <!--效果点云-->
                 <GroupBox Header="效果点云" Grid.Column="1" Margin="2,4,4,4">
                     <hx:Viewport3DX BackgroundColor="{Binding BackgroundColor}"
-                                    MSAA="Maximum"
+                                    MSAA="{Binding MSAALevel}"
                                     ShowViewCube="True"
                                     Camera="{Binding Camera}">
                         <!--效果器-->

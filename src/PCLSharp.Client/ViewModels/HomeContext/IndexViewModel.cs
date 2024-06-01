@@ -112,6 +112,22 @@ namespace PCLSharp.Client.ViewModels.HomeContext
 
         #region # 属性
 
+        #region MSAA等级 —— MSAALevel MSAALevel
+        /// <summary>
+        /// MSAA等级
+        /// </summary>
+        [DependencyProperty]
+        public MSAALevel MSAALevel { get; set; }
+        #endregion
+
+        #region 是否高画质 —— bool HighImageQuality
+        /// <summary>
+        /// 是否高画质
+        /// </summary>
+        [DependencyProperty]
+        public bool HighImageQuality { get; set; }
+        #endregion
+
         #region 文件路径 —— string FilePath
         /// <summary>
         /// 文件路径
@@ -226,6 +242,8 @@ namespace PCLSharp.Client.ViewModels.HomeContext
         protected override Task OnInitializeAsync(CancellationToken cancellationToken)
         {
             //默认值
+            this.MSAALevel = MSAALevel.Maximum;
+            this.HighImageQuality = true;
             this.LabelColor = Colors.Black;
             this.BackgroundColor = Colors.LightGray;
             this.KeyPointColor = Colors.Red;
@@ -545,6 +563,16 @@ namespace PCLSharp.Client.ViewModels.HomeContext
 
 
         //常用
+
+        #region 切换画质 —— void SwitchImageQuality()
+        /// <summary>
+        /// 切换画质
+        /// </summary>
+        public void SwitchImageQuality()
+        {
+            this.MSAALevel = this.HighImageQuality ? MSAALevel.Maximum : MSAALevel.Disable;
+        }
+        #endregion
 
         #region 估算质心 —— async void EstimateCentroid()
         /// <summary>

@@ -16,6 +16,11 @@
 
     <mah:MetroWindow.RightWindowCommands>
         <mah:WindowCommands>
+            <mah:WindowCommands Margin="0,0,-20,0">
+                <mah:ToggleSwitch OnContent="高画质模式" OffContent="流畅模式" Height="34" FontSize="14" FontFamily="微软雅黑"
+                                  IsOn="{Binding HighImageQuality}"
+                                  cm:Message.Attach="[Event Toggled] = [Action SwitchImageQuality()]" />
+            </mah:WindowCommands>
             <Button Content="刷新点云" cm:Message.Attach="RefreshCloud()" />
             <Button Content="指向质心" cm:Message.Attach="LookAtCentroid()" />
             <Button Content="重置相机" cm:Message.Attach="ResetCamera()" />
@@ -142,7 +147,7 @@
                 <!--点云视口-->
                 <hx:Viewport3DX Grid.Column="1" 
                                 BackgroundColor="LightGray"
-                                MSAA="Maximum"
+                                MSAA="{Binding MSAALevel}"
                                 ShowCoordinateSystem="True"
                                 CoordinateSystemSize="2"
                                 CoordinateSystemHorizontalPosition="-1"
