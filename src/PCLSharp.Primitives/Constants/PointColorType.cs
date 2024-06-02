@@ -1,4 +1,4 @@
-﻿namespace PCLSharp.Primitives.Enums
+﻿namespace PCLSharp.Primitives.Constants
 {
     /// <summary>
     /// 点颜色类型

@@ -20,6 +20,7 @@
       <SDLCheck>false</SDLCheck>
       <OpenMPSupport>true</OpenMPSupport>
       <GenerateXMLDocumentationFiles>true</GenerateXMLDocumentationFiles>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
     </ClCompile>
   </ItemDefinitionGroup>
   <ItemGroup />

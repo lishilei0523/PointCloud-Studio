@@ -11,7 +11,7 @@ using PCLSharp.Client.ViewModels.SegmentationContext;
 using PCLSharp.Extensions.Helix;
 using PCLSharp.Extensions.Plotter;
 using PCLSharp.Modules.Interfaces;
-using PCLSharp.Primitives.Enums;
+using PCLSharp.Primitives.Constants;
 using PCLSharp.Primitives.Extensions;
 using PCLSharp.Primitives.Features;
 using PCLSharp.Primitives.Models;
