@@ -722,9 +722,9 @@ namespace PCLSharp.Client.ViewModels.RegistrationContext
         {
             this.Camera = new PerspectiveCamera
             {
-                LookDirection = new Vector3D(0, 0, -2),
+                LookDirection = new Vector3D(0, 0, -200),
                 UpDirection = new Vector3D(0, 1, 0),
-                Position = new Point3D(0, 0, 2),
+                Position = new Point3D(0, 0, 200),
                 NearPlaneDistance = 0.125,
                 FarPlaneDistance = double.PositiveInfinity,
                 FieldOfView = 30
