@@ -42,10 +42,20 @@
     <PackageReference Include="SD.Infrastructure.WPF.Caliburn" Version="1.2.1" />
   </ItemGroup>
 
+  <!--NuGet引用SDK-->
   <ItemGroup>
-    <ProjectReference Include="..\PCLSharp.Primitives\PCLSharp.Primitives.csproj" />
-    <ProjectReference Include="..\PCLSharp.Modules\PCLSharp.Modules.csproj" />
-    <ProjectReference Include="..\PCLSharp.Extensions.Helix\PCLSharp.Extensions.Helix.csproj" />
-    <ProjectReference Include="..\PCLSharp.Extensions.Plotter\PCLSharp.Extensions.Plotter.csproj" />
+    <PackageReference Include="PCLSharp.Primitives" Version="1.0.0" />
+    <PackageReference Include="PCLSharp.Modules" Version="1.0.0" />
+    <PackageReference Include="PCLSharp.Extensions.Helix" Version="1.0.0" />
+    <PackageReference Include="PCLSharp.Extensions.Plotter" Version="1.0.0" />
+    <PackageReference Include="PCLSharp.Runtime.win-x64" Version="1.0.0" />
+  </ItemGroup>
+
+  <!--项目引用SDK-->
+  <ItemGroup>
+    <!--<ProjectReference Include="..\PCLSharp.Primitives\PCLSharp.Primitives.csproj" />-->
+    <!--<ProjectReference Include="..\PCLSharp.Modules\PCLSharp.Modules.csproj" />-->
+    <!--<ProjectReference Include="..\PCLSharp.Extensions.Helix\PCLSharp.Extensions.Helix.csproj" />-->
+    <!--<ProjectReference Include="..\PCLSharp.Extensions.Plotter\PCLSharp.Extensions.Plotter.csproj" />-->
   </ItemGroup>
 </Project>
