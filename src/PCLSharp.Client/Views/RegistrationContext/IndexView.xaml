@@ -12,7 +12,8 @@
         Title="点云配准" 
         Width="1280" Height="800" FontSize="14"
         WindowStartupLocation="CenterScreen"
-        Style="{StaticResource MetroWindow.Styles.Clean}">
+        Style="{StaticResource MetroWindow.Styles.Clean}"
+        cm:Message.Attach="[Event KeyDown] = [Action OnKeyDown()]">
 
     <mah:MetroWindow.RightWindowCommands>
         <mah:WindowCommands>

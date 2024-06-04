@@ -21,6 +21,7 @@ using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
+using System.Windows.Input;
 using System.Windows.Media.Media3D;
 using PerspectiveCamera = HelixToolkit.Wpf.SharpDX.PerspectiveCamera;
 
@@ -747,6 +748,22 @@ namespace PCLSharp.Client.ViewModels.RegistrationContext
                 FarPlaneDistance = double.PositiveInfinity,
                 FieldOfView = 30
             };
+        }
+        #endregion
+
+
+        //Events
+
+        #region 键盘按下事件 —— void OnKeyDown()
+        /// <summary>
+        /// 键盘按下事件
+        /// </summary>
+        public void OnKeyDown()
+        {
+            if (Keyboard.IsKeyDown(Key.F5))
+            {
+                this.RefreshCloud();
+            }
         }
         #endregion
 
