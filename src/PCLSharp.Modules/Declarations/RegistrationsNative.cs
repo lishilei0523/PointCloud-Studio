@@ -207,7 +207,7 @@ namespace PCLSharp.Modules.Declarations
         /// <param name="threadsCount">线程数</param>
         /// <returns>配准结果</returns>
         [DllImport(AssemblyNames.Modules, EntryPoint = "alignPointToPlane")]
-        public static extern IntPtr AlignPointToPlane(Point3F[] sourcePoints, int sourceLength, Point3F[] targetPoints, int normalK, int targetLength, float maxCorrespondenceDistance, float transformationEpsilon, float euclideanFitnessEpsilon, int maximumIterations, int threadsCount);
+        public static extern IntPtr AlignPointToPlane(Point3F[] sourcePoints, int sourceLength, Point3F[] targetPoints, int targetLength, int normalK, float maxCorrespondenceDistance, float transformationEpsilon, float euclideanFitnessEpsilon, int maximumIterations, int threadsCount);
         #endregion
     }
 }

@@ -1,5 +1,10 @@
-﻿using SD.Infrastructure.WPF.Caliburn.Aspects;
+﻿using PCLSharp.Primitives.Constants;
+using SD.Common;
+using SD.Infrastructure.WPF.Caliburn.Aspects;
 using SD.Infrastructure.WPF.Caliburn.Base;
+using System.Collections.Generic;
+using System.Threading;
+using System.Threading.Tasks;
 using System.Windows;
 
 namespace PCLSharp.Client.ViewModels.RegistrationContext
@@ -21,6 +26,7 @@ namespace PCLSharp.Client.ViewModels.RegistrationContext
             this.SampleIIRate = 2.0f;
 
             //分割
+            this.NeedToSegment = true;
             this.ClusterTolerance = 1.5f;
             this.MinClusterSize = 1000;
             this.MaxClusterSize = 100000;
@@ -46,6 +52,7 @@ namespace PCLSharp.Client.ViewModels.RegistrationContext
             this.CorrespondenceRandomness = 6;
 
             //精配准
+            this.SelectedFineAlignmentMode = FineAlignmentMode.GICP;
             this.MaxCorrespondenceDistance = 100.0f;
             this.TransformationEpsilon = 1e-6f;
             this.EuclideanFitnessEpsilon = 0.1f;
@@ -79,6 +86,14 @@ namespace PCLSharp.Client.ViewModels.RegistrationContext
 
 
         //分割
+
+        #region 是否分割 —— bool NeedToSegment
+        /// <summary>
+        /// 是否分割
+        /// </summary>
+        [DependencyProperty]
+        public bool NeedToSegment { get; set; }
+        #endregion
 
         #region 簇搜索容差 —— float? ClusterTolerance
         /// <summary>
@@ -215,6 +230,22 @@ namespace PCLSharp.Client.ViewModels.RegistrationContext
 
         //精配准
 
+        #region 精配准模式字典 —— IDictionary<string, string> FineAlignmentModes
+        /// <summary>
+        /// 精配准模式字典
+        /// </summary>
+        [DependencyProperty]
+        public IDictionary<string, string> FineAlignmentModes { get; set; }
+        #endregion
+
+        #region 已选精配准模式 —— FineAlignmentMode? SelectedFineAlignmentMode
+        /// <summary>
+        /// 已选精配准模式
+        /// </summary>
+        [DependencyProperty]
+        public FineAlignmentMode? SelectedFineAlignmentMode { get; set; }
+        #endregion
+
         #region 分辨率 —— float? MaxCorrespondenceDistance
         /// <summary>
         /// 分辨率
@@ -262,6 +293,18 @@ namespace PCLSharp.Client.ViewModels.RegistrationContext
 
         #region # 方法
 
+        #region 初始化 —— override Task OnInitializeAsync(CancellationToken cancellationToken)
+        /// <summary>
+        /// 初始化
+        /// </summary>
+        protected override Task OnInitializeAsync(CancellationToken cancellationToken)
+        {
+            this.FineAlignmentModes = typeof(FineAlignmentMode).GetEnumMembers();
+
+            return base.OnInitializeAsync(cancellationToken);
+        }
+        #endregion
+
         #region 提交 —— async void Submit()
         /// <summary>
         /// 提交
@@ -282,17 +325,17 @@ namespace PCLSharp.Client.ViewModels.RegistrationContext
                 return;
             }
             //分割
-            if (!this.ClusterTolerance.HasValue)
+            if (this.NeedToSegment && !this.ClusterTolerance.HasValue)
             {
                 MessageBox.Show("簇搜索容差不可为空！", "错误", MessageBoxButton.OK, MessageBoxImage.Error);
                 return;
             }
-            if (!this.MinClusterSize.HasValue)
+            if (this.NeedToSegment && !this.MinClusterSize.HasValue)
             {
                 MessageBox.Show("簇最小尺寸不可为空！", "错误", MessageBoxButton.OK, MessageBoxImage.Error);
                 return;
             }
-            if (!this.MaxClusterSize.HasValue)
+            if (this.NeedToSegment && !this.MaxClusterSize.HasValue)
             {
                 MessageBox.Show("簇最大尺寸不可为空！", "错误", MessageBoxButton.OK, MessageBoxImage.Error);
                 return;
@@ -362,6 +405,11 @@ namespace PCLSharp.Client.ViewModels.RegistrationContext
                 return;
             }
             //精配准
+            if (!this.SelectedFineAlignmentMode.HasValue)
+            {
+                MessageBox.Show("精配准模式不可为空！", "错误", MessageBoxButton.OK, MessageBoxImage.Error);
+                return;
+            }
             if (!this.MaxCorrespondenceDistance.HasValue)
             {
                 MessageBox.Show("分辨率不可为空！", "错误", MessageBoxButton.OK, MessageBoxImage.Error);

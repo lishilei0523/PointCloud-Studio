@@ -68,6 +68,9 @@
                                 <sd:FormItem Label="二次采样率：">
                                     <TextBlock Text="{Binding ParamViewModel.SampleIIRate}" />
                                 </sd:FormItem>
+                                <sd:FormItem Label="是否分割：">
+                                    <TextBlock Text="{Binding ParamViewModel.NeedToSegment, Converter={StaticResource Converters.YesNoDescriptionConverter}}" />
+                                </sd:FormItem>
                                 <sd:FormItem Label="簇搜索容差：">
                                     <TextBlock Text="{Binding ParamViewModel.ClusterTolerance}" />
                                 </sd:FormItem>
@@ -125,6 +128,9 @@
                             </StackPanel>
                             <StackPanel Grid.IsSharedSizeScope="True" Margin="0,5">
                                 <TextBlock Text="---------------精配准---------------" Margin="0,0,0,10" Foreground="Red" />
+                                <sd:FormItem Label="精配准模式：">
+                                    <TextBlock Text="{Binding ParamViewModel.SelectedFineAlignmentMode,Converter={StaticResource Converters.EnumMemberConverter}}" />
+                                </sd:FormItem>
                                 <sd:FormItem Label="分辨率：">
                                     <TextBlock Text="{Binding ParamViewModel.MaxCorrespondenceDistance}" />
                                 </sd:FormItem>

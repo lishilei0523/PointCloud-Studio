@@ -9,9 +9,9 @@
     <Company>SD</Company>
     <Description>SD.Framework PCL客户端</Description>
     <Copyright>Copyright © SD 2024</Copyright>
-    <Version>1.0.1</Version>
-    <AssemblyVersion>1.0.1</AssemblyVersion>
-    <FileVersion>1.0.1.0</FileVersion>
+    <Version>1.0.2</Version>
+    <AssemblyVersion>1.0.2</AssemblyVersion>
+    <FileVersion>1.0.2.0</FileVersion>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Platform)'=='AnyCPU'">
@@ -34,6 +34,7 @@
     <PackageReference Include="HelixToolkit.Wpf.SharpDX" Version="2.25.0" />
     <PackageReference Include="SkiaSharp.Views.WPF" Version="2.88.8" />
     <PackageReference Include="MrAdvice" Version="2.15.0" />
+    <PackageReference Include="SD.Common" Version="3.2.1" />
     <PackageReference Include="SD.Toolkits.Mathematics" Version="0.1.0" />
     <PackageReference Include="SD.IOC.Core" Version="1.3.1" />
     <PackageReference Include="SD.Infrastructure" Version="3.7.0" />
@@ -44,18 +45,18 @@
 
   <!--NuGet引用SDK-->
   <ItemGroup>
-    <PackageReference Include="PCLSharp.Primitives" Version="1.0.1" />
+    <!--<PackageReference Include="PCLSharp.Primitives" Version="1.0.1" />
     <PackageReference Include="PCLSharp.Modules" Version="1.0.1" />
     <PackageReference Include="PCLSharp.Extensions.Helix" Version="1.0.0" />
     <PackageReference Include="PCLSharp.Extensions.Plotter" Version="1.0.0" />
-    <PackageReference Include="PCLSharp.Runtime.win-x64" Version="1.0.1" />
+    <PackageReference Include="PCLSharp.Runtime.win-x64" Version="1.0.1" />-->
   </ItemGroup>
 
   <!--项目引用SDK-->
   <ItemGroup>
-    <!--<ProjectReference Include="..\PCLSharp.Primitives\PCLSharp.Primitives.csproj" />
+    <ProjectReference Include="..\PCLSharp.Primitives\PCLSharp.Primitives.csproj" />
     <ProjectReference Include="..\PCLSharp.Modules\PCLSharp.Modules.csproj" />
     <ProjectReference Include="..\PCLSharp.Extensions.Helix\PCLSharp.Extensions.Helix.csproj" />
-    <ProjectReference Include="..\PCLSharp.Extensions.Plotter\PCLSharp.Extensions.Plotter.csproj" />-->
+    <ProjectReference Include="..\PCLSharp.Extensions.Plotter\PCLSharp.Extensions.Plotter.csproj" />
   </ItemGroup>
 </Project>

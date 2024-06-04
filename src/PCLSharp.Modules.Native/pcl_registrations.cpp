@@ -546,7 +546,7 @@ AlignmentResult* alignPointToPoint(Point3F sourcePoints[], const int sourceLengt
 /// <param name="maximumIterations">最大迭代次数</param>
 /// <param name="threadsCount">线程数</param>
 /// <returns>配准结果</returns>
-AlignmentResult* alignPointToPlane(Point3F sourcePoints[], const int sourceLength, Point3F targetPoints[], const int normalK, const int targetLength, const float maxCorrespondenceDistance, const float transformationEpsilon, const float euclideanFitnessEpsilon, const int maximumIterations, const int threadsCount)
+AlignmentResult* alignPointToPlane(Point3F sourcePoints[], const int sourceLength, Point3F targetPoints[], const int targetLength, const int normalK, const float maxCorrespondenceDistance, const float transformationEpsilon, const float euclideanFitnessEpsilon, const int maximumIterations, const int threadsCount)
 {
 	const PointCloud<PointXYZ>::Ptr& sourceCloud = pclsharp::toPointCloud(sourcePoints, sourceLength);
 	const PointCloud<PointXYZ>::Ptr& targetCloud = pclsharp::toPointCloud(targetPoints, targetLength);

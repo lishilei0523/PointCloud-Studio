@@ -6,9 +6,10 @@
         xmlns:fluentWpf="clr-namespace:SourceChord.FluentWPF;assembly=FluentWPF"
         xmlns:sd="https://github.com/lishilei0523/SD.Framework"
         xmlns:cal="http://www.caliburnproject.org"
+        xmlns:mah="http://metro.mahapps.com/winfx/xaml/controls"
         mc:Ignorable="d"
         Title="配准参数" 
-        Width="1024" Height="805" ResizeMode="NoResize" 
+        Width="1024" Height="855" ResizeMode="NoResize" 
         FontSize="14"
         WindowStyle="ThreeDBorderWindow"
         WindowStartupLocation="CenterOwner"
@@ -39,14 +40,17 @@
                         <sd:FormItem Label="二次采样率：">
                             <TextBox Text="{Binding SampleIIRate}" Style="{StaticResource TextBoxRevealStyle}" />
                         </sd:FormItem>
+                        <sd:FormItem Label="是否分割：">
+                            <mah:ToggleSwitch IsOn="{Binding NeedToSegment}" OnContent="是" OffContent="否" Style="{StaticResource ToggleSwitch.Styles.Fluent}" />
+                        </sd:FormItem>
                         <sd:FormItem Label="簇搜索容差：">
-                            <TextBox Text="{Binding ClusterTolerance}" Style="{StaticResource TextBoxRevealStyle}" />
+                            <TextBox Text="{Binding ClusterTolerance}" IsEnabled="{Binding NeedToSegment}" Style="{StaticResource TextBoxRevealStyle}" />
                         </sd:FormItem>
                         <sd:FormItem Label="簇最小尺寸：">
-                            <TextBox Text="{Binding MinClusterSize}" Style="{StaticResource TextBoxRevealStyle}" />
+                            <TextBox Text="{Binding MinClusterSize}" IsEnabled="{Binding NeedToSegment}" Style="{StaticResource TextBoxRevealStyle}" />
                         </sd:FormItem>
                         <sd:FormItem Label="簇最大尺寸：">
-                            <TextBox Text="{Binding MaxClusterSize}" Style="{StaticResource TextBoxRevealStyle}" />
+                            <TextBox Text="{Binding MaxClusterSize}" IsEnabled="{Binding NeedToSegment}" Style="{StaticResource TextBoxRevealStyle}" />
                         </sd:FormItem>
                         <sd:FormItem Label="平均K近邻：">
                             <TextBox Text="{Binding MeanK}" Style="{StaticResource TextBoxRevealStyle}" />
@@ -102,6 +106,13 @@
                 </GroupBox>
                 <GroupBox Header="精配准" Margin="2,2,4,4">
                     <StackPanel Grid.IsSharedSizeScope="True" Margin="0,10">
+                        <sd:FormItem Label="精配准模式：">
+                            <ComboBox ItemsSource="{Binding FineAlignmentModes}" 
+                                      DisplayMemberPath="Value"
+                                      SelectedValuePath="Key"
+                                      SelectedValue="{Binding SelectedFineAlignmentMode}"
+                                      Style="{StaticResource ComboBox.Styles.Fluent}" />
+                        </sd:FormItem>
                         <sd:FormItem Label="分辨率：">
                             <TextBox Text="{Binding MaxCorrespondenceDistance}" Style="{StaticResource TextBoxRevealStyle}" />
                         </sd:FormItem>

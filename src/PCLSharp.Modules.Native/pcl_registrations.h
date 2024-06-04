@@ -173,4 +173,4 @@ EXPORT_C AlignmentResult* CALLING_MODE alignPointToPoint(Point3F sourcePoints[],
 /// <param name="maximumIterations">最大迭代次数</param>
 /// <param name="threadsCount">线程数</param>
 /// <returns>配准结果</returns>
-EXPORT_C AlignmentResult* CALLING_MODE alignPointToPlane(Point3F sourcePoints[], int sourceLength, Point3F targetPoints[], int normalK, int targetLength, float maxCorrespondenceDistance, float transformationEpsilon, float euclideanFitnessEpsilon, int maximumIterations, int threadsCount);
+EXPORT_C AlignmentResult* CALLING_MODE alignPointToPlane(Point3F sourcePoints[], int sourceLength, Point3F targetPoints[], int targetLength, int normalK, float maxCorrespondenceDistance, float transformationEpsilon, float euclideanFitnessEpsilon, int maximumIterations, int threadsCount);
