@@ -37,6 +37,16 @@ namespace PCLSharp.Modules.Interfaces
         Point3F[] MatrixTransform(IEnumerable<Point3F> points, float[] matrixArray);
         #endregion
 
+        #region # 合并坐标点法向量 —— Point3Normal3[] MergePointsNormals(IEnumerable<Point3F> points...
+        /// <summary>
+        /// 合并坐标点法向量
+        /// </summary>
+        /// <param name="points">点集</param>
+        /// <param name="normals">法向量集</param>
+        /// <returns>点集</returns>
+        Point3Normal3[] MergePointsNormals(IEnumerable<Point3F> points, IEnumerable<Normal3F> normals);
+        #endregion
+
         #region # 长方体剪裁 —— Point3F[] CropBox(IEnumerable<Point3F> points...
         /// <summary>
         /// 长方体剪裁

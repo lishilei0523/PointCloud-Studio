@@ -67,23 +67,6 @@ namespace PCLSharp.Modules.Declarations
         public static extern IntPtr AlignNDT(Point3F[] sourcePoints, int sourceLength, Point3F[] targetPoints, int targetLength, float resolution, float stepSize, float transformationEpsilon, int maximumIterations);
         #endregion
 
-        #region # ICP配准 —— static extern IntPtr AlignICP(Point3F[] sourcePoints...
-        /// <summary>
-        /// ICP配准
-        /// </summary>
-        /// <param name="sourcePoints">源点集</param>
-        /// <param name="sourceLength">源点集长度</param>
-        /// <param name="targetPoints">目标点集</param>
-        /// <param name="targetLength">目标点集长度</param>
-        /// <param name="maxCorrespondenceDistance">分辨率</param>
-        /// <param name="transformationEpsilon">变换最大差值</param>
-        /// <param name="euclideanFitnessEpsilon">均方误差阈值</param>
-        /// <param name="maximumIterations">最大迭代次数</param>
-        /// <returns>配准结果</returns>
-        [DllImport(AssemblyNames.Modules, EntryPoint = "alignICP")]
-        public static extern IntPtr AlignICP(Point3F[] sourcePoints, int sourceLength, Point3F[] targetPoints, int targetLength, float maxCorrespondenceDistance, float transformationEpsilon, float euclideanFitnessEpsilon, int maximumIterations);
-        #endregion
-
         #region # GICP配准 —— static extern IntPtr AlignGICP(Point3F[] sourcePoints...
         /// <summary>
         /// GICP配准
@@ -189,6 +172,42 @@ namespace PCLSharp.Modules.Declarations
         /// <returns>配准结果</returns>
         [DllImport(AssemblyNames.Modules, EntryPoint = "saciaAlignSHOT")]
         public static extern IntPtr SaciaAlignSHOT(Point3F[] sourcePoints, Shot352F[] sourceDescriptors, int sourceLength, Point3F[] targetPoints, Shot352F[] targetDescriptors, int targetLength, float minSampleDistance, int samplesCount, int correspondenceRandomness);
+        #endregion
+
+        #region # ICP-Point-To-Point配准 —— static extern IntPtr AlignPointToPoint(Point3F[] sourcePoints...
+        /// <summary>
+        /// ICP-Point-To-Point配准
+        /// </summary>
+        /// <param name="sourcePoints">源点集</param>
+        /// <param name="sourceLength">源点集长度</param>
+        /// <param name="targetPoints">目标点集</param>
+        /// <param name="targetLength">目标点集长度</param>
+        /// <param name="maxCorrespondenceDistance">分辨率</param>
+        /// <param name="transformationEpsilon">变换最大差值</param>
+        /// <param name="euclideanFitnessEpsilon">均方误差阈值</param>
+        /// <param name="maximumIterations">最大迭代次数</param>
+        /// <returns>配准结果</returns>
+        [DllImport(AssemblyNames.Modules, EntryPoint = "alignPointToPoint")]
+        public static extern IntPtr AlignPointToPoint(Point3F[] sourcePoints, int sourceLength, Point3F[] targetPoints, int targetLength, float maxCorrespondenceDistance, float transformationEpsilon, float euclideanFitnessEpsilon, int maximumIterations);
+        #endregion
+
+        #region # ICP-Point-To-Plane配准 —— static extern IntPtr AlignPointToPlane(Point3F[] sourcePoints...
+        /// <summary>
+        /// ICP-Point-To-Plane配准
+        /// </summary>
+        /// <param name="sourcePoints">源点集</param>
+        /// <param name="sourceLength">源点集长度</param>
+        /// <param name="targetPoints">目标点集</param>
+        /// <param name="targetLength">目标点集长度</param>
+        /// <param name="normalK">法向量K</param>
+        /// <param name="maxCorrespondenceDistance">分辨率</param>
+        /// <param name="transformationEpsilon">变换最大差值</param>
+        /// <param name="euclideanFitnessEpsilon">均方误差阈值</param>
+        /// <param name="maximumIterations">最大迭代次数</param>
+        /// <param name="threadsCount">线程数</param>
+        /// <returns>配准结果</returns>
+        [DllImport(AssemblyNames.Modules, EntryPoint = "alignPointToPlane")]
+        public static extern IntPtr AlignPointToPlane(Point3F[] sourcePoints, int sourceLength, Point3F[] targetPoints, int normalK, int targetLength, float maxCorrespondenceDistance, float transformationEpsilon, float euclideanFitnessEpsilon, int maximumIterations, int threadsCount);
         #endregion
     }
 }

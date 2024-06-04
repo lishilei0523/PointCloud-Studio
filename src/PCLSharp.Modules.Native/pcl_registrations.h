@@ -57,20 +57,6 @@ EXPORT_C AlignmentResult* CALLING_MODE alignK4PCS(Point3F sourcePoints[], int so
 EXPORT_C AlignmentResult* CALLING_MODE alignNDT(Point3F sourcePoints[], int sourceLength, Point3F targetPoints[], int targetLength, float resolution, float stepSize, float transformationEpsilon, int maximumIterations);
 
 /// <summary>
-/// ICP配准
-/// </summary>
-/// <param name="sourcePoints">源点集</param>
-/// <param name="sourceLength">源点集长度</param>
-/// <param name="targetPoints">目标点集</param>
-/// <param name="targetLength">目标点集长度</param>
-/// <param name="maxCorrespondenceDistance">分辨率</param>
-/// <param name="transformationEpsilon">变换最大差值</param>
-/// <param name="euclideanFitnessEpsilon">均方误差阈值</param>
-/// <param name="maximumIterations">最大迭代次数</param>
-/// <returns>配准结果</returns>
-EXPORT_C AlignmentResult* CALLING_MODE alignICP(Point3F sourcePoints[], int sourceLength, Point3F targetPoints[], int targetLength, float maxCorrespondenceDistance, float transformationEpsilon, float euclideanFitnessEpsilon, int maximumIterations);
-
-/// <summary>
 /// GICP配准
 /// </summary>
 /// <param name="sourcePoints">源点集</param>
@@ -158,3 +144,33 @@ EXPORT_C AlignmentResult* CALLING_MODE saciaAlign3DSC(Point3F sourcePoints[], Sh
 /// <param name="correspondenceRandomness">随机特征邻域点数</param>
 /// <returns>配准结果</returns>
 EXPORT_C AlignmentResult* CALLING_MODE saciaAlignSHOT(Point3F sourcePoints[], Shot352F sourceDescriptors[], int sourceLength, Point3F targetPoints[], Shot352F targetDescriptors[], int targetLength, float minSampleDistance, int samplesCount, int correspondenceRandomness);
+
+/// <summary>
+/// ICP-Point-To-Point配准
+/// </summary>
+/// <param name="sourcePoints">源点集</param>
+/// <param name="sourceLength">源点集长度</param>
+/// <param name="targetPoints">目标点集</param>
+/// <param name="targetLength">目标点集长度</param>
+/// <param name="maxCorrespondenceDistance">分辨率</param>
+/// <param name="transformationEpsilon">变换最大差值</param>
+/// <param name="euclideanFitnessEpsilon">均方误差阈值</param>
+/// <param name="maximumIterations">最大迭代次数</param>
+/// <returns>配准结果</returns>
+EXPORT_C AlignmentResult* CALLING_MODE alignPointToPoint(Point3F sourcePoints[], int sourceLength, Point3F targetPoints[], int targetLength, float maxCorrespondenceDistance, float transformationEpsilon, float euclideanFitnessEpsilon, int maximumIterations);
+
+/// <summary>
+/// ICP-Point-To-Plane配准
+/// </summary>
+/// <param name="sourcePoints">源点集</param>
+/// <param name="sourceLength">源点集长度</param>
+/// <param name="targetPoints">目标点集</param>
+/// <param name="targetLength">目标点集长度</param>
+/// <param name="normalK">法向量K</param>
+/// <param name="maxCorrespondenceDistance">分辨率</param>
+/// <param name="transformationEpsilon">变换最大差值</param>
+/// <param name="euclideanFitnessEpsilon">均方误差阈值</param>
+/// <param name="maximumIterations">最大迭代次数</param>
+/// <param name="threadsCount">线程数</param>
+/// <returns>配准结果</returns>
+EXPORT_C AlignmentResult* CALLING_MODE alignPointToPlane(Point3F sourcePoints[], int sourceLength, Point3F targetPoints[], int normalK, int targetLength, float maxCorrespondenceDistance, float transformationEpsilon, float euclideanFitnessEpsilon, int maximumIterations, int threadsCount);

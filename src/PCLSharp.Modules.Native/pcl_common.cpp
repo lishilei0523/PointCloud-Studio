@@ -41,7 +41,7 @@ Point3F* estimateCentroid(Point3F points[], const int length)
 /// <returns>变换后点云</returns>
 Point3Fs* affineTransform(Point3F points[], const int length, const Pose pose)
 {
-	const PointCloud<PointXYZ>::Ptr sourceCloud = pclsharp::toPointCloud(points, length);
+	const PointCloud<PointXYZ>::Ptr& sourceCloud = pclsharp::toPointCloud(points, length);
 	const PointCloud<PointXYZ>::Ptr targetCloud = std::make_shared<PointCloud<PointXYZ>>();
 
 	//创建仿射变换对象
@@ -75,7 +75,7 @@ Point3Fs* affineTransform(Point3F points[], const int length, const Pose pose)
 /// <returns>变换后点云</returns>
 Point3Fs* matrixTransform(Point3F points[], const int length, float matrixArray[])
 {
-	const PointCloud<PointXYZ>::Ptr sourceCloud = pclsharp::toPointCloud(points, length);
+	const PointCloud<PointXYZ>::Ptr& sourceCloud = pclsharp::toPointCloud(points, length);
 	const PointCloud<PointXYZ>::Ptr targetCloud = std::make_shared<PointCloud<PointXYZ>>();
 
 	Eigen::Matrix4f rtMatrix = Eigen::Matrix4f::Identity();
@@ -96,6 +96,25 @@ Point3Fs* matrixTransform(Point3F points[], const int length, float matrixArray[
 	Point3Fs* point3Fs = pclsharp::toPoint3Fs(*targetCloud);
 
 	return point3Fs;
+}
+
+/// <summary>
+/// 合并坐标点法向量
+/// </summary>
+/// <param name="points">点集</param>
+/// <param name="normal3Fs">法向量集</param>
+/// <param name="length">点集长度</param>
+/// <returns>点集</returns>
+Point3Normal3s* mergePointsNormals(Point3F points[], Normal3F normal3Fs[], const int length)
+{
+	const PointCloud<PointXYZ>::Ptr& cloud = pclsharp::toPointCloud(points, length);
+	const PointCloud<Normal>::Ptr& normals = pclsharp::toPointCloud(normal3Fs, length);
+	PointCloud<PointNormal> pointNormals;
+	pcl::concatenateFields(*cloud, *normals, pointNormals);
+
+	Point3Normal3s* point3Normal3s = pclsharp::toPoint3Normal3s(pointNormals);
+
+	return point3Normal3s;
 }
 
 /// <summary>

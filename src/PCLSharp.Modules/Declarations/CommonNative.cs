@@ -45,6 +45,18 @@ namespace PCLSharp.Modules.Declarations
         public static extern IntPtr MatrixTransform(Point3F[] points, int length, float[] matrixArray);
         #endregion
 
+        #region # 合并坐标点法向量 —— static extern IntPtr MergePointsNormals(Point3F[] points...
+        /// <summary>
+        /// 合并坐标点法向量
+        /// </summary>
+        /// <param name="points">点集</param>
+        /// <param name="normal3Fs">法向量集</param>
+        /// <param name="length">点集长度</param>
+        /// <returns>点集</returns>
+        [DllImport(AssemblyNames.Modules, EntryPoint = "mergePointsNormals")]
+        public static extern IntPtr MergePointsNormals(Point3F[] points, Normal3F[] normal3Fs, int length);
+        #endregion
+
         #region # 长方体剪裁 —— static extern IntPtr CropBox(Point3F[] points...
         /// <summary>
         /// 长方体剪裁

@@ -56,20 +56,6 @@ namespace PCLSharp.Modules.Interfaces
         AlignmentResult AlignNDT(IEnumerable<Point3F> sourcePoints, IEnumerable<Point3F> targetPoints, float resolution, float stepSize, float transformationEpsilon, int maximumIterations);
         #endregion
 
-        #region # ICP配准 —— AlignmentResult AlignICP(IEnumerable<Point3F> sourcePoints...
-        /// <summary>
-        /// ICP配准
-        /// </summary>
-        /// <param name="sourcePoints">源点集</param>
-        /// <param name="targetPoints">目标点集</param>
-        /// <param name="maxCorrespondenceDistance">分辨率</param>
-        /// <param name="transformationEpsilon">变换最大差值</param>
-        /// <param name="euclideanFitnessEpsilon">均方误差阈值</param>
-        /// <param name="maximumIterations">最大迭代次数</param>
-        /// <returns>配准结果</returns>
-        AlignmentResult AlignICP(IEnumerable<Point3F> sourcePoints, IEnumerable<Point3F> targetPoints, float maxCorrespondenceDistance, float transformationEpsilon, float euclideanFitnessEpsilon, int maximumIterations);
-        #endregion
-
         #region # GICP配准 —— AlignmentResult AlignGICP(IEnumerable<Point3F> sourcePoints...
         /// <summary>
         /// GICP配准
@@ -157,6 +143,36 @@ namespace PCLSharp.Modules.Interfaces
         /// <param name="correspondenceRandomness">随机特征邻域点数</param>
         /// <returns>配准结果</returns>
         AlignmentResult AlignSACIA(IEnumerable<Point3F> sourcePoints, IEnumerable<Shot352F> sourceDescriptors, IEnumerable<Point3F> targetPoints, IEnumerable<Shot352F> targetDescriptors, float minSampleDistance, int samplesCount, int correspondenceRandomness);
+        #endregion
+
+        #region # ICP-Point-To-Point配准 —— AlignmentResult AlignPointToPoint(IEnumerable<Point3F> sourcePoints...
+        /// <summary>
+        /// ICP-Point-To-Point配准
+        /// </summary>
+        /// <param name="sourcePoints">源点集</param>
+        /// <param name="targetPoints">目标点集</param>
+        /// <param name="maxCorrespondenceDistance">分辨率</param>
+        /// <param name="transformationEpsilon">变换最大差值</param>
+        /// <param name="euclideanFitnessEpsilon">均方误差阈值</param>
+        /// <param name="maximumIterations">最大迭代次数</param>
+        /// <returns>配准结果</returns>
+        AlignmentResult AlignPointToPoint(IEnumerable<Point3F> sourcePoints, IEnumerable<Point3F> targetPoints, float maxCorrespondenceDistance, float transformationEpsilon, float euclideanFitnessEpsilon, int maximumIterations);
+        #endregion
+
+        #region # ICP-Point-To-Plane配准 —— AlignmentResult AlignPointToPlane(IEnumerable<Point3F> sourcePoints...
+        /// <summary>
+        /// ICP-Point-To-Plane配准
+        /// </summary>
+        /// <param name="sourcePoints">源点集</param>
+        /// <param name="targetPoints">目标点集</param>
+        /// <param name="normalK">法向量K</param>
+        /// <param name="maxCorrespondenceDistance">分辨率</param>
+        /// <param name="transformationEpsilon">变换最大差值</param>
+        /// <param name="euclideanFitnessEpsilon">均方误差阈值</param>
+        /// <param name="maximumIterations">最大迭代次数</param>
+        /// <param name="threadsCount">线程数</param>
+        /// <returns>配准结果</returns>
+        AlignmentResult AlignPointToPlane(IEnumerable<Point3F> sourcePoints, IEnumerable<Point3F> targetPoints, int normalK, float maxCorrespondenceDistance, float transformationEpsilon, float euclideanFitnessEpsilon, int maximumIterations, int threadsCount);
         #endregion
     }
 }

@@ -130,43 +130,6 @@ namespace PCLSharp.Modules.Implements
         }
         #endregion
 
-        #region # ICP配准 —— AlignmentResult AlignICP(IEnumerable<Point3F> sourcePoints...
-        /// <summary>
-        /// ICP配准
-        /// </summary>
-        /// <param name="sourcePoints">源点集</param>
-        /// <param name="targetPoints">目标点集</param>
-        /// <param name="maxCorrespondenceDistance">分辨率</param>
-        /// <param name="transformationEpsilon">变换最大差值</param>
-        /// <param name="euclideanFitnessEpsilon">均方误差阈值</param>
-        /// <param name="maximumIterations">最大迭代次数</param>
-        /// <returns>配准结果</returns>
-        public AlignmentResult AlignICP(IEnumerable<Point3F> sourcePoints, IEnumerable<Point3F> targetPoints, float maxCorrespondenceDistance, float transformationEpsilon, float euclideanFitnessEpsilon, int maximumIterations)
-        {
-            Point3F[] sourcePoints_ = sourcePoints?.ToArray() ?? Array.Empty<Point3F>();
-            Point3F[] targetPoints_ = targetPoints?.ToArray() ?? Array.Empty<Point3F>();
-
-            #region # 验证
-
-            if (!sourcePoints_.Any())
-            {
-                throw new ArgumentNullException(nameof(sourcePoints), "源点集不可为空！");
-            }
-            if (!targetPoints_.Any())
-            {
-                throw new ArgumentNullException(nameof(targetPoints), "目标点集不可为空！");
-            }
-
-            #endregion
-
-            IntPtr pointer = RegistrationsNative.AlignICP(sourcePoints_, sourcePoints_.Length, targetPoints_, targetPoints_.Length, maxCorrespondenceDistance, transformationEpsilon, euclideanFitnessEpsilon, maximumIterations);
-            AlignmentResult alignmentResult = Marshal.PtrToStructure<AlignmentResult>(pointer);
-            DisposeNative.DisposeAlignmentResult(pointer);
-
-            return alignmentResult;
-        }
-        #endregion
-
         #region # GICP配准 —— AlignmentResult AlignGICP(IEnumerable<Point3F> sourcePoints...
         /// <summary>
         /// GICP配准
@@ -477,6 +440,82 @@ namespace PCLSharp.Modules.Implements
             #endregion
 
             IntPtr pointer = RegistrationsNative.SaciaAlignSHOT(sourcePoints_, sourceDescriptors_, sourcePoints_.Length, targetPoints_, targetDescriptors_, targetPoints_.Length, minSampleDistance, samplesCount, correspondenceRandomness);
+            AlignmentResult alignmentResult = Marshal.PtrToStructure<AlignmentResult>(pointer);
+            DisposeNative.DisposeAlignmentResult(pointer);
+
+            return alignmentResult;
+        }
+        #endregion
+
+        #region # ICP-Point-To-Point配准 —— AlignmentResult AlignPointToPoint(IEnumerable<Point3F> sourcePoints...
+        /// <summary>
+        /// ICP-Point-To-Point配准
+        /// </summary>
+        /// <param name="sourcePoints">源点集</param>
+        /// <param name="targetPoints">目标点集</param>
+        /// <param name="maxCorrespondenceDistance">分辨率</param>
+        /// <param name="transformationEpsilon">变换最大差值</param>
+        /// <param name="euclideanFitnessEpsilon">均方误差阈值</param>
+        /// <param name="maximumIterations">最大迭代次数</param>
+        /// <returns>配准结果</returns>
+        public AlignmentResult AlignPointToPoint(IEnumerable<Point3F> sourcePoints, IEnumerable<Point3F> targetPoints, float maxCorrespondenceDistance, float transformationEpsilon, float euclideanFitnessEpsilon, int maximumIterations)
+        {
+            Point3F[] sourcePoints_ = sourcePoints?.ToArray() ?? Array.Empty<Point3F>();
+            Point3F[] targetPoints_ = targetPoints?.ToArray() ?? Array.Empty<Point3F>();
+
+            #region # 验证
+
+            if (!sourcePoints_.Any())
+            {
+                throw new ArgumentNullException(nameof(sourcePoints), "源点集不可为空！");
+            }
+            if (!targetPoints_.Any())
+            {
+                throw new ArgumentNullException(nameof(targetPoints), "目标点集不可为空！");
+            }
+
+            #endregion
+
+            IntPtr pointer = RegistrationsNative.AlignPointToPoint(sourcePoints_, sourcePoints_.Length, targetPoints_, targetPoints_.Length, maxCorrespondenceDistance, transformationEpsilon, euclideanFitnessEpsilon, maximumIterations);
+            AlignmentResult alignmentResult = Marshal.PtrToStructure<AlignmentResult>(pointer);
+            DisposeNative.DisposeAlignmentResult(pointer);
+
+            return alignmentResult;
+        }
+        #endregion
+
+        #region # ICP-Point-To-Plane配准 —— AlignmentResult AlignPointToPlane(IEnumerable<Point3F> sourcePoints...
+        /// <summary>
+        /// ICP-Point-To-Plane配准
+        /// </summary>
+        /// <param name="sourcePoints">源点集</param>
+        /// <param name="targetPoints">目标点集</param>
+        /// <param name="normalK">法向量K</param>
+        /// <param name="maxCorrespondenceDistance">分辨率</param>
+        /// <param name="transformationEpsilon">变换最大差值</param>
+        /// <param name="euclideanFitnessEpsilon">均方误差阈值</param>
+        /// <param name="maximumIterations">最大迭代次数</param>
+        /// <param name="threadsCount">线程数</param>
+        /// <returns>配准结果</returns>
+        public AlignmentResult AlignPointToPlane(IEnumerable<Point3F> sourcePoints, IEnumerable<Point3F> targetPoints, int normalK, float maxCorrespondenceDistance, float transformationEpsilon, float euclideanFitnessEpsilon, int maximumIterations, int threadsCount)
+        {
+            Point3F[] sourcePoints_ = sourcePoints?.ToArray() ?? Array.Empty<Point3F>();
+            Point3F[] targetPoints_ = targetPoints?.ToArray() ?? Array.Empty<Point3F>();
+
+            #region # 验证
+
+            if (!sourcePoints_.Any())
+            {
+                throw new ArgumentNullException(nameof(sourcePoints), "源点集不可为空！");
+            }
+            if (!targetPoints_.Any())
+            {
+                throw new ArgumentNullException(nameof(targetPoints), "目标点集不可为空！");
+            }
+
+            #endregion
+
+            IntPtr pointer = RegistrationsNative.AlignPointToPlane(sourcePoints_, sourcePoints_.Length, targetPoints_, targetPoints_.Length, normalK, maxCorrespondenceDistance, transformationEpsilon, euclideanFitnessEpsilon, maximumIterations, threadsCount);
             AlignmentResult alignmentResult = Marshal.PtrToStructure<AlignmentResult>(pointer);
             DisposeNative.DisposeAlignmentResult(pointer);
 

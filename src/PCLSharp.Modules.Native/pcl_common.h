@@ -32,6 +32,15 @@ EXPORT_C Point3Fs* CALLING_MODE affineTransform(Point3F points[], int length, Po
 EXPORT_C Point3Fs* CALLING_MODE matrixTransform(Point3F points[], int length, float matrixArray[]);
 
 /// <summary>
+/// 合并坐标点法向量
+/// </summary>
+/// <param name="points">点集</param>
+/// <param name="normal3Fs">法向量集</param>
+/// <param name="length">点集长度</param>
+/// <returns>点集</returns>
+EXPORT_C Point3Normal3s* CALLING_MODE mergePointsNormals(Point3F points[], Normal3F normal3Fs[], int length);
+
+/// <summary>
 /// 长方体剪裁
 /// </summary>
 /// <param name="points">点集</param>

@@ -99,6 +99,44 @@ namespace PCLSharp.Modules.Implements
         }
         #endregion
 
+        #region # 合并坐标点法向量 —— Point3Normal3[] MergePointsNormals(IEnumerable<Point3F> points...
+        /// <summary>
+        /// 合并坐标点法向量
+        /// </summary>
+        /// <param name="points">点集</param>
+        /// <param name="normals">法向量集</param>
+        /// <returns>点集</returns>
+        public Point3Normal3[] MergePointsNormals(IEnumerable<Point3F> points, IEnumerable<Normal3F> normals)
+        {
+            Point3F[] points_ = points?.ToArray() ?? Array.Empty<Point3F>();
+            Normal3F[] normals_ = normals?.ToArray() ?? Array.Empty<Normal3F>();
+
+            #region # 验证
+
+            if (!points_.Any())
+            {
+                return Array.Empty<Point3Normal3>();
+            }
+            if (!normals_.Any())
+            {
+                return Array.Empty<Point3Normal3>();
+            }
+            if (points_.Length != normals_.Length)
+            {
+                throw new InvalidOperationException("点集与法向量集长度不一致！");
+            }
+
+            #endregion
+
+            IntPtr pointer = CommonNative.MergePointsNormals(points_, normals_, points_.Length);
+            Point3Normal3s point3Normal3s = Marshal.PtrToStructure<Point3Normal3s>(pointer);
+            Point3Normal3[] pointNormals = point3Normal3s.Recover();
+            DisposeNative.DisposePoint3Normal3s(pointer);
+
+            return pointNormals;
+        }
+        #endregion
+
         #region # 长方体剪裁 —— Point3F[] CropBox(IEnumerable<Point3F> points...
         /// <summary>
         /// 长方体剪裁
