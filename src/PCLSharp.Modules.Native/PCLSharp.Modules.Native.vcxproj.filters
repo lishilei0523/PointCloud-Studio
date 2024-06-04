@@ -72,4 +72,7 @@
       <Filter>Headers</Filter>
     </ClInclude>
   </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="Version.rc" />
+  </ItemGroup>
 </Project>

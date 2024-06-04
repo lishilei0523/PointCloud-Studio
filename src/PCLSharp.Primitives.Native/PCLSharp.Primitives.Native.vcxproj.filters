@@ -87,4 +87,7 @@
       <Filter>Maps</Filter>
     </ClCompile>
   </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="Version.rc" />
+  </ItemGroup>
 </Project>

@@ -176,6 +176,9 @@
     <ClInclude Include="pcl_search.h" />
     <ClInclude Include="pcl_segmentations.h" />
   </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="Version.rc" />
+  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>
