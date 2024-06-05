@@ -56,10 +56,6 @@ namespace PCLSharp.Client.ViewModels.RegistrationContext
 
             //精配准
             this.SelectedFineAlignmentMode = FineAlignmentMode.GICP;
-            this.IsICP = true;
-            this.IsNDT = false;
-            this.Resolution = 1.5f;
-            this.StepSize = 0.1f;
             this.MaxCorrespondenceDistance = 100.0f;
             this.TransformationEpsilon = 1e-6f;
             this.EuclideanFitnessEpsilon = 0.1f;
@@ -277,38 +273,6 @@ namespace PCLSharp.Client.ViewModels.RegistrationContext
         public FineAlignmentMode? SelectedFineAlignmentMode { get; set; }
         #endregion
 
-        #region 是否ICP模式 —— bool IsICP
-        /// <summary>
-        /// 是否ICP模式
-        /// </summary>
-        [DependencyProperty]
-        public bool IsICP { get; set; }
-        #endregion
-
-        #region 是否NDT模式 ——bool IsNDT
-        /// <summary>
-        /// 是否NDT模式
-        /// </summary>
-        [DependencyProperty]
-        public bool IsNDT { get; set; }
-        #endregion
-
-        #region 分辨率 —— float? Resolution
-        /// <summary>
-        /// 分辨率
-        /// </summary>
-        [DependencyProperty]
-        public float? Resolution { get; set; }
-        #endregion
-
-        #region 步长 —— float? StepSize
-        /// <summary>
-        /// 步长
-        /// </summary>
-        [DependencyProperty]
-        public float? StepSize { get; set; }
-        #endregion
-
         #region 最大相似距离 —— float? MaxCorrespondenceDistance
         /// <summary>
         /// 最大相似距离
@@ -365,17 +329,6 @@ namespace PCLSharp.Client.ViewModels.RegistrationContext
             this.FineAlignmentModes = typeof(FineAlignmentMode).GetEnumMembers();
 
             return base.OnInitializeAsync(cancellationToken);
-        }
-        #endregion
-
-        #region 切换精配准模式 —— void SwitchFineAlignmentMode()
-        /// <summary>
-        /// 切换精配准模式
-        /// </summary>
-        public void SwitchFineAlignmentMode()
-        {
-            this.IsICP = this.SelectedFineAlignmentMode != FineAlignmentMode.NDT;
-            this.IsNDT = !this.IsICP;
         }
         #endregion
 
@@ -484,17 +437,7 @@ namespace PCLSharp.Client.ViewModels.RegistrationContext
                 MessageBox.Show("精配准模式不可为空！", "错误", MessageBoxButton.OK, MessageBoxImage.Error);
                 return;
             }
-            if (this.SelectedFineAlignmentMode == FineAlignmentMode.NDT && !this.Resolution.HasValue)
-            {
-                MessageBox.Show("分辨率不可为空！", "错误", MessageBoxButton.OK, MessageBoxImage.Error);
-                return;
-            }
-            if (this.SelectedFineAlignmentMode == FineAlignmentMode.NDT && !this.StepSize.HasValue)
-            {
-                MessageBox.Show("步长不可为空！", "错误", MessageBoxButton.OK, MessageBoxImage.Error);
-                return;
-            }
-            if (this.SelectedFineAlignmentMode != FineAlignmentMode.NDT && !this.MaxCorrespondenceDistance.HasValue)
+            if (!this.MaxCorrespondenceDistance.HasValue)
             {
                 MessageBox.Show("最大相似距离不可为空！", "错误", MessageBoxButton.OK, MessageBoxImage.Error);
                 return;
@@ -504,7 +447,7 @@ namespace PCLSharp.Client.ViewModels.RegistrationContext
                 MessageBox.Show("变换最大差值不可为空！", "错误", MessageBoxButton.OK, MessageBoxImage.Error);
                 return;
             }
-            if (this.SelectedFineAlignmentMode != FineAlignmentMode.NDT && !this.EuclideanFitnessEpsilon.HasValue)
+            if (!this.EuclideanFitnessEpsilon.HasValue)
             {
                 MessageBox.Show("均方误差阈值不可为空！", "错误", MessageBoxButton.OK, MessageBoxImage.Error);
                 return;

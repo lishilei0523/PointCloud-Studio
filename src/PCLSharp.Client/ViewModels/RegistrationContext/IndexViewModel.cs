@@ -624,25 +624,14 @@ namespace PCLSharp.Client.ViewModels.RegistrationContext
             }
 
             //精配准
-            AlignmentResult fineAlignmentResult;
             fineWatch.Start();
-            switch (this.ParamViewModel.SelectedFineAlignmentMode!.Value)
+            AlignmentResult fineAlignmentResult = this.ParamViewModel.SelectedFineAlignmentMode!.Value switch
             {
-                case FineAlignmentMode.PointToPoint:
-                    fineAlignmentResult = this._cloudRegistrations.AlignPointToPoint(sourceBufferPoints, targetBufferPoints, this.ParamViewModel.MaxCorrespondenceDistance!.Value, this.ParamViewModel.TransformationEpsilon!.Value, this.ParamViewModel.EuclideanFitnessEpsilon!.Value, this.ParamViewModel.MaximumIterations!.Value);
-                    break;
-                case FineAlignmentMode.PointToPlane:
-                    fineAlignmentResult = this._cloudRegistrations.AlignPointToPlane(sourceBufferPoints, targetBufferPoints, this.ParamViewModel.NormalK!.Value, this.ParamViewModel.MaxCorrespondenceDistance!.Value, this.ParamViewModel.TransformationEpsilon!.Value, this.ParamViewModel.EuclideanFitnessEpsilon!.Value, this.ParamViewModel.MaximumIterations!.Value, this.ParamViewModel.ThreadsCount!.Value);
-                    break;
-                case FineAlignmentMode.GICP:
-                    fineAlignmentResult = this._cloudRegistrations.AlignGICP(sourceBufferPoints, targetBufferPoints, this.ParamViewModel.MaxCorrespondenceDistance!.Value, this.ParamViewModel.TransformationEpsilon!.Value, this.ParamViewModel.EuclideanFitnessEpsilon!.Value, this.ParamViewModel.MaximumIterations!.Value);
-                    break;
-                case FineAlignmentMode.NDT:
-                    fineAlignmentResult = this._cloudRegistrations.AlignNDT(sourceBufferPoints, targetBufferPoints, this.ParamViewModel.Resolution!.Value, this.ParamViewModel.StepSize!.Value, this.ParamViewModel.TransformationEpsilon!.Value, this.ParamViewModel.MaximumIterations!.Value);
-                    break;
-                default:
-                    throw new NotSupportedException();
-            }
+                FineAlignmentMode.PointToPoint => this._cloudRegistrations.AlignPointToPoint(sourceBufferPoints, targetBufferPoints, this.ParamViewModel.MaxCorrespondenceDistance!.Value, this.ParamViewModel.TransformationEpsilon!.Value, this.ParamViewModel.EuclideanFitnessEpsilon!.Value, this.ParamViewModel.MaximumIterations!.Value),
+                FineAlignmentMode.PointToPlane => this._cloudRegistrations.AlignPointToPlane(sourceBufferPoints, targetBufferPoints, this.ParamViewModel.NormalK!.Value, this.ParamViewModel.MaxCorrespondenceDistance!.Value, this.ParamViewModel.TransformationEpsilon!.Value, this.ParamViewModel.EuclideanFitnessEpsilon!.Value, this.ParamViewModel.MaximumIterations!.Value, this.ParamViewModel.ThreadsCount!.Value),
+                FineAlignmentMode.GICP => this._cloudRegistrations.AlignGICP(sourceBufferPoints, targetBufferPoints, this.ParamViewModel.MaxCorrespondenceDistance!.Value, this.ParamViewModel.TransformationEpsilon!.Value, this.ParamViewModel.EuclideanFitnessEpsilon!.Value, this.ParamViewModel.MaximumIterations!.Value),
+                _ => throw new NotSupportedException()
+            };
             fineWatch.Stop();
             this.FineAlignmentDuration = fineWatch.Elapsed.ToString(Constants.DurationFormat);
 

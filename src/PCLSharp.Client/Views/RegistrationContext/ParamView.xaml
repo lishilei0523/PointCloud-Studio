@@ -68,7 +68,7 @@
                 </GroupBox>
             </StackPanel>
             <StackPanel Grid.Column="1">
-                <GroupBox Header="点云分割" Margin="2,4,2,2" Height="280">
+                <GroupBox Header="分割" Margin="2,4,2,2" Height="280">
                     <StackPanel Grid.IsSharedSizeScope="True" Margin="0,10">
                         <sd:FormItem Label="分割最大簇：">
                             <mah:ToggleSwitch IsOn="{Binding NeedToSegment}" OnContent="是" OffContent="否" Style="{StaticResource ToggleSwitch.Styles.Fluent}" />
@@ -84,7 +84,7 @@
                         </sd:FormItem>
                     </StackPanel>
                 </GroupBox>
-                <GroupBox Header="离群点移除" Margin="2,2,2,2" Height="260">
+                <GroupBox Header="离群点" Margin="2,2,2,2" Height="260">
                     <StackPanel Grid.IsSharedSizeScope="True" Margin="0,10">
                         <sd:FormItem Label="离群点移除：">
                             <mah:ToggleSwitch IsOn="{Binding NeedOutlierRemoval}" OnContent="是" OffContent="否" Style="{StaticResource ToggleSwitch.Styles.Fluent}" />
@@ -129,23 +129,16 @@
                                       DisplayMemberPath="Value"
                                       SelectedValuePath="Key"
                                       SelectedValue="{Binding SelectedFineAlignmentMode}"
-                                      Style="{StaticResource ComboBox.Styles.Fluent}"
-                                      cal:Message.Attach="[Event SelectionChanged] = [Action SwitchFineAlignmentMode()]" />
-                        </sd:FormItem>
-                        <sd:FormItem Label="分辨率：">
-                            <TextBox Text="{Binding Resolution}" IsEnabled="{Binding IsNDT}" Style="{StaticResource TextBoxRevealStyle}" />
-                        </sd:FormItem>
-                        <sd:FormItem Label="步长：">
-                            <TextBox Text="{Binding StepSize}" IsEnabled="{Binding IsNDT}" Style="{StaticResource TextBoxRevealStyle}" />
+                                      Style="{StaticResource ComboBox.Styles.Fluent}" />
                         </sd:FormItem>
                         <sd:FormItem Label="最大相似距离：">
-                            <TextBox Text="{Binding MaxCorrespondenceDistance}" IsEnabled="{Binding IsICP}" Style="{StaticResource TextBoxRevealStyle}" />
+                            <TextBox Text="{Binding MaxCorrespondenceDistance}" Style="{StaticResource TextBoxRevealStyle}" />
                         </sd:FormItem>
                         <sd:FormItem Label="变换最大差值：">
                             <TextBox Text="{Binding TransformationEpsilon}" Style="{StaticResource TextBoxRevealStyle}" />
                         </sd:FormItem>
                         <sd:FormItem Label="均方误差阈值：">
-                            <TextBox Text="{Binding EuclideanFitnessEpsilon}" IsEnabled="{Binding IsICP}" Style="{StaticResource TextBoxRevealStyle}" />
+                            <TextBox Text="{Binding EuclideanFitnessEpsilon}" Style="{StaticResource TextBoxRevealStyle}" />
                         </sd:FormItem>
                         <sd:FormItem Label="最大迭代次数：">
                             <TextBox Text="{Binding MaximumIterations}" Style="{StaticResource TextBoxRevealStyle}" />

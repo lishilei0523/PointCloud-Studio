@@ -75,7 +75,7 @@
                                 <sd:FormItem Label="网格尺寸：">
                                     <TextBlock Text="{Binding ParamViewModel.SampleIILeafSize}" />
                                 </sd:FormItem>
-                                <TextBlock Text="---------------分    割---------------" Margin="0,0,0,10" Foreground="Red" />
+                                <TextBlock Text="----------------分割----------------" Margin="0,0,0,10" Foreground="Red" />
                                 <sd:FormItem Label="分割最大簇：">
                                     <TextBlock Text="{Binding ParamViewModel.NeedToSegment, Converter={StaticResource Converters.YesNoDescriptionConverter}}" />
                                 </sd:FormItem>
@@ -88,7 +88,7 @@
                                 <sd:FormItem Label="簇最大尺寸：">
                                     <TextBlock Text="{Binding ParamViewModel.MaxClusterSize}" />
                                 </sd:FormItem>
-                                <TextBlock Text="-------------离群点移除-------------" Margin="0,0,0,10" Foreground="Red" />
+                                <TextBlock Text="---------------离群点---------------" Margin="0,0,0,10" Foreground="Red" />
                                 <sd:FormItem Label="离群点移除：">
                                     <TextBlock Text="{Binding ParamViewModel.NeedOutlierRemoval, Converter={StaticResource Converters.YesNoDescriptionConverter}}" />
                                 </sd:FormItem>
@@ -118,7 +118,7 @@
                                 </sd:FormItem>
                             </StackPanel>
                             <StackPanel Grid.IsSharedSizeScope="True" Margin="0,5">
-                                <TextBlock Text="---------------特    征---------------" Margin="0,0,0,10" Foreground="Red" />
+                                <TextBlock Text="----------------特征----------------" Margin="0,0,0,10" Foreground="Red" />
                                 <sd:FormItem Label="法向量K近邻：">
                                     <TextBlock Text="{Binding ParamViewModel.NormalK}" />
                                 </sd:FormItem>
@@ -142,12 +142,6 @@
                                 <TextBlock Text="---------------精配准---------------" Margin="0,0,0,10" Foreground="Red" />
                                 <sd:FormItem Label="精配准模式：">
                                     <TextBlock Text="{Binding ParamViewModel.SelectedFineAlignmentMode,Converter={StaticResource Converters.EnumMemberConverter}}" />
-                                </sd:FormItem>
-                                <sd:FormItem Label="分辨率：">
-                                    <TextBlock Text="{Binding ParamViewModel.Resolution}" />
-                                </sd:FormItem>
-                                <sd:FormItem Label="步长：">
-                                    <TextBlock Text="{Binding ParamViewModel.StepSize}" />
                                 </sd:FormItem>
                                 <sd:FormItem Label="最大相似距离：">
                                     <TextBlock Text="{Binding ParamViewModel.MaxCorrespondenceDistance}" />
