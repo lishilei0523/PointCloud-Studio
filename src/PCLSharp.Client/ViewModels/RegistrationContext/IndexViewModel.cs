@@ -556,7 +556,7 @@ namespace PCLSharp.Client.ViewModels.RegistrationContext
                 this.TargetSampledCountI = targetBufferPoints.Length;
             }
 
-            //欧几里得聚类分割
+            //分割最大簇
             if (this.ParamViewModel.NeedToSegment)
             {
                 segmentWatch.Start();
@@ -576,7 +576,7 @@ namespace PCLSharp.Client.ViewModels.RegistrationContext
                 this.TargetSegmentedCount = targetBufferPoints.Length;
             }
 
-            //统计离群点移除
+            //离群点移除
             if (this.ParamViewModel.NeedOutlierRemoval)
             {
                 outlierRemovalWatch.Start();
@@ -604,7 +604,7 @@ namespace PCLSharp.Client.ViewModels.RegistrationContext
             featureWatch.Stop();
             this.FeatureDuration = featureWatch.Elapsed.ToString(Constants.DurationFormat);
 
-            //SAC-IA粗配准
+            //粗配准
             coarseWatch.Start();
             AlignmentResult coarseAlignmentResult = this._cloudRegistrations.AlignSACIA(sourceKeyPoints, sourceDescriptors, targetKeyPoints, targetDescriptors, this.ParamViewModel.MinSampleDistance!.Value, this.ParamViewModel.SamplesCount!.Value, this.ParamViewModel.CorrespondenceRandomness!.Value);
             sourceBufferPoints = await Task.Run(() => this._cloudCommon.MatrixTransform(sourceBufferPoints, coarseAlignmentResult.Matrix));
@@ -628,8 +628,11 @@ namespace PCLSharp.Client.ViewModels.RegistrationContext
             AlignmentResult fineAlignmentResult = this.ParamViewModel.SelectedFineAlignmentMode!.Value switch
             {
                 FineAlignmentMode.PointToPoint => this._cloudRegistrations.AlignPointToPoint(sourceBufferPoints, targetBufferPoints, this.ParamViewModel.MaxCorrespondenceDistance!.Value, this.ParamViewModel.TransformationEpsilon!.Value, this.ParamViewModel.EuclideanFitnessEpsilon!.Value, this.ParamViewModel.MaximumIterations!.Value),
+
                 FineAlignmentMode.PointToPlane => this._cloudRegistrations.AlignPointToPlane(sourceBufferPoints, targetBufferPoints, this.ParamViewModel.NormalK!.Value, this.ParamViewModel.MaxCorrespondenceDistance!.Value, this.ParamViewModel.TransformationEpsilon!.Value, this.ParamViewModel.EuclideanFitnessEpsilon!.Value, this.ParamViewModel.MaximumIterations!.Value, this.ParamViewModel.ThreadsCount!.Value),
+
                 FineAlignmentMode.GICP => this._cloudRegistrations.AlignGICP(sourceBufferPoints, targetBufferPoints, this.ParamViewModel.MaxCorrespondenceDistance!.Value, this.ParamViewModel.TransformationEpsilon!.Value, this.ParamViewModel.EuclideanFitnessEpsilon!.Value, this.ParamViewModel.MaximumIterations!.Value),
+
                 _ => throw new NotSupportedException()
             };
             fineWatch.Stop();
