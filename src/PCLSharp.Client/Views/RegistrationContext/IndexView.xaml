@@ -43,6 +43,7 @@
                 <MenuItem Header="打开源点云(_S)" cm:Message.Attach="OpenSourceCloud()" />
                 <MenuItem Header="打开目标点云(_T)" cm:Message.Attach="OpenTargetCloud()" />
                 <MenuItem Header="设置参数(_P)" cm:Message.Attach="SetParameters()" />
+                <MenuItem Header="设置参数2(_Q)" cm:Message.Attach="SetParameters2()" />
                 <MenuItem Header="执行配准(_R)" cm:Message.Attach="ExecuteAlignment()" />
             </Menu>
         </Border>

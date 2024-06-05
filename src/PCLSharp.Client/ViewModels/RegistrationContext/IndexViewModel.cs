@@ -491,6 +491,17 @@ namespace PCLSharp.Client.ViewModels.RegistrationContext
         }
         #endregion
 
+        #region 设置参数2 —— async void SetParameters2()
+        /// <summary>
+        /// 设置参数2
+        /// </summary>
+        public async void SetParameters2()
+        {
+            Param2ViewModel paramViewModel = ResolveMediator.Resolve<Param2ViewModel>();
+            await this._windowManager.ShowDialogAsync(paramViewModel);
+        }
+        #endregion
+
         #region 执行配准 —— async void ExecuteAlignment()
         /// <summary>
         /// 执行配准

@@ -1,0 +1,215 @@
+﻿<Window x:Class="PCLSharp.Client.Views.RegistrationContext.Param2View"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:fluentWpf="clr-namespace:SourceChord.FluentWPF;assembly=FluentWPF"
+        xmlns:sd="https://github.com/lishilei0523/SD.Framework"
+        xmlns:cm="http://www.caliburnproject.org"
+        xmlns:mah="http://metro.mahapps.com/winfx/xaml/controls"
+        mc:Ignorable="d"
+        Title="配准参数" 
+        Width="640" Height="900" ResizeMode="NoResize" 
+        FontSize="14"
+        WindowStyle="ThreeDBorderWindow"
+        WindowStartupLocation="CenterOwner"
+        fluentWpf:AcrylicWindow.Enabled="True"
+        fluentWpf:AcrylicWindow.AcrylicWindowStyle="NoIcon">
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <!--表单区-->
+            <RowDefinition Height="*" />
+            <!--占位区-->
+            <RowDefinition Height="10" />
+            <!--控制区-->
+            <RowDefinition Height="50" />
+        </Grid.RowDefinitions>
+        <!--表单区-->
+        <ScrollViewer Grid.Row="0" HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Auto">
+            <StackPanel>
+                <GroupBox Header="主参数" Margin="4,2,4,2">
+                    <StackPanel Grid.IsSharedSizeScope="True" Margin="0,10">
+                        <sd:FormItem Label="一次采样：">
+                            <mah:ToggleSwitch IsOn="{Binding NeedSampleI}" OnContent="是" OffContent="否" 
+                                              Style="{StaticResource ToggleSwitch.Styles.Fluent}"
+                                              cm:Message.Attach="[Event Toggled] = [Action SwitchSampleI()]" />
+                        </sd:FormItem>
+                        <sd:FormItem Label="网格尺寸：" Visibility="{Binding SampleIVisibility}">
+                            <TextBox Text="{Binding SampleILeafSize}" Style="{StaticResource TextBoxRevealStyle}" />
+                        </sd:FormItem>
+                        <sd:FormItem Label="粗配准：">
+                            <mah:ToggleSwitch IsOn="{Binding NeedCoarseAlignment}" OnContent="是" OffContent="否" 
+                                              Style="{StaticResource ToggleSwitch.Styles.Fluent}"
+                                              cm:Message.Attach="[Event Toggled] = [Action SwitchCoarseAlignment()]" />
+                        </sd:FormItem>
+                        <sd:FormItem Label="      二次采样：">
+                            <mah:ToggleSwitch IsOn="{Binding NeedSampleII}" OnContent="是" OffContent="否" 
+                                              Style="{StaticResource ToggleSwitch.Styles.Fluent}"
+                                              cm:Message.Attach="[Event Toggled] = [Action SwitchSampleII()]" />
+                        </sd:FormItem>
+                        <sd:FormItem Label="网格尺寸：" Visibility="{Binding SampleIIVisibility}">
+                            <TextBox Text="{Binding SampleIILeafSize}" Style="{StaticResource TextBoxRevealStyle}" />
+                        </sd:FormItem>
+                        <sd:FormItem Label="精配准：">
+                            <mah:ToggleSwitch IsOn="{Binding NeedFineAlignment}" OnContent="是" OffContent="否" 
+                                              Style="{StaticResource ToggleSwitch.Styles.Fluent}"
+                                              cm:Message.Attach="[Event Toggled] = [Action SwitchFineAlignment()]" />
+                        </sd:FormItem>
+                        <sd:FormItem Label="线程数：">
+                            <TextBox Text="{Binding ThreadsCount}" Style="{StaticResource TextBoxRevealStyle}" />
+                        </sd:FormItem>
+                    </StackPanel>
+                </GroupBox>
+                <GroupBox Header="粗配准" Margin="4,2,4,2" Visibility="{Binding CoarseAlignmentVisibility}">
+                    <StackPanel Grid.IsSharedSizeScope="True" Margin="0,10" >
+                        <sd:FormItem Label="粗配准模式：">
+                            <ComboBox ItemsSource="{Binding CoarseAlignmentModes}" 
+                                      DisplayMemberPath="Value"
+                                      SelectedValuePath="Key"
+                                      SelectedValue="{Binding SelectedCoarseAlignmentMode}"
+                                      Style="{StaticResource ComboBox.Styles.Fluent}"
+                                      cm:Message.Attach="[Event SelectionChanged] = [Action SwitchCoarseAlignmentMode()]" />
+                        </sd:FormItem>
+                        <sd:FormItem Label="采样数量：">
+                            <TextBox Text="{Binding SamplesCount}" Style="{StaticResource TextBoxRevealStyle}" />
+                        </sd:FormItem>
+                        <sd:FormItem Label="分割最大簇：">
+                            <mah:ToggleSwitch IsOn="{Binding NeedToSegment}" OnContent="是" OffContent="否" 
+                                              Style="{StaticResource ToggleSwitch.Styles.Fluent}"
+                                              cm:Message.Attach="[Event Toggled] = [Action SwitchNeedToSegment()]" />
+                        </sd:FormItem>
+                        <sd:FormItem Label="   离群点移除：">
+                            <mah:ToggleSwitch IsOn="{Binding NeedOutlierRemoval}" OnContent="是" OffContent="否" 
+                                              Style="{StaticResource ToggleSwitch.Styles.Fluent}"
+                                              cm:Message.Attach="[Event Toggled] = [Action SwitchNeedOutlierRemoval()]" />
+                        </sd:FormItem>
+                    </StackPanel>
+                </GroupBox>
+                <GroupBox Header="K-FPCS" Margin="4,2,4,2" Visibility="{Binding KFPCSVisibility}">
+                    <StackPanel Grid.IsSharedSizeScope="True" Margin="0,10">
+                        <sd:FormItem Label="近似重叠：">
+                            <TextBox Text="{Binding ApproxOverlap}" Style="{StaticResource TextBoxRevealStyle}" />
+                        </sd:FormItem>
+                        <sd:FormItem Label="平移向量系数：">
+                            <TextBox Text="{Binding Lambda}" Style="{StaticResource TextBoxRevealStyle}" />
+                        </sd:FormItem>
+                        <sd:FormItem Label="配准距离：">
+                            <TextBox Text="{Binding Delta}" Style="{StaticResource TextBoxRevealStyle}" />
+                        </sd:FormItem>
+                        <sd:FormItem Label="最大计算时间：">
+                            <TextBox Text="{Binding MaxComputationTime}" Style="{StaticResource TextBoxRevealStyle}" />
+                        </sd:FormItem>
+                    </StackPanel>
+                </GroupBox>
+                <GroupBox Header="SAC-IA" Margin="4,2,4,2" Visibility="{Binding SACIAVisibility}">
+                    <StackPanel Grid.IsSharedSizeScope="True" Margin="0,10">
+                        <sd:FormItem Label="采样最小距离：">
+                            <TextBox Text="{Binding MinSampleDistance}" Style="{StaticResource TextBoxRevealStyle}" />
+                        </sd:FormItem>
+                        <sd:FormItem Label="随机邻域点数：">
+                            <TextBox Text="{Binding CorrespondenceRandomness}" Style="{StaticResource TextBoxRevealStyle}" />
+                        </sd:FormItem>
+                    </StackPanel>
+                </GroupBox>
+                <GroupBox Header="分割" Margin="4,2,4,2" Visibility="{Binding SegmentVisibility}">
+                    <StackPanel Grid.IsSharedSizeScope="True" Margin="0,10">
+                        <sd:FormItem Label="簇搜索容差：">
+                            <TextBox Text="{Binding ClusterTolerance}" IsEnabled="{Binding NeedToSegment}" Style="{StaticResource TextBoxRevealStyle}" />
+                        </sd:FormItem>
+                        <sd:FormItem Label="簇最小尺寸：">
+                            <TextBox Text="{Binding MinClusterSize}" IsEnabled="{Binding NeedToSegment}" Style="{StaticResource TextBoxRevealStyle}" />
+                        </sd:FormItem>
+                        <sd:FormItem Label="   簇最大尺寸：">
+                            <TextBox Text="{Binding MaxClusterSize}" IsEnabled="{Binding NeedToSegment}" Style="{StaticResource TextBoxRevealStyle}" />
+                        </sd:FormItem>
+                    </StackPanel>
+                </GroupBox>
+                <GroupBox Header="离群点" Margin="4,2,4,2" Visibility="{Binding OutlierRemovalVisibility}">
+                    <StackPanel Grid.IsSharedSizeScope="True" Margin="0,10">
+                        <sd:FormItem Label="平均K近邻：">
+                            <TextBox Text="{Binding MeanK}" IsEnabled="{Binding NeedOutlierRemoval}" Style="{StaticResource TextBoxRevealStyle}" />
+                        </sd:FormItem>
+                        <sd:FormItem Label="   标准差系数：">
+                            <TextBox Text="{Binding StddevMult}" IsEnabled="{Binding NeedOutlierRemoval}" Style="{StaticResource TextBoxRevealStyle}" />
+                        </sd:FormItem>
+                    </StackPanel>
+                </GroupBox>
+                <GroupBox Header="关键点" Margin="4,2,4,2" Visibility="{Binding SACIAVisibility}">
+                    <StackPanel Grid.IsSharedSizeScope="True" Margin="0,10">
+                        <sd:FormItem Label="显著半径：">
+                            <TextBox Text="{Binding SalientRadius}" Style="{StaticResource TextBoxRevealStyle}" />
+                        </sd:FormItem>
+                        <sd:FormItem Label="抑制半径：">
+                            <TextBox Text="{Binding NonMaxRadius}" Style="{StaticResource TextBoxRevealStyle}" />
+                        </sd:FormItem>
+                        <sd:FormItem Label="二一比上限：">
+                            <TextBox Text="{Binding Threshold21}" Style="{StaticResource TextBoxRevealStyle}" />
+                        </sd:FormItem>
+                        <sd:FormItem Label="三二比上限：">
+                            <TextBox Text="{Binding Threshold32}" Style="{StaticResource TextBoxRevealStyle}" />
+                        </sd:FormItem>
+                        <sd:FormItem Label="   最小邻域数：">
+                            <TextBox Text="{Binding MinNeighborsCount}" Style="{StaticResource TextBoxRevealStyle}" />
+                        </sd:FormItem>
+                    </StackPanel>
+                </GroupBox>
+                <GroupBox Header="特征" Margin="4,2,4,2" Visibility="{Binding SACIAVisibility}">
+                    <StackPanel Grid.IsSharedSizeScope="True" Margin="0,10">
+                        <sd:FormItem Label=" 法向量K近邻：">
+                            <TextBox Text="{Binding NormalK}" Style="{StaticResource TextBoxRevealStyle}" />
+                        </sd:FormItem>
+                        <sd:FormItem Label="特征K近邻：">
+                            <TextBox Text="{Binding FeatureK}" Style="{StaticResource TextBoxRevealStyle}" />
+                        </sd:FormItem>
+                    </StackPanel>
+                </GroupBox>
+                <GroupBox Header="精配准" Margin="4,2,4,2" Visibility="{Binding FineAlignmentVisibility}">
+                    <StackPanel Grid.IsSharedSizeScope="True" Margin="0,10">
+                        <sd:FormItem Label="精配准模式：">
+                            <ComboBox ItemsSource="{Binding FineAlignmentModes}" 
+                                      DisplayMemberPath="Value"
+                                      SelectedValuePath="Key"
+                                      SelectedValue="{Binding SelectedFineAlignmentMode}"
+                                      Style="{StaticResource ComboBox.Styles.Fluent}"
+                                      cm:Message.Attach="[Event SelectionChanged] = [Action SwitchFineAlignmentMode()]" />
+                        </sd:FormItem>
+                        <sd:FormItem Label="变换最大差值：">
+                            <TextBox Text="{Binding TransformationEpsilon}" Style="{StaticResource TextBoxRevealStyle}" />
+                        </sd:FormItem>
+                        <sd:FormItem Label="最大迭代次数：">
+                            <TextBox Text="{Binding MaximumIterations}" Style="{StaticResource TextBoxRevealStyle}" />
+                        </sd:FormItem>
+                    </StackPanel>
+                </GroupBox>
+                <GroupBox Header="ICP" Margin="4,2,4,2" Visibility="{Binding ICPVisibility}">
+                    <StackPanel Grid.IsSharedSizeScope="True" Margin="0,10">
+                        <sd:FormItem Label="最大相似距离：">
+                            <TextBox Text="{Binding MaxCorrespondenceDistance}" Style="{StaticResource TextBoxRevealStyle}" />
+                        </sd:FormItem>
+                        <sd:FormItem Label="均方误差阈值：">
+                            <TextBox Text="{Binding EuclideanFitnessEpsilon}" Style="{StaticResource TextBoxRevealStyle}" />
+                        </sd:FormItem>
+                    </StackPanel>
+                </GroupBox>
+                <GroupBox Header="NDT" Margin="4,2,4,2" Visibility="{Binding NDTVisibility}">
+                    <StackPanel Grid.IsSharedSizeScope="True" Margin="0,10">
+                        <sd:FormItem Label="          分辨率：">
+                            <TextBox Text="{Binding Resolution}" Style="{StaticResource TextBoxRevealStyle}" />
+                        </sd:FormItem>
+                        <sd:FormItem Label="步长：">
+                            <TextBox Text="{Binding StepSize}" Style="{StaticResource TextBoxRevealStyle}" />
+                        </sd:FormItem>
+                    </StackPanel>
+                </GroupBox>
+            </StackPanel>
+        </ScrollViewer>
+        <!--控制区-->
+        <Grid Grid.Row="2" Style="{StaticResource Form.Styles.Submit.Grid}">
+            <WrapPanel Style="{StaticResource Form.Styles.Submit.WrapPanel}">
+                <Button Content="确定" cm:Message.Attach="Submit()" Style="{StaticResource Button.Styles.Fluent.Focus}" />
+                <Button Content="取消" cm:Message.Attach="TryCloseAsync('false')" Style="{StaticResource Button.Styles.Fluent.Default}" />
+            </WrapPanel>
+        </Grid>
+    </Grid>
+</Window>
