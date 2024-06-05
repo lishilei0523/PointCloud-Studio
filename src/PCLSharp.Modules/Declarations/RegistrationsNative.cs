@@ -75,7 +75,7 @@ namespace PCLSharp.Modules.Declarations
         /// <param name="sourceLength">源点集长度</param>
         /// <param name="targetPoints">目标点集</param>
         /// <param name="targetLength">目标点集长度</param>
-        /// <param name="maxCorrespondenceDistance">分辨率</param>
+        /// <param name="maxCorrespondenceDistance">最大相似距离</param>
         /// <param name="transformationEpsilon">变换最大差值</param>
         /// <param name="euclideanFitnessEpsilon">均方误差阈值</param>
         /// <param name="maximumIterations">最大迭代次数</param>
@@ -182,7 +182,7 @@ namespace PCLSharp.Modules.Declarations
         /// <param name="sourceLength">源点集长度</param>
         /// <param name="targetPoints">目标点集</param>
         /// <param name="targetLength">目标点集长度</param>
-        /// <param name="maxCorrespondenceDistance">分辨率</param>
+        /// <param name="maxCorrespondenceDistance">最大相似距离</param>
         /// <param name="transformationEpsilon">变换最大差值</param>
         /// <param name="euclideanFitnessEpsilon">均方误差阈值</param>
         /// <param name="maximumIterations">最大迭代次数</param>
@@ -200,7 +200,7 @@ namespace PCLSharp.Modules.Declarations
         /// <param name="targetPoints">目标点集</param>
         /// <param name="targetLength">目标点集长度</param>
         /// <param name="normalK">法向量K</param>
-        /// <param name="maxCorrespondenceDistance">分辨率</param>
+        /// <param name="maxCorrespondenceDistance">最大相似距离</param>
         /// <param name="transformationEpsilon">变换最大差值</param>
         /// <param name="euclideanFitnessEpsilon">均方误差阈值</param>
         /// <param name="maximumIterations">最大迭代次数</param>

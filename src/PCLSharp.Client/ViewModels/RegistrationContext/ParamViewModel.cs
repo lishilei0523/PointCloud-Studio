@@ -246,9 +246,9 @@ namespace PCLSharp.Client.ViewModels.RegistrationContext
         public FineAlignmentMode? SelectedFineAlignmentMode { get; set; }
         #endregion
 
-        #region 分辨率 —— float? MaxCorrespondenceDistance
+        #region 最大相似距离 —— float? MaxCorrespondenceDistance
         /// <summary>
-        /// 分辨率
+        /// 最大相似距离
         /// </summary>
         [DependencyProperty]
         public float? MaxCorrespondenceDistance { get; set; }

@@ -132,7 +132,7 @@
                                 <sd:FormItem Label="精配准模式：">
                                     <TextBlock Text="{Binding ParamViewModel.SelectedFineAlignmentMode,Converter={StaticResource Converters.EnumMemberConverter}}" />
                                 </sd:FormItem>
-                                <sd:FormItem Label="分辨率：">
+                                <sd:FormItem Label="最大相似距离：">
                                     <TextBlock Text="{Binding ParamViewModel.MaxCorrespondenceDistance}" />
                                 </sd:FormItem>
                                 <sd:FormItem Label="变换最大差值：">
