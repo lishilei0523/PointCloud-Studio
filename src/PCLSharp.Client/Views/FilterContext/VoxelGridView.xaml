@@ -26,7 +26,7 @@
         </Grid.RowDefinitions>
         <!--表单区-->
         <StackPanel Grid.Row="0" Grid.IsSharedSizeScope="True" Margin="20,30">
-            <sd:FormItem Label="叶子尺寸：">
+            <sd:FormItem Label="网格尺寸：">
                 <TextBox Text="{Binding LeafSize}" Style="{StaticResource TextBoxRevealStyle}" />
             </sd:FormItem>
         </StackPanel>

@@ -39,7 +39,7 @@ EXPORT_C Point3Fs* CALLING_MODE applyUniformSampling(Point3F points[], int lengt
 /// </summary>
 /// <param name="points">点集</param>
 /// <param name="length">点集长度</param>
-/// <param name="leafSize">叶尺寸</param>
+/// <param name="leafSize">网格尺寸</param>
 /// <returns>过滤后点集</returns>
 EXPORT_C Point3Fs* CALLING_MODE applyVoxelGrid(Point3F points[], int length, float leafSize);
 
@@ -48,7 +48,7 @@ EXPORT_C Point3Fs* CALLING_MODE applyVoxelGrid(Point3F points[], int length, flo
 /// </summary>
 /// <param name="points">点集</param>
 /// <param name="length">点集长度</param>
-/// <param name="leafSize">叶尺寸</param>
+/// <param name="leafSize">网格尺寸</param>
 /// <returns>过滤后点集</returns>
 EXPORT_C Point3Fs* CALLING_MODE applyApproxVoxelGrid(Point3F points[], int length, float leafSize);
 

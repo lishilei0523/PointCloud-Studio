@@ -11,9 +11,9 @@ namespace PCLSharp.Modules.Declarations
     /// </summary>
     internal static class RegistrationsNative
     {
-        #region # 4PCS配准 —— static extern IntPtr Align4PCS(Point3F[] sourcePoints...
+        #region # FPCS配准 —— static extern IntPtr AlignFPCS(Point3F[] sourcePoints...
         /// <summary>
-        /// 4PCS配准
+        /// FPCS配准
         /// </summary>
         /// <param name="sourcePoints">源点集</param>
         /// <param name="sourceLength">源点集长度</param>
@@ -26,13 +26,13 @@ namespace PCLSharp.Modules.Declarations
         /// <param name="maxComputationTime">最大计算时间(秒)</param>
         /// <param name="threadsCount">线程数</param>
         /// <returns>配准结果</returns>
-        [DllImport(AssemblyNames.Modules, EntryPoint = "align4PCS")]
-        public static extern IntPtr Align4PCS(Point3F[] sourcePoints, int sourceLength, Point3F[] targetPoints, int targetLength, float approxOverlap, float delta, bool normalize, int samplesCount, int maxComputationTime, int threadsCount);
+        [DllImport(AssemblyNames.Modules, EntryPoint = "alignFPCS")]
+        public static extern IntPtr AlignFPCS(Point3F[] sourcePoints, int sourceLength, Point3F[] targetPoints, int targetLength, float approxOverlap, float delta, bool normalize, int samplesCount, int maxComputationTime, int threadsCount);
         #endregion
 
-        #region # K-4PCS配准 —— static extern IntPtr AlignK4PCS(Point3F[] sourcePoints...
+        #region # K-FPCS配准 —— static extern IntPtr AlignKFPCS(Point3F[] sourcePoints...
         /// <summary>
-        /// K-4PCS配准
+        /// K-FPCS配准
         /// </summary>
         /// <param name="sourcePoints">源点集</param>
         /// <param name="sourceLength">源点集长度</param>
@@ -46,42 +46,8 @@ namespace PCLSharp.Modules.Declarations
         /// <param name="maxComputationTime">最大计算时间(秒)</param>
         /// <param name="threadsCount">线程数</param>
         /// <returns>配准结果</returns>
-        [DllImport(AssemblyNames.Modules, EntryPoint = "alignK4PCS")]
-        public static extern IntPtr AlignK4PCS(Point3F[] sourcePoints, int sourceLength, Point3F[] targetPoints, int targetLength, float approxOverlap, float lambda, float delta, bool normalize, int samplesCount, int maxComputationTime, int threadsCount);
-        #endregion
-
-        #region # NDT配准 —— static extern IntPtr AlignNDT(Point3F[] sourcePoints...
-        /// <summary>
-        /// NDT配准
-        /// </summary>
-        /// <param name="sourcePoints">源点集</param>
-        /// <param name="sourceLength">源点集长度</param>
-        /// <param name="targetPoints">目标点集</param>
-        /// <param name="targetLength">目标点集长度</param>
-        /// <param name="resolution">分辨率</param>
-        /// <param name="stepSize">步长</param>
-        /// <param name="transformationEpsilon">变换最大差值</param>
-        /// <param name="maximumIterations">最大迭代次数</param>
-        /// <returns>配准结果</returns>
-        [DllImport(AssemblyNames.Modules, EntryPoint = "alignNDT")]
-        public static extern IntPtr AlignNDT(Point3F[] sourcePoints, int sourceLength, Point3F[] targetPoints, int targetLength, float resolution, float stepSize, float transformationEpsilon, int maximumIterations);
-        #endregion
-
-        #region # GICP配准 —— static extern IntPtr AlignGICP(Point3F[] sourcePoints...
-        /// <summary>
-        /// GICP配准
-        /// </summary>
-        /// <param name="sourcePoints">源点集</param>
-        /// <param name="sourceLength">源点集长度</param>
-        /// <param name="targetPoints">目标点集</param>
-        /// <param name="targetLength">目标点集长度</param>
-        /// <param name="maxCorrespondenceDistance">最大相似距离</param>
-        /// <param name="transformationEpsilon">变换最大差值</param>
-        /// <param name="euclideanFitnessEpsilon">均方误差阈值</param>
-        /// <param name="maximumIterations">最大迭代次数</param>
-        /// <returns>配准结果</returns>
-        [DllImport(AssemblyNames.Modules, EntryPoint = "alignGICP")]
-        public static extern IntPtr AlignGICP(Point3F[] sourcePoints, int sourceLength, Point3F[] targetPoints, int targetLength, float maxCorrespondenceDistance, float transformationEpsilon, float euclideanFitnessEpsilon, int maximumIterations);
+        [DllImport(AssemblyNames.Modules, EntryPoint = "alignKFPCS")]
+        public static extern IntPtr AlignKFPCS(Point3F[] sourcePoints, int sourceLength, Point3F[] targetPoints, int targetLength, float approxOverlap, float lambda, float delta, bool normalize, int samplesCount, int maxComputationTime, int threadsCount);
         #endregion
 
         #region # SAC-IA-NARF配准 —— static extern IntPtr SaciaAlignNARF(Point3F[] sourcePoints...
@@ -172,6 +138,40 @@ namespace PCLSharp.Modules.Declarations
         /// <returns>配准结果</returns>
         [DllImport(AssemblyNames.Modules, EntryPoint = "saciaAlignSHOT")]
         public static extern IntPtr SaciaAlignSHOT(Point3F[] sourcePoints, Shot352F[] sourceDescriptors, int sourceLength, Point3F[] targetPoints, Shot352F[] targetDescriptors, int targetLength, float minSampleDistance, int samplesCount, int correspondenceRandomness);
+        #endregion
+
+        #region # NDT配准 —— static extern IntPtr AlignNDT(Point3F[] sourcePoints...
+        /// <summary>
+        /// NDT配准
+        /// </summary>
+        /// <param name="sourcePoints">源点集</param>
+        /// <param name="sourceLength">源点集长度</param>
+        /// <param name="targetPoints">目标点集</param>
+        /// <param name="targetLength">目标点集长度</param>
+        /// <param name="resolution">分辨率</param>
+        /// <param name="stepSize">步长</param>
+        /// <param name="transformationEpsilon">变换最大差值</param>
+        /// <param name="maximumIterations">最大迭代次数</param>
+        /// <returns>配准结果</returns>
+        [DllImport(AssemblyNames.Modules, EntryPoint = "alignNDT")]
+        public static extern IntPtr AlignNDT(Point3F[] sourcePoints, int sourceLength, Point3F[] targetPoints, int targetLength, float resolution, float stepSize, float transformationEpsilon, int maximumIterations);
+        #endregion
+
+        #region # GICP配准 —— static extern IntPtr AlignGICP(Point3F[] sourcePoints...
+        /// <summary>
+        /// GICP配准
+        /// </summary>
+        /// <param name="sourcePoints">源点集</param>
+        /// <param name="sourceLength">源点集长度</param>
+        /// <param name="targetPoints">目标点集</param>
+        /// <param name="targetLength">目标点集长度</param>
+        /// <param name="maxCorrespondenceDistance">最大相似距离</param>
+        /// <param name="transformationEpsilon">变换最大差值</param>
+        /// <param name="euclideanFitnessEpsilon">均方误差阈值</param>
+        /// <param name="maximumIterations">最大迭代次数</param>
+        /// <returns>配准结果</returns>
+        [DllImport(AssemblyNames.Modules, EntryPoint = "alignGICP")]
+        public static extern IntPtr AlignGICP(Point3F[] sourcePoints, int sourceLength, Point3F[] targetPoints, int targetLength, float maxCorrespondenceDistance, float transformationEpsilon, float euclideanFitnessEpsilon, int maximumIterations);
         #endregion
 
         #region # ICP-Point-To-Point配准 —— static extern IntPtr AlignPointToPoint(Point3F[] sourcePoints...

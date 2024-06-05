@@ -22,8 +22,10 @@ namespace PCLSharp.Client.ViewModels.RegistrationContext
         public ParamViewModel()
         {
             //降采样
-            this.LeafSize = 1.0f;
-            this.SampleIIRate = 2.0f;
+            this.NeedSampleI = true;
+            this.NeedSampleII = true;
+            this.SampleILeafSize = 1.0f;
+            this.SampleIILeafSize = 2.0f;
 
             //分割
             this.NeedToSegment = true;
@@ -32,6 +34,7 @@ namespace PCLSharp.Client.ViewModels.RegistrationContext
             this.MaxClusterSize = 100000;
 
             //离群点移除
+            this.NeedOutlierRemoval = true;
             this.MeanK = 50;
             this.StddevMult = 1.0f;
 
@@ -53,6 +56,10 @@ namespace PCLSharp.Client.ViewModels.RegistrationContext
 
             //精配准
             this.SelectedFineAlignmentMode = FineAlignmentMode.GICP;
+            this.IsICP = true;
+            this.IsNDT = false;
+            this.Resolution = 1.5f;
+            this.StepSize = 0.1f;
             this.MaxCorrespondenceDistance = 100.0f;
             this.TransformationEpsilon = 1e-6f;
             this.EuclideanFitnessEpsilon = 0.1f;
@@ -68,20 +75,36 @@ namespace PCLSharp.Client.ViewModels.RegistrationContext
 
         //降采样
 
-        #region 叶子尺寸 —— float? LeafSize
+        #region 是否一次采样 —— bool NeedSampleI
         /// <summary>
-        /// 叶子尺寸
+        /// 是否一次采样
         /// </summary>
         [DependencyProperty]
-        public float? LeafSize { get; set; }
+        public bool NeedSampleI { get; set; }
         #endregion
 
-        #region 二次采样率 —— float? SampleIIRate
+        #region 是否二次采样 —— bool NeedSampleII
         /// <summary>
-        /// 二次采样率
+        /// 是否二次采样
         /// </summary>
         [DependencyProperty]
-        public float? SampleIIRate { get; set; }
+        public bool NeedSampleII { get; set; }
+        #endregion
+
+        #region 一次网格尺寸 —— float? SampleILeafSize
+        /// <summary>
+        /// 一次网格尺寸
+        /// </summary>
+        [DependencyProperty]
+        public float? SampleILeafSize { get; set; }
+        #endregion
+
+        #region 二次网格尺寸 —— float? SampleIILeafSize
+        /// <summary>
+        /// 二次网格尺寸
+        /// </summary>
+        [DependencyProperty]
+        public float? SampleIILeafSize { get; set; }
         #endregion
 
 
@@ -121,6 +144,14 @@ namespace PCLSharp.Client.ViewModels.RegistrationContext
 
 
         //离群点移除
+
+        #region 是否离群点移除 —— bool NeedOutlierRemoval
+        /// <summary>
+        /// 是否离群点移除
+        /// </summary>
+        [DependencyProperty]
+        public bool NeedOutlierRemoval { get; set; }
+        #endregion
 
         #region 平均近邻K —— int? MeanK
         /// <summary>
@@ -246,6 +277,38 @@ namespace PCLSharp.Client.ViewModels.RegistrationContext
         public FineAlignmentMode? SelectedFineAlignmentMode { get; set; }
         #endregion
 
+        #region 是否ICP模式 —— bool IsICP
+        /// <summary>
+        /// 是否ICP模式
+        /// </summary>
+        [DependencyProperty]
+        public bool IsICP { get; set; }
+        #endregion
+
+        #region 是否NDT模式 ——bool IsNDT
+        /// <summary>
+        /// 是否NDT模式
+        /// </summary>
+        [DependencyProperty]
+        public bool IsNDT { get; set; }
+        #endregion
+
+        #region 分辨率 —— float? Resolution
+        /// <summary>
+        /// 分辨率
+        /// </summary>
+        [DependencyProperty]
+        public float? Resolution { get; set; }
+        #endregion
+
+        #region 步长 —— float? StepSize
+        /// <summary>
+        /// 步长
+        /// </summary>
+        [DependencyProperty]
+        public float? StepSize { get; set; }
+        #endregion
+
         #region 最大相似距离 —— float? MaxCorrespondenceDistance
         /// <summary>
         /// 最大相似距离
@@ -305,6 +368,17 @@ namespace PCLSharp.Client.ViewModels.RegistrationContext
         }
         #endregion
 
+        #region 切换精配准模式 —— void SwitchFineAlignmentMode()
+        /// <summary>
+        /// 切换精配准模式
+        /// </summary>
+        public void SwitchFineAlignmentMode()
+        {
+            this.IsICP = this.SelectedFineAlignmentMode != FineAlignmentMode.NDT;
+            this.IsNDT = !this.IsICP;
+        }
+        #endregion
+
         #region 提交 —— async void Submit()
         /// <summary>
         /// 提交
@@ -314,14 +388,14 @@ namespace PCLSharp.Client.ViewModels.RegistrationContext
             #region # 验证
 
             //降采样
-            if (!this.LeafSize.HasValue)
+            if (this.NeedSampleI && !this.SampleILeafSize.HasValue)
             {
-                MessageBox.Show("叶子尺寸不可为空！", "错误", MessageBoxButton.OK, MessageBoxImage.Error);
+                MessageBox.Show("一次网格尺寸不可为空！", "错误", MessageBoxButton.OK, MessageBoxImage.Error);
                 return;
             }
-            if (!this.SampleIIRate.HasValue)
+            if (this.NeedSampleII && !this.SampleIILeafSize.HasValue)
             {
-                MessageBox.Show("二次采样率不可为空！", "错误", MessageBoxButton.OK, MessageBoxImage.Error);
+                MessageBox.Show("二次网格尺寸不可为空！", "错误", MessageBoxButton.OK, MessageBoxImage.Error);
                 return;
             }
             //分割
@@ -341,12 +415,12 @@ namespace PCLSharp.Client.ViewModels.RegistrationContext
                 return;
             }
             //离群点移除
-            if (!this.MeanK.HasValue)
+            if (this.NeedOutlierRemoval && !this.MeanK.HasValue)
             {
                 MessageBox.Show("平均距离估计的最近邻居的数量不可为空！", "错误", MessageBoxButton.OK, MessageBoxImage.Error);
                 return;
             }
-            if (!this.StddevMult.HasValue)
+            if (this.NeedOutlierRemoval && !this.StddevMult.HasValue)
             {
                 MessageBox.Show("标准差阈值系数不可为空！", "错误", MessageBoxButton.OK, MessageBoxImage.Error);
                 return;
@@ -410,9 +484,19 @@ namespace PCLSharp.Client.ViewModels.RegistrationContext
                 MessageBox.Show("精配准模式不可为空！", "错误", MessageBoxButton.OK, MessageBoxImage.Error);
                 return;
             }
-            if (!this.MaxCorrespondenceDistance.HasValue)
+            if (this.SelectedFineAlignmentMode == FineAlignmentMode.NDT && !this.Resolution.HasValue)
             {
                 MessageBox.Show("分辨率不可为空！", "错误", MessageBoxButton.OK, MessageBoxImage.Error);
+                return;
+            }
+            if (this.SelectedFineAlignmentMode == FineAlignmentMode.NDT && !this.StepSize.HasValue)
+            {
+                MessageBox.Show("步长不可为空！", "错误", MessageBoxButton.OK, MessageBoxImage.Error);
+                return;
+            }
+            if (this.SelectedFineAlignmentMode != FineAlignmentMode.NDT && !this.MaxCorrespondenceDistance.HasValue)
+            {
+                MessageBox.Show("最大相似距离不可为空！", "错误", MessageBoxButton.OK, MessageBoxImage.Error);
                 return;
             }
             if (!this.TransformationEpsilon.HasValue)
@@ -420,7 +504,7 @@ namespace PCLSharp.Client.ViewModels.RegistrationContext
                 MessageBox.Show("变换最大差值不可为空！", "错误", MessageBoxButton.OK, MessageBoxImage.Error);
                 return;
             }
-            if (!this.EuclideanFitnessEpsilon.HasValue)
+            if (this.SelectedFineAlignmentMode != FineAlignmentMode.NDT && !this.EuclideanFitnessEpsilon.HasValue)
             {
                 MessageBox.Show("均方误差阈值不可为空！", "错误", MessageBoxButton.OK, MessageBoxImage.Error);
                 return;

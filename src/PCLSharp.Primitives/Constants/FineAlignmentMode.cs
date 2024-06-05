@@ -30,6 +30,13 @@ namespace PCLSharp.Primitives.Constants
         /// </summary>
         [EnumMember]
         [Description("GICP")]
-        GICP = 2
+        GICP = 2,
+
+        /// <summary>
+        /// NDT
+        /// </summary>
+        [EnumMember]
+        [Description("NDT")]
+        NDT = 3
     }
 }

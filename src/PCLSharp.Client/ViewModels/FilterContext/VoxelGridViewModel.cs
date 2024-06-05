@@ -24,9 +24,9 @@ namespace PCLSharp.Client.ViewModels.FilterContext
 
         #region # 属性
 
-        #region 叶子尺寸 —— float? LeafSize
+        #region 网格尺寸 —— float? LeafSize
         /// <summary>
-        /// 叶子尺寸
+        /// 网格尺寸
         /// </summary>
         [DependencyProperty]
         public float? LeafSize { get; set; }
@@ -46,7 +46,7 @@ namespace PCLSharp.Client.ViewModels.FilterContext
 
             if (!this.LeafSize.HasValue)
             {
-                MessageBox.Show("叶子尺寸不可为空！", "错误", MessageBoxButton.OK, MessageBoxImage.Error);
+                MessageBox.Show("网格尺寸不可为空！", "错误", MessageBoxButton.OK, MessageBoxImage.Error);
                 return;
             }
 

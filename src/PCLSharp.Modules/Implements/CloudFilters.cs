@@ -109,7 +109,7 @@ namespace PCLSharp.Modules.Implements
         /// 适用体素降采样
         /// </summary>
         /// <param name="points">点集</param>
-        /// <param name="leafSize">叶尺寸</param>
+        /// <param name="leafSize">网格尺寸</param>
         /// <returns>过滤后点集</returns>
         public Point3F[] ApplyVoxelGrid(IEnumerable<Point3F> points, float leafSize)
         {
@@ -138,7 +138,7 @@ namespace PCLSharp.Modules.Implements
         /// 适用近似体素降采样
         /// </summary>
         /// <param name="points">点集</param>
-        /// <param name="leafSize">叶尺寸</param>
+        /// <param name="leafSize">网格尺寸</param>
         /// <returns>过滤后点集</returns>
         public Point3F[] ApplyApproxVoxelGrid(IEnumerable<Point3F> points, float leafSize)
         {

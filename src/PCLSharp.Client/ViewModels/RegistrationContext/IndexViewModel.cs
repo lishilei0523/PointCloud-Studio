@@ -161,9 +161,9 @@ namespace PCLSharp.Client.ViewModels.RegistrationContext
         public PointGeometry3D SourceCentroid { get; set; }
         #endregion
 
-        #region 降采样I耗时 —— string SampleIDuration
+        #region 一次采样耗时 —— string SampleIDuration
         /// <summary>
-        /// 降采样I耗时
+        /// 一次采样耗时
         /// </summary>
         [DependencyProperty]
         public string SampleIDuration { get; set; }
@@ -209,9 +209,9 @@ namespace PCLSharp.Client.ViewModels.RegistrationContext
         public string CoarseAlignmentDuration { get; set; }
         #endregion
 
-        #region 降采样II耗时 —— string SampleIIDuration
+        #region 二次采样耗时 —— string SampleIIDuration
         /// <summary>
-        /// 降采样II耗时
+        /// 二次采样耗时
         /// </summary>
         [DependencyProperty]
         public string SampleIIDuration { get; set; }
@@ -537,17 +537,24 @@ namespace PCLSharp.Client.ViewModels.RegistrationContext
             totalWatch.Start();
 
             //提取原始点云
-            IEnumerable<Point3F> originalSourcePoints = this.SourceCloud.Points.ToPoint3Fs();
-            IEnumerable<Point3F> originalTargetPoints = this.TargetCloud.Points.ToPoint3Fs();
+            Point3F[] originalSourcePoints = this.SourceCloud.Points.ToPoint3Fs().ToArray();
+            Point3F[] originalTargetPoints = this.TargetCloud.Points.ToPoint3Fs().ToArray();
+            Point3F[] sourceBufferPoints = new Point3F[originalSourcePoints.Length];
+            Point3F[] targetBufferPoints = new Point3F[originalTargetPoints.Length];
+            Array.Copy(originalSourcePoints, sourceBufferPoints, originalSourcePoints.Length);
+            Array.Copy(originalTargetPoints, targetBufferPoints, originalTargetPoints.Length);
 
-            //体素降采样I
-            sampleIWatch.Start();
-            Point3F[] sourceBufferPoints = await Task.Run(() => this._cloudFilters.ApplyVoxelGrid(originalSourcePoints, this.ParamViewModel.LeafSize!.Value));
-            Point3F[] targetBufferPoints = await Task.Run(() => this._cloudFilters.ApplyVoxelGrid(originalTargetPoints, this.ParamViewModel.LeafSize!.Value));
-            sampleIWatch.Stop();
-            this.SampleIDuration = sampleIWatch.Elapsed.ToString(Constants.DurationFormat);
-            this.SourceSampledCountI = sourceBufferPoints.Length;
-            this.TargetSampledCountI = targetBufferPoints.Length;
+            //一次采样
+            if (this.ParamViewModel.NeedSampleI)
+            {
+                sampleIWatch.Start();
+                sourceBufferPoints = await Task.Run(() => this._cloudFilters.ApplyVoxelGrid(sourceBufferPoints, this.ParamViewModel.SampleILeafSize!.Value));
+                targetBufferPoints = await Task.Run(() => this._cloudFilters.ApplyVoxelGrid(targetBufferPoints, this.ParamViewModel.SampleILeafSize!.Value));
+                sampleIWatch.Stop();
+                this.SampleIDuration = sampleIWatch.Elapsed.ToString(Constants.DurationFormat);
+                this.SourceSampledCountI = sourceBufferPoints.Length;
+                this.TargetSampledCountI = targetBufferPoints.Length;
+            }
 
             //欧几里得聚类分割
             if (this.ParamViewModel.NeedToSegment)
@@ -570,13 +577,16 @@ namespace PCLSharp.Client.ViewModels.RegistrationContext
             }
 
             //统计离群点移除
-            outlierRemovalWatch.Start();
-            sourceBufferPoints = await Task.Run(() => this._cloudFilters.ApplyStatisticalOutlierRemoval(sourceBufferPoints, this.ParamViewModel.MeanK!.Value, this.ParamViewModel.StddevMult!.Value));
-            targetBufferPoints = await Task.Run(() => this._cloudFilters.ApplyStatisticalOutlierRemoval(targetBufferPoints, this.ParamViewModel.MeanK!.Value, this.ParamViewModel.StddevMult!.Value));
-            outlierRemovalWatch.Stop();
-            this.OuterRemovalDuration = outlierRemovalWatch.Elapsed.ToString(Constants.DurationFormat);
-            this.SourceOutlierCount = sourceBufferPoints.Length;
-            this.TargetOutlierCount = targetBufferPoints.Length;
+            if (this.ParamViewModel.NeedOutlierRemoval)
+            {
+                outlierRemovalWatch.Start();
+                sourceBufferPoints = await Task.Run(() => this._cloudFilters.ApplyStatisticalOutlierRemoval(sourceBufferPoints, this.ParamViewModel.MeanK!.Value, this.ParamViewModel.StddevMult!.Value));
+                targetBufferPoints = await Task.Run(() => this._cloudFilters.ApplyStatisticalOutlierRemoval(targetBufferPoints, this.ParamViewModel.MeanK!.Value, this.ParamViewModel.StddevMult!.Value));
+                outlierRemovalWatch.Stop();
+                this.OuterRemovalDuration = outlierRemovalWatch.Elapsed.ToString(Constants.DurationFormat);
+                this.SourceOutlierCount = sourceBufferPoints.Length;
+                this.TargetOutlierCount = targetBufferPoints.Length;
+            }
 
             //ISS关键点
             keyPointWatch.Start();
@@ -601,14 +611,17 @@ namespace PCLSharp.Client.ViewModels.RegistrationContext
             coarseWatch.Stop();
             this.CoarseAlignmentDuration = coarseWatch.Elapsed.ToString(Constants.DurationFormat);
 
-            //体素降采样II
-            sampleIIWatch.Start();
-            sourceBufferPoints = await Task.Run(() => this._cloudFilters.ApplyVoxelGrid(sourceBufferPoints, this.ParamViewModel.LeafSize!.Value * this.ParamViewModel.SampleIIRate!.Value));
-            targetBufferPoints = await Task.Run(() => this._cloudFilters.ApplyVoxelGrid(targetBufferPoints, this.ParamViewModel.LeafSize!.Value * this.ParamViewModel.SampleIIRate!.Value));
-            sampleIIWatch.Stop();
-            this.SampleIIDuration = sampleIIWatch.Elapsed.ToString(Constants.DurationFormat);
-            this.SourceSampledCountII = sourceBufferPoints.Length;
-            this.TargetSampledCountII = targetBufferPoints.Length;
+            //二次采样
+            if (this.ParamViewModel.NeedSampleII)
+            {
+                sampleIIWatch.Start();
+                sourceBufferPoints = await Task.Run(() => this._cloudFilters.ApplyVoxelGrid(sourceBufferPoints, this.ParamViewModel.SampleIILeafSize!.Value));
+                targetBufferPoints = await Task.Run(() => this._cloudFilters.ApplyVoxelGrid(targetBufferPoints, this.ParamViewModel.SampleIILeafSize!.Value));
+                sampleIIWatch.Stop();
+                this.SampleIIDuration = sampleIIWatch.Elapsed.ToString(Constants.DurationFormat);
+                this.SourceSampledCountII = sourceBufferPoints.Length;
+                this.TargetSampledCountII = targetBufferPoints.Length;
+            }
 
             //精配准
             AlignmentResult fineAlignmentResult;
@@ -623,6 +636,9 @@ namespace PCLSharp.Client.ViewModels.RegistrationContext
                     break;
                 case FineAlignmentMode.GICP:
                     fineAlignmentResult = this._cloudRegistrations.AlignGICP(sourceBufferPoints, targetBufferPoints, this.ParamViewModel.MaxCorrespondenceDistance!.Value, this.ParamViewModel.TransformationEpsilon!.Value, this.ParamViewModel.EuclideanFitnessEpsilon!.Value, this.ParamViewModel.MaximumIterations!.Value);
+                    break;
+                case FineAlignmentMode.NDT:
+                    fineAlignmentResult = this._cloudRegistrations.AlignNDT(sourceBufferPoints, targetBufferPoints, this.ParamViewModel.Resolution!.Value, this.ParamViewModel.StepSize!.Value, this.ParamViewModel.TransformationEpsilon!.Value, this.ParamViewModel.MaximumIterations!.Value);
                     break;
                 default:
                     throw new NotSupportedException();

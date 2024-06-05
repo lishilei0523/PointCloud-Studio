@@ -91,7 +91,7 @@ Point3Fs* applyUniformSampling(Point3F points[], const int length, const float r
 /// </summary>
 /// <param name="points">点集</param>
 /// <param name="length">点集长度</param>
-/// <param name="leafSize">叶尺寸</param>
+/// <param name="leafSize">网格尺寸</param>
 /// <returns>过滤后点集</returns>
 Point3Fs* applyVoxelGrid(Point3F points[], const int length, const float leafSize)
 {
@@ -114,7 +114,7 @@ Point3Fs* applyVoxelGrid(Point3F points[], const int length, const float leafSiz
 /// </summary>
 /// <param name="points">点集</param>
 /// <param name="length">点集长度</param>
-/// <param name="leafSize">叶尺寸</param>
+/// <param name="leafSize">网格尺寸</param>
 /// <returns>过滤后点集</returns>
 Point3Fs* applyApproxVoxelGrid(Point3F points[], int length, float leafSize)
 {

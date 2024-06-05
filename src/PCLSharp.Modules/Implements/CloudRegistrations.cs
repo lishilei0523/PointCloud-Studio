@@ -14,9 +14,9 @@ namespace PCLSharp.Modules.Implements
     /// </summary>
     public class CloudRegistrations : ICloudRegistrations
     {
-        #region # 4PCS配准 —— AlignmentResult Align4PCS(IEnumerable<Point3F> sourcePoints...
+        #region # FPCS配准 —— AlignmentResult AlignFPCS(IEnumerable<Point3F> sourcePoints...
         /// <summary>
-        /// 4PCS配准
+        /// FPCS配准
         /// </summary>
         /// <param name="sourcePoints">源点集</param>
         /// <param name="targetPoints">目标点集</param>
@@ -27,7 +27,7 @@ namespace PCLSharp.Modules.Implements
         /// <param name="maxComputationTime">最大计算时间(秒)</param>
         /// <param name="threadsCount">线程数</param>
         /// <returns>配准结果</returns>
-        public AlignmentResult Align4PCS(IEnumerable<Point3F> sourcePoints, IEnumerable<Point3F> targetPoints, float approxOverlap, float delta, bool normalize, int samplesCount, int maxComputationTime, int threadsCount)
+        public AlignmentResult AlignFPCS(IEnumerable<Point3F> sourcePoints, IEnumerable<Point3F> targetPoints, float approxOverlap, float delta, bool normalize, int samplesCount, int maxComputationTime, int threadsCount)
         {
             Point3F[] sourcePoints_ = sourcePoints?.ToArray() ?? Array.Empty<Point3F>();
             Point3F[] targetPoints_ = targetPoints?.ToArray() ?? Array.Empty<Point3F>();
@@ -45,7 +45,7 @@ namespace PCLSharp.Modules.Implements
 
             #endregion
 
-            IntPtr pointer = RegistrationsNative.Align4PCS(sourcePoints_, sourcePoints_.Length, targetPoints_, targetPoints_.Length, approxOverlap, delta, normalize, samplesCount, maxComputationTime, threadsCount);
+            IntPtr pointer = RegistrationsNative.AlignFPCS(sourcePoints_, sourcePoints_.Length, targetPoints_, targetPoints_.Length, approxOverlap, delta, normalize, samplesCount, maxComputationTime, threadsCount);
             AlignmentResult alignmentResult = Marshal.PtrToStructure<AlignmentResult>(pointer);
             DisposeNative.DisposeAlignmentResult(pointer);
 
@@ -53,9 +53,9 @@ namespace PCLSharp.Modules.Implements
         }
         #endregion
 
-        #region # K-4PCS配准 —— AlignmentResult AlignK4PCS(IEnumerable<Point3F> sourcePoints...
+        #region # K-FPCS配准 —— AlignmentResult AlignKFPCS(IEnumerable<Point3F> sourcePoints...
         /// <summary>
-        /// K-4PCS配准
+        /// K-FPCS配准
         /// </summary>
         /// <param name="sourcePoints">源点集</param>
         /// <param name="targetPoints">目标点集</param>
@@ -67,7 +67,7 @@ namespace PCLSharp.Modules.Implements
         /// <param name="maxComputationTime">最大计算时间(秒)</param>
         /// <param name="threadsCount">线程数</param>
         /// <returns>配准结果</returns>
-        public AlignmentResult AlignK4PCS(IEnumerable<Point3F> sourcePoints, IEnumerable<Point3F> targetPoints, float approxOverlap, float lambda, float delta, bool normalize, int samplesCount, int maxComputationTime, int threadsCount)
+        public AlignmentResult AlignKFPCS(IEnumerable<Point3F> sourcePoints, IEnumerable<Point3F> targetPoints, float approxOverlap, float lambda, float delta, bool normalize, int samplesCount, int maxComputationTime, int threadsCount)
         {
             Point3F[] sourcePoints_ = sourcePoints?.ToArray() ?? Array.Empty<Point3F>();
             Point3F[] targetPoints_ = targetPoints?.ToArray() ?? Array.Empty<Point3F>();
@@ -85,81 +85,7 @@ namespace PCLSharp.Modules.Implements
 
             #endregion
 
-            IntPtr pointer = RegistrationsNative.AlignK4PCS(sourcePoints_, sourcePoints_.Length, targetPoints_, targetPoints_.Length, approxOverlap, lambda, delta, normalize, samplesCount, maxComputationTime, threadsCount);
-            AlignmentResult alignmentResult = Marshal.PtrToStructure<AlignmentResult>(pointer);
-            DisposeNative.DisposeAlignmentResult(pointer);
-
-            return alignmentResult;
-        }
-        #endregion
-
-        #region # NDT配准 —— AlignmentResult AlignNDT(IEnumerable<Point3F> sourcePoints...
-        /// <summary>
-        /// NDT配准
-        /// </summary>
-        /// <param name="sourcePoints">源点集</param>
-        /// <param name="targetPoints">目标点集</param>
-        /// <param name="resolution">分辨率</param>
-        /// <param name="stepSize">步长</param>
-        /// <param name="transformationEpsilon">变换最大差值</param>
-        /// <param name="maximumIterations">最大迭代次数</param>
-        /// <returns>配准结果</returns>
-        public AlignmentResult AlignNDT(IEnumerable<Point3F> sourcePoints, IEnumerable<Point3F> targetPoints, float resolution, float stepSize, float transformationEpsilon, int maximumIterations)
-        {
-            Point3F[] sourcePoints_ = sourcePoints?.ToArray() ?? Array.Empty<Point3F>();
-            Point3F[] targetPoints_ = targetPoints?.ToArray() ?? Array.Empty<Point3F>();
-
-            #region # 验证
-
-            if (!sourcePoints_.Any())
-            {
-                throw new ArgumentNullException(nameof(sourcePoints), "源点集不可为空！");
-            }
-            if (!targetPoints_.Any())
-            {
-                throw new ArgumentNullException(nameof(targetPoints), "目标点集不可为空！");
-            }
-
-            #endregion
-
-            IntPtr pointer = RegistrationsNative.AlignNDT(sourcePoints_, sourcePoints_.Length, targetPoints_, targetPoints_.Length, resolution, stepSize, transformationEpsilon, maximumIterations);
-            AlignmentResult alignmentResult = Marshal.PtrToStructure<AlignmentResult>(pointer);
-            DisposeNative.DisposeAlignmentResult(pointer);
-
-            return alignmentResult;
-        }
-        #endregion
-
-        #region # GICP配准 —— AlignmentResult AlignGICP(IEnumerable<Point3F> sourcePoints...
-        /// <summary>
-        /// GICP配准
-        /// </summary>
-        /// <param name="sourcePoints">源点集</param>
-        /// <param name="targetPoints">目标点集</param>
-        /// <param name="maxCorrespondenceDistance">最大相似距离</param>
-        /// <param name="transformationEpsilon">变换最大差值</param>
-        /// <param name="euclideanFitnessEpsilon">均方误差阈值</param>
-        /// <param name="maximumIterations">最大迭代次数</param>
-        /// <returns>配准结果</returns>
-        public AlignmentResult AlignGICP(IEnumerable<Point3F> sourcePoints, IEnumerable<Point3F> targetPoints, float maxCorrespondenceDistance, float transformationEpsilon, float euclideanFitnessEpsilon, int maximumIterations)
-        {
-            Point3F[] sourcePoints_ = sourcePoints?.ToArray() ?? Array.Empty<Point3F>();
-            Point3F[] targetPoints_ = targetPoints?.ToArray() ?? Array.Empty<Point3F>();
-
-            #region # 验证
-
-            if (!sourcePoints_.Any())
-            {
-                throw new ArgumentNullException(nameof(sourcePoints), "源点集不可为空！");
-            }
-            if (!targetPoints_.Any())
-            {
-                throw new ArgumentNullException(nameof(targetPoints), "目标点集不可为空！");
-            }
-
-            #endregion
-
-            IntPtr pointer = RegistrationsNative.AlignGICP(sourcePoints_, sourcePoints_.Length, targetPoints_, targetPoints_.Length, maxCorrespondenceDistance, transformationEpsilon, euclideanFitnessEpsilon, maximumIterations);
+            IntPtr pointer = RegistrationsNative.AlignKFPCS(sourcePoints_, sourcePoints_.Length, targetPoints_, targetPoints_.Length, approxOverlap, lambda, delta, normalize, samplesCount, maxComputationTime, threadsCount);
             AlignmentResult alignmentResult = Marshal.PtrToStructure<AlignmentResult>(pointer);
             DisposeNative.DisposeAlignmentResult(pointer);
 
@@ -440,6 +366,80 @@ namespace PCLSharp.Modules.Implements
             #endregion
 
             IntPtr pointer = RegistrationsNative.SaciaAlignSHOT(sourcePoints_, sourceDescriptors_, sourcePoints_.Length, targetPoints_, targetDescriptors_, targetPoints_.Length, minSampleDistance, samplesCount, correspondenceRandomness);
+            AlignmentResult alignmentResult = Marshal.PtrToStructure<AlignmentResult>(pointer);
+            DisposeNative.DisposeAlignmentResult(pointer);
+
+            return alignmentResult;
+        }
+        #endregion
+
+        #region # NDT配准 —— AlignmentResult AlignNDT(IEnumerable<Point3F> sourcePoints...
+        /// <summary>
+        /// NDT配准
+        /// </summary>
+        /// <param name="sourcePoints">源点集</param>
+        /// <param name="targetPoints">目标点集</param>
+        /// <param name="resolution">分辨率</param>
+        /// <param name="stepSize">步长</param>
+        /// <param name="transformationEpsilon">变换最大差值</param>
+        /// <param name="maximumIterations">最大迭代次数</param>
+        /// <returns>配准结果</returns>
+        public AlignmentResult AlignNDT(IEnumerable<Point3F> sourcePoints, IEnumerable<Point3F> targetPoints, float resolution, float stepSize, float transformationEpsilon, int maximumIterations)
+        {
+            Point3F[] sourcePoints_ = sourcePoints?.ToArray() ?? Array.Empty<Point3F>();
+            Point3F[] targetPoints_ = targetPoints?.ToArray() ?? Array.Empty<Point3F>();
+
+            #region # 验证
+
+            if (!sourcePoints_.Any())
+            {
+                throw new ArgumentNullException(nameof(sourcePoints), "源点集不可为空！");
+            }
+            if (!targetPoints_.Any())
+            {
+                throw new ArgumentNullException(nameof(targetPoints), "目标点集不可为空！");
+            }
+
+            #endregion
+
+            IntPtr pointer = RegistrationsNative.AlignNDT(sourcePoints_, sourcePoints_.Length, targetPoints_, targetPoints_.Length, resolution, stepSize, transformationEpsilon, maximumIterations);
+            AlignmentResult alignmentResult = Marshal.PtrToStructure<AlignmentResult>(pointer);
+            DisposeNative.DisposeAlignmentResult(pointer);
+
+            return alignmentResult;
+        }
+        #endregion
+
+        #region # GICP配准 —— AlignmentResult AlignGICP(IEnumerable<Point3F> sourcePoints...
+        /// <summary>
+        /// GICP配准
+        /// </summary>
+        /// <param name="sourcePoints">源点集</param>
+        /// <param name="targetPoints">目标点集</param>
+        /// <param name="maxCorrespondenceDistance">最大相似距离</param>
+        /// <param name="transformationEpsilon">变换最大差值</param>
+        /// <param name="euclideanFitnessEpsilon">均方误差阈值</param>
+        /// <param name="maximumIterations">最大迭代次数</param>
+        /// <returns>配准结果</returns>
+        public AlignmentResult AlignGICP(IEnumerable<Point3F> sourcePoints, IEnumerable<Point3F> targetPoints, float maxCorrespondenceDistance, float transformationEpsilon, float euclideanFitnessEpsilon, int maximumIterations)
+        {
+            Point3F[] sourcePoints_ = sourcePoints?.ToArray() ?? Array.Empty<Point3F>();
+            Point3F[] targetPoints_ = targetPoints?.ToArray() ?? Array.Empty<Point3F>();
+
+            #region # 验证
+
+            if (!sourcePoints_.Any())
+            {
+                throw new ArgumentNullException(nameof(sourcePoints), "源点集不可为空！");
+            }
+            if (!targetPoints_.Any())
+            {
+                throw new ArgumentNullException(nameof(targetPoints), "目标点集不可为空！");
+            }
+
+            #endregion
+
+            IntPtr pointer = RegistrationsNative.AlignGICP(sourcePoints_, sourcePoints_.Length, targetPoints_, targetPoints_.Length, maxCorrespondenceDistance, transformationEpsilon, euclideanFitnessEpsilon, maximumIterations);
             AlignmentResult alignmentResult = Marshal.PtrToStructure<AlignmentResult>(pointer);
             DisposeNative.DisposeAlignmentResult(pointer);
 

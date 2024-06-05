@@ -55,7 +55,7 @@ namespace PCLSharp.Modules.Declarations
         /// </summary>
         /// <param name="points">点集</param>
         /// <param name="length">点集长度</param>
-        /// <param name="leafSize">叶尺寸</param>
+        /// <param name="leafSize">网格尺寸</param>
         /// <returns>过滤后点集</returns>
         [DllImport(AssemblyNames.Modules, EntryPoint = "applyVoxelGrid")]
         public static extern IntPtr ApplyVoxelGrid(Point3F[] points, int length, float leafSize);
@@ -67,7 +67,7 @@ namespace PCLSharp.Modules.Declarations
         /// </summary>
         /// <param name="points">点集</param>
         /// <param name="length">点集长度</param>
-        /// <param name="leafSize">叶尺寸</param>
+        /// <param name="leafSize">网格尺寸</param>
         /// <returns>过滤后点集</returns>
         [DllImport(AssemblyNames.Modules, EntryPoint = "applyApproxVoxelGrid")]
         public static extern IntPtr ApplyApproxVoxelGrid(Point3F[] points, int length, float leafSize);

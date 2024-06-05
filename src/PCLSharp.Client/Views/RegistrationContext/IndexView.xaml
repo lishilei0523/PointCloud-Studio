@@ -62,14 +62,21 @@
                     <ScrollViewer HorizontalScrollBarVisibility="Disabled">
                         <StackPanel>
                             <StackPanel Grid.IsSharedSizeScope="True" Margin="0,5">
-                                <TextBlock Text="---------------预处理---------------" Margin="0,0,0,10" Foreground="Red" />
+                                <TextBlock Text="---------------降采样---------------" Margin="0,0,0,10" Foreground="Red" />
+                                <sd:FormItem Label="一次采样：">
+                                    <TextBlock Text="{Binding ParamViewModel.NeedSampleI, Converter={StaticResource Converters.YesNoDescriptionConverter}}" />
+                                </sd:FormItem>
                                 <sd:FormItem Label="网格尺寸：">
-                                    <TextBlock Text="{Binding ParamViewModel.LeafSize}" />
+                                    <TextBlock Text="{Binding ParamViewModel.SampleILeafSize}" />
                                 </sd:FormItem>
-                                <sd:FormItem Label="二次采样率：">
-                                    <TextBlock Text="{Binding ParamViewModel.SampleIIRate}" />
+                                <sd:FormItem Label="二次采样：">
+                                    <TextBlock Text="{Binding ParamViewModel.NeedSampleII, Converter={StaticResource Converters.YesNoDescriptionConverter}}" />
                                 </sd:FormItem>
-                                <sd:FormItem Label="是否分割：">
+                                <sd:FormItem Label="网格尺寸：">
+                                    <TextBlock Text="{Binding ParamViewModel.SampleIILeafSize}" />
+                                </sd:FormItem>
+                                <TextBlock Text="---------------分    割---------------" Margin="0,0,0,10" Foreground="Red" />
+                                <sd:FormItem Label="分割最大簇：">
                                     <TextBlock Text="{Binding ParamViewModel.NeedToSegment, Converter={StaticResource Converters.YesNoDescriptionConverter}}" />
                                 </sd:FormItem>
                                 <sd:FormItem Label="簇搜索容差：">
@@ -80,6 +87,10 @@
                                 </sd:FormItem>
                                 <sd:FormItem Label="簇最大尺寸：">
                                     <TextBlock Text="{Binding ParamViewModel.MaxClusterSize}" />
+                                </sd:FormItem>
+                                <TextBlock Text="-------------离群点移除-------------" Margin="0,0,0,10" Foreground="Red" />
+                                <sd:FormItem Label="离群点移除：">
+                                    <TextBlock Text="{Binding ParamViewModel.NeedOutlierRemoval, Converter={StaticResource Converters.YesNoDescriptionConverter}}" />
                                 </sd:FormItem>
                                 <sd:FormItem Label="平均K近邻：">
                                     <TextBlock Text="{Binding ParamViewModel.MeanK}" />
@@ -131,6 +142,12 @@
                                 <TextBlock Text="---------------精配准---------------" Margin="0,0,0,10" Foreground="Red" />
                                 <sd:FormItem Label="精配准模式：">
                                     <TextBlock Text="{Binding ParamViewModel.SelectedFineAlignmentMode,Converter={StaticResource Converters.EnumMemberConverter}}" />
+                                </sd:FormItem>
+                                <sd:FormItem Label="分辨率：">
+                                    <TextBlock Text="{Binding ParamViewModel.Resolution}" />
+                                </sd:FormItem>
+                                <sd:FormItem Label="步长：">
+                                    <TextBlock Text="{Binding ParamViewModel.StepSize}" />
                                 </sd:FormItem>
                                 <sd:FormItem Label="最大相似距离：">
                                     <TextBlock Text="{Binding ParamViewModel.MaxCorrespondenceDistance}" />
@@ -253,7 +270,7 @@
                             </StackPanel>
                             <StackPanel Grid.IsSharedSizeScope="True" Margin="0,5">
                                 <TextBlock Text="---------------粗配准---------------" Margin="0,0,0,10" Foreground="Red" />
-                                <sd:FormItem Label="是否收敛：">
+                                <sd:FormItem Label="已收敛：">
                                     <TextBlock Text="{Binding CoarseHasConverged, Converter={StaticResource Converters.YesNoDescriptionConverter}}" />
                                 </sd:FormItem>
                                 <sd:FormItem Label="拟合分数：">
@@ -264,7 +281,7 @@
                             </StackPanel>
                             <StackPanel Grid.IsSharedSizeScope="True" Margin="0,5">
                                 <TextBlock Text="---------------精配准---------------" Margin="0,0,0,10" Foreground="Red" />
-                                <sd:FormItem Label="是否收敛：">
+                                <sd:FormItem Label="已收敛：">
                                     <TextBlock Text="{Binding FineHasConverged, Converter={StaticResource Converters.YesNoDescriptionConverter}}" />
                                 </sd:FormItem>
                                 <sd:FormItem Label="拟合分数：">
