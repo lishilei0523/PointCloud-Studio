@@ -21,34 +21,58 @@ namespace PCLSharp.Client.ViewModels.RegistrationContext
         /// </summary>
         public Param2ViewModel()
         {
-            this.NeedSampleI = false;
-            this.NeedSampleII = false;
-            this.SampleIVisibility = Visibility.Collapsed;
-            this.SampleIIVisibility = Visibility.Collapsed;
-
-            this.NeedCoarseAlignment = false;
-            this.NeedFineAlignment = false;
-            this.CoarseAlignmentVisibility = Visibility.Collapsed;
-            this.FineAlignmentVisibility = Visibility.Collapsed;
-            this.KFPCSVisibility = Visibility.Collapsed;
-            this.SACIAVisibility = Visibility.Collapsed;
-
-            //降采样
+            //主参数
+            this.NeedSampleI = true;
+            this.SampleIEnabled = true;
             this.SampleILeafSize = 1.0f;
+            this.NeedCoarseAlignment = true;
+            this.NeedSampleII = true;
+            this.SampleIIEnabled = true;
             this.SampleIILeafSize = 2.0f;
+            this.NeedFineAlignment = true;
+            this.ThreadsCount = 20;
+
+            //粗配准
+            this.CoarseAlignmentEnabled = true;
+            this.SelectedCoarseAlignmentMode = CoarseAlignmentMode.SACIA;
+            this.SamplesCount = 100;
+            this.NeedToSegment = true;
+            this.SegmentEnabled = true;
+            this.NeedOutlierRemoval = true;
+            this.OutlierRemovalEnabled = true;
+
+            //精配准
+            this.FineAlignmentEnabled = true;
+            this.SelectedFineAlignmentMode = FineAlignmentMode.PointToPlane;
+            this.TransformationEpsilon = 1e-6f;
+            this.MaximumIterations = 35;
+
+            //K-FPCS
+            this.KFPCSEnabled = false;
+            this.ApproxOverlap = 0.7f;
+            this.Lambda = 1.5f;
+            this.Delta = 0.002f;
+            this.NeedToNormalize = false;
+            this.MaxComputationTime = 1000;
+
+            //SAC-IA
+            this.SACIAEnabled = true;
+            this.MinSampleDistance = 7.0f;
+            this.CorrespondenceRandomness = 6;
 
             //分割
-            this.NeedToSegment = true;
+            this.SegmentEnabled = true;
             this.ClusterTolerance = 1.5f;
             this.MinClusterSize = 1000;
             this.MaxClusterSize = 100000;
 
             //离群点移除
-            this.NeedOutlierRemoval = true;
+            this.OutlierRemovalEnabled = true;
             this.MeanK = 50;
             this.StddevMult = 1.0f;
 
             //关键点
+            this.KeyPointEnabled = true;
             this.SalientRadius = 5.0f;
             this.NonMaxRadius = 5.0f;
             this.Threshold21 = 0.95f;
@@ -56,22 +80,19 @@ namespace PCLSharp.Client.ViewModels.RegistrationContext
             this.MinNeighborsCount = 6;
 
             //特征
+            this.FeatureEnabled = true;
             this.NormalK = 10;
             this.FeatureK = 15;
 
-            //粗配准
-            this.MinSampleDistance = 7.0f;
-            this.SamplesCount = 100;
-            this.CorrespondenceRandomness = 6;
-
-            //精配准
+            //ICP
+            this.ICPEnabled = true;
             this.MaxCorrespondenceDistance = 100.0f;
-            this.TransformationEpsilon = 1e-6f;
             this.EuclideanFitnessEpsilon = 0.1f;
-            this.MaximumIterations = 35;
 
-            //其他
-            this.ThreadsCount = 20;
+            //NDT
+            this.NDTEnabled = false;
+            this.Resolution = 1.5f;
+            this.StepSize = 0.1f;
         }
 
         #endregion
@@ -88,12 +109,12 @@ namespace PCLSharp.Client.ViewModels.RegistrationContext
         public bool NeedSampleI { get; set; }
         #endregion
 
-        #region 一次采样可见性 —— Visibility SampleIVisibility
+        #region 一次采样可用性 —— bool SampleIEnabled
         /// <summary>
-        /// 一次采样可见性
+        /// 一次采样可用性
         /// </summary>
         [DependencyProperty]
-        public Visibility SampleIVisibility { get; set; }
+        public bool SampleIEnabled { get; set; }
         #endregion
 
         #region 一次网格尺寸 —— float? SampleILeafSize
@@ -115,12 +136,12 @@ namespace PCLSharp.Client.ViewModels.RegistrationContext
         public bool NeedCoarseAlignment { get; set; }
         #endregion
 
-        #region 粗配准可见性 —— Visibility CoarseAlignmentVisibility
+        #region 粗配准可用性 —— bool CoarseAlignmentEnabled
         /// <summary>
-        /// 粗配准可见性
+        /// 粗配准可用性
         /// </summary>
         [DependencyProperty]
-        public Visibility CoarseAlignmentVisibility { get; set; }
+        public bool CoarseAlignmentEnabled { get; set; }
         #endregion
 
         #region 粗配准模式 —— CoarseAlignmentMode? SelectedCoarseAlignmentMode
@@ -166,12 +187,12 @@ namespace PCLSharp.Client.ViewModels.RegistrationContext
 
         //粗配准: K-FPCS
 
-        #region K-FPCS可见性 —— Visibility KFPCSVisibility
+        #region K-FPCS可用性 —— bool KFPCSEnabled
         /// <summary>
-        /// K-FPCS可见性
+        /// K-FPCS可用性
         /// </summary>
         [DependencyProperty]
-        public Visibility KFPCSVisibility { get; set; }
+        public bool KFPCSEnabled { get; set; }
         #endregion
 
         #region 近似重叠 —— float? ApproxOverlap
@@ -198,6 +219,14 @@ namespace PCLSharp.Client.ViewModels.RegistrationContext
         public float? Delta { get; set; }
         #endregion
 
+        #region 是否标准化 —— bool? NeedToNormalize
+        /// <summary>
+        /// 是否标准化
+        /// </summary>
+        [DependencyProperty]
+        public bool? NeedToNormalize { get; set; }
+        #endregion
+
         #region 最大计算时间 —— int? MaxComputationTime
         /// <summary>
         /// 最大计算时间
@@ -210,12 +239,12 @@ namespace PCLSharp.Client.ViewModels.RegistrationContext
 
         //粗配准: SAC-IA
 
-        #region SAC-IA可见性 —— Visibility SACIAVisibility
+        #region SAC-IA可用性 —— bool SACIAEnabled
         /// <summary>
-        /// SAC-IA可见性
+        /// SAC-IA可用性
         /// </summary>
         [DependencyProperty]
-        public Visibility SACIAVisibility { get; set; }
+        public bool SACIAEnabled { get; set; }
         #endregion
 
         #region 采样点最小距离 —— float? MinSampleDistance
@@ -237,12 +266,12 @@ namespace PCLSharp.Client.ViewModels.RegistrationContext
 
         //粗配准-分割
 
-        #region 分割可见性 —— Visibility SegmentVisibility
+        #region 分割可用性 —— bool SegmentEnabled
         /// <summary>
-        /// 分割可见性
+        /// 分割可用性
         /// </summary>
         [DependencyProperty]
-        public Visibility SegmentVisibility { get; set; }
+        public bool SegmentEnabled { get; set; }
         #endregion
 
         #region 簇搜索容差 —— float? ClusterTolerance
@@ -272,12 +301,12 @@ namespace PCLSharp.Client.ViewModels.RegistrationContext
 
         //粗配准-离群点移除
 
-        #region 离群点移除可见性 —— Visibility OutlierRemovalVisibility
+        #region 离群点移除可用性 —— bool OutlierRemovalEnabled
         /// <summary>
-        /// 离群点移除可见性
+        /// 离群点移除可用性
         /// </summary>
         [DependencyProperty]
-        public Visibility OutlierRemovalVisibility { get; set; }
+        public bool OutlierRemovalEnabled { get; set; }
         #endregion
 
         #region 平均近邻K —— int? MeanK
@@ -299,12 +328,12 @@ namespace PCLSharp.Client.ViewModels.RegistrationContext
 
         //粗配准: SAC-IA-关键点
 
-        #region 关键点可见性 —— Visibility KeyPointVisibility
+        #region 关键点可用性 —— bool KeyPointEnabled
         /// <summary>
-        /// 关键点可见性
+        /// 关键点可用性
         /// </summary>
         [DependencyProperty]
-        public Visibility KeyPointVisibility { get; set; }
+        public bool KeyPointEnabled { get; set; }
         #endregion
 
         #region 显著半径 —— float? SalientRadius
@@ -350,12 +379,12 @@ namespace PCLSharp.Client.ViewModels.RegistrationContext
 
         //粗配准: SAC-IA-特征
 
-        #region 特征可见性 —— Visibility FeatureVisibility
+        #region 特征可用性 —— bool FeatureEnabled
         /// <summary>
-        /// 特征可见性
+        /// 特征可用性
         /// </summary>
         [DependencyProperty]
-        public Visibility FeatureVisibility { get; set; }
+        public bool FeatureEnabled { get; set; }
         #endregion
 
         #region 法向量K —— int? NormalK
@@ -385,12 +414,12 @@ namespace PCLSharp.Client.ViewModels.RegistrationContext
         public bool NeedSampleII { get; set; }
         #endregion
 
-        #region 二次采样可见性 —— Visibility SampleIIVisibility
+        #region 二次采样可用性 —— bool SampleIIEnabled
         /// <summary>
-        /// 二次采样可见性
+        /// 二次采样可用性
         /// </summary>
         [DependencyProperty]
-        public Visibility SampleIIVisibility { get; set; }
+        public bool SampleIIEnabled { get; set; }
         #endregion
 
         #region 二次网格尺寸 —— float? SampleIILeafSize
@@ -412,12 +441,12 @@ namespace PCLSharp.Client.ViewModels.RegistrationContext
         public bool NeedFineAlignment { get; set; }
         #endregion
 
-        #region 精配准可见性 —— Visibility FineAlignmentVisibility
+        #region 精配准可用性 —— bool FineAlignmentEnabled
         /// <summary>
-        /// 精配准可见性
+        /// 精配准可用性
         /// </summary>
         [DependencyProperty]
-        public Visibility FineAlignmentVisibility { get; set; }
+        public bool FineAlignmentEnabled { get; set; }
         #endregion
 
         #region 精配准模式 —— FineAlignmentMode? SelectedFineAlignmentMode
@@ -455,12 +484,12 @@ namespace PCLSharp.Client.ViewModels.RegistrationContext
 
         //精配准: ICP
 
-        #region ICP可见性 —— Visibility ICPVisibility
+        #region ICP可用性 —— bool ICPEnabled
         /// <summary>
-        /// ICP可见性
+        /// ICP可用性
         /// </summary>
         [DependencyProperty]
-        public Visibility ICPVisibility { get; set; }
+        public bool ICPEnabled { get; set; }
         #endregion
 
         #region 最大相似距离 —— float? MaxCorrespondenceDistance
@@ -482,12 +511,12 @@ namespace PCLSharp.Client.ViewModels.RegistrationContext
 
         //精配准: NDT
 
-        #region NDT可见性 —— Visibility NDTVisibility
+        #region NDT可用性 —— bool NDTEnabled
         /// <summary>
-        /// NDT可见性
+        /// NDT可用性
         /// </summary>
         [DependencyProperty]
-        public Visibility NDTVisibility { get; set; }
+        public bool NDTEnabled { get; set; }
         #endregion
 
         #region 分辨率 —— float? Resolution
@@ -545,7 +574,7 @@ namespace PCLSharp.Client.ViewModels.RegistrationContext
         /// </summary>
         public void SwitchSampleI()
         {
-            this.SampleIVisibility = this.NeedSampleI ? Visibility.Visible : Visibility.Collapsed;
+            this.SampleIEnabled = this.NeedSampleI;
         }
         #endregion
 
@@ -555,7 +584,21 @@ namespace PCLSharp.Client.ViewModels.RegistrationContext
         /// </summary>
         public void SwitchCoarseAlignment()
         {
-            this.CoarseAlignmentVisibility = this.NeedCoarseAlignment ? Visibility.Visible : Visibility.Collapsed;
+            if (this.NeedCoarseAlignment)
+            {
+                this.CoarseAlignmentEnabled = true;
+            }
+            else
+            {
+                this.CoarseAlignmentEnabled = false;
+                this.KFPCSEnabled = false;
+                this.SACIAEnabled = false;
+                this.NeedToSegment = false;
+                this.SegmentEnabled = false;
+                this.NeedOutlierRemoval = false;
+                this.OutlierRemovalEnabled = false;
+                this.SelectedCoarseAlignmentMode = null;
+            }
         }
         #endregion
 
@@ -567,18 +610,22 @@ namespace PCLSharp.Client.ViewModels.RegistrationContext
         {
             if (this.SelectedCoarseAlignmentMode == CoarseAlignmentMode.KFPCS)
             {
-                this.KFPCSVisibility = Visibility.Visible;
-                this.SACIAVisibility = Visibility.Collapsed;
+                this.KFPCSEnabled = true;
+                this.SACIAEnabled = false;
+                this.KeyPointEnabled = false;
+                this.FeatureEnabled = false;
             }
             else if (this.SelectedCoarseAlignmentMode == CoarseAlignmentMode.SACIA)
             {
-                this.SACIAVisibility = Visibility.Visible;
-                this.KFPCSVisibility = Visibility.Collapsed;
+                this.SACIAEnabled = true;
+                this.KFPCSEnabled = false;
+                this.KeyPointEnabled = true;
+                this.FeatureEnabled = true;
             }
             else
             {
-                this.KFPCSVisibility = Visibility.Collapsed;
-                this.SACIAVisibility = Visibility.Collapsed;
+                this.KFPCSEnabled = false;
+                this.SACIAEnabled = false;
             }
         }
         #endregion
@@ -589,7 +636,7 @@ namespace PCLSharp.Client.ViewModels.RegistrationContext
         /// </summary>
         public void SwitchNeedToSegment()
         {
-            this.SegmentVisibility = this.NeedToSegment == true ? Visibility.Visible : Visibility.Collapsed;
+            this.SegmentEnabled = this.NeedToSegment == true;
         }
         #endregion
 
@@ -599,7 +646,7 @@ namespace PCLSharp.Client.ViewModels.RegistrationContext
         /// </summary>
         public void SwitchNeedOutlierRemoval()
         {
-            this.OutlierRemovalVisibility = this.NeedOutlierRemoval == true ? Visibility.Visible : Visibility.Collapsed;
+            this.OutlierRemovalEnabled = this.NeedOutlierRemoval == true;
         }
         #endregion
 
@@ -609,7 +656,7 @@ namespace PCLSharp.Client.ViewModels.RegistrationContext
         /// </summary>
         public void SwitchSampleII()
         {
-            this.SampleIIVisibility = this.NeedSampleII ? Visibility.Visible : Visibility.Collapsed;
+            this.SampleIIEnabled = this.NeedSampleII;
         }
         #endregion
 
@@ -619,7 +666,17 @@ namespace PCLSharp.Client.ViewModels.RegistrationContext
         /// </summary>
         public void SwitchFineAlignment()
         {
-            this.FineAlignmentVisibility = this.NeedFineAlignment ? Visibility.Visible : Visibility.Collapsed;
+            if (this.NeedFineAlignment)
+            {
+                this.FineAlignmentEnabled = true;
+            }
+            else
+            {
+                this.FineAlignmentEnabled = false;
+                this.ICPEnabled = false;
+                this.NDTEnabled = false;
+                this.SelectedFineAlignmentMode = null;
+            }
         }
         #endregion
 
@@ -633,18 +690,18 @@ namespace PCLSharp.Client.ViewModels.RegistrationContext
                 this.SelectedFineAlignmentMode == FineAlignmentMode.PointToPlane ||
                 this.SelectedFineAlignmentMode == FineAlignmentMode.GICP)
             {
-                this.ICPVisibility = Visibility.Visible;
-                this.NDTVisibility = Visibility.Collapsed;
+                this.ICPEnabled = true;
+                this.NDTEnabled = false;
             }
             else if (this.SelectedFineAlignmentMode == FineAlignmentMode.NDT)
             {
-                this.NDTVisibility = Visibility.Visible;
-                this.ICPVisibility = Visibility.Collapsed;
+                this.NDTEnabled = true;
+                this.ICPEnabled = false;
             }
             else
             {
-                this.ICPVisibility = Visibility.Collapsed;
-                this.NDTVisibility = Visibility.Collapsed;
+                this.ICPEnabled = false;
+                this.NDTEnabled = false;
             }
         }
         #endregion
@@ -656,6 +713,189 @@ namespace PCLSharp.Client.ViewModels.RegistrationContext
         public async void Submit()
         {
             #region # 验证
+
+            if (!this.CoarseAlignmentEnabled && !this.FineAlignmentEnabled)
+            {
+                MessageBox.Show("粗配准与精配准不可同时关闭！", "错误", MessageBoxButton.OK, MessageBoxImage.Error);
+                return;
+            }
+            if (!this.ThreadsCount.HasValue)
+            {
+                MessageBox.Show("线程数不可为空！", "错误", MessageBoxButton.OK, MessageBoxImage.Error);
+                return;
+            }
+            //一次采样
+            if (this.SampleIEnabled && !this.SampleILeafSize.HasValue)
+            {
+                MessageBox.Show("一次网格尺寸不可为空！", "错误", MessageBoxButton.OK, MessageBoxImage.Error);
+                return;
+            }
+            //粗配准
+            if (this.CoarseAlignmentEnabled && !this.SelectedCoarseAlignmentMode.HasValue)
+            {
+                MessageBox.Show("粗配准模式不可为空！", "错误", MessageBoxButton.OK, MessageBoxImage.Error);
+                return;
+            }
+            if (this.CoarseAlignmentEnabled && !this.SamplesCount.HasValue)
+            {
+                MessageBox.Show("采样数量不可为空！", "错误", MessageBoxButton.OK, MessageBoxImage.Error);
+                return;
+            }
+            if (this.CoarseAlignmentEnabled && !this.NeedToSegment.HasValue)
+            {
+                MessageBox.Show("是否分割不可为空！", "错误", MessageBoxButton.OK, MessageBoxImage.Error);
+                return;
+            }
+            if (this.CoarseAlignmentEnabled && !this.NeedOutlierRemoval.HasValue)
+            {
+                MessageBox.Show("是否离群点移除不可为空！", "错误", MessageBoxButton.OK, MessageBoxImage.Error);
+                return;
+            }
+            //粗配准: K-FPCS
+            if (this.KFPCSEnabled && !this.ApproxOverlap.HasValue)
+            {
+                MessageBox.Show("近似重叠不可为空！", "错误", MessageBoxButton.OK, MessageBoxImage.Error);
+                return;
+            }
+            if (this.KFPCSEnabled && !this.Lambda.HasValue)
+            {
+                MessageBox.Show("平移向量系数不可为空！", "错误", MessageBoxButton.OK, MessageBoxImage.Error);
+                return;
+            }
+            if (this.KFPCSEnabled && !this.Delta.HasValue)
+            {
+                MessageBox.Show("配准距离不可为空！", "错误", MessageBoxButton.OK, MessageBoxImage.Error);
+                return;
+            }
+            if (this.KFPCSEnabled && !this.NeedToNormalize.HasValue)
+            {
+                MessageBox.Show("是否标准化不可为空！", "错误", MessageBoxButton.OK, MessageBoxImage.Error);
+                return;
+            }
+            if (this.KFPCSEnabled && !this.MaxComputationTime.HasValue)
+            {
+                MessageBox.Show("最大计算时间不可为空！", "错误", MessageBoxButton.OK, MessageBoxImage.Error);
+                return;
+            }
+            //粗配准: SAC-IA
+            if (this.SACIAEnabled && !this.MinSampleDistance.HasValue)
+            {
+                MessageBox.Show("采样点最小距离不可为空！", "错误", MessageBoxButton.OK, MessageBoxImage.Error);
+                return;
+            }
+            if (this.SACIAEnabled && !this.CorrespondenceRandomness.HasValue)
+            {
+                MessageBox.Show("随机特征邻域点数不可为空！", "错误", MessageBoxButton.OK, MessageBoxImage.Error);
+                return;
+            }
+            //粗配准-分割
+            if (this.SegmentEnabled && !this.ClusterTolerance.HasValue)
+            {
+                MessageBox.Show("簇搜索容差不可为空！", "错误", MessageBoxButton.OK, MessageBoxImage.Error);
+                return;
+            }
+            if (this.SegmentEnabled && !this.MinClusterSize.HasValue)
+            {
+                MessageBox.Show("簇最小尺寸不可为空！", "错误", MessageBoxButton.OK, MessageBoxImage.Error);
+                return;
+            }
+            if (this.SegmentEnabled && !this.MaxClusterSize.HasValue)
+            {
+                MessageBox.Show("簇最大尺寸不可为空！", "错误", MessageBoxButton.OK, MessageBoxImage.Error);
+                return;
+            }
+            //粗配准-离群点移除
+            if (this.OutlierRemovalEnabled && !this.MeanK.HasValue)
+            {
+                MessageBox.Show("平均近邻K不可为空！", "错误", MessageBoxButton.OK, MessageBoxImage.Error);
+                return;
+            }
+            if (this.OutlierRemovalEnabled && !this.StddevMult.HasValue)
+            {
+                MessageBox.Show("标准差系数不可为空！", "错误", MessageBoxButton.OK, MessageBoxImage.Error);
+                return;
+            }
+            //粗配准: SAC-IA-关键点
+            if (this.KeyPointEnabled && !this.SalientRadius.HasValue)
+            {
+                MessageBox.Show("显著半径不可为空！", "错误", MessageBoxButton.OK, MessageBoxImage.Error);
+                return;
+            }
+            if (this.KeyPointEnabled && !this.NonMaxRadius.HasValue)
+            {
+                MessageBox.Show("抑制半径不可为空！", "错误", MessageBoxButton.OK, MessageBoxImage.Error);
+                return;
+            }
+            if (this.KeyPointEnabled && !this.Threshold21.HasValue)
+            {
+                MessageBox.Show("二一比上限不可为空！", "错误", MessageBoxButton.OK, MessageBoxImage.Error);
+                return;
+            }
+            if (this.KeyPointEnabled && !this.Threshold32.HasValue)
+            {
+                MessageBox.Show("三二比上限不可为空！", "错误", MessageBoxButton.OK, MessageBoxImage.Error);
+                return;
+            }
+            if (this.KeyPointEnabled && !this.MinNeighborsCount.HasValue)
+            {
+                MessageBox.Show("最小邻域点数不可为空！", "错误", MessageBoxButton.OK, MessageBoxImage.Error);
+                return;
+            }
+            //粗配准: SAC-IA-特征
+            if (this.FeatureEnabled && !this.NormalK.HasValue)
+            {
+                MessageBox.Show("法向量K不可为空！", "错误", MessageBoxButton.OK, MessageBoxImage.Error);
+                return;
+            }
+            if (this.FeatureEnabled && !this.FeatureK.HasValue)
+            {
+                MessageBox.Show("特征K不可为空！", "错误", MessageBoxButton.OK, MessageBoxImage.Error);
+                return;
+            }
+            //二次采样
+            if (this.SampleIIEnabled && !this.SampleIILeafSize.HasValue)
+            {
+                MessageBox.Show("二次网格尺寸不可为空！", "错误", MessageBoxButton.OK, MessageBoxImage.Error);
+                return;
+            }
+            //精配准
+            if (this.FineAlignmentEnabled && !this.SelectedFineAlignmentMode.HasValue)
+            {
+                MessageBox.Show("精配准模式不可为空！", "错误", MessageBoxButton.OK, MessageBoxImage.Error);
+                return;
+            }
+            if (this.FineAlignmentEnabled && !this.TransformationEpsilon.HasValue)
+            {
+                MessageBox.Show("变换最大差值不可为空！", "错误", MessageBoxButton.OK, MessageBoxImage.Error);
+                return;
+            }
+            if (this.FineAlignmentEnabled && !this.MaximumIterations.HasValue)
+            {
+                MessageBox.Show("最大迭代次数不可为空！", "错误", MessageBoxButton.OK, MessageBoxImage.Error);
+                return;
+            }
+            //精配准: ICP
+            if (this.ICPEnabled && !this.MaxCorrespondenceDistance.HasValue)
+            {
+                MessageBox.Show("最大相似距离不可为空！", "错误", MessageBoxButton.OK, MessageBoxImage.Error);
+                return;
+            }
+            if (this.ICPEnabled && !this.EuclideanFitnessEpsilon.HasValue)
+            {
+                MessageBox.Show("均方误差阈值不可为空！", "错误", MessageBoxButton.OK, MessageBoxImage.Error);
+                return;
+            }
+            //精配准: NDT
+            if (this.NDTEnabled && !this.Resolution.HasValue)
+            {
+                MessageBox.Show("网格分辨率不可为空！", "错误", MessageBoxButton.OK, MessageBoxImage.Error);
+                return;
+            }
+            if (this.NDTEnabled && !this.StepSize.HasValue)
+            {
+                MessageBox.Show("最大步长不可为空！", "错误", MessageBoxButton.OK, MessageBoxImage.Error);
+                return;
+            }
 
             #endregion
 
