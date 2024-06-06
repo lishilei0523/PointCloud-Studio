@@ -491,23 +491,40 @@ namespace PCLSharp.Client.ViewModels.RegistrationContext
         }
         #endregion
 
-        #region 设置参数2 —— async void SetParameters2()
-        /// <summary>
-        /// 设置参数2
-        /// </summary>
-        public async void SetParameters2()
-        {
-            Param2ViewModel paramViewModel = ResolveMediator.Resolve<Param2ViewModel>();
-            await this._windowManager.ShowDialogAsync(paramViewModel);
-        }
-        #endregion
-
         #region 执行配准 —— async void ExecuteAlignment()
         /// <summary>
         /// 执行配准
         /// </summary>
         public async void ExecuteAlignment()
         {
+            //清空结果
+            this.SampleIDuration = null;
+            this.SampleIIDuration = null;
+            this.SegmentDuration = null;
+            this.OuterRemovalDuration = null;
+            this.KeyPointDuration = null;
+            this.FeatureDuration = null;
+            this.CoarseAlignmentDuration = null;
+            this.FineAlignmentDuration = null;
+            this.TotalDuration = null;
+            this.SourceSampledCountI = null;
+            this.TargetSampledCountI = null;
+            this.SourceSampledCountII = null;
+            this.TargetSampledCountII = null;
+            this.SourceSegmentedCount = null;
+            this.TargetSegmentedCount = null;
+            this.SourceOutlierCount = null;
+            this.TargetOutlierCount = null;
+            this.SourceKeyPointsCount = null;
+            this.TargetKeyPointsCount = null;
+            this.CoarseHasConverged = null;
+            this.CoarseFitnessScore = null;
+            this.CoarseMatrix = null;
+            this.FineHasConverged = null;
+            this.FineFitnessScore = null;
+            this.FineMatrix = null;
+            this.FinalMatrix = null;
+
             #region # 验证
 
             if (this.SourceCloud == null)
@@ -556,7 +573,7 @@ namespace PCLSharp.Client.ViewModels.RegistrationContext
             Array.Copy(originalTargetPoints, targetBufferPoints, originalTargetPoints.Length);
 
             //一次采样
-            if (this.ParamViewModel.NeedSampleI)
+            if (this.ParamViewModel.SampleIEnabled)
             {
                 sampleIWatch.Start();
                 sourceBufferPoints = await Task.Run(() => this._cloudFilters.ApplyVoxelGrid(sourceBufferPoints, this.ParamViewModel.SampleILeafSize!.Value));
@@ -567,63 +584,86 @@ namespace PCLSharp.Client.ViewModels.RegistrationContext
                 this.TargetSampledCountI = targetBufferPoints.Length;
             }
 
-            //分割最大簇
-            if (this.ParamViewModel.NeedToSegment)
-            {
-                segmentWatch.Start();
-                Point3F[][] sourceClusters = await Task.Run(() => this._cloudSegmentations.EuclidClusterSegment(sourceBufferPoints, this.ParamViewModel.ClusterTolerance!.Value, this.ParamViewModel.MinClusterSize!.Value, this.ParamViewModel.MaxClusterSize!.Value));
-                Point3F[][] targetClusters = await Task.Run(() => this._cloudSegmentations.EuclidClusterSegment(targetBufferPoints, this.ParamViewModel.ClusterTolerance!.Value, this.ParamViewModel.MinClusterSize!.Value, this.ParamViewModel.MaxClusterSize!.Value));
-                if (sourceClusters.Any())
-                {
-                    sourceBufferPoints = sourceClusters[0];
-                }
-                if (targetClusters.Any())
-                {
-                    targetBufferPoints = targetClusters[0];
-                }
-                segmentWatch.Stop();
-                this.SegmentDuration = segmentWatch.Elapsed.ToString(Constants.DurationFormat);
-                this.SourceSegmentedCount = sourceBufferPoints.Length;
-                this.TargetSegmentedCount = targetBufferPoints.Length;
-            }
-
-            //离群点移除
-            if (this.ParamViewModel.NeedOutlierRemoval)
-            {
-                outlierRemovalWatch.Start();
-                sourceBufferPoints = await Task.Run(() => this._cloudFilters.ApplyStatisticalOutlierRemoval(sourceBufferPoints, this.ParamViewModel.MeanK!.Value, this.ParamViewModel.StddevMult!.Value));
-                targetBufferPoints = await Task.Run(() => this._cloudFilters.ApplyStatisticalOutlierRemoval(targetBufferPoints, this.ParamViewModel.MeanK!.Value, this.ParamViewModel.StddevMult!.Value));
-                outlierRemovalWatch.Stop();
-                this.OuterRemovalDuration = outlierRemovalWatch.Elapsed.ToString(Constants.DurationFormat);
-                this.SourceOutlierCount = sourceBufferPoints.Length;
-                this.TargetOutlierCount = targetBufferPoints.Length;
-            }
-
-            //ISS关键点
-            keyPointWatch.Start();
-            Point3F[] sourceKeyPoints = await Task.Run(() => this._cloudKeyPoints.DetectISS(sourceBufferPoints, this.ParamViewModel.SalientRadius!.Value, this.ParamViewModel.NonMaxRadius!.Value, this.ParamViewModel.Threshold21!.Value, this.ParamViewModel.Threshold32!.Value, this.ParamViewModel.MinNeighborsCount!.Value, this.ParamViewModel.ThreadsCount!.Value));
-            Point3F[] targetKeyPoints = await Task.Run(() => this._cloudKeyPoints.DetectISS(targetBufferPoints, this.ParamViewModel.SalientRadius!.Value, this.ParamViewModel.NonMaxRadius!.Value, this.ParamViewModel.Threshold21!.Value, this.ParamViewModel.Threshold32!.Value, this.ParamViewModel.MinNeighborsCount!.Value, this.ParamViewModel.ThreadsCount!.Value));
-            keyPointWatch.Stop();
-            this.KeyPointDuration = keyPointWatch.Elapsed.ToString(Constants.DurationFormat);
-            this.SourceKeyPointsCount = sourceKeyPoints.Length;
-            this.TargetKeyPointsCount = targetKeyPoints.Length;
-
-            //FPFH特征
-            featureWatch.Start();
-            FPFHSignature33F[] sourceDescriptors = await Task.Run(() => this._cloudFeatures.ComputeFPFH(sourceKeyPoints, this.ParamViewModel.NormalK!.Value, this.ParamViewModel.FeatureK!.Value, this.ParamViewModel.ThreadsCount!.Value));
-            FPFHSignature33F[] targetDescriptors = await Task.Run(() => this._cloudFeatures.ComputeFPFH(targetKeyPoints, this.ParamViewModel.NormalK!.Value, this.ParamViewModel.FeatureK!.Value, this.ParamViewModel.ThreadsCount!.Value));
-            featureWatch.Stop();
-            this.FeatureDuration = featureWatch.Elapsed.ToString(Constants.DurationFormat);
-
             //粗配准
-            coarseWatch.Start();
-            AlignmentResult coarseAlignmentResult = this._cloudRegistrations.AlignSACIA(sourceKeyPoints, sourceDescriptors, targetKeyPoints, targetDescriptors, this.ParamViewModel.MinSampleDistance!.Value, this.ParamViewModel.SamplesCount!.Value, this.ParamViewModel.CorrespondenceRandomness!.Value);
-            sourceBufferPoints = await Task.Run(() => this._cloudCommon.MatrixTransform(sourceBufferPoints, coarseAlignmentResult.Matrix));
-            coarseWatch.Stop();
-            this.CoarseAlignmentDuration = coarseWatch.Elapsed.ToString(Constants.DurationFormat);
+            AlignmentResult? coarseAlignmentResult = null;
+            if (this.ParamViewModel.CoarseAlignmentEnabled)
+            {
+                //分割最大簇
+                if (this.ParamViewModel.SegmentEnabled)
+                {
+                    segmentWatch.Start();
+                    Point3F[][] sourceClusters = await Task.Run(() => this._cloudSegmentations.EuclidClusterSegment(sourceBufferPoints, this.ParamViewModel.ClusterTolerance!.Value, this.ParamViewModel.MinClusterSize!.Value, this.ParamViewModel.MaxClusterSize!.Value));
+                    Point3F[][] targetClusters = await Task.Run(() => this._cloudSegmentations.EuclidClusterSegment(targetBufferPoints, this.ParamViewModel.ClusterTolerance!.Value, this.ParamViewModel.MinClusterSize!.Value, this.ParamViewModel.MaxClusterSize!.Value));
+                    if (sourceClusters.Any())
+                    {
+                        sourceBufferPoints = sourceClusters[0];
+                    }
+                    if (targetClusters.Any())
+                    {
+                        targetBufferPoints = targetClusters[0];
+                    }
+                    segmentWatch.Stop();
+                    this.SegmentDuration = segmentWatch.Elapsed.ToString(Constants.DurationFormat);
+                    this.SourceSegmentedCount = sourceBufferPoints.Length;
+                    this.TargetSegmentedCount = targetBufferPoints.Length;
+                }
+
+                //离群点移除
+                if (this.ParamViewModel.OutlierRemovalEnabled)
+                {
+                    outlierRemovalWatch.Start();
+                    sourceBufferPoints = await Task.Run(() => this._cloudFilters.ApplyStatisticalOutlierRemoval(sourceBufferPoints, this.ParamViewModel.MeanK!.Value, this.ParamViewModel.StddevMult!.Value));
+                    targetBufferPoints = await Task.Run(() => this._cloudFilters.ApplyStatisticalOutlierRemoval(targetBufferPoints, this.ParamViewModel.MeanK!.Value, this.ParamViewModel.StddevMult!.Value));
+                    outlierRemovalWatch.Stop();
+                    this.OuterRemovalDuration = outlierRemovalWatch.Elapsed.ToString(Constants.DurationFormat);
+                    this.SourceOutlierCount = sourceBufferPoints.Length;
+                    this.TargetOutlierCount = targetBufferPoints.Length;
+                }
+
+                //K-FPCS
+                if (this.ParamViewModel.SelectedCoarseAlignmentMode == CoarseAlignmentMode.KFPCS)
+                {
+                    //粗配准
+                    coarseWatch.Start();
+                    coarseAlignmentResult = this._cloudRegistrations.AlignKFPCS(sourceBufferPoints, targetBufferPoints, this.ParamViewModel.ApproxOverlap!.Value, this.ParamViewModel.Lambda!.Value, this.ParamViewModel.Delta!.Value, this.ParamViewModel.NeedToNormalize!.Value, this.ParamViewModel.SamplesCount!.Value, this.ParamViewModel.MaxComputationTime!.Value, this.ParamViewModel.ThreadsCount!.Value);
+                    sourceBufferPoints = await Task.Run(() => this._cloudCommon.MatrixTransform(sourceBufferPoints, coarseAlignmentResult.Value.Matrix));
+                    coarseWatch.Stop();
+                    this.CoarseAlignmentDuration = coarseWatch.Elapsed.ToString(Constants.DurationFormat);
+                }
+                //SAC-IA
+                else if (this.ParamViewModel.SelectedCoarseAlignmentMode == CoarseAlignmentMode.SACIA)
+                {
+                    //ISS关键点
+                    keyPointWatch.Start();
+                    Point3F[] sourceKeyPoints = await Task.Run(() => this._cloudKeyPoints.DetectISS(sourceBufferPoints, this.ParamViewModel.SalientRadius!.Value, this.ParamViewModel.NonMaxRadius!.Value, this.ParamViewModel.Threshold21!.Value, this.ParamViewModel.Threshold32!.Value, this.ParamViewModel.MinNeighborsCount!.Value, this.ParamViewModel.ThreadsCount!.Value));
+                    Point3F[] targetKeyPoints = await Task.Run(() => this._cloudKeyPoints.DetectISS(targetBufferPoints, this.ParamViewModel.SalientRadius!.Value, this.ParamViewModel.NonMaxRadius!.Value, this.ParamViewModel.Threshold21!.Value, this.ParamViewModel.Threshold32!.Value, this.ParamViewModel.MinNeighborsCount!.Value, this.ParamViewModel.ThreadsCount!.Value));
+                    keyPointWatch.Stop();
+                    this.KeyPointDuration = keyPointWatch.Elapsed.ToString(Constants.DurationFormat);
+                    this.SourceKeyPointsCount = sourceKeyPoints.Length;
+                    this.TargetKeyPointsCount = targetKeyPoints.Length;
+
+                    //FPFH特征
+                    featureWatch.Start();
+                    FPFHSignature33F[] sourceDescriptors = await Task.Run(() => this._cloudFeatures.ComputeFPFH(sourceKeyPoints, this.ParamViewModel.NormalK!.Value, this.ParamViewModel.FeatureK!.Value, this.ParamViewModel.ThreadsCount!.Value));
+                    FPFHSignature33F[] targetDescriptors = await Task.Run(() => this._cloudFeatures.ComputeFPFH(targetKeyPoints, this.ParamViewModel.NormalK!.Value, this.ParamViewModel.FeatureK!.Value, this.ParamViewModel.ThreadsCount!.Value));
+                    featureWatch.Stop();
+                    this.FeatureDuration = featureWatch.Elapsed.ToString(Constants.DurationFormat);
+
+                    //粗配准
+                    coarseWatch.Start();
+                    coarseAlignmentResult = this._cloudRegistrations.AlignSACIA(sourceKeyPoints, sourceDescriptors, targetKeyPoints, targetDescriptors, this.ParamViewModel.MinSampleDistance!.Value, this.ParamViewModel.SamplesCount!.Value, this.ParamViewModel.CorrespondenceRandomness!.Value);
+                    sourceBufferPoints = await Task.Run(() => this._cloudCommon.MatrixTransform(sourceBufferPoints, coarseAlignmentResult.Value.Matrix));
+                    coarseWatch.Stop();
+                    this.CoarseAlignmentDuration = coarseWatch.Elapsed.ToString(Constants.DurationFormat);
+                }
+                else
+                {
+                    throw new NotSupportedException();
+                }
+            }
 
             //二次采样
-            if (this.ParamViewModel.NeedSampleII)
+            if (this.ParamViewModel.SampleIIEnabled)
             {
                 sampleIIWatch.Start();
                 sourceBufferPoints = await Task.Run(() => this._cloudFilters.ApplyVoxelGrid(sourceBufferPoints, this.ParamViewModel.SampleIILeafSize!.Value));
@@ -635,40 +675,65 @@ namespace PCLSharp.Client.ViewModels.RegistrationContext
             }
 
             //精配准
-            fineWatch.Start();
-            AlignmentResult fineAlignmentResult = this.ParamViewModel.SelectedFineAlignmentMode!.Value switch
+            AlignmentResult? fineAlignmentResult = null;
+            if (this.ParamViewModel.FineAlignmentEnabled)
             {
-                FineAlignmentMode.PointToPoint => this._cloudRegistrations.AlignPointToPoint(sourceBufferPoints, targetBufferPoints, this.ParamViewModel.MaxCorrespondenceDistance!.Value, this.ParamViewModel.TransformationEpsilon!.Value, this.ParamViewModel.EuclideanFitnessEpsilon!.Value, this.ParamViewModel.MaximumIterations!.Value),
-
-                FineAlignmentMode.PointToPlane => this._cloudRegistrations.AlignPointToPlane(sourceBufferPoints, targetBufferPoints, this.ParamViewModel.NormalK!.Value, this.ParamViewModel.MaxCorrespondenceDistance!.Value, this.ParamViewModel.TransformationEpsilon!.Value, this.ParamViewModel.EuclideanFitnessEpsilon!.Value, this.ParamViewModel.MaximumIterations!.Value, this.ParamViewModel.ThreadsCount!.Value),
-
-                FineAlignmentMode.GICP => this._cloudRegistrations.AlignGICP(sourceBufferPoints, targetBufferPoints, this.ParamViewModel.MaxCorrespondenceDistance!.Value, this.ParamViewModel.TransformationEpsilon!.Value, this.ParamViewModel.EuclideanFitnessEpsilon!.Value, this.ParamViewModel.MaximumIterations!.Value),
-
-                _ => throw new NotSupportedException()
-            };
-            fineWatch.Stop();
-            this.FineAlignmentDuration = fineWatch.Elapsed.ToString(Constants.DurationFormat);
+                fineWatch.Start();
+                //ICP: Point to point
+                if (this.ParamViewModel.SelectedFineAlignmentMode == FineAlignmentMode.PointToPoint)
+                {
+                    fineAlignmentResult = this._cloudRegistrations.AlignPointToPoint(sourceBufferPoints, targetBufferPoints, this.ParamViewModel.MaxCorrespondenceDistance!.Value, this.ParamViewModel.TransformationEpsilon!.Value,
+                        this.ParamViewModel.EuclideanFitnessEpsilon!.Value, this.ParamViewModel.MaximumIterations!.Value);
+                }
+                //ICP: Point to plane
+                else if (this.ParamViewModel.SelectedFineAlignmentMode == FineAlignmentMode.PointToPlane)
+                {
+                    fineAlignmentResult = this._cloudRegistrations.AlignPointToPlane(sourceBufferPoints, targetBufferPoints, this.ParamViewModel.NormalK!.Value, this.ParamViewModel.MaxCorrespondenceDistance!.Value, this.ParamViewModel.TransformationEpsilon!.Value, this.ParamViewModel.EuclideanFitnessEpsilon!.Value, this.ParamViewModel.MaximumIterations!.Value, this.ParamViewModel.ThreadsCount!.Value);
+                }
+                //GICP
+                else if (this.ParamViewModel.SelectedFineAlignmentMode == FineAlignmentMode.GICP)
+                {
+                    fineAlignmentResult = this._cloudRegistrations.AlignGICP(sourceBufferPoints, targetBufferPoints, this.ParamViewModel.MaxCorrespondenceDistance!.Value, this.ParamViewModel.TransformationEpsilon!.Value, this.ParamViewModel.EuclideanFitnessEpsilon!.Value, this.ParamViewModel.MaximumIterations!.Value);
+                }
+                //NDT
+                else if (this.ParamViewModel.SelectedFineAlignmentMode == FineAlignmentMode.NDT)
+                {
+                    fineAlignmentResult = this._cloudRegistrations.AlignNDT(sourceBufferPoints, targetBufferPoints, this.ParamViewModel.Resolution!.Value, this.ParamViewModel.StepSize!.Value, this.ParamViewModel.TransformationEpsilon!.Value, this.ParamViewModel.MaximumIterations!.Value);
+                }
+                else
+                {
+                    throw new NotSupportedException();
+                }
+                fineWatch.Stop();
+                this.FineAlignmentDuration = fineWatch.Elapsed.ToString(Constants.DurationFormat);
+            }
 
             //解析配准结果
             const int rowsCount = 4;
             const int colsCount = 4;
-            Matrix<float> coarseMatrix = DenseMatrix.Create(rowsCount, colsCount, 0);
-            Matrix<float> fineMatrix = DenseMatrix.Create(rowsCount, colsCount, 0);
+            Matrix<float> coarseMatrix = DenseMatrix.CreateIdentity(rowsCount);
+            Matrix<float> fineMatrix = DenseMatrix.CreateIdentity(rowsCount);
             for (int rowIndex = 0; rowIndex < rowsCount; rowIndex++)
             {
                 for (int colIndex = 0; colIndex < colsCount; colIndex++)
                 {
                     int index = rowIndex * colsCount + colIndex;
-                    coarseMatrix[rowIndex, colIndex] = coarseAlignmentResult.Matrix[index];
-                    fineMatrix[rowIndex, colIndex] = fineAlignmentResult.Matrix[index];
+                    if (coarseAlignmentResult.HasValue)
+                    {
+                        coarseMatrix[rowIndex, colIndex] = coarseAlignmentResult!.Value.Matrix[index];
+                    }
+                    if (fineAlignmentResult.HasValue)
+                    {
+                        fineMatrix[rowIndex, colIndex] = fineAlignmentResult!.Value.Matrix[index];
+                    }
                 }
             }
             Matrix<float> finalMatrix = fineMatrix * coarseMatrix;
-            this.CoarseHasConverged = coarseAlignmentResult.HasConverged;
-            this.CoarseFitnessScore = coarseAlignmentResult.FitnessScore;
+            this.CoarseHasConverged = coarseAlignmentResult?.HasConverged;
+            this.CoarseFitnessScore = coarseAlignmentResult?.FitnessScore;
             this.CoarseMatrix = coarseMatrix.ToMatrixString(Constants.MatrixFormat);
-            this.FineHasConverged = fineAlignmentResult.HasConverged;
-            this.FineFitnessScore = fineAlignmentResult.FitnessScore;
+            this.FineHasConverged = fineAlignmentResult?.HasConverged;
+            this.FineFitnessScore = fineAlignmentResult?.FitnessScore;
             this.FineMatrix = fineMatrix.ToMatrixString(Constants.MatrixFormat);
             this.FinalMatrix = finalMatrix.ToMatrixString(Constants.MatrixFormat);
 
@@ -676,8 +741,14 @@ namespace PCLSharp.Client.ViewModels.RegistrationContext
             this.TotalDuration = totalWatch.Elapsed.ToString(Constants.DurationFormat);
 
             //原始点云转换
-            originalSourcePoints = await Task.Run(() => this._cloudCommon.MatrixTransform(originalSourcePoints, coarseAlignmentResult.Matrix));
-            originalSourcePoints = await Task.Run(() => this._cloudCommon.MatrixTransform(originalSourcePoints, fineAlignmentResult.Matrix));
+            if (coarseAlignmentResult.HasValue)
+            {
+                originalSourcePoints = await Task.Run(() => this._cloudCommon.MatrixTransform(originalSourcePoints, coarseAlignmentResult.Value.Matrix));
+            }
+            if (fineAlignmentResult.HasValue)
+            {
+                originalSourcePoints = await Task.Run(() => this._cloudCommon.MatrixTransform(originalSourcePoints, fineAlignmentResult.Value.Matrix));
+            }
             this.SourceCloud = originalSourcePoints.ToPointGeometry3D();
 
             this.Idle();
