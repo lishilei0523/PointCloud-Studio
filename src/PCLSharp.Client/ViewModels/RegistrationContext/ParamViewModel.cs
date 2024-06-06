@@ -21,78 +21,7 @@ namespace PCLSharp.Client.ViewModels.RegistrationContext
         /// </summary>
         public ParamViewModel()
         {
-            //主参数
-            this.NeedSampleI = true;
-            this.SampleIEnabled = true;
-            this.SampleILeafSize = 1.0f;
-            this.NeedCoarseAlignment = true;
-            this.NeedSampleII = true;
-            this.SampleIIEnabled = true;
-            this.SampleIILeafSize = 2.0f;
-            this.NeedFineAlignment = true;
-            this.ThreadsCount = 20;
-
-            //粗配准
-            this.CoarseAlignmentEnabled = true;
-            this.SelectedCoarseAlignmentMode = CoarseAlignmentMode.SACIA;
-            this.SamplesCount = 100;
-            this.NeedToSegment = true;
-            this.SegmentEnabled = true;
-            this.NeedOutlierRemoval = true;
-            this.OutlierRemovalEnabled = true;
-
-            //精配准
-            this.FineAlignmentEnabled = true;
-            this.SelectedFineAlignmentMode = FineAlignmentMode.PointToPlane;
-            this.TransformationEpsilon = 1e-6f;
-            this.MaximumIterations = 35;
-
-            //K-FPCS
-            this.KFPCSEnabled = false;
-            this.ApproxOverlap = 0.7f;
-            this.Lambda = 1.5f;
-            this.Delta = 0.002f;
-            this.NeedToNormalize = false;
-            this.MaxComputationTime = 1000;
-
-            //SAC-IA
-            this.SACIAEnabled = true;
-            this.MinSampleDistance = 7.0f;
-            this.CorrespondenceRandomness = 6;
-
-            //分割
-            this.SegmentEnabled = true;
-            this.ClusterTolerance = 1.5f;
-            this.MinClusterSize = 1000;
-            this.MaxClusterSize = 100000;
-
-            //离群点移除
-            this.OutlierRemovalEnabled = true;
-            this.MeanK = 50;
-            this.StddevMult = 1.0f;
-
-            //关键点
-            this.KeyPointEnabled = true;
-            this.SalientRadius = 5.0f;
-            this.NonMaxRadius = 5.0f;
-            this.Threshold21 = 0.95f;
-            this.Threshold32 = 0.95f;
-            this.MinNeighborsCount = 6;
-
-            //特征
-            this.FeatureEnabled = true;
-            this.NormalK = 10;
-            this.FeatureK = 15;
-
-            //ICP
-            this.ICPEnabled = true;
-            this.MaxCorrespondenceDistance = 100.0f;
-            this.EuclideanFitnessEpsilon = 0.1f;
-
-            //NDT
-            this.NDTEnabled = false;
-            this.Resolution = 1.5f;
-            this.StepSize = 0.1f;
+            this.Reset();
         }
 
         #endregion
@@ -705,6 +634,87 @@ namespace PCLSharp.Client.ViewModels.RegistrationContext
                 this.ICPEnabled = false;
                 this.NDTEnabled = false;
             }
+        }
+        #endregion
+
+        #region 重置 —— void Reset()
+        /// <summary>
+        /// 重置
+        /// </summary>
+        public void Reset()
+        {
+            //主参数
+            this.NeedSampleI = true;
+            this.SampleIEnabled = true;
+            this.SampleILeafSize = 1.0f;
+            this.NeedCoarseAlignment = true;
+            this.NeedSampleII = true;
+            this.SampleIIEnabled = true;
+            this.SampleIILeafSize = 2.0f;
+            this.NeedFineAlignment = true;
+            this.ThreadsCount = 20;
+
+            //粗配准
+            this.CoarseAlignmentEnabled = true;
+            this.SelectedCoarseAlignmentMode = CoarseAlignmentMode.SACIA;
+            this.SamplesCount = 100;
+            this.NeedToSegment = true;
+            this.SegmentEnabled = true;
+            this.NeedOutlierRemoval = true;
+            this.OutlierRemovalEnabled = true;
+
+            //精配准
+            this.FineAlignmentEnabled = true;
+            this.SelectedFineAlignmentMode = FineAlignmentMode.PointToPlane;
+            this.TransformationEpsilon = 1e-6f;
+            this.MaximumIterations = 35;
+
+            //K-FPCS
+            this.KFPCSEnabled = false;
+            this.ApproxOverlap = 0.7f;
+            this.Lambda = 1.5f;
+            this.Delta = 0.002f;
+            this.NeedToNormalize = false;
+            this.MaxComputationTime = 1000;
+
+            //SAC-IA
+            this.SACIAEnabled = true;
+            this.MinSampleDistance = 7.0f;
+            this.CorrespondenceRandomness = 6;
+
+            //分割
+            this.SegmentEnabled = true;
+            this.ClusterTolerance = 1.5f;
+            this.MinClusterSize = 1000;
+            this.MaxClusterSize = 100000;
+
+            //离群点移除
+            this.OutlierRemovalEnabled = true;
+            this.MeanK = 50;
+            this.StddevMult = 1.0f;
+
+            //关键点
+            this.KeyPointEnabled = true;
+            this.SalientRadius = 5.0f;
+            this.NonMaxRadius = 5.0f;
+            this.Threshold21 = 0.95f;
+            this.Threshold32 = 0.95f;
+            this.MinNeighborsCount = 6;
+
+            //特征
+            this.FeatureEnabled = true;
+            this.NormalK = 10;
+            this.FeatureK = 15;
+
+            //ICP
+            this.ICPEnabled = true;
+            this.MaxCorrespondenceDistance = 100.0f;
+            this.EuclideanFitnessEpsilon = 0.1f;
+
+            //NDT
+            this.NDTEnabled = false;
+            this.Resolution = 1.5f;
+            this.StepSize = 0.1f;
         }
         #endregion
 
