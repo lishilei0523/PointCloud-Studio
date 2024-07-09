@@ -4,7 +4,7 @@
 #define CALLING_MODE _cdecl
 #elif __linux__
 #define EXPORT_C extern "C"
-#define CALLING_MODE __attribute__((__stdcall__))
+#define CALLING_MODE __attribute__((__cdecl__))
 #endif
 #include <point3f.h>
 #include <narf36fs.h>
