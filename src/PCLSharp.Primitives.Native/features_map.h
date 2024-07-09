@@ -1,5 +1,9 @@
 #pragma once
+#ifdef _WIN32
 #define EXPORT_CPP extern __declspec(dllexport)
+#elif __linux__
+#define EXPORT_CPP extern
+#endif
 #include <pcl/point_types.h>
 #include <pcl/point_cloud.h>
 #include "narf36f.h"
