@@ -1,10 +1,11 @@
 #pragma once
 #ifdef _WIN32
 #define EXPORT_C extern "C" __declspec(dllexport)
+#define CALLING_MODE _cdecl
 #elif __linux__
 #define EXPORT_C extern "C"
+#define CALLING_MODE __attribute__((__stdcall__))
 #endif
-#define CALLING_MODE _cdecl
 #include <point3f.h>
 #include <point3fs.h>
 #include <point3normal3.h>
