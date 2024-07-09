@@ -25,7 +25,7 @@ Point3Fs* loadPCD(const char* filePath)
 	}
 
 	const string message = std::format("加载\"{}\"时出错！", filePath);
-	throw exception(message.c_str());
+	throw invalid_argument(message.c_str());
 }
 
 /// <summary>
@@ -44,7 +44,7 @@ Point3Normal3s* loadNormalPCD(const char* filePath)
 	}
 
 	const string message = std::format("加载\"{}\"时出错！", filePath);
-	throw exception(message.c_str());
+	throw invalid_argument(message.c_str());
 }
 
 /// <summary>
@@ -63,7 +63,7 @@ Point3Color4s* loadColorPCD(const char* filePath)
 	}
 
 	const string message = std::format("加载\"{}\"时出错！", filePath);
-	throw exception(message.c_str());
+	throw invalid_argument(message.c_str());
 }
 
 /// <summary>
@@ -82,7 +82,7 @@ Point3Fs* loadPLY(const char* filePath)
 	}
 
 	const string message = std::format("加载\"{}\"时出错！", filePath);
-	throw exception(message.c_str());
+	throw invalid_argument(message.c_str());
 }
 
 /// <summary>
@@ -101,7 +101,7 @@ Point3Normal3s* loadNormalPLY(const char* filePath)
 	}
 
 	const string message = std::format("加载\"{}\"时出错！", filePath);
-	throw exception(message.c_str());
+	throw invalid_argument(message.c_str());
 }
 
 /// <summary>
@@ -120,7 +120,7 @@ Point3Color4s* loadColorPLY(const char* filePath)
 	}
 
 	const string message = std::format("加载\"{}\"时出错！", filePath);
-	throw exception(message.c_str());
+	throw invalid_argument(message.c_str());
 }
 
 /// <summary>
@@ -139,7 +139,7 @@ Point3Fs* loadOBJ(const char* filePath)
 	}
 
 	const string message = std::format("加载\"{}\"时出错！", filePath);
-	throw exception(message.c_str());
+	throw invalid_argument(message.c_str());
 }
 
 /// <summary>
@@ -158,7 +158,7 @@ Point3Normal3s* loadNormalOBJ(const char* filePath)
 	}
 
 	const string message = std::format("加载\"{}\"时出错！", filePath);
-	throw exception(message.c_str());
+	throw invalid_argument(message.c_str());
 }
 
 /// <summary>
@@ -177,7 +177,7 @@ Point3Color4s* loadColorOBJ(const char* filePath)
 	}
 
 	const string message = std::format("加载\"{}\"时出错！", filePath);
-	throw exception(message.c_str());
+	throw invalid_argument(message.c_str());
 }
 
 /// <summary>
@@ -194,7 +194,7 @@ void saveTextPCD(Point3F points[], int length, const char* filePath)
 	if (saveStatus != 0)
 	{
 		const string message = std::format("保存\"{}\"时出错！", filePath);
-		throw exception(message.c_str());
+		throw invalid_argument(message.c_str());
 	}
 }
 
@@ -212,7 +212,7 @@ void saveBinaryPCD(Point3F points[], int length, const char* filePath)
 	if (saveStatus != 0)
 	{
 		const string message = std::format("保存\"{}\"时出错！", filePath);
-		throw exception(message.c_str());
+		throw invalid_argument(message.c_str());
 	}
 }
 
@@ -230,7 +230,7 @@ void saveNormalTextPCD(Point3Normal3 pointNormals[], int length, const char* fil
 	if (saveStatus != 0)
 	{
 		const string message = std::format("保存\"{}\"时出错！", filePath);
-		throw exception(message.c_str());
+		throw invalid_argument(message.c_str());
 	}
 }
 
@@ -248,7 +248,7 @@ void saveNormalBinaryPCD(Point3Normal3 pointNormals[], int length, const char* f
 	if (saveStatus != 0)
 	{
 		const string message = std::format("保存\"{}\"时出错！", filePath);
-		throw exception(message.c_str());
+		throw invalid_argument(message.c_str());
 	}
 }
 
@@ -266,7 +266,7 @@ void saveColorTextPCD(Point3Color4 pointColors[], int length, const char* filePa
 	if (saveStatus != 0)
 	{
 		const string message = std::format("保存\"{}\"时出错！", filePath);
-		throw exception(message.c_str());
+		throw invalid_argument(message.c_str());
 	}
 }
 
@@ -284,7 +284,7 @@ void saveColorBinaryPCD(Point3Color4 pointColors[], int length, const char* file
 	if (saveStatus != 0)
 	{
 		const string message = std::format("保存\"{}\"时出错！", filePath);
-		throw exception(message.c_str());
+		throw invalid_argument(message.c_str());
 	}
 }
 
@@ -302,7 +302,7 @@ void saveTextPLY(Point3F points[], int length, const char* filePath)
 	if (saveStatus != 0)
 	{
 		const string message = std::format("保存\"{}\"时出错！", filePath);
-		throw exception(message.c_str());
+		throw invalid_argument(message.c_str());
 	}
 }
 
@@ -320,7 +320,7 @@ void saveBinaryPLY(Point3F points[], int length, const char* filePath)
 	if (saveStatus != 0)
 	{
 		const string message = std::format("保存\"{}\"时出错！", filePath);
-		throw exception(message.c_str());
+		throw invalid_argument(message.c_str());
 	}
 }
 
@@ -338,7 +338,7 @@ void saveNormalTextPLY(Point3Normal3 pointNormals[], int length, const char* fil
 	if (saveStatus != 0)
 	{
 		const string message = std::format("保存\"{}\"时出错！", filePath);
-		throw exception(message.c_str());
+		throw invalid_argument(message.c_str());
 	}
 }
 
@@ -356,7 +356,7 @@ void saveNormalBinaryPLY(Point3Normal3 pointNormals[], int length, const char* f
 	if (saveStatus != 0)
 	{
 		const string message = std::format("保存\"{}\"时出错！", filePath);
-		throw exception(message.c_str());
+		throw invalid_argument(message.c_str());
 	}
 }
 
@@ -374,7 +374,7 @@ void saveColorTextPLY(Point3Color4 pointColors[], int length, const char* filePa
 	if (saveStatus != 0)
 	{
 		const string message = std::format("保存\"{}\"时出错！", filePath);
-		throw exception(message.c_str());
+		throw invalid_argument(message.c_str());
 	}
 }
 
@@ -392,6 +392,6 @@ void saveColorBinaryPLY(Point3Color4 pointColors[], int length, const char* file
 	if (saveStatus != 0)
 	{
 		const string message = std::format("保存\"{}\"时出错！", filePath);
-		throw exception(message.c_str());
+		throw invalid_argument(message.c_str());
 	}
 }

@@ -5,7 +5,7 @@
 #include <pcl/keypoints/narf_keypoint.h>
 #include <pcl/keypoints/iss_3d.h>
 #include <pcl/keypoints/sift_keypoint.h>
-#include <pcl/keypoints/harris_3D.h>
+#include <pcl/keypoints/harris_3d.h>
 #include <pcl/keypoints/susan.h>
 #include <pcl/features/range_image_border_extractor.h>
 #include <primitives_map.h>

@@ -22,5 +22,4 @@ target_link_libraries(PCLSharp.Modules.Native PCLSharp.Primitives.Native)
 
 target_compile_options(PCLSharp.Modules.Native 
 	PRIVATE 
-	$<$<CXX_COMPILER_ID:MSVC>:/bigobj> 
-	$<$<CXX_COMPILER_ID:GNU>:-Wa,-mbig-obj>) 
+	$<$<CXX_COMPILER_ID:MSVC>:/bigobj>) 
