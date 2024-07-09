@@ -5,7 +5,7 @@
   <PropertyGroup>
     <_PropertySheetDisplayName>Property.PCL.Release.x64</_PropertySheetDisplayName>
     <IncludePath>$(SolutionDir)src\PCLSharp.Primitives.Native;E:\Packages\cpp\PCL\v1.14.0\include\pcl-1.14;E:\Packages\cpp\PCL\v1.14.0\3rdParty\Boost\include\boost-1_84;E:\Packages\cpp\PCL\v1.14.0\3rdParty\Eigen3\include\eigen3;E:\Packages\cpp\PCL\v1.14.0\3rdParty\FLANN\include;E:\Packages\cpp\PCL\v1.14.0\3rdParty\Qhull\include;$(IncludePath)</IncludePath>
-    <LibraryPath>$(SolutionDir)runtimes\lib;$(SolutionDir)src\PCLSharp.Primitives.Native\bin\$(Configuration)\$(Platform);E:\Packages\cpp\PCL\v1.14.0\3rdParty\Boost\lib;E:\Packages\cpp\PCL\v1.14.0\3rdParty\FLANN\lib;E:\Packages\cpp\PCL\v1.14.0\3rdParty\Qhull\lib;$(LibraryPath)</LibraryPath>
+    <LibraryPath>$(SolutionDir)runtimes\win-x64\lib;$(SolutionDir)src\PCLSharp.Primitives.Native\bin\$(Configuration)\$(Platform);E:\Packages\cpp\PCL\v1.14.0\3rdParty\Boost\lib;E:\Packages\cpp\PCL\v1.14.0\3rdParty\FLANN\lib;E:\Packages\cpp\PCL\v1.14.0\3rdParty\Qhull\lib;$(LibraryPath)</LibraryPath>
     <OutDir>bin\$(Configuration)\$(Platform)\</OutDir>
     <IntDir>obj\$(Configuration)\$(Platform)\</IntDir>
   </PropertyGroup>
