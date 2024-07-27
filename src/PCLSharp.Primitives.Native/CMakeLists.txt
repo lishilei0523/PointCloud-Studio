@@ -1,6 +1,5 @@
 cmake_minimum_required(VERSION 3.25)
 project(PCLSharp.Primitives.Native)
-set(CMAKE_CXX_STANDARD 20)
 
 find_package(PCL REQUIRED)
 include_directories(${PCL_INCLUDE_DIRS})
@@ -9,10 +8,12 @@ add_definitions(${PCL_DEFINITIONS})
 
 file(GLOB INCLUDE_FILES
     "${CMAKE_CURRENT_LIST_DIR}/*.h")
-
 file(GLOB SOURCE_FILES
     "${CMAKE_CURRENT_LIST_DIR}/*.cpp")
 
-add_library(PCLSharp.Primitives.Native SHARED ${INCLUDE_FILES} ${SOURCE_FILES})
+add_library(${PROJECT_NAME} SHARED ${INCLUDE_FILES} ${SOURCE_FILES})
 
-target_link_libraries(PCLSharp.Primitives.Native ${PCL_LIBRARIES})
+target_link_libraries(${PROJECT_NAME} ${PCL_LIBRARIES})
+
+# MSVC大文件编译选项
+target_compile_options(${PROJECT_NAME} PRIVATE $<$<CXX_COMPILER_ID:MSVC>:/bigobj>)
