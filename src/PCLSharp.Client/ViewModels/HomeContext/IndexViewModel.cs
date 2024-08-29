@@ -656,7 +656,7 @@ namespace PCLSharp.Client.ViewModels.HomeContext
             this.Busy();
 
             CropBoxViewModel viewModel = ResolveMediator.Resolve<CropBoxViewModel>();
-            viewModel.Load(this.EffectivePointCloud.Positions);
+            viewModel.Load(this.EffectivePointCloud);
             bool? result = await this._windowManager.ShowDialogAsync(viewModel);
             if (result == true)
             {
@@ -689,17 +689,11 @@ namespace PCLSharp.Client.ViewModels.HomeContext
             this.Busy();
 
             ProjectViewModel viewModel = ResolveMediator.Resolve<ProjectViewModel>();
+            viewModel.Load(this.EffectivePointCloud);
             bool? result = await this._windowManager.ShowDialogAsync(viewModel);
             if (result == true)
             {
-                IEnumerable<Point3F> points = this.EffectivePointCloud.Points.ToPoint3Fs();
-                Point3F[] projectedPoints = await Task.Run(() => this._cloudCommon.ProjectPlane(points, viewModel.A!.Value, viewModel.B!.Value, viewModel.C!.Value, viewModel.D!.Value));
-
-                IEnumerable<Vector3> positions = projectedPoints.ToVector3s();
-                this.EffectivePointCloud = new PointGeometry3D
-                {
-                    Positions = new Vector3Collection(positions)
-                };
+                this.EffectivePointCloud = viewModel.PointCloud;
             }
 
             this.Idle();

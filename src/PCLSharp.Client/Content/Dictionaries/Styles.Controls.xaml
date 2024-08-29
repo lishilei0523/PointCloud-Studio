@@ -54,13 +54,26 @@
     </Style>
     <!--TabControl文档样式-->
     <Style x:Key="TabControl.Styles.Document" TargetType="{x:Type TabControl}">
-        <Setter Property="Background" Value="WhiteSmoke" />
-        <Setter Property="BorderBrush" Value="#CCCCCC" />
-        <Setter Property="BorderThickness" Value="1,1,1,0" />
+        <Setter Property="BorderBrush" Value="{DynamicResource SystemBaseLowColorBrush}" />
+        <Setter Property="BorderThickness" Value="1,1,1,1" />
     </Style>
     <!--TabControlItem文档样式-->
     <Style x:Key="TabControlItem.Styles.Document" TargetType="{x:Type TabItem}">
-        <Setter Property="Background" Value="WhiteSmoke" />
+        <Setter Property="Background" Value="{DynamicResource SystemListLowColorBrush}" />
         <Setter Property="Padding" Value="10,3" />
+    </Style>
+    <!--横向GridSplitter样式-->
+    <Style x:Key="GridSplitter.Horizontal" TargetType="{x:Type GridSplitter}"
+           BasedOn="{StaticResource MahApps.Styles.GridSplitter}">
+        <Setter Property="Height" Value="2" />
+        <Setter Property="Background" Value="Transparent" />
+        <Setter Property="VerticalAlignment" Value="Bottom" />
+    </Style>
+    <!--纵向GridSplitter样式-->
+    <Style x:Key="GridSplitter.Vertical" TargetType="{x:Type GridSplitter}" 
+           BasedOn="{StaticResource MahApps.Styles.GridSplitter}">
+        <Setter Property="Width" Value="2" />
+        <Setter Property="Background" Value="Transparent" />
+        <Setter Property="HorizontalAlignment" Value="Right" />
     </Style>
 </ResourceDictionary>

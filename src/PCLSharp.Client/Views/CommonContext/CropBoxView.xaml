@@ -1,17 +1,17 @@
 ﻿<mah:MetroWindow x:Class="PCLSharp.Client.Views.CommonContext.CropBoxView"
-        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:mah="http://metro.mahapps.com/winfx/xaml/controls"
-        xmlns:cm="http://caliburnmicro.com"
-        xmlns:hx="http://helix-toolkit.org/wpf/SharpDX"
-        xmlns:busyIndicator="https://github.com/Peoky/BusyIndicator"
-        mc:Ignorable="d"
-        Title="长方体剪裁" 
-        Width="1280" Height="800" FontSize="14"
-        WindowStartupLocation="CenterScreen"
-        Style="{StaticResource MetroWindow.Styles.Clean}">
+                 xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                 xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                 xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+                 xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+                 xmlns:mah="http://metro.mahapps.com/winfx/xaml/controls"
+                 xmlns:cm="http://caliburnmicro.com"
+                 xmlns:hx="http://helix-toolkit.org/wpf/SharpDX"
+                 xmlns:busyIndicator="https://github.com/Peoky/BusyIndicator"
+                 mc:Ignorable="d"
+                 Title="长方体剪裁" 
+                 Width="1280" Height="800" FontSize="14"
+                 WindowStartupLocation="CenterScreen"
+                 Style="{StaticResource MetroWindow.Styles.Clean}">
 
     <mah:MetroWindow.RightWindowCommands>
         <mah:WindowCommands>
@@ -103,7 +103,7 @@
         <!--Controller-->
         <Grid Grid.Row="3" Style="{StaticResource Form.Styles.Submit.Grid}">
             <WrapPanel Style="{StaticResource Form.Styles.Submit.WrapPanel}">
-                <Button Content="确定" cm:Message.Attach="Submit()" Style="{StaticResource Button.Styles.Fluent.Focus}" />
+                <Button Content="确定" cm:Message.Attach="TryCloseAsync('true')" Style="{StaticResource Button.Styles.Fluent.Focus}" />
                 <Button Content="取消" cm:Message.Attach="TryCloseAsync('false')" Style="{StaticResource Button.Styles.Fluent.Default}" />
             </WrapPanel>
         </Grid>
