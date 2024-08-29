@@ -16,9 +16,9 @@ using PerspectiveCamera = HelixToolkit.Wpf.SharpDX.PerspectiveCamera;
 namespace PCLSharp.Client.ViewModels.CommonContext
 {
     /// <summary>
-    /// 点云视图模型基类
+    /// 点云预览视图模型基类
     /// </summary>
-    public abstract class CloudViewModel : ScreenBase
+    public abstract class PreviewViewModel : ScreenBase
     {
         #region # 字段及构造器
 
@@ -30,7 +30,7 @@ namespace PCLSharp.Client.ViewModels.CommonContext
         /// <summary>
         /// 依赖注入构造器
         /// </summary>
-        protected CloudViewModel(ICloudCommon cloudCommon)
+        protected PreviewViewModel(ICloudCommon cloudCommon)
         {
             this._cloudCommon = cloudCommon;
         }
@@ -114,10 +114,10 @@ namespace PCLSharp.Client.ViewModels.CommonContext
         public virtual void Load(PointGeometry3D pointCloud)
         {
             this.PointCloud = pointCloud;
-            IEnumerable<Vector3> vectors = pointCloud.Points.Select(point => new Vector3(point.P0.X, point.P0.Y, point.P0.Z));
+            IEnumerable<Vector3> positions = pointCloud.Points.Select(point => new Vector3(point.P0.X, point.P0.Y, point.P0.Z));
             this.BasedPointCloud = new PointGeometry3D
             {
-                Positions = new Vector3Collection(vectors)
+                Positions = new Vector3Collection(positions)
             };
         }
         #endregion
@@ -166,6 +166,20 @@ namespace PCLSharp.Client.ViewModels.CommonContext
             this.Camera.LookAt(centroid.ToPoint(), 200);
 
             this.Idle();
+        }
+        #endregion
+
+        #region 重置点云 —— void ResetPointCloud()
+        /// <summary>
+        /// 重置点云
+        /// </summary>
+        public void ResetPointCloud()
+        {
+            IEnumerable<Vector3> positions = this.BasedPointCloud.Points.Select(point => new Vector3(point.P0.X, point.P0.Y, point.P0.Z));
+            this.PointCloud = new PointGeometry3D
+            {
+                Positions = new Vector3Collection(positions)
+            };
         }
         #endregion
 

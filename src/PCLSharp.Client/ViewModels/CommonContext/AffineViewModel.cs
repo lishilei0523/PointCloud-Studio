@@ -1,5 +1,12 @@
-﻿using SD.Infrastructure.WPF.Caliburn.Aspects;
-using SD.Infrastructure.WPF.Caliburn.Base;
+﻿using HelixToolkit.Wpf.SharpDX;
+using PCLSharp.Extensions.Helix;
+using PCLSharp.Modules.Interfaces;
+using PCLSharp.Primitives.Models;
+using SD.Infrastructure.WPF.Caliburn.Aspects;
+using SharpDX;
+using System.Collections.Generic;
+using System.Threading;
+using System.Threading.Tasks;
 using System.Windows;
 
 namespace PCLSharp.Client.ViewModels.CommonContext
@@ -7,22 +14,22 @@ namespace PCLSharp.Client.ViewModels.CommonContext
     /// <summary>
     /// 仿射变换视图模型
     /// </summary>
-    public class AffineViewModel : ScreenBase
+    public class AffineViewModel : PreviewViewModel
     {
         #region # 字段及构造器
 
         /// <summary>
+        /// 点云通用操作接口;
+        /// </summary>
+        private readonly ICloudCommon _cloudCommon;
+
+        /// <summary>
         /// 依赖注入构造器
         /// </summary>
-        public AffineViewModel()
+        public AffineViewModel(ICloudCommon cloudCommon)
+            : base(cloudCommon)
         {
-            //默认值
-            this.X = 0.1f;
-            this.Y = 0.1f;
-            this.Z = 0.1f;
-            this.RX = 15f;
-            this.RY = 15;
-            this.RZ = 0;
+            this._cloudCommon = cloudCommon;
         }
 
         #endregion
@@ -81,11 +88,29 @@ namespace PCLSharp.Client.ViewModels.CommonContext
 
         #region # 方法
 
-        #region 提交 —— async void Submit()
+        #region 初始化 —— override Task OnInitializeAsync(CancellationToken cancellationToken)
         /// <summary>
-        /// 提交
+        /// 初始化
         /// </summary>
-        public async void Submit()
+        protected override Task OnInitializeAsync(CancellationToken cancellationToken)
+        {
+            //默认值
+            this.X = 0.1f;
+            this.Y = 0.1f;
+            this.Z = 0.1f;
+            this.RX = 15f;
+            this.RY = 15;
+            this.RZ = 0;
+
+            return base.OnInitializeAsync(cancellationToken);
+        }
+        #endregion
+
+        #region 应用 —— async void Apply()
+        /// <summary>
+        /// 应用
+        /// </summary>
+        public async void Apply()
         {
             #region # 验证
 
@@ -119,10 +144,27 @@ namespace PCLSharp.Client.ViewModels.CommonContext
                 MessageBox.Show("Z轴旋转角度不可为空！", "错误", MessageBoxButton.OK, MessageBoxImage.Error);
                 return;
             }
+            if (this.PointCloud == null)
+            {
+                MessageBox.Show("点云不可为空！", "错误", MessageBoxButton.OK, MessageBoxImage.Error);
+                return;
+            }
 
             #endregion
 
-            await base.TryCloseAsync(true);
+            this.Busy();
+
+            IEnumerable<Point3F> points = this.BasedPointCloud.Points.ToPoint3Fs();
+            Pose pose = new Pose(this.X!.Value, this.Y!.Value, this.Z!.Value, this.RX!.Value, this.RY!.Value, this.RZ!.Value);
+            Point3F[] transformedPoints = await Task.Run(() => this._cloudCommon.AffineTransform(points, pose));
+
+            IEnumerable<Vector3> positions = transformedPoints.ToVector3s();
+            this.PointCloud = new PointGeometry3D
+            {
+                Positions = new Vector3Collection(positions)
+            };
+
+            this.Idle();
         }
         #endregion
 

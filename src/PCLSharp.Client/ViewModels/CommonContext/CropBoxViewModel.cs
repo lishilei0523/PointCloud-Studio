@@ -20,7 +20,7 @@ namespace PCLSharp.Client.ViewModels.CommonContext
     /// <summary>
     /// 长方体裁剪视图模型
     /// </summary>
-    public class CropBoxViewModel : CloudViewModel
+    public class CropBoxViewModel : PreviewViewModel
     {
         #region # 字段及构造器
 

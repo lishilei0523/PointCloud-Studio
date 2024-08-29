@@ -619,18 +619,11 @@ namespace PCLSharp.Client.ViewModels.HomeContext
             this.Busy();
 
             AffineViewModel viewModel = ResolveMediator.Resolve<AffineViewModel>();
+            viewModel.Load(this.EffectivePointCloud);
             bool? result = await this._windowManager.ShowDialogAsync(viewModel);
             if (result == true)
             {
-                IEnumerable<Point3F> points = this.EffectivePointCloud.Points.ToPoint3Fs();
-                Pose pose = new Pose(viewModel.X!.Value, viewModel.Y!.Value, viewModel.Z!.Value, viewModel.RX!.Value, viewModel.RY!.Value, viewModel.RZ!.Value);
-                Point3F[] transformedPoints = await Task.Run(() => this._cloudCommon.AffineTransform(points, pose));
-
-                IEnumerable<Vector3> positions = transformedPoints.ToVector3s();
-                this.EffectivePointCloud = new PointGeometry3D
-                {
-                    Positions = new Vector3Collection(positions)
-                };
+                this.EffectivePointCloud = viewModel.PointCloud;
             }
 
             this.Idle();
@@ -660,10 +653,7 @@ namespace PCLSharp.Client.ViewModels.HomeContext
             bool? result = await this._windowManager.ShowDialogAsync(viewModel);
             if (result == true)
             {
-                this.EffectivePointCloud = new PointGeometry3D
-                {
-                    Positions = viewModel.PointCloud.Positions
-                };
+                this.EffectivePointCloud = viewModel.PointCloud;
             }
 
             this.Idle();

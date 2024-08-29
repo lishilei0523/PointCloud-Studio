@@ -14,7 +14,7 @@ namespace PCLSharp.Client.ViewModels.CommonContext
     /// <summary>
     /// 投射平面视图模型
     /// </summary>
-    public class ProjectViewModel : CloudViewModel
+    public class ProjectViewModel : PreviewViewModel
     {
         #region # 字段及构造器
 
