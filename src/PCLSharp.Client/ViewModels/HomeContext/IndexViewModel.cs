@@ -775,19 +775,12 @@ namespace PCLSharp.Client.ViewModels.HomeContext
             this.EffectiveKeyPoints = null;
 
             KSearchViewModel viewModel = ResolveMediator.Resolve<KSearchViewModel>();
+            viewModel.Load(this.EffectivePointCloud);
             bool? result = await this._windowManager.ShowDialogAsync(viewModel);
             if (result == true)
             {
-                IEnumerable<Point3F> points = this.EffectivePointCloud.Points.ToPoint3Fs();
-                Point3F referencePoint = new Point3F(viewModel.ReferencePointX!.Value, viewModel.ReferencePointY!.Value, viewModel.ReferencePointZ!.Value);
-                Point3F[] keyPoints = await Task.Run(() => this._cloudSearch.KSearch(points, referencePoint, viewModel.K!.Value));
-
-                IEnumerable<Vector3> positions = keyPoints.ToVector3s();
-                this.EffectiveKeyPoints = new PointGeometry3D
-                {
-                    Positions = new Vector3Collection(positions)
-                };
-                this.KeyPointColor = Colors.Red;
+                this.EffectiveKeyPoints = viewModel.KeyPoints;
+                this.KeyPointColor = this.PointColor.Invert();
             }
 
             this.Idle();
@@ -816,19 +809,12 @@ namespace PCLSharp.Client.ViewModels.HomeContext
             this.EffectiveKeyPoints = null;
 
             RadiusSearchViewModel viewModel = ResolveMediator.Resolve<RadiusSearchViewModel>();
+            viewModel.Load(this.EffectivePointCloud);
             bool? result = await this._windowManager.ShowDialogAsync(viewModel);
             if (result == true)
             {
-                IEnumerable<Point3F> points = this.EffectivePointCloud.Points.ToPoint3Fs();
-                Point3F referencePoint = new Point3F(viewModel.ReferencePointX!.Value, viewModel.ReferencePointY!.Value, viewModel.ReferencePointZ!.Value);
-                Point3F[] keyPoints = await Task.Run(() => this._cloudSearch.RadiusSearch(points, referencePoint, viewModel.Radius!.Value));
-
-                IEnumerable<Vector3> positions = keyPoints.ToVector3s();
-                this.EffectiveKeyPoints = new PointGeometry3D
-                {
-                    Positions = new Vector3Collection(positions)
-                };
-                this.KeyPointColor = Colors.Red;
+                this.EffectiveKeyPoints = viewModel.KeyPoints;
+                this.KeyPointColor = this.PointColor.Invert();
             }
 
             this.Idle();
@@ -857,19 +843,12 @@ namespace PCLSharp.Client.ViewModels.HomeContext
             this.EffectiveKeyPoints = null;
 
             OctreeSearchViewModel viewModel = ResolveMediator.Resolve<OctreeSearchViewModel>();
+            viewModel.Load(this.EffectivePointCloud);
             bool? result = await this._windowManager.ShowDialogAsync(viewModel);
             if (result == true)
             {
-                IEnumerable<Point3F> points = this.EffectivePointCloud.Points.ToPoint3Fs();
-                Point3F referencePoint = new Point3F(viewModel.ReferencePointX!.Value, viewModel.ReferencePointY!.Value, viewModel.ReferencePointZ!.Value);
-                Point3F[] keyPoints = await Task.Run(() => this._cloudSearch.OctreeSearch(points, referencePoint, viewModel.Resolution!.Value));
-
-                IEnumerable<Vector3> positions = keyPoints.ToVector3s();
-                this.EffectiveKeyPoints = new PointGeometry3D
-                {
-                    Positions = new Vector3Collection(positions)
-                };
-                this.KeyPointColor = Colors.Red;
+                this.EffectiveKeyPoints = viewModel.KeyPoints;
+                this.KeyPointColor = this.PointColor.Invert();
             }
 
             this.Idle();

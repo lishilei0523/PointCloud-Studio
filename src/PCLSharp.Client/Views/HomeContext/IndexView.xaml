@@ -15,10 +15,15 @@
         cm:Message.Attach="[Event KeyDown] = [Action OnKeyDown()]">
 
     <mah:MetroWindow.RightWindowCommands>
-        <mah:WindowCommands Margin="0,0,-35,0">
-            <mah:ToggleSwitch OnContent="高画质模式" OffContent="流畅模式" Height="32" FontSize="12" FontFamily="微软雅黑"
-                              IsOn="{Binding HighImageQuality}"
-                              cm:Message.Attach="[Event Toggled] = [Action SwitchImageQuality()]" />
+        <mah:WindowCommands>
+            <mah:WindowCommands Margin="0,0,-20,0">
+                <mah:ToggleSwitch OnContent="高画质模式" OffContent="流畅模式" Height="34" FontSize="14" FontFamily="微软雅黑"
+                                  IsOn="{Binding HighImageQuality}"
+                                  cm:Message.Attach="[Event Toggled] = [Action SwitchImageQuality()]" />
+            </mah:WindowCommands>
+            <Button Content="指向质心" cm:Message.Attach="LookAtCentroid()" />
+            <Button Content="刷新点云" cm:Message.Attach="RefreshCloud()" />
+            <Button Content="重置相机" cm:Message.Attach="ResetCamera()" />
         </mah:WindowCommands>
     </mah:MetroWindow.RightWindowCommands>
 

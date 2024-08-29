@@ -169,11 +169,11 @@ namespace PCLSharp.Client.ViewModels.CommonContext
         }
         #endregion
 
-        #region 重置点云 —— void ResetPointCloud()
+        #region 重置点云 —— virtual void ResetPointCloud()
         /// <summary>
         /// 重置点云
         /// </summary>
-        public void ResetPointCloud()
+        public virtual void ResetPointCloud()
         {
             IEnumerable<Vector3> positions = this.BasedPointCloud.Points.Select(point => new Vector3(point.P0.X, point.P0.Y, point.P0.Z));
             this.PointCloud = new PointGeometry3D
