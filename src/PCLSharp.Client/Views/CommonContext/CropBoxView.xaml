@@ -9,7 +9,7 @@
                  xmlns:busyIndicator="https://github.com/Peoky/BusyIndicator"
                  mc:Ignorable="d"
                  Title="长方体剪裁" 
-                 Width="1280" Height="800" FontSize="14"
+                 Width="1440" Height="900" FontSize="14"
                  WindowStartupLocation="CenterScreen"
                  Style="{StaticResource MetroWindow.Styles.Clean}">
 

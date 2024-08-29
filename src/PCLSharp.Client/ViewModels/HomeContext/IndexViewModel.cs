@@ -739,17 +739,11 @@ namespace PCLSharp.Client.ViewModels.HomeContext
             this.Busy();
 
             BoundaryViewModel viewModel = ResolveMediator.Resolve<BoundaryViewModel>();
+            viewModel.Load(this.EffectivePointCloud);
             bool? result = await this._windowManager.ShowDialogAsync(viewModel);
             if (result == true)
             {
-                IEnumerable<Point3F> points = this.EffectivePointCloud.Points.ToPoint3Fs();
-                Point3F[] projectedPoints = await Task.Run(() => this._cloudCommon.ExtractBoundary(points, viewModel.NormalK!.Value, viewModel.FeatureRadius!.Value, viewModel.AngleThreshold!.Value, viewModel.ThreadsCount!.Value));
-
-                IEnumerable<Vector3> positions = projectedPoints.ToVector3s();
-                this.EffectivePointCloud = new PointGeometry3D
-                {
-                    Positions = new Vector3Collection(positions)
-                };
+                this.EffectivePointCloud = viewModel.PointCloud;
             }
 
             this.Idle();

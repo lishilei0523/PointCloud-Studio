@@ -1,11 +1,9 @@
-﻿using System.Windows;
-
-namespace PCLSharp.Client.Views.CommonContext
+﻿namespace PCLSharp.Client.Views.CommonContext
 {
     /// <summary>
     /// 提取边界视图
     /// </summary>
-    public partial class BoundaryView : Window
+    public partial class BoundaryView
     {
         public BoundaryView()
         {
