@@ -1,5 +1,11 @@
-﻿using SD.Infrastructure.WPF.Caliburn.Aspects;
-using SD.Infrastructure.WPF.Caliburn.Base;
+﻿using HelixToolkit.Wpf.SharpDX;
+using PCLSharp.Client.ViewModels.CommonContext;
+using PCLSharp.Extensions.Helix;
+using PCLSharp.Modules.Interfaces;
+using PCLSharp.Primitives.Models;
+using SD.Infrastructure.WPF.Caliburn.Aspects;
+using SharpDX;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Threading;
 using System.Threading.Tasks;
@@ -10,16 +16,22 @@ namespace PCLSharp.Client.ViewModels.FilterContext
     /// <summary>
     /// 直通滤波视图模型
     /// </summary>
-    public class PassThroghViewModel : ScreenBase
+    public class PassThroghViewModel : PreviewViewModel
     {
         #region # 字段及构造器
 
         /// <summary>
+        /// 点云滤波接口
+        /// </summary>
+        private readonly ICloudFilters _cloudFilters;
+
+        /// <summary>
         /// 依赖注入构造器
         /// </summary>
-        public PassThroghViewModel()
+        public PassThroghViewModel(ICloudCommon cloudCommon, ICloudFilters cloudFilters)
+            : base(cloudCommon)
         {
-
+            this._cloudFilters = cloudFilters;
         }
 
         #endregion
@@ -85,11 +97,11 @@ namespace PCLSharp.Client.ViewModels.FilterContext
         }
         #endregion
 
-        #region 提交 —— async void Submit()
+        #region 应用 —— async void Apply()
         /// <summary>
-        /// 提交
+        /// 应用
         /// </summary>
-        public async void Submit()
+        public async void Apply()
         {
             #region # 验证
 
@@ -113,10 +125,26 @@ namespace PCLSharp.Client.ViewModels.FilterContext
                 MessageBox.Show("过滤范围最大值必须大于最小值！", "错误", MessageBoxButton.OK, MessageBoxImage.Error);
                 return;
             }
+            if (this.PointCloud == null)
+            {
+                MessageBox.Show("点云不可为空！", "错误", MessageBoxButton.OK, MessageBoxImage.Error);
+                return;
+            }
 
             #endregion
 
-            await base.TryCloseAsync(true);
+            this.Busy();
+
+            IEnumerable<Point3F> points = this.BasedPointCloud.Points.ToPoint3Fs();
+            Point3F[] filterdPoints = await Task.Run(() => this._cloudFilters.ApplyPassThrogh(points, this.SelectedAxis, this.LimitMin!.Value, this.LimitMax!.Value));
+
+            IEnumerable<Vector3> positions = filterdPoints.ToVector3s();
+            this.PointCloud = new PointGeometry3D
+            {
+                Positions = new Vector3Collection(positions)
+            };
+
+            this.Idle();
         }
         #endregion
 

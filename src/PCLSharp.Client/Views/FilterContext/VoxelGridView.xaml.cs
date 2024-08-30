@@ -1,11 +1,9 @@
-﻿using System.Windows;
-
-namespace PCLSharp.Client.Views.FilterContext
+﻿namespace PCLSharp.Client.Views.FilterContext
 {
     /// <summary>
     /// 体素降采样视图
     /// </summary>
-    public partial class VoxelGridView : Window
+    public partial class VoxelGridView
     {
         public VoxelGridView()
         {

@@ -1,5 +1,13 @@
-﻿using SD.Infrastructure.WPF.Caliburn.Aspects;
-using SD.Infrastructure.WPF.Caliburn.Base;
+﻿using HelixToolkit.Wpf.SharpDX;
+using PCLSharp.Client.ViewModels.CommonContext;
+using PCLSharp.Extensions.Helix;
+using PCLSharp.Modules.Interfaces;
+using PCLSharp.Primitives.Models;
+using SD.Infrastructure.WPF.Caliburn.Aspects;
+using SharpDX;
+using System.Collections.Generic;
+using System.Threading;
+using System.Threading.Tasks;
 using System.Windows;
 
 namespace PCLSharp.Client.ViewModels.FilterContext
@@ -7,18 +15,22 @@ namespace PCLSharp.Client.ViewModels.FilterContext
     /// <summary>
     /// 半径离群点移除视图模型
     /// </summary>
-    public class RadiusOutlierRemovalViewModel : ScreenBase
+    public class RadiusOutlierRemovalViewModel : PreviewViewModel
     {
         #region # 字段及构造器
 
         /// <summary>
+        /// 点云滤波接口
+        /// </summary>
+        private readonly ICloudFilters _cloudFilters;
+
+        /// <summary>
         /// 依赖注入构造器
         /// </summary>
-        public RadiusOutlierRemovalViewModel()
+        public RadiusOutlierRemovalViewModel(ICloudCommon cloudCommon, ICloudFilters cloudFilters)
+            : base(cloudCommon)
         {
-            //默认值
-            this.Radius = 0.4f;
-            this.MinNeighborsInRadius = 2;
+            this._cloudFilters = cloudFilters;
         }
 
         #endregion
@@ -45,11 +57,25 @@ namespace PCLSharp.Client.ViewModels.FilterContext
 
         #region # 方法
 
-        #region 提交 —— async void Submit()
+        #region 初始化 —— override Task OnInitializeAsync(CancellationToken cancellationToken)
         /// <summary>
-        /// 提交
+        /// 初始化
         /// </summary>
-        public async void Submit()
+        protected override Task OnInitializeAsync(CancellationToken cancellationToken)
+        {
+            //默认值
+            this.Radius = 0.4f;
+            this.MinNeighborsInRadius = 2;
+
+            return base.OnInitializeAsync(cancellationToken);
+        }
+        #endregion
+
+        #region 应用 —— async void Apply()
+        /// <summary>
+        /// 应用
+        /// </summary>
+        public async void Apply()
         {
             #region # 验证
 
@@ -63,10 +89,26 @@ namespace PCLSharp.Client.ViewModels.FilterContext
                 MessageBox.Show("半径范围内点数量最小值不可为空！", "错误", MessageBoxButton.OK, MessageBoxImage.Error);
                 return;
             }
+            if (this.PointCloud == null)
+            {
+                MessageBox.Show("点云不可为空！", "错误", MessageBoxButton.OK, MessageBoxImage.Error);
+                return;
+            }
 
             #endregion
 
-            await base.TryCloseAsync(true);
+            this.Busy();
+
+            IEnumerable<Point3F> points = this.BasedPointCloud.Points.ToPoint3Fs();
+            Point3F[] filterdPoints = await Task.Run(() => this._cloudFilters.ApplyRadiusOutlierRemoval(points, this.Radius!.Value, this.MinNeighborsInRadius!.Value));
+
+            IEnumerable<Vector3> positions = filterdPoints.ToVector3s();
+            this.PointCloud = new PointGeometry3D
+            {
+                Positions = new Vector3Collection(positions)
+            };
+
+            this.Idle();
         }
         #endregion
 

@@ -877,17 +877,11 @@ namespace PCLSharp.Client.ViewModels.HomeContext
             this.Busy();
 
             PassThroghViewModel viewModel = ResolveMediator.Resolve<PassThroghViewModel>();
+            viewModel.Load(this.EffectivePointCloud);
             bool? result = await this._windowManager.ShowDialogAsync(viewModel);
             if (result == true)
             {
-                IEnumerable<Point3F> points = this.EffectivePointCloud.Points.ToPoint3Fs();
-                Point3F[] filterdPoints = await Task.Run(() => this._cloudFilters.ApplyPassThrogh(points, viewModel.SelectedAxis, viewModel.LimitMin!.Value, viewModel.LimitMax!.Value));
-
-                IEnumerable<Vector3> positions = filterdPoints.ToVector3s();
-                this.EffectivePointCloud = new PointGeometry3D
-                {
-                    Positions = new Vector3Collection(positions)
-                };
+                this.EffectivePointCloud = viewModel.PointCloud;
             }
 
             this.Idle();
@@ -913,17 +907,11 @@ namespace PCLSharp.Client.ViewModels.HomeContext
             this.Busy();
 
             RandomSampleViewModel viewModel = ResolveMediator.Resolve<RandomSampleViewModel>();
+            viewModel.Load(this.EffectivePointCloud);
             bool? result = await this._windowManager.ShowDialogAsync(viewModel);
             if (result == true)
             {
-                IEnumerable<Point3F> points = this.EffectivePointCloud.Points.ToPoint3Fs();
-                Point3F[] filterdPoints = await Task.Run(() => this._cloudFilters.ApplyRandomSampling(points, viewModel.Seed!.Value, viewModel.SamplesCount!.Value));
-
-                IEnumerable<Vector3> positions = filterdPoints.ToVector3s();
-                this.EffectivePointCloud = new PointGeometry3D
-                {
-                    Positions = new Vector3Collection(positions)
-                };
+                this.EffectivePointCloud = viewModel.PointCloud;
             }
 
             this.Idle();
@@ -949,17 +937,11 @@ namespace PCLSharp.Client.ViewModels.HomeContext
             this.Busy();
 
             UniformSampleViewModel viewModel = ResolveMediator.Resolve<UniformSampleViewModel>();
+            viewModel.Load(this.EffectivePointCloud);
             bool? result = await this._windowManager.ShowDialogAsync(viewModel);
             if (result == true)
             {
-                IEnumerable<Point3F> points = this.EffectivePointCloud.Points.ToPoint3Fs();
-                Point3F[] filterdPoints = await Task.Run(() => this._cloudFilters.ApplyUniformSampling(points, viewModel.Radius!.Value));
-
-                IEnumerable<Vector3> positions = filterdPoints.ToVector3s();
-                this.EffectivePointCloud = new PointGeometry3D
-                {
-                    Positions = new Vector3Collection(positions)
-                };
+                this.EffectivePointCloud = viewModel.PointCloud;
             }
 
             this.Idle();
@@ -985,17 +967,11 @@ namespace PCLSharp.Client.ViewModels.HomeContext
             this.Busy();
 
             VoxelGridViewModel viewModel = ResolveMediator.Resolve<VoxelGridViewModel>();
+            viewModel.Load(this.EffectivePointCloud);
             bool? result = await this._windowManager.ShowDialogAsync(viewModel);
             if (result == true)
             {
-                IEnumerable<Point3F> points = this.EffectivePointCloud.Points.ToPoint3Fs();
-                Point3F[] filterdPoints = await Task.Run(() => this._cloudFilters.ApplyVoxelGrid(points, viewModel.LeafSize!.Value));
-
-                IEnumerable<Vector3> positions = filterdPoints.ToVector3s();
-                this.EffectivePointCloud = new PointGeometry3D
-                {
-                    Positions = new Vector3Collection(positions)
-                };
+                this.EffectivePointCloud = viewModel.PointCloud;
             }
 
             this.Idle();
@@ -1021,17 +997,11 @@ namespace PCLSharp.Client.ViewModels.HomeContext
             this.Busy();
 
             ApproxVoxelGridViewModel viewModel = ResolveMediator.Resolve<ApproxVoxelGridViewModel>();
+            viewModel.Load(this.EffectivePointCloud);
             bool? result = await this._windowManager.ShowDialogAsync(viewModel);
             if (result == true)
             {
-                IEnumerable<Point3F> points = this.EffectivePointCloud.Points.ToPoint3Fs();
-                Point3F[] filterdPoints = await Task.Run(() => this._cloudFilters.ApplyApproxVoxelGrid(points, viewModel.LeafSize!.Value));
-
-                IEnumerable<Vector3> positions = filterdPoints.ToVector3s();
-                this.EffectivePointCloud = new PointGeometry3D
-                {
-                    Positions = new Vector3Collection(positions)
-                };
+                this.EffectivePointCloud = viewModel.PointCloud;
             }
 
             this.Idle();
@@ -1057,17 +1027,11 @@ namespace PCLSharp.Client.ViewModels.HomeContext
             this.Busy();
 
             StatOutlierRemovalViewModel viewModel = ResolveMediator.Resolve<StatOutlierRemovalViewModel>();
+            viewModel.Load(this.EffectivePointCloud);
             bool? result = await this._windowManager.ShowDialogAsync(viewModel);
             if (result == true)
             {
-                IEnumerable<Point3F> points = this.EffectivePointCloud.Points.ToPoint3Fs();
-                Point3F[] filterdPoints = await Task.Run(() => this._cloudFilters.ApplyStatisticalOutlierRemoval(points, viewModel.MeanK!.Value, viewModel.StddevMult!.Value));
-
-                IEnumerable<Vector3> positions = filterdPoints.ToVector3s();
-                this.EffectivePointCloud = new PointGeometry3D
-                {
-                    Positions = new Vector3Collection(positions)
-                };
+                this.EffectivePointCloud = viewModel.PointCloud;
             }
 
             this.Idle();
@@ -1093,17 +1057,11 @@ namespace PCLSharp.Client.ViewModels.HomeContext
             this.Busy();
 
             RadiusOutlierRemovalViewModel viewModel = ResolveMediator.Resolve<RadiusOutlierRemovalViewModel>();
+            viewModel.Load(this.EffectivePointCloud);
             bool? result = await this._windowManager.ShowDialogAsync(viewModel);
             if (result == true)
             {
-                IEnumerable<Point3F> points = this.EffectivePointCloud.Points.ToPoint3Fs();
-                Point3F[] filterdPoints = await Task.Run(() => this._cloudFilters.ApplyRadiusOutlierRemoval(points, viewModel.Radius!.Value, viewModel.MinNeighborsInRadius!.Value));
-
-                IEnumerable<Vector3> positions = filterdPoints.ToVector3s();
-                this.EffectivePointCloud = new PointGeometry3D
-                {
-                    Positions = new Vector3Collection(positions)
-                };
+                this.EffectivePointCloud = viewModel.PointCloud;
             }
 
             this.Idle();

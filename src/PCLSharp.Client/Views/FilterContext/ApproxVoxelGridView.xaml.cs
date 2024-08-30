@@ -1,11 +1,9 @@
-﻿using System.Windows;
-
-namespace PCLSharp.Client.Views.FilterContext
+﻿namespace PCLSharp.Client.Views.FilterContext
 {
     /// <summary>
     /// 近似体素降采样视图
     /// </summary>
-    public partial class ApproxVoxelGridView : Window
+    public partial class ApproxVoxelGridView
     {
         public ApproxVoxelGridView()
         {
