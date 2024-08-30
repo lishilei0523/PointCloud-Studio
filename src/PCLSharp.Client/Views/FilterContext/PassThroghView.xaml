@@ -41,7 +41,7 @@
                     <ColumnDefinition Width="*" />
                     <ColumnDefinition Width="260" />
                 </Grid.ColumnDefinitions>
-                <!--图像预览-->
+                <!--点云预览-->
                 <GroupBox Grid.Column="0" Header="点云预览" Margin="4,4,2,4">
                     <hx:Viewport3DX BackgroundColor="LightGray"
                                  MSAA="{Binding MSAALevel}"

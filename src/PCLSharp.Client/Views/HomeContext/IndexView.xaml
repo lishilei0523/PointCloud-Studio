@@ -79,9 +79,7 @@
                 </MenuItem>
                 <MenuItem Header="法向量(_N)">
                     <MenuItem Header="K近邻估算法向量(_K)" cm:Message.Attach="EstimateNormalsByK()" />
-                    <MenuItem Header="K近邻估算法向量(OMP)(_G)" cm:Message.Attach="EstimateNormalsByKP()" />
                     <MenuItem Header="Radius估算法向量(_R)" cm:Message.Attach="EstimateNormalsByRadius()" />
-                    <MenuItem Header="Radius估算法向量(OMP)(_S)" cm:Message.Attach="EstimateNormalsByRadiusP()" />
                 </MenuItem>
                 <MenuItem Header="关键点(_K)">
                     <MenuItem Header="NARF关键点(_N)" cm:Message.Attach="DetectNARF()" />
