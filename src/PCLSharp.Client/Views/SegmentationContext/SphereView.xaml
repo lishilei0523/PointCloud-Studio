@@ -77,7 +77,7 @@
                 <!--参数设置-->
                 <GroupBox Grid.Column="1" Header="参数设置" Margin="2,4,4,4">
                     <StackPanel Grid.IsSharedSizeScope="True" Margin="5,20">
-                        <sd:FormItem Label="是否优化模型系数：">
+                        <sd:FormItem Label="优化模型系数：">
                             <mah:ToggleSwitch IsOn="{Binding OptimizeCoefficients}" OnContent="是" OffContent="否" Style="{StaticResource ToggleSwitch.Styles.Fluent}" />
                         </sd:FormItem>
                         <sd:FormItem Label="概率：">

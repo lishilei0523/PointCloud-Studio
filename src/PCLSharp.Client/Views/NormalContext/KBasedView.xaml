@@ -82,7 +82,7 @@
                         <sd:FormItem Label="OMP：">
                             <mah:ToggleSwitch IsOn="{Binding OMPEnabled}" OnContent="启用" OffContent="禁用" Style="{StaticResource ToggleSwitch.Styles.Fluent}" />
                         </sd:FormItem>
-                        <sd:FormItem Label="搜索近邻数量：">
+                        <sd:FormItem Label="K值：">
                             <mah:NumericUpDown Value="{Binding K, UpdateSourceTrigger=PropertyChanged}"
                                                Style="{StaticResource NumericUpDown.Styles.Fluent}" />
                         </sd:FormItem>
