@@ -58,7 +58,7 @@
                     <ColumnDefinition Width="240" />
                 </Grid.ColumnDefinitions>
                 <!--配准参数-->
-                <GroupBox Grid.Column="0" Header="配准参数" Margin="0">
+                <GroupBox Grid.Column="0" Header="配准参数" Margin="4,4,2,4">
                     <ScrollViewer HorizontalScrollBarVisibility="Disabled">
                         <StackPanel>
                             <StackPanel Grid.IsSharedSizeScope="True" Margin="0,5">
@@ -199,8 +199,8 @@
                     </ScrollViewer>
                 </GroupBox>
                 <!--点云视口-->
-                <hx:Viewport3DX Grid.Column="1" 
-                                BackgroundColor="LightGray"
+                <GroupBox Grid.Column="1" Header="点云预览" Margin="2,4,2,4">
+                    <hx:Viewport3DX BackgroundColor="LightGray"
                                 MSAA="{Binding MSAALevel}"
                                 ShowCoordinateSystem="True"
                                 CoordinateSystemSize="2"
@@ -208,31 +208,32 @@
                                 CoordinateSystemVerticalPosition="1"
                                 CoordinateSystemLabelForeground="Black"
                                 Camera="{Binding Camera}">
-                    <!--效果器-->
-                    <hx:Viewport3DX.EffectsManager>
-                        <hx:DefaultEffectsManager />
-                    </hx:Viewport3DX.EffectsManager>
-                    <!--键盘鼠标-->
-                    <hx:Viewport3DX.InputBindings>
-                        <KeyBinding Key="U" Command="hx:ViewportCommands.TopView" />
-                        <KeyBinding Key="F" Command="hx:ViewportCommands.FrontView" />
-                        <KeyBinding Key="R" Command="hx:ViewportCommands.RightView" />
-                        <KeyBinding Key="B" Command="hx:ViewportCommands.BackView" />
-                        <KeyBinding Key="L" Command="hx:ViewportCommands.LeftView" />
-                        <KeyBinding Key="D" Command="hx:ViewportCommands.BottomView" />
-                        <KeyBinding Command="hx:ViewportCommands.ZoomExtents" Gesture="Control+E" />
-                        <MouseBinding Command="hx:ViewportCommands.Pan" Gesture="MiddleClick" />
-                        <MouseBinding Command="hx:ViewportCommands.Rotate" Gesture="RightClick" />
-                    </hx:Viewport3DX.InputBindings>
-                    <!--光源-->
-                    <hx:DirectionalLight3D Color="White" Direction="{Binding Camera.LookDirection}" />
-                    <!--源点云-->
-                    <hx:PointGeometryModel3D Geometry="{Binding SourceCloud}" Color="Red" />
-                    <!--目标点云-->
-                    <hx:PointGeometryModel3D Geometry="{Binding TargetCloud}" Color="Green" />
-                </hx:Viewport3DX>
+                        <!--效果器-->
+                        <hx:Viewport3DX.EffectsManager>
+                            <hx:DefaultEffectsManager />
+                        </hx:Viewport3DX.EffectsManager>
+                        <!--键盘鼠标-->
+                        <hx:Viewport3DX.InputBindings>
+                            <KeyBinding Key="U" Command="hx:ViewportCommands.TopView" />
+                            <KeyBinding Key="F" Command="hx:ViewportCommands.FrontView" />
+                            <KeyBinding Key="R" Command="hx:ViewportCommands.RightView" />
+                            <KeyBinding Key="B" Command="hx:ViewportCommands.BackView" />
+                            <KeyBinding Key="L" Command="hx:ViewportCommands.LeftView" />
+                            <KeyBinding Key="D" Command="hx:ViewportCommands.BottomView" />
+                            <KeyBinding Command="hx:ViewportCommands.ZoomExtents" Gesture="Control+E" />
+                            <MouseBinding Command="hx:ViewportCommands.Pan" Gesture="MiddleClick" />
+                            <MouseBinding Command="hx:ViewportCommands.Rotate" Gesture="RightClick" />
+                        </hx:Viewport3DX.InputBindings>
+                        <!--光源-->
+                        <hx:DirectionalLight3D Color="White" Direction="{Binding Camera.LookDirection}" />
+                        <!--源点云-->
+                        <hx:PointGeometryModel3D Geometry="{Binding SourceCloud}" Color="Red" />
+                        <!--目标点云-->
+                        <hx:PointGeometryModel3D Geometry="{Binding TargetCloud}" Color="Green" />
+                    </hx:Viewport3DX>
+                </GroupBox>
                 <!--配准结果-->
-                <GroupBox Grid.Column="2" Header="配准结果" Margin="0">
+                <GroupBox Grid.Column="2" Header="配准结果" Margin="2,4,4,4">
                     <ScrollViewer HorizontalScrollBarVisibility="Disabled">
                         <StackPanel>
                             <StackPanel Grid.IsSharedSizeScope="True" Margin="0,5">
