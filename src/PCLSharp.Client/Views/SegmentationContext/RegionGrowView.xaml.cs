@@ -1,11 +1,9 @@
-﻿using System.Windows;
-
-namespace PCLSharp.Client.Views.SegmentationContext
+﻿namespace PCLSharp.Client.Views.SegmentationContext
 {
     /// <summary>
     /// 区域生长分割视图
     /// </summary>
-    public partial class RegionGrowView : Window
+    public partial class RegionGrowView
     {
         public RegionGrowView()
         {

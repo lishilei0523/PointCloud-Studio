@@ -1571,17 +1571,11 @@ namespace PCLSharp.Client.ViewModels.HomeContext
             this.Busy();
 
             SphereViewModel viewModel = ResolveMediator.Resolve<SphereViewModel>();
+            viewModel.Load(this.EffectivePointCloud);
             bool? result = await this._windowManager.ShowDialogAsync(viewModel);
             if (result == true)
             {
-                IEnumerable<Point3F> points = this.EffectivePointCloud.Points.ToPoint3Fs();
-                Point3F[] segmentedPoints = await Task.Run(() => this._cloudSegmentations.SegmentSphere(points, viewModel.OptimizeCoefficients!.Value, viewModel.Probability!.Value, viewModel.DistanceThreshold!.Value, viewModel.MinRadius!.Value, viewModel.MaxRadius!.Value, viewModel.MaxIterationsCount!.Value, out Point3F center, out float radius));
-
-                IEnumerable<Vector3> positions = segmentedPoints.ToVector3s();
-                this.EffectivePointCloud = new PointGeometry3D
-                {
-                    Positions = new Vector3Collection(positions)
-                };
+                this.EffectivePointCloud = viewModel.PointCloud;
             }
 
             this.Idle();
@@ -1607,33 +1601,11 @@ namespace PCLSharp.Client.ViewModels.HomeContext
             this.Busy();
 
             EuclidViewModel viewModel = ResolveMediator.Resolve<EuclidViewModel>();
+            viewModel.Load(this.EffectivePointCloud);
             bool? result = await this._windowManager.ShowDialogAsync(viewModel);
             if (result == true)
             {
-                IEnumerable<Point3F> points = this.EffectivePointCloud.Points.ToPoint3Fs();
-                Point3F[][] pointsClusters = await Task.Run(() => this._cloudSegmentations.EuclidClusterSegment(points, viewModel.ClusterTolerance!.Value, viewModel.MinClusterSize!.Value, viewModel.MaxClusterSize!.Value));
-
-                Vector3Collection positions = new Vector3Collection();
-                Color4Collection colors = new Color4Collection();
-                for (int clusterIndex = 0; clusterIndex < pointsClusters.Length; clusterIndex++)
-                {
-                    Point3F[] pointsCluster = pointsClusters[clusterIndex];
-                    Color color = ColorExtension.RandomColor();
-                    if (clusterIndex % 2 == 0)
-                    {
-                        color = color.Invert();
-                    }
-                    IEnumerable<Vector3> clusterPositions = pointsCluster.ToVector3s();
-                    IEnumerable<Color4> clusterColors = pointsCluster.Select(x => color.ToColor4());
-                    positions.AddRange(clusterPositions);
-                    colors.AddRange(clusterColors);
-                }
-
-                this.EffectivePointCloud = new PointGeometry3D
-                {
-                    Positions = positions,
-                    Colors = colors
-                };
+                this.EffectivePointCloud = viewModel.PointCloud;
             }
 
             this.Idle();
@@ -1659,33 +1631,11 @@ namespace PCLSharp.Client.ViewModels.HomeContext
             this.Busy();
 
             RegionGrowViewModel viewModel = ResolveMediator.Resolve<RegionGrowViewModel>();
+            viewModel.Load(this.EffectivePointCloud);
             bool? result = await this._windowManager.ShowDialogAsync(viewModel);
             if (result == true)
             {
-                IEnumerable<Point3F> points = this.EffectivePointCloud.Points.ToPoint3Fs();
-                Point3F[][] pointsClusters = await Task.Run(() => this._cloudSegmentations.RegionGrowingSegment(points, viewModel.NormalK!.Value, viewModel.ClusterK!.Value, viewModel.SmoothnessThreshold!.Value, viewModel.CurvatureThreshold!.Value, viewModel.MinClusterSize!.Value, viewModel.MaxClusterSize!.Value, viewModel.ThreadsCount!.Value));
-
-                Vector3Collection positions = new Vector3Collection();
-                Color4Collection colors = new Color4Collection();
-                for (int clusterIndex = 0; clusterIndex < pointsClusters.Length; clusterIndex++)
-                {
-                    Point3F[] pointsCluster = pointsClusters[clusterIndex];
-                    Color color = ColorExtension.RandomColor();
-                    if (clusterIndex % 2 == 0)
-                    {
-                        color = color.Invert();
-                    }
-                    IEnumerable<Vector3> clusterPositions = pointsCluster.ToVector3s();
-                    IEnumerable<Color4> clusterColors = pointsCluster.Select(x => color.ToColor4());
-                    positions.AddRange(clusterPositions);
-                    colors.AddRange(clusterColors);
-                }
-
-                this.EffectivePointCloud = new PointGeometry3D
-                {
-                    Positions = positions,
-                    Colors = colors
-                };
+                this.EffectivePointCloud = viewModel.PointCloud;
             }
 
             this.Idle();
@@ -1711,33 +1661,11 @@ namespace PCLSharp.Client.ViewModels.HomeContext
             this.Busy();
 
             RegionGrowColorViewModel viewModel = ResolveMediator.Resolve<RegionGrowColorViewModel>();
+            viewModel.Load(this.EffectivePointCloud);
             bool? result = await this._windowManager.ShowDialogAsync(viewModel);
             if (result == true)
             {
-                Point3Color4[] pointColors = this.EffectivePointCloud.ToPoint3Color4s();
-                Point3Color4[][] pointsClusters = await Task.Run(() => this._cloudSegmentations.RegionGrowingColorSegment(pointColors, viewModel.NormalK!.Value, viewModel.ClusterK!.Value, viewModel.DistanceThreshold!.Value, viewModel.SmoothnessThreshold!.Value, viewModel.CurvatureThreshold!.Value, viewModel.PointColorThreshold!.Value, viewModel.RegionColorThreshold!.Value, viewModel.MinClusterSize!.Value, viewModel.MaxClusterSize!.Value, viewModel.ThreadsCount!.Value));
-
-                Vector3Collection positions = new Vector3Collection();
-                Color4Collection colors = new Color4Collection();
-                for (int clusterIndex = 0; clusterIndex < pointsClusters.Length; clusterIndex++)
-                {
-                    Point3Color4[] pointsCluster = pointsClusters[clusterIndex];
-                    Color color = ColorExtension.RandomColor();
-                    if (clusterIndex % 2 == 0)
-                    {
-                        color = color.Invert();
-                    }
-                    IEnumerable<Vector3> clusterPositions = pointsCluster.Select(x => x.GetPoint()).ToVector3s();
-                    IEnumerable<Color4> clusterColors = pointsCluster.Select(x => color.ToColor4());
-                    positions.AddRange(clusterPositions);
-                    colors.AddRange(clusterColors);
-                }
-
-                this.EffectivePointCloud = new PointGeometry3D
-                {
-                    Positions = positions,
-                    Colors = colors
-                };
+                this.EffectivePointCloud = viewModel.PointCloud;
             }
 
             this.Idle();

@@ -1,11 +1,9 @@
-﻿using System.Windows;
-
-namespace PCLSharp.Client.Views.SegmentationContext
+﻿namespace PCLSharp.Client.Views.SegmentationContext
 {
     /// <summary>
     /// 分割平面视图
     /// </summary>
-    public partial class PlaneView : Window
+    public partial class PlaneView
     {
         public PlaneView()
         {

@@ -1,5 +1,13 @@
-﻿using SD.Infrastructure.WPF.Caliburn.Aspects;
-using SD.Infrastructure.WPF.Caliburn.Base;
+﻿using HelixToolkit.Wpf.SharpDX;
+using PCLSharp.Client.ViewModels.CommonContext;
+using PCLSharp.Extensions.Helix;
+using PCLSharp.Modules.Interfaces;
+using PCLSharp.Primitives.Models;
+using SD.Infrastructure.WPF.Caliburn.Aspects;
+using SharpDX;
+using System.Collections.Generic;
+using System.Threading;
+using System.Threading.Tasks;
 using System.Windows;
 
 namespace PCLSharp.Client.ViewModels.SegmentationContext
@@ -7,20 +15,22 @@ namespace PCLSharp.Client.ViewModels.SegmentationContext
     /// <summary>
     /// 分割平面视图模型
     /// </summary>
-    public class PlaneViewModel : ScreenBase
+    public class PlaneViewModel : PreviewViewModel
     {
         #region # 字段及构造器
 
         /// <summary>
+        /// 点云分割接口
+        /// </summary>
+        private readonly ICloudSegmentations _cloudSegmentations;
+
+        /// <summary>
         /// 依赖注入构造器
         /// </summary>
-        public PlaneViewModel()
+        public PlaneViewModel(ICloudCommon cloudCommon, ICloudSegmentations cloudSegmentations)
+            : base(cloudCommon)
         {
-            //默认值
-            this.OptimizeCoefficients = true;
-            this.Probability = 0.9f;
-            this.DistanceThreshold = 0.01f;
-            this.MaxIterationsCount = 1000;
+            this._cloudSegmentations = cloudSegmentations;
         }
 
         #endregion
@@ -63,11 +73,27 @@ namespace PCLSharp.Client.ViewModels.SegmentationContext
 
         #region # 方法
 
-        #region 提交 —— async void Submit()
+        #region 初始化 —— override Task OnInitializeAsync(CancellationToken cancellationToken)
         /// <summary>
-        /// 提交
+        /// 初始化
         /// </summary>
-        public async void Submit()
+        protected override Task OnInitializeAsync(CancellationToken cancellationToken)
+        {
+            //默认值
+            this.OptimizeCoefficients = true;
+            this.Probability = 0.9f;
+            this.DistanceThreshold = 0.01f;
+            this.MaxIterationsCount = 1000;
+
+            return base.OnInitializeAsync(cancellationToken);
+        }
+        #endregion
+
+        #region 应用 —— async void Apply()
+        /// <summary>
+        /// 应用
+        /// </summary>
+        public async void Apply()
         {
             #region # 验证
 
@@ -91,10 +117,26 @@ namespace PCLSharp.Client.ViewModels.SegmentationContext
                 MessageBox.Show("最大迭代次数不可为空！", "错误", MessageBoxButton.OK, MessageBoxImage.Error);
                 return;
             }
+            if (this.PointCloud == null)
+            {
+                MessageBox.Show("点云不可为空！", "错误", MessageBoxButton.OK, MessageBoxImage.Error);
+                return;
+            }
 
             #endregion
 
-            await base.TryCloseAsync(true);
+            this.Busy();
+
+            IEnumerable<Point3F> points = this.BasedPointCloud.Points.ToPoint3Fs();
+            Point3F[] segmentedPoints = await Task.Run(() => this._cloudSegmentations.SegmentPlane(points, this.OptimizeCoefficients!.Value, this.Probability!.Value, this.DistanceThreshold!.Value, this.MaxIterationsCount!.Value, out int a, out int b, out int c, out int d));
+
+            IEnumerable<Vector3> positions = segmentedPoints.ToVector3s();
+            this.PointCloud = new PointGeometry3D
+            {
+                Positions = new Vector3Collection(positions)
+            };
+
+            this.Idle();
         }
         #endregion
 

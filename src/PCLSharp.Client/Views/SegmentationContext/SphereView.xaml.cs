@@ -1,11 +1,9 @@
-﻿using System.Windows;
-
-namespace PCLSharp.Client.Views.SegmentationContext
+﻿namespace PCLSharp.Client.Views.SegmentationContext
 {
     /// <summary>
     /// 分割球体视图
     /// </summary>
-    public partial class SphereView : Window
+    public partial class SphereView
     {
         public SphereView()
         {

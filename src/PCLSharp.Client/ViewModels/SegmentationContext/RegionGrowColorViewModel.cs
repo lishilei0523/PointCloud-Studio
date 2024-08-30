@@ -1,32 +1,40 @@
-﻿using SD.Infrastructure.WPF.Caliburn.Aspects;
-using SD.Infrastructure.WPF.Caliburn.Base;
+﻿using HelixToolkit.Wpf.SharpDX;
+using PCLSharp.Client.ViewModels.CommonContext;
+using PCLSharp.Extensions.Helix;
+using PCLSharp.Modules.Interfaces;
+using PCLSharp.Primitives.Extensions;
+using PCLSharp.Primitives.Models;
+using SD.Infrastructure.WPF.Caliburn.Aspects;
+using SD.Infrastructure.WPF.Extensions;
+using SharpDX;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading;
+using System.Threading.Tasks;
 using System.Windows;
+using Color = System.Windows.Media.Color;
 
 namespace PCLSharp.Client.ViewModels.SegmentationContext
 {
     /// <summary>
     /// 区域生长颜色分割视图模型
     /// </summary>
-    public class RegionGrowColorViewModel : ScreenBase
+    public class RegionGrowColorViewModel : PreviewViewModel
     {
         #region # 字段及构造器
 
         /// <summary>
+        /// 点云分割接口
+        /// </summary>
+        private readonly ICloudSegmentations _cloudSegmentations;
+
+        /// <summary>
         /// 依赖注入构造器
         /// </summary>
-        public RegionGrowColorViewModel()
+        public RegionGrowColorViewModel(ICloudCommon cloudCommon, ICloudSegmentations cloudSegmentations)
+            : base(cloudCommon)
         {
-            //默认值
-            this.NormalK = 50;
-            this.ClusterK = 30;
-            this.DistanceThreshold = 10.0f;
-            this.SmoothnessThreshold = 30.0f;
-            this.CurvatureThreshold = 1.5f;
-            this.PointColorThreshold = 6.0f;
-            this.RegionColorThreshold = 5.0f;
-            this.MinClusterSize = 1000;
-            this.MaxClusterSize = 100000;
-            this.ThreadsCount = 20;
+            this._cloudSegmentations = cloudSegmentations;
         }
 
         #endregion
@@ -117,11 +125,33 @@ namespace PCLSharp.Client.ViewModels.SegmentationContext
 
         #region # 方法
 
-        #region 提交 —— async void Submit()
+        #region 初始化 —— override Task OnInitializeAsync(CancellationToken cancellationToken)
         /// <summary>
-        /// 提交
+        /// 初始化
         /// </summary>
-        public async void Submit()
+        protected override Task OnInitializeAsync(CancellationToken cancellationToken)
+        {
+            //默认值
+            this.NormalK = 50;
+            this.ClusterK = 30;
+            this.DistanceThreshold = 10.0f;
+            this.SmoothnessThreshold = 30.0f;
+            this.CurvatureThreshold = 1.5f;
+            this.PointColorThreshold = 6.0f;
+            this.RegionColorThreshold = 5.0f;
+            this.MinClusterSize = 1000;
+            this.MaxClusterSize = 100000;
+            this.ThreadsCount = 20;
+
+            return base.OnInitializeAsync(cancellationToken);
+        }
+        #endregion
+
+        #region 应用 —— async void Apply()
+        /// <summary>
+        /// 应用
+        /// </summary>
+        public async void Apply()
         {
             #region # 验证
 
@@ -175,10 +205,41 @@ namespace PCLSharp.Client.ViewModels.SegmentationContext
                 MessageBox.Show("线程数不可为空！", "错误", MessageBoxButton.OK, MessageBoxImage.Error);
                 return;
             }
+            if (this.PointCloud == null)
+            {
+                MessageBox.Show("点云不可为空！", "错误", MessageBoxButton.OK, MessageBoxImage.Error);
+                return;
+            }
 
             #endregion
 
-            await base.TryCloseAsync(true);
+            this.Busy();
+
+            Point3Color4[] pointColors = this.PointCloud.ToPoint3Color4s();
+            Point3Color4[][] pointsClusters = await Task.Run(() => this._cloudSegmentations.RegionGrowingColorSegment(pointColors, this.NormalK!.Value, this.ClusterK!.Value, this.DistanceThreshold!.Value, this.SmoothnessThreshold!.Value, this.CurvatureThreshold!.Value, this.PointColorThreshold!.Value, this.RegionColorThreshold!.Value, this.MinClusterSize!.Value, this.MaxClusterSize!.Value, this.ThreadsCount!.Value));
+
+            Vector3Collection positions = new Vector3Collection();
+            Color4Collection colors = new Color4Collection();
+            for (int clusterIndex = 0; clusterIndex < pointsClusters.Length; clusterIndex++)
+            {
+                Point3Color4[] pointsCluster = pointsClusters[clusterIndex];
+                Color color = ColorExtension.RandomColor();
+                if (clusterIndex % 2 == 0)
+                {
+                    color = color.Invert();
+                }
+                IEnumerable<Vector3> clusterPositions = pointsCluster.Select(x => x.GetPoint()).ToVector3s();
+                IEnumerable<Color4> clusterColors = pointsCluster.Select(x => color.ToColor4());
+                positions.AddRange(clusterPositions);
+                colors.AddRange(clusterColors);
+            }
+            this.PointCloud = new PointGeometry3D
+            {
+                Positions = positions,
+                Colors = colors
+            };
+
+            this.Idle();
         }
         #endregion
 
