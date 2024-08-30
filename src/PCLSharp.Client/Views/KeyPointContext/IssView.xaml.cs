@@ -1,11 +1,9 @@
-﻿using System.Windows;
-
-namespace PCLSharp.Client.Views.KeyPointContext
+﻿namespace PCLSharp.Client.Views.KeyPointContext
 {
     /// <summary>
     /// ISS关键点视图
     /// </summary>
-    public partial class IssView : Window
+    public partial class IssView
     {
         public IssView()
         {

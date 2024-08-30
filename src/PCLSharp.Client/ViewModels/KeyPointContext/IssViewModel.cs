@@ -1,30 +1,38 @@
-﻿using SD.Infrastructure.WPF.Caliburn.Aspects;
-using SD.Infrastructure.WPF.Caliburn.Base;
+﻿using HelixToolkit.Wpf.SharpDX;
+using PCLSharp.Client.ViewModels.CommonContext;
+using PCLSharp.Extensions.Helix;
+using PCLSharp.Modules.Interfaces;
+using PCLSharp.Primitives.Models;
+using SD.Infrastructure.WPF.Caliburn.Aspects;
+using SharpDX;
+using System.Collections.Generic;
+using System.Threading;
+using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Media;
+using Color = System.Windows.Media.Color;
 
 namespace PCLSharp.Client.ViewModels.KeyPointContext
 {
     /// <summary>
     /// ISS关键点视图模型
     /// </summary>
-    public class IssViewModel : ScreenBase
+    public class IssViewModel : PreviewViewModel
     {
         #region # 字段及构造器
 
         /// <summary>
+        /// 点云关键点接口
+        /// </summary>
+        private readonly ICloudKeyPoints _cloudKeyPoints;
+
+        /// <summary>
         /// 依赖注入构造器
         /// </summary>
-        public IssViewModel()
+        public IssViewModel(ICloudCommon cloudCommon, ICloudKeyPoints cloudKeyPoints)
+            : base(cloudCommon)
         {
-            //默认值
-            this.SalientRadius = 0.01f;
-            this.NonMaxRadius = 0.05f;
-            this.Threshold21 = 0.65f;
-            this.Threshold32 = 0.1f;
-            this.MinNeighborsCount = 4;
-            this.ThreadsCount = 10;
-            this.KeyPointColor = Colors.Red;
+            this._cloudKeyPoints = cloudKeyPoints;
         }
 
         #endregion
@@ -87,15 +95,42 @@ namespace PCLSharp.Client.ViewModels.KeyPointContext
         public Color? KeyPointColor { get; set; }
         #endregion
 
+        #region 点云关键点 —— PointGeometry3D KeyPoints
+        /// <summary>
+        /// 点云关键点
+        /// </summary>
+        [DependencyProperty]
+        public PointGeometry3D KeyPoints { get; set; }
+        #endregion
+
         #endregion
 
         #region # 方法
 
-        #region 提交 —— async void Submit()
+        #region 初始化 —— override Task OnInitializeAsync(CancellationToken cancellationToken)
         /// <summary>
-        /// 提交
+        /// 初始化
         /// </summary>
-        public async void Submit()
+        protected override Task OnInitializeAsync(CancellationToken cancellationToken)
+        {
+            //默认值
+            this.SalientRadius = 0.01f;
+            this.NonMaxRadius = 0.05f;
+            this.Threshold21 = 0.65f;
+            this.Threshold32 = 0.1f;
+            this.MinNeighborsCount = 4;
+            this.ThreadsCount = 10;
+            this.KeyPointColor = Colors.Red;
+
+            return base.OnInitializeAsync(cancellationToken);
+        }
+        #endregion
+
+        #region 应用 —— async void Apply()
+        /// <summary>
+        /// 应用
+        /// </summary>
+        public async void Apply()
         {
             #region # 验证
 
@@ -134,10 +169,36 @@ namespace PCLSharp.Client.ViewModels.KeyPointContext
                 MessageBox.Show("关键点颜色不可为空！", "错误", MessageBoxButton.OK, MessageBoxImage.Error);
                 return;
             }
+            if (this.PointCloud == null)
+            {
+                MessageBox.Show("点云不可为空！", "错误", MessageBoxButton.OK, MessageBoxImage.Error);
+                return;
+            }
 
             #endregion
 
-            await base.TryCloseAsync(true);
+            this.Busy();
+
+            IEnumerable<Point3F> points = this.BasedPointCloud.Points.ToPoint3Fs();
+            Point3F[] keyPoints = await Task.Run(() => this._cloudKeyPoints.DetectISS(points, this.SalientRadius!.Value, this.NonMaxRadius!.Value, this.Threshold21!.Value, this.Threshold32!.Value, this.MinNeighborsCount!.Value, this.ThreadsCount!.Value));
+
+            IEnumerable<Vector3> positions = keyPoints.ToVector3s();
+            this.KeyPoints = new PointGeometry3D
+            {
+                Positions = new Vector3Collection(positions)
+            };
+
+            this.Idle();
+        }
+        #endregion
+
+        #region 重置点云 —— override void ResetPointCloud()
+        /// <summary>
+        /// 重置点云
+        /// </summary>
+        public override void ResetPointCloud()
+        {
+            this.KeyPoints = null;
         }
         #endregion
 

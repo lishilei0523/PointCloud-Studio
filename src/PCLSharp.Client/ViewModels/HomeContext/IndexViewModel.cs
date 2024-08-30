@@ -1162,17 +1162,11 @@ namespace PCLSharp.Client.ViewModels.HomeContext
             this.EffectiveKeyPoints = null;
 
             KeyPointContext.NarfViewModel viewModel = ResolveMediator.Resolve<KeyPointContext.NarfViewModel>();
+            viewModel.Load(this.EffectivePointCloud);
             bool? result = await this._windowManager.ShowDialogAsync(viewModel);
             if (result == true)
             {
-                IEnumerable<Point3F> points = this.EffectivePointCloud.Points.ToPoint3Fs();
-                Point3F[] keyPoints = await Task.Run(() => this._cloudKeyPoints.DetectNARF(points, viewModel.AngularResolution!.Value, viewModel.MaxAngleWidth!.Value, viewModel.MaxAngleHeight!.Value, viewModel.NoiseLevel!.Value, viewModel.MinRange!.Value, viewModel.BorderSize!.Value, viewModel.SupportSize!.Value));
-
-                IEnumerable<Vector3> positions = keyPoints.ToVector3s();
-                this.EffectiveKeyPoints = new PointGeometry3D
-                {
-                    Positions = new Vector3Collection(positions)
-                };
+                this.EffectiveKeyPoints = viewModel.KeyPoints;
                 this.KeyPointColor = viewModel.KeyPointColor!.Value;
             }
 
@@ -1202,17 +1196,11 @@ namespace PCLSharp.Client.ViewModels.HomeContext
             this.EffectiveKeyPoints = null;
 
             IssViewModel viewModel = ResolveMediator.Resolve<IssViewModel>();
+            viewModel.Load(this.EffectivePointCloud);
             bool? result = await this._windowManager.ShowDialogAsync(viewModel);
             if (result == true)
             {
-                IEnumerable<Point3F> points = this.EffectivePointCloud.Points.ToPoint3Fs();
-                Point3F[] keyPoints = await Task.Run(() => this._cloudKeyPoints.DetectISS(points, viewModel.SalientRadius!.Value, viewModel.NonMaxRadius!.Value, viewModel.Threshold21!.Value, viewModel.Threshold32!.Value, viewModel.MinNeighborsCount!.Value, viewModel.ThreadsCount!.Value));
-
-                IEnumerable<Vector3> positions = keyPoints.ToVector3s();
-                this.EffectiveKeyPoints = new PointGeometry3D
-                {
-                    Positions = new Vector3Collection(positions)
-                };
+                this.EffectiveKeyPoints = viewModel.KeyPoints;
                 this.KeyPointColor = viewModel.KeyPointColor!.Value;
             }
 
@@ -1242,17 +1230,11 @@ namespace PCLSharp.Client.ViewModels.HomeContext
             this.EffectiveKeyPoints = null;
 
             SiftViewModel viewModel = ResolveMediator.Resolve<SiftViewModel>();
+            viewModel.Load(this.EffectivePointCloud);
             bool? result = await this._windowManager.ShowDialogAsync(viewModel);
             if (result == true)
             {
-                IEnumerable<Point3F> points = this.EffectivePointCloud.Points.ToPoint3Fs();
-                Point3F[] keyPoints = await Task.Run(() => this._cloudKeyPoints.DetectSIFT(points, viewModel.MinScale!.Value, viewModel.OctavesCount!.Value, viewModel.ScalesPerOctaveCount!.Value, viewModel.MinContrast!.Value));
-
-                IEnumerable<Vector3> positions = keyPoints.ToVector3s();
-                this.EffectiveKeyPoints = new PointGeometry3D
-                {
-                    Positions = new Vector3Collection(positions)
-                };
+                this.EffectiveKeyPoints = viewModel.KeyPoints;
                 this.KeyPointColor = viewModel.KeyPointColor!.Value;
             }
 
@@ -1282,17 +1264,11 @@ namespace PCLSharp.Client.ViewModels.HomeContext
             this.EffectiveKeyPoints = null;
 
             HarrisViewModel viewModel = ResolveMediator.Resolve<HarrisViewModel>();
+            viewModel.Load(this.EffectivePointCloud);
             bool? result = await this._windowManager.ShowDialogAsync(viewModel);
             if (result == true)
             {
-                IEnumerable<Point3F> points = this.EffectivePointCloud.Points.ToPoint3Fs();
-                Point3F[] keyPoints = await Task.Run(() => this._cloudKeyPoints.DetectHarris(points, viewModel.NonMaxSupression!.Value, viewModel.Radius!.Value, viewModel.Threshold!.Value));
-
-                IEnumerable<Vector3> positions = keyPoints.ToVector3s();
-                this.EffectiveKeyPoints = new PointGeometry3D
-                {
-                    Positions = new Vector3Collection(positions)
-                };
+                this.EffectiveKeyPoints = viewModel.KeyPoints;
                 this.KeyPointColor = viewModel.KeyPointColor!.Value;
             }
 
@@ -1322,17 +1298,11 @@ namespace PCLSharp.Client.ViewModels.HomeContext
             this.EffectiveKeyPoints = null;
 
             SusanViewModel viewModel = ResolveMediator.Resolve<SusanViewModel>();
+            viewModel.Load(this.EffectivePointCloud);
             bool? result = await this._windowManager.ShowDialogAsync(viewModel);
             if (result == true)
             {
-                IEnumerable<Point3F> points = this.EffectivePointCloud.Points.ToPoint3Fs();
-                Point3F[] keyPoints = await Task.Run(() => this._cloudKeyPoints.DetectSUSAN(points, viewModel.NonMaxSupression!.Value, viewModel.Radius!.Value, viewModel.DistanceThreshold!.Value, viewModel.AngularThreshold!.Value, viewModel.IntensityThreshold!.Value));
-
-                IEnumerable<Vector3> positions = keyPoints.ToVector3s();
-                this.EffectiveKeyPoints = new PointGeometry3D
-                {
-                    Positions = new Vector3Collection(positions)
-                };
+                this.EffectiveKeyPoints = viewModel.KeyPoints;
                 this.KeyPointColor = viewModel.KeyPointColor!.Value;
             }
 
