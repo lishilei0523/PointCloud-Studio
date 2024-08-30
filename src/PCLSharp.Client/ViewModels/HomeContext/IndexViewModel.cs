@@ -1137,7 +1137,7 @@ namespace PCLSharp.Client.ViewModels.HomeContext
             //清理法向量
             this.EffectiveNormals.Clear();
 
-            KBasedViewModel viewModel = ResolveMediator.Resolve<KBasedViewModel>();
+            KBasedPViewModel viewModel = ResolveMediator.Resolve<KBasedPViewModel>();
             bool? result = await this._windowManager.ShowDialogAsync(viewModel);
             if (result == true)
             {
@@ -1227,7 +1227,7 @@ namespace PCLSharp.Client.ViewModels.HomeContext
             //清理法向量
             this.EffectiveNormals.Clear();
 
-            RadiusBasedViewModel viewModel = ResolveMediator.Resolve<RadiusBasedViewModel>();
+            RadiusBasedPViewModel viewModel = ResolveMediator.Resolve<RadiusBasedPViewModel>();
             bool? result = await this._windowManager.ShowDialogAsync(viewModel);
             if (result == true)
             {
