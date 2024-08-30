@@ -77,20 +77,6 @@
                 <!--参数设置-->
                 <GroupBox Grid.Column="1" Header="参数设置" Margin="2,4,4,4">
                     <StackPanel Grid.IsSharedSizeScope="True" Margin="5,20">
-                        <sd:FormItem Label="簇搜索容差：">
-                            <mah:NumericUpDown Value="{Binding ClusterTolerance, UpdateSourceTrigger=PropertyChanged}"
-                                               Style="{StaticResource NumericUpDown.Styles.Fluent}" />
-                        </sd:FormItem>
-                        <sd:FormItem Label="簇最小尺寸：">
-                            <mah:NumericUpDown Value="{Binding MinClusterSize, UpdateSourceTrigger=PropertyChanged}"
-                                               Style="{StaticResource NumericUpDown.Styles.Fluent}" />
-                        </sd:FormItem>
-                        <sd:FormItem Label="簇最大尺寸：">
-                            <mah:NumericUpDown Value="{Binding MaxClusterSize, UpdateSourceTrigger=PropertyChanged}"
-                                               Style="{StaticResource NumericUpDown.Styles.Fluent}" />
-                        </sd:FormItem>
-
-
                         <sd:FormItem Label="法向量K：">
                             <mah:NumericUpDown Value="{Binding NormalK, UpdateSourceTrigger=PropertyChanged}"
                                                Style="{StaticResource NumericUpDown.Styles.Fluent}" />
