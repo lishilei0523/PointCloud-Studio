@@ -51,7 +51,8 @@
                                     CoordinateSystemHorizontalPosition="-1"
                                     CoordinateSystemVerticalPosition="1"
                                     CoordinateSystemLabelForeground="Black"
-                                    Camera="{Binding Camera}">
+                                    Camera="{Binding Camera}"
+                                    cm:Message.Attach="[Event MouseLeftButtonDown] = [Action ViewportOnMouseLeftDown($source, $eventArgs)]">
                         <!--效果器-->
                         <hx:Viewport3DX.EffectsManager>
                             <hx:DefaultEffectsManager />
@@ -79,7 +80,7 @@
                 <!--参数设置-->
                 <GroupBox Grid.Column="1" Header="参数设置" Margin="2,4,4,4">
                     <StackPanel Grid.IsSharedSizeScope="True" Margin="5,20">
-                        <sd:FormItem Label="搜索半径：">
+                        <sd:FormItem Label="半径值：">
                             <mah:NumericUpDown Value="{Binding Radius, UpdateSourceTrigger=PropertyChanged}"
                                                Style="{StaticResource NumericUpDown.Styles.Fluent}" />
                         </sd:FormItem>

@@ -51,7 +51,8 @@
                                     CoordinateSystemHorizontalPosition="-1"
                                     CoordinateSystemVerticalPosition="1"
                                     CoordinateSystemLabelForeground="Black"
-                                    Camera="{Binding Camera}">
+                                    Camera="{Binding Camera}"
+                                    cm:Message.Attach="[Event MouseLeftButtonDown] = [Action ViewportOnMouseLeftDown($source, $eventArgs)]">
                         <!--效果器-->
                         <hx:Viewport3DX.EffectsManager>
                             <hx:DefaultEffectsManager />
