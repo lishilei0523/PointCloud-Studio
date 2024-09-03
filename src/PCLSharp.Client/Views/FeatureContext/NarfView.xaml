@@ -1,20 +1,18 @@
-﻿<Window x:Class="PCLSharp.Client.Views.FeatureContext.NarfView"
-        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:fluentWpf="clr-namespace:SourceChord.FluentWPF;assembly=FluentWPF"
-        xmlns:sd="https://github.com/lishilei0523/SD.Framework"
-        xmlns:cal="http://www.caliburnproject.org"
-        xmlns:mah="http://metro.mahapps.com/winfx/xaml/controls"
-        mc:Ignorable="d"
-        Title="NARF特征"
-        Width="500" Height="650" ResizeMode="NoResize"
-        FontSize="14"
-        WindowStyle="ThreeDBorderWindow"
-        WindowStartupLocation="CenterOwner"
-        fluentWpf:AcrylicWindow.Enabled="True"
-        fluentWpf:AcrylicWindow.AcrylicWindowStyle="NoIcon">
+﻿<mah:MetroWindow x:Class="PCLSharp.Client.Views.FeatureContext.NarfView"
+                 xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                 xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                 xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+                 xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+                 xmlns:sd="https://github.com/lishilei0523/SD.Framework"
+                 xmlns:cm="http://www.caliburnproject.org"
+                 xmlns:mah="http://metro.mahapps.com/winfx/xaml/controls"
+                 mc:Ignorable="d"
+                 Title="NARF特征"
+                 Width="420" Height="650" ResizeMode="NoResize"
+                 FontSize="14"
+                 WindowStyle="ThreeDBorderWindow"
+                 WindowStartupLocation="CenterOwner"
+                 Style="{StaticResource MetroWindow.Styles.Clean}">
 
     <Grid>
         <Grid.RowDefinitions>
@@ -28,34 +26,43 @@
         <!--表单区-->
         <StackPanel Grid.Row="0" Grid.IsSharedSizeScope="True" Margin="20,30">
             <sd:FormItem Label="角度分辨率：">
-                <TextBox Text="{Binding AngularResolution}" Style="{StaticResource TextBoxRevealStyle}" />
+                <mah:NumericUpDown Value="{Binding AngularResolution, UpdateSourceTrigger=PropertyChanged}"
+                                   Style="{StaticResource NumericUpDown.Styles.Fluent.Float}" />
             </sd:FormItem>
             <sd:FormItem Label="水平边界角度：">
-                <TextBox Text="{Binding MaxAngleWidth}" Style="{StaticResource TextBoxRevealStyle}" />
+                <mah:NumericUpDown Value="{Binding MaxAngleWidth, UpdateSourceTrigger=PropertyChanged}"
+                                   Style="{StaticResource NumericUpDown.Styles.Fluent.Float}" />
             </sd:FormItem>
             <sd:FormItem Label="垂直边界角度：">
-                <TextBox Text="{Binding MaxAngleHeight}" Style="{StaticResource TextBoxRevealStyle}" />
+                <mah:NumericUpDown Value="{Binding MaxAngleHeight, UpdateSourceTrigger=PropertyChanged}"
+                                   Style="{StaticResource NumericUpDown.Styles.Fluent.Float}" />
             </sd:FormItem>
             <sd:FormItem Label="最近点最大距离：">
-                <TextBox Text="{Binding NoiseLevel}" Style="{StaticResource TextBoxRevealStyle}" />
+                <mah:NumericUpDown Value="{Binding NoiseLevel, UpdateSourceTrigger=PropertyChanged}"
+                                   Style="{StaticResource NumericUpDown.Styles.Fluent.Float}" />
             </sd:FormItem>
             <sd:FormItem Label="最小可见范围：">
-                <TextBox Text="{Binding MinRange}" Style="{StaticResource TextBoxRevealStyle}" />
+                <mah:NumericUpDown Value="{Binding MinRange, UpdateSourceTrigger=PropertyChanged}"
+                                   Style="{StaticResource NumericUpDown.Styles.Fluent.Float}" />
             </sd:FormItem>
             <sd:FormItem Label="边界尺寸：">
-                <TextBox Text="{Binding BorderSize}" Style="{StaticResource TextBoxRevealStyle}" />
+                <mah:NumericUpDown Value="{Binding BorderSize, UpdateSourceTrigger=PropertyChanged}"
+                                   Style="{StaticResource NumericUpDown.Styles.Fluent}" />
             </sd:FormItem>
             <sd:FormItem Label="计算范围半径：">
-                <TextBox Text="{Binding SupportSize}" Style="{StaticResource TextBoxRevealStyle}" />
+                <mah:NumericUpDown Value="{Binding SupportSize, UpdateSourceTrigger=PropertyChanged}"
+                                   Style="{StaticResource NumericUpDown.Styles.Fluent.Float}" />
             </sd:FormItem>
             <sd:FormItem Label="旋转不变性：">
                 <mah:ToggleSwitch IsOn="{Binding RotationInvariant}" OnContent="是" OffContent="否" Style="{StaticResource ToggleSwitch.Styles.Fluent}" />
             </sd:FormItem>
             <sd:FormItem Label="直方图宽度：">
-                <TextBox Text="{Binding ImageWidth}" Style="{StaticResource TextBoxRevealStyle}" />
+                <mah:NumericUpDown Value="{Binding ImageWidth, UpdateSourceTrigger=PropertyChanged}"
+                                   Style="{StaticResource NumericUpDown.Styles.Fluent}" />
             </sd:FormItem>
             <sd:FormItem Label="直方图高度：">
-                <TextBox Text="{Binding ImageHeight}" Style="{StaticResource TextBoxRevealStyle}" />
+                <mah:NumericUpDown Value="{Binding ImageHeight, UpdateSourceTrigger=PropertyChanged}"
+                                   Style="{StaticResource NumericUpDown.Styles.Fluent}" />
             </sd:FormItem>
         </StackPanel>
         <!--占位区-->
@@ -63,9 +70,9 @@
         <!--控制区-->
         <Grid Grid.Row="2" Style="{StaticResource Form.Styles.Submit.Grid}">
             <WrapPanel Style="{StaticResource Form.Styles.Submit.WrapPanel}">
-                <Button Content="确定" cal:Message.Attach="Submit()" Style="{StaticResource Button.Styles.Fluent.Focus}" />
-                <Button Content="取消" cal:Message.Attach="TryCloseAsync('false')" Style="{StaticResource Button.Styles.Fluent.Default}" />
+                <Button Content="确定" cm:Message.Attach="Submit()" Style="{StaticResource Button.Styles.Fluent.Focus}" />
+                <Button Content="取消" cm:Message.Attach="TryCloseAsync('false')" Style="{StaticResource Button.Styles.Fluent.Default}" />
             </WrapPanel>
         </Grid>
     </Grid>
-</Window>
+</mah:MetroWindow>

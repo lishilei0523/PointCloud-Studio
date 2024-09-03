@@ -87,23 +87,23 @@
                         </sd:FormItem>
                         <sd:FormItem Label="距离阈值：">
                             <mah:NumericUpDown Value="{Binding DistanceThreshold, UpdateSourceTrigger=PropertyChanged}"
-                                               Style="{StaticResource NumericUpDown.Styles.Fluent}" />
+                                               Style="{StaticResource NumericUpDown.Styles.Fluent.Float}" />
                         </sd:FormItem>
                         <sd:FormItem Label="平滑阈值(角度)：">
                             <mah:NumericUpDown Value="{Binding SmoothnessThreshold, UpdateSourceTrigger=PropertyChanged}"
-                                               Style="{StaticResource NumericUpDown.Styles.Fluent}" />
+                                               Style="{StaticResource NumericUpDown.Styles.Fluent.Float}" />
                         </sd:FormItem>
                         <sd:FormItem Label="曲率阈值：">
                             <mah:NumericUpDown Value="{Binding CurvatureThreshold, UpdateSourceTrigger=PropertyChanged}"
-                                               Style="{StaticResource NumericUpDown.Styles.Fluent}" />
+                                               Style="{StaticResource NumericUpDown.Styles.Fluent.Float}" />
                         </sd:FormItem>
                         <sd:FormItem Label="点颜色阈值：">
                             <mah:NumericUpDown Value="{Binding PointColorThreshold, UpdateSourceTrigger=PropertyChanged}"
-                                               Style="{StaticResource NumericUpDown.Styles.Fluent}" />
+                                               Style="{StaticResource NumericUpDown.Styles.Fluent.Float}" />
                         </sd:FormItem>
                         <sd:FormItem Label="区域颜色阈值：">
                             <mah:NumericUpDown Value="{Binding RegionColorThreshold, UpdateSourceTrigger=PropertyChanged}"
-                                               Style="{StaticResource NumericUpDown.Styles.Fluent}" />
+                                               Style="{StaticResource NumericUpDown.Styles.Fluent.Float}" />
                         </sd:FormItem>
                         <sd:FormItem Label="簇最小尺寸：">
                             <mah:NumericUpDown Value="{Binding MinClusterSize, UpdateSourceTrigger=PropertyChanged}"

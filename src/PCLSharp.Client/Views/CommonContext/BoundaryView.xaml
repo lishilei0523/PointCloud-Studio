@@ -83,11 +83,11 @@
                         </sd:FormItem>
                         <sd:FormItem Label="特征半径：">
                             <mah:NumericUpDown Value="{Binding FeatureRadius, UpdateSourceTrigger=PropertyChanged}"
-                                               Style="{StaticResource NumericUpDown.Styles.Fluent}" />
+                                               Style="{StaticResource NumericUpDown.Styles.Fluent.Float}" />
                         </sd:FormItem>
                         <sd:FormItem Label="角度阈值：">
                             <mah:NumericUpDown Value="{Binding AngleThreshold, UpdateSourceTrigger=PropertyChanged}"
-                                               Style="{StaticResource NumericUpDown.Styles.Fluent}" />
+                                               Style="{StaticResource NumericUpDown.Styles.Fluent.Float}" />
                         </sd:FormItem>
                         <sd:FormItem Label="线程数：">
                             <mah:NumericUpDown Value="{Binding ThreadsCount, UpdateSourceTrigger=PropertyChanged}"

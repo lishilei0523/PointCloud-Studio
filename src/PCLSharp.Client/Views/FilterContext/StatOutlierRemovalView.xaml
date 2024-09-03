@@ -83,7 +83,7 @@
                         </sd:FormItem>
                         <sd:FormItem Label="标准差系数：">
                             <mah:NumericUpDown Value="{Binding StddevMult, UpdateSourceTrigger=PropertyChanged}"
-                                               Style="{StaticResource NumericUpDown.Styles.Fluent}" />
+                                               Style="{StaticResource NumericUpDown.Styles.Fluent.Float}" />
                         </sd:FormItem>
                     </StackPanel>
                 </GroupBox>

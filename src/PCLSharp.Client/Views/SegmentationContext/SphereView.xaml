@@ -82,19 +82,19 @@
                         </sd:FormItem>
                         <sd:FormItem Label="概率：">
                             <mah:NumericUpDown Value="{Binding Probability, UpdateSourceTrigger=PropertyChanged}"
-                                               Style="{StaticResource NumericUpDown.Styles.Fluent}" />
+                                               Style="{StaticResource NumericUpDown.Styles.Fluent.Float}" />
                         </sd:FormItem>
                         <sd:FormItem Label="距离阈值：">
                             <mah:NumericUpDown Value="{Binding DistanceThreshold, UpdateSourceTrigger=PropertyChanged}"
-                                               Style="{StaticResource NumericUpDown.Styles.Fluent}" />
+                                               Style="{StaticResource NumericUpDown.Styles.Fluent.Float}" />
                         </sd:FormItem>
                         <sd:FormItem Label="最小半径：">
                             <mah:NumericUpDown Value="{Binding MinRadius, UpdateSourceTrigger=PropertyChanged}"
-                                               Style="{StaticResource NumericUpDown.Styles.Fluent}" />
+                                               Style="{StaticResource NumericUpDown.Styles.Fluent.Float}" />
                         </sd:FormItem>
                         <sd:FormItem Label="最大半径：">
                             <mah:NumericUpDown Value="{Binding MaxRadius, UpdateSourceTrigger=PropertyChanged}"
-                                               Style="{StaticResource NumericUpDown.Styles.Fluent}" />
+                                               Style="{StaticResource NumericUpDown.Styles.Fluent.Float}" />
                         </sd:FormItem>
                         <sd:FormItem Label="最大迭代次数：">
                             <mah:NumericUpDown Value="{Binding MaxIterationsCount, UpdateSourceTrigger=PropertyChanged}"

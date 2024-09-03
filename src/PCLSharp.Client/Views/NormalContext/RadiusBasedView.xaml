@@ -84,15 +84,15 @@
                         </sd:FormItem>
                         <sd:FormItem Label="搜索半径：">
                             <mah:NumericUpDown Value="{Binding Radius, UpdateSourceTrigger=PropertyChanged}"
-                                               Style="{StaticResource NumericUpDown.Styles.Fluent}" />
+                                               Style="{StaticResource NumericUpDown.Styles.Fluent.Float}" />
                         </sd:FormItem>
                         <sd:FormItem Label="法向量长度：">
                             <mah:NumericUpDown Value="{Binding NormalLength, UpdateSourceTrigger=PropertyChanged}"
-                                               Style="{StaticResource NumericUpDown.Styles.Fluent}" />
+                                               Style="{StaticResource NumericUpDown.Styles.Fluent.Float}" />
                         </sd:FormItem>
                         <sd:FormItem Label="法向量厚度：">
                             <mah:NumericUpDown Value="{Binding NormalThickness, UpdateSourceTrigger=PropertyChanged}"
-                                               Style="{StaticResource NumericUpDown.Styles.Fluent}" />
+                                               Style="{StaticResource NumericUpDown.Styles.Fluent.Float}" />
                         </sd:FormItem>
                         <sd:FormItem Label="法向量颜色：">
                             <mah:ColorPicker SelectedColor="{Binding NormalColor}" Style="{StaticResource ColorPicker.Styles.Fluent}" />

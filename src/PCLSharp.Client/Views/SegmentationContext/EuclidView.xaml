@@ -79,7 +79,7 @@
                     <StackPanel Grid.IsSharedSizeScope="True" Margin="5,20">
                         <sd:FormItem Label="簇搜索容差：">
                             <mah:NumericUpDown Value="{Binding ClusterTolerance, UpdateSourceTrigger=PropertyChanged}"
-                                               Style="{StaticResource NumericUpDown.Styles.Fluent}" />
+                                               Style="{StaticResource NumericUpDown.Styles.Fluent.Float}" />
                         </sd:FormItem>
                         <sd:FormItem Label="簇最小尺寸：">
                             <mah:NumericUpDown Value="{Binding MinClusterSize, UpdateSourceTrigger=PropertyChanged}"

@@ -81,23 +81,23 @@
                     <StackPanel Grid.IsSharedSizeScope="True" Margin="5,20">
                         <sd:FormItem Label="角度分辨率：">
                             <mah:NumericUpDown Value="{Binding AngularResolution, UpdateSourceTrigger=PropertyChanged}"
-                                               Style="{StaticResource NumericUpDown.Styles.Fluent}" />
+                                               Style="{StaticResource NumericUpDown.Styles.Fluent.Float}" />
                         </sd:FormItem>
                         <sd:FormItem Label="水平边界角度：">
                             <mah:NumericUpDown Value="{Binding MaxAngleWidth, UpdateSourceTrigger=PropertyChanged}"
-                                               Style="{StaticResource NumericUpDown.Styles.Fluent}" />
+                                               Style="{StaticResource NumericUpDown.Styles.Fluent.Float}" />
                         </sd:FormItem>
                         <sd:FormItem Label="垂直边界角度：">
                             <mah:NumericUpDown Value="{Binding MaxAngleHeight, UpdateSourceTrigger=PropertyChanged}"
-                                               Style="{StaticResource NumericUpDown.Styles.Fluent}" />
+                                               Style="{StaticResource NumericUpDown.Styles.Fluent.Float}" />
                         </sd:FormItem>
                         <sd:FormItem Label="最近点最大距离：">
                             <mah:NumericUpDown Value="{Binding NoiseLevel, UpdateSourceTrigger=PropertyChanged}"
-                                               Style="{StaticResource NumericUpDown.Styles.Fluent}" />
+                                               Style="{StaticResource NumericUpDown.Styles.Fluent.Float}" />
                         </sd:FormItem>
                         <sd:FormItem Label="最小可见范围：">
                             <mah:NumericUpDown Value="{Binding MinRange, UpdateSourceTrigger=PropertyChanged}"
-                                               Style="{StaticResource NumericUpDown.Styles.Fluent}" />
+                                               Style="{StaticResource NumericUpDown.Styles.Fluent.Float}" />
                         </sd:FormItem>
                         <sd:FormItem Label="边界尺寸：">
                             <mah:NumericUpDown Value="{Binding BorderSize, UpdateSourceTrigger=PropertyChanged}"
@@ -105,7 +105,7 @@
                         </sd:FormItem>
                         <sd:FormItem Label="计算范围半径：">
                             <mah:NumericUpDown Value="{Binding SupportSize, UpdateSourceTrigger=PropertyChanged}"
-                                               Style="{StaticResource NumericUpDown.Styles.Fluent}" />
+                                               Style="{StaticResource NumericUpDown.Styles.Fluent.Float}" />
                         </sd:FormItem>
                         <sd:FormItem Label="关键点颜色：">
                             <mah:ColorPicker SelectedColor="{Binding KeyPointColor}" Style="{StaticResource ColorPicker.Styles.Fluent}" />

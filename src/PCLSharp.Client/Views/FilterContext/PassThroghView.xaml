@@ -84,11 +84,11 @@
                         </sd:FormItem>
                         <sd:FormItem Label="过滤范围最小值：">
                             <mah:NumericUpDown Value="{Binding LimitMin, UpdateSourceTrigger=PropertyChanged}"
-                                               Style="{StaticResource NumericUpDown.Styles.Fluent}" />
+                                               Style="{StaticResource NumericUpDown.Styles.Fluent.Float}" />
                         </sd:FormItem>
                         <sd:FormItem Label="过滤范围最大值：">
                             <mah:NumericUpDown Value="{Binding LimitMax, UpdateSourceTrigger=PropertyChanged}"
-                                               Style="{StaticResource NumericUpDown.Styles.Fluent}" />
+                                               Style="{StaticResource NumericUpDown.Styles.Fluent.Float}" />
                         </sd:FormItem>
                     </StackPanel>
                 </GroupBox>

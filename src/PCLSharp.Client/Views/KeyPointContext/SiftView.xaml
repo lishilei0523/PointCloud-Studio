@@ -81,7 +81,7 @@
                     <StackPanel Grid.IsSharedSizeScope="True" Margin="5,20">
                         <sd:FormItem Label="尺度空间最小标准差：">
                             <mah:NumericUpDown Value="{Binding MinScale, UpdateSourceTrigger=PropertyChanged}"
-                                               Style="{StaticResource NumericUpDown.Styles.Fluent}" />
+                                               Style="{StaticResource NumericUpDown.Styles.Fluent.Float}" />
                         </sd:FormItem>
                         <sd:FormItem Label="金字塔组数量：">
                             <mah:NumericUpDown Value="{Binding OctavesCount, UpdateSourceTrigger=PropertyChanged}"
@@ -93,7 +93,7 @@
                         </sd:FormItem>
                         <sd:FormItem Label="限制关键点检测阈值：">
                             <mah:NumericUpDown Value="{Binding MinContrast, UpdateSourceTrigger=PropertyChanged}"
-                                               Style="{StaticResource NumericUpDown.Styles.Fluent}" />
+                                               Style="{StaticResource NumericUpDown.Styles.Fluent.Float}" />
                         </sd:FormItem>
                         <sd:FormItem Label="关键点颜色：">
                             <mah:ColorPicker SelectedColor="{Binding KeyPointColor}" Style="{StaticResource ColorPicker.Styles.Fluent}" />

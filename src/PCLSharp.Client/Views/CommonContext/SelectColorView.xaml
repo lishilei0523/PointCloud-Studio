@@ -1,20 +1,18 @@
-﻿<Window x:Class="PCLSharp.Client.Views.CommonContext.SelectColorView"
-        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:fluentWpf="clr-namespace:SourceChord.FluentWPF;assembly=FluentWPF"
-        xmlns:sd="https://github.com/lishilei0523/SD.Framework"
-        xmlns:cal="http://www.caliburnproject.org"
-        xmlns:mah="http://metro.mahapps.com/winfx/xaml/controls"
-        mc:Ignorable="d"
-        Title="选择颜色"
-        Width="500" Height="260" ResizeMode="NoResize"
-        FontSize="14"
-        WindowStyle="ThreeDBorderWindow"
-        WindowStartupLocation="CenterOwner"
-        fluentWpf:AcrylicWindow.Enabled="True"
-        fluentWpf:AcrylicWindow.AcrylicWindowStyle="NoIcon">
+﻿<mah:MetroWindow x:Class="PCLSharp.Client.Views.CommonContext.SelectColorView"
+                 xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                 xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                 xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+                 xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+                 xmlns:sd="https://github.com/lishilei0523/SD.Framework"
+                 xmlns:cal="http://www.caliburnproject.org"
+                 xmlns:mah="http://metro.mahapps.com/winfx/xaml/controls"
+                 mc:Ignorable="d"
+                 Title="选择颜色"
+                 Width="500" Height="260" ResizeMode="NoResize"
+                 FontSize="14"
+                 WindowStyle="ThreeDBorderWindow"
+                 WindowStartupLocation="CenterOwner"
+                 Style="{StaticResource MetroWindow.Styles.Clean}">
 
     <Grid>
         <Grid.RowDefinitions>
@@ -41,4 +39,4 @@
             </WrapPanel>
         </Grid>
     </Grid>
-</Window>
+</mah:MetroWindow>
