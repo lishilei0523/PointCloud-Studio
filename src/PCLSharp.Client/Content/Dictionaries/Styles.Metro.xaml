@@ -92,8 +92,8 @@
         <Setter Property="VerticalContentAlignment" Value="Center" />
         <Setter Property="mah:TextBoxHelper.UseFloatingWatermark" Value="False" />
     </Style>
-    <!--MahApps.Metro.NumericUpDown浮点型样式-->
-    <Style x:Key="NumericUpDown.Styles.Float" TargetType="{x:Type mah:NumericUpDown}"
+    <!--MahApps.Metro.NumericUpDown默认浮点型样式-->
+    <Style x:Key="NumericUpDown.Styles.Default.Float" TargetType="{x:Type mah:NumericUpDown}"
            BasedOn="{StaticResource NumericUpDown.Styles.Default}">
         <Setter Property="Interval" Value="0.1" />
         <Setter Property="StringFormat" Value="F3" />
