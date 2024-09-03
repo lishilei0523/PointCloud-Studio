@@ -79,27 +79,28 @@
                     <StackPanel Grid.IsSharedSizeScope="True" Margin="5,20">
                         <sd:FormItem Label="X轴位置：">
                             <mah:NumericUpDown Value="{Binding X, UpdateSourceTrigger=PropertyChanged}"
-                                               Style="{StaticResource NumericUpDown.Styles.Fluent}" />
+                                               Style="{StaticResource NumericUpDown.Styles.Fluent.Float}" />
                         </sd:FormItem>
                         <sd:FormItem Label="Y轴位置：">
                             <mah:NumericUpDown Value="{Binding Y, UpdateSourceTrigger=PropertyChanged}"
-                                               Style="{StaticResource NumericUpDown.Styles.Fluent}" />
+                                               Style="{StaticResource NumericUpDown.Styles.Fluent.Float}" />
                         </sd:FormItem>
                         <sd:FormItem Label="Z轴位置：">
                             <mah:NumericUpDown Value="{Binding Z, UpdateSourceTrigger=PropertyChanged}"
-                                               Style="{StaticResource NumericUpDown.Styles.Fluent}" />
+                                               Style="{StaticResource NumericUpDown.Styles.Fluent.Float}" />
                         </sd:FormItem>
                         <sd:FormItem Label="X轴旋转角度：">
-                            <mah:NumericUpDown Value="{Binding RX, UpdateSourceTrigger=PropertyChanged}"
-                                               Style="{StaticResource NumericUpDown.Styles.Fluent}" />
+                            <Slider Minimum="-360" Maximum="360" TickFrequency="30" Value="{Binding RX}"
+                                    Style="{StaticResource Slider.Styles.Fluent}" />
                         </sd:FormItem>
                         <sd:FormItem Label="Y轴旋转角度：">
-                            <mah:NumericUpDown Value="{Binding RY, UpdateSourceTrigger=PropertyChanged}"
-                                               Style="{StaticResource NumericUpDown.Styles.Fluent}" />
+                            <Slider Minimum="-360" Maximum="360" TickFrequency="30" 
+                                    Value="{Binding RY}"
+                                    Style="{StaticResource Slider.Styles.Fluent}" />
                         </sd:FormItem>
                         <sd:FormItem Label="Z轴旋转角度：">
-                            <mah:NumericUpDown Value="{Binding RZ, UpdateSourceTrigger=PropertyChanged}"
-                                               Style="{StaticResource NumericUpDown.Styles.Fluent}" />
+                            <Slider Minimum="-360" Maximum="360" TickFrequency="30" Value="{Binding RZ}"
+                                    Style="{StaticResource Slider.Styles.Fluent}" />
                         </sd:FormItem>
                     </StackPanel>
                 </GroupBox>

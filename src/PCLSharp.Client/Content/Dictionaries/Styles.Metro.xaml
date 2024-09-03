@@ -92,6 +92,12 @@
         <Setter Property="VerticalContentAlignment" Value="Center" />
         <Setter Property="mah:TextBoxHelper.UseFloatingWatermark" Value="False" />
     </Style>
+    <!--MahApps.Metro.NumericUpDown浮点型样式-->
+    <Style x:Key="NumericUpDown.Styles.Float" TargetType="{x:Type mah:NumericUpDown}"
+           BasedOn="{StaticResource NumericUpDown.Styles.Default}">
+        <Setter Property="Interval" Value="0.1" />
+        <Setter Property="StringFormat" Value="F3" />
+    </Style>
     <!--MahApps.Metro.NumericUpDown.Fluent样式-->
     <Style x:Key="NumericUpDown.Styles.Fluent" TargetType="{x:Type mah:NumericUpDown}">
         <Setter Property="Foreground" Value="{DynamicResource SystemBaseHighColorBrush}" />
@@ -105,6 +111,20 @@
         <Setter Property="mah:TextBoxHelper.UseFloatingWatermark" Value="False" />
         <Setter Property="mah:ControlsHelper.FocusBorderBrush" Value="{StaticResource TextBox.Focus.Border}" />
         <Setter Property="mah:ControlsHelper.MouseOverBorderBrush" Value="{StaticResource TextBox.MouseOver.Border}" />
+        <Style.Triggers>
+            <Trigger Property="IsMouseOver" Value="True">
+                <Setter Property="Background" Value="#BBFFFFFF" />
+            </Trigger>
+            <Trigger Property="IsFocused" Value="True">
+                <Setter Property="Background" Value="#EEFFFFFF" />
+            </Trigger>
+        </Style.Triggers>
+    </Style>
+    <!--MahApps.Metro.NumericUpDown.Fluent浮点型样式-->
+    <Style x:Key="NumericUpDown.Styles.Fluent.Float" TargetType="{x:Type mah:NumericUpDown}"
+           BasedOn="{StaticResource NumericUpDown.Styles.Fluent}">
+        <Setter Property="Interval" Value="0.1" />
+        <Setter Property="StringFormat" Value="F3" />
         <Style.Triggers>
             <Trigger Property="IsMouseOver" Value="True">
                 <Setter Property="Background" Value="#BBFFFFFF" />
@@ -246,16 +266,33 @@
             </Trigger>
         </Style.Triggers>
     </Style>
-    <!--MahApps.Metro.RangeSlider.Fluent样式-->
-    <Style x:Key="RangeSlider.Styles.Fluent" TargetType="{x:Type mah:RangeSlider}">
+    <!--MahApps.Metro.Slider.Fluent样式-->
+    <Style x:Key="Slider.Styles.Fluent" TargetType="{x:Type Slider}"
+           BasedOn="{StaticResource MahApps.Styles.Slider}">
         <Setter Property="FontFamily" Value="微软雅黑" />
         <Setter Property="Height" Value="32" />
         <Setter Property="Orientation" Value="Horizontal" />
-        <Setter Property="TickPlacement" Value="TopLeft" />
-        <Setter Property="AutoToolTipPlacement" Value="BottomRight" />
-        <Setter Property="TickFrequency" Value="3" />
+        <Setter Property="TickPlacement" Value="Both" />
+        <Setter Property="AutoToolTipPlacement" Value="TopLeft" />
+        <Setter Property="TickFrequency" Value="5" />
         <Setter Property="SmallChange" Value="1" />
         <Setter Property="LargeChange" Value="10" />
+        <Setter Property="ToolTip" Value="{Binding RelativeSource={RelativeSource Self}, Path=Value}" />
+        <Setter Property="mah:SliderHelper.ChangeValueBy" Value="LargeChange" />
+        <Setter Property="mah:SliderHelper.EnableMouseWheel" Value="MouseHover" />
+    </Style>
+    <!--MahApps.Metro.RangeSlider.Fluent样式-->
+    <Style x:Key="RangeSlider.Styles.Fluent" TargetType="{x:Type mah:RangeSlider}"
+           BasedOn="{StaticResource MahApps.Styles.RangeSlider}">
+        <Setter Property="FontFamily" Value="微软雅黑" />
+        <Setter Property="Height" Value="32" />
+        <Setter Property="Orientation" Value="Horizontal" />
+        <Setter Property="TickPlacement" Value="Both" />
+        <Setter Property="AutoToolTipPlacement" Value="TopLeft" />
+        <Setter Property="TickFrequency" Value="5" />
+        <Setter Property="SmallChange" Value="1" />
+        <Setter Property="LargeChange" Value="10" />
+        <Setter Property="mah:SliderHelper.ChangeValueBy" Value="LargeChange" />
         <Setter Property="mah:SliderHelper.EnableMouseWheel" Value="MouseHover" />
     </Style>
     <!--MahApps.Metro.Watermark默认样式-->
