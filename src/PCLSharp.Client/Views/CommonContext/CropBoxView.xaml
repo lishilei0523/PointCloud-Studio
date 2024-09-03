@@ -46,8 +46,9 @@
         </Border>
         <!--Body-->
         <busyIndicator:BusyMask Grid.Row="1" IndicatorType="Cupertino" IsBusy="{Binding IsBusy}">
-            <!--点云视口-->
-            <hx:Viewport3DX BackgroundColor="LightGray"
+            <!--点云预览-->
+            <GroupBox Header="点云预览" Margin="4,4,4,4">
+                <hx:Viewport3DX BackgroundColor="LightGray"
                             MSAA="{Binding MSAALevel}"
                             ShowCoordinateSystem="True"
                             CoordinateSystemSize="2"
@@ -59,29 +60,30 @@
                             [Event MouseLeftButtonDown] = [Action ViewportOnMouseLeftDown($source, $eventArgs)];
                             [Event MouseMove] = [Action ViewportOnMouseMove($source, $eventArgs)];
                             [Event MouseUp] = [Action ViewportOnMouseUp()]">
-                <!--效果器-->
-                <hx:Viewport3DX.EffectsManager>
-                    <hx:DefaultEffectsManager />
-                </hx:Viewport3DX.EffectsManager>
-                <!--键盘鼠标-->
-                <hx:Viewport3DX.InputBindings>
-                    <KeyBinding Key="U" Command="hx:ViewportCommands.TopView" />
-                    <KeyBinding Key="F" Command="hx:ViewportCommands.FrontView" />
-                    <KeyBinding Key="R" Command="hx:ViewportCommands.RightView" />
-                    <KeyBinding Key="B" Command="hx:ViewportCommands.BackView" />
-                    <KeyBinding Key="L" Command="hx:ViewportCommands.LeftView" />
-                    <KeyBinding Key="D" Command="hx:ViewportCommands.BottomView" />
-                    <KeyBinding Command="hx:ViewportCommands.ZoomExtents" Gesture="Control+E" />
-                    <MouseBinding Command="hx:ViewportCommands.Pan" Gesture="MiddleClick" />
-                    <MouseBinding Command="hx:ViewportCommands.Rotate" Gesture="RightClick" />
-                </hx:Viewport3DX.InputBindings>
-                <!--光源-->
-                <hx:DirectionalLight3D Color="White" Direction="{Binding Camera.LookDirection}" />
-                <!--点云-->
-                <hx:PointGeometryModel3D Geometry="{Binding PointCloud}" Color="Green" />
-                <!--边界长方体-->
-                <hx:Element3DPresenter Content="{Binding BoundingBox}" />
-            </hx:Viewport3DX>
+                    <!--效果器-->
+                    <hx:Viewport3DX.EffectsManager>
+                        <hx:DefaultEffectsManager />
+                    </hx:Viewport3DX.EffectsManager>
+                    <!--键盘鼠标-->
+                    <hx:Viewport3DX.InputBindings>
+                        <KeyBinding Key="U" Command="hx:ViewportCommands.TopView" />
+                        <KeyBinding Key="F" Command="hx:ViewportCommands.FrontView" />
+                        <KeyBinding Key="R" Command="hx:ViewportCommands.RightView" />
+                        <KeyBinding Key="B" Command="hx:ViewportCommands.BackView" />
+                        <KeyBinding Key="L" Command="hx:ViewportCommands.LeftView" />
+                        <KeyBinding Key="D" Command="hx:ViewportCommands.BottomView" />
+                        <KeyBinding Command="hx:ViewportCommands.ZoomExtents" Gesture="Control+E" />
+                        <MouseBinding Command="hx:ViewportCommands.Pan" Gesture="MiddleClick" />
+                        <MouseBinding Command="hx:ViewportCommands.Rotate" Gesture="RightClick" />
+                    </hx:Viewport3DX.InputBindings>
+                    <!--光源-->
+                    <hx:DirectionalLight3D Color="White" Direction="{Binding Camera.LookDirection}" />
+                    <!--点云-->
+                    <hx:PointGeometryModel3D Geometry="{Binding PointCloud}" Color="Green" />
+                    <!--边界长方体-->
+                    <hx:Element3DPresenter Content="{Binding BoundingBox}" />
+                </hx:Viewport3DX>
+            </GroupBox>
         </busyIndicator:BusyMask>
         <!--Footer-->
         <Border Grid.Row="2" Style="{StaticResource Panel.Styles.Function.Border}" BorderThickness="0,1,0,0">

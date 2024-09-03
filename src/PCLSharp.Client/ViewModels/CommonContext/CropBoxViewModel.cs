@@ -35,17 +35,11 @@ namespace PCLSharp.Client.ViewModels.CommonContext
         private Point? _selectedPoint2D;
 
         /// <summary>
-        /// 点云通用操作接口;
-        /// </summary>
-        private readonly ICloudCommon _cloudCommon;
-
-        /// <summary>
         /// 依赖注入构造器
         /// </summary>
         public CropBoxViewModel(ICloudCommon cloudCommon)
             : base(cloudCommon)
         {
-            this._cloudCommon = cloudCommon;
         }
 
         #endregion
