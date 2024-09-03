@@ -9,7 +9,7 @@
         xmlns:mah="http://metro.mahapps.com/winfx/xaml/controls"
         mc:Ignorable="d"
         Title="配准参数" 
-        Width="1151" Height="945" ResizeMode="NoResize" 
+        Width="1151" Height="943" ResizeMode="NoResize" 
         FontSize="14"
         WindowStyle="ThreeDBorderWindow"
         WindowStartupLocation="CenterOwner"
@@ -20,8 +20,6 @@
         <Grid.RowDefinitions>
             <!--表单区-->
             <RowDefinition Height="*" />
-            <!--占位区-->
-            <RowDefinition Height="0" />
             <!--控制区-->
             <RowDefinition Height="50" />
         </Grid.RowDefinitions>
@@ -246,7 +244,7 @@
             </StackPanel>
         </Grid>
         <!--控制区-->
-        <Grid Grid.Row="2" Style="{StaticResource Form.Styles.Submit.Grid}">
+        <Grid Grid.Row="1" Style="{StaticResource Form.Styles.Submit.Grid}">
             <WrapPanel Style="{StaticResource Form.Styles.Submit.WrapPanel}">
                 <Button Content="确定" cm:Message.Attach="Submit()" Style="{StaticResource Button.Styles.Fluent.Focus}" />
                 <Button Content="重置" cm:Message.Attach="Reset()" Style="{StaticResource Button.Styles.Fluent.Default}" />
