@@ -10,7 +10,6 @@
                  Title="FPFH特征"
                  Width="420" Height="400" ResizeMode="NoResize"
                  FontSize="14"
-                 WindowStyle="ThreeDBorderWindow"
                  WindowStartupLocation="CenterOwner"
                  Style="{StaticResource MetroWindow.Styles.Clean}">
 
