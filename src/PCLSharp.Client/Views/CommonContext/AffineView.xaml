@@ -93,14 +93,26 @@
                             <Slider Minimum="-360" Maximum="360" TickFrequency="30" Value="{Binding RX}"
                                     Style="{StaticResource Slider.Styles.Fluent}" />
                         </sd:FormItem>
+                        <sd:FormItem>
+                            <mah:NumericUpDown Value="{Binding RX, UpdateSourceTrigger=PropertyChanged}"
+                                               Style="{StaticResource NumericUpDown.Styles.Fluent.Float}" />
+                        </sd:FormItem>
                         <sd:FormItem Label="Y轴旋转角度：">
                             <Slider Minimum="-360" Maximum="360" TickFrequency="30" 
                                     Value="{Binding RY}"
                                     Style="{StaticResource Slider.Styles.Fluent}" />
                         </sd:FormItem>
+                        <sd:FormItem>
+                            <mah:NumericUpDown Value="{Binding RY, UpdateSourceTrigger=PropertyChanged}"
+                                               Style="{StaticResource NumericUpDown.Styles.Fluent.Float}" />
+                        </sd:FormItem>
                         <sd:FormItem Label="Z轴旋转角度：">
                             <Slider Minimum="-360" Maximum="360" TickFrequency="30" Value="{Binding RZ}"
                                     Style="{StaticResource Slider.Styles.Fluent}" />
+                        </sd:FormItem>
+                        <sd:FormItem>
+                            <mah:NumericUpDown Value="{Binding RZ, UpdateSourceTrigger=PropertyChanged}"
+                                               Style="{StaticResource NumericUpDown.Styles.Fluent.Float}" />
                         </sd:FormItem>
                     </StackPanel>
                 </GroupBox>
