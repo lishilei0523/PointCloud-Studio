@@ -38,6 +38,10 @@ namespace PCLSharp.Client
         /// </summary>
         protected override async void OnStartup(object sender, StartupEventArgs e)
         {
+            //启动屏幕
+            SplashScreen splashScreen = new SplashScreen("Content/Images/PCL.png");
+            splashScreen.Show(true);
+
             await base.DisplayRootViewForAsync<IndexViewModel>();
         }
         #endregion
