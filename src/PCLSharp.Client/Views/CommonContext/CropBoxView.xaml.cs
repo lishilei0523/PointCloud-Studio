@@ -1,7 +1,7 @@
 ﻿namespace PCLSharp.Client.Views.CommonContext
 {
     /// <summary>
-    /// 长方体裁剪视图
+    /// 盒子裁剪视图
     /// </summary>
     public partial class CropBoxView
     {

@@ -8,7 +8,7 @@
                  xmlns:hx="http://helix-toolkit.org/wpf/SharpDX"
                  xmlns:busyIndicator="https://github.com/Peoky/BusyIndicator"
                  mc:Ignorable="d"
-                 Title="长方体剪裁" 
+                 Title="盒子裁剪" 
                  Width="1440" Height="900" FontSize="14"
                  WindowStartupLocation="CenterScreen"
                  Style="{StaticResource MetroWindow.Styles.Clean}">

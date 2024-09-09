@@ -18,7 +18,7 @@ using Pose = SD.Toolkits.Mathematics.Models.Pose;
 namespace PCLSharp.Client.ViewModels.CommonContext
 {
     /// <summary>
-    /// 长方体裁剪视图模型
+    /// 盒子裁剪视图模型
     /// </summary>
     public class CropBoxViewModel : PreviewViewModel
     {

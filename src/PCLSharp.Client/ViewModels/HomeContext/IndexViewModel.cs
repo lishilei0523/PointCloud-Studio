@@ -630,9 +630,9 @@ namespace PCLSharp.Client.ViewModels.HomeContext
         }
         #endregion
 
-        #region 长方体裁剪 —— async void CropBox()
+        #region 盒子裁剪 —— async void CropBox()
         /// <summary>
-        /// 长方体裁剪
+        /// 盒子裁剪
         /// </summary>
         public async void CropBox()
         {
