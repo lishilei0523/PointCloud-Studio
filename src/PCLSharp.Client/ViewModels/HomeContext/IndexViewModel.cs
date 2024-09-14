@@ -26,6 +26,7 @@ using SkiaSharp.Views.WPF;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Threading;
@@ -747,6 +748,16 @@ namespace PCLSharp.Client.ViewModels.HomeContext
             }
 
             this.Idle();
+        }
+        #endregion
+
+        #region 技术支持 —— void Support()
+        /// <summary>
+        /// 技术支持
+        /// </summary>
+        public void Support()
+        {
+            Process.Start("https://gitee.com/lishilei0523/PointCloud-Studio");
         }
         #endregion
 

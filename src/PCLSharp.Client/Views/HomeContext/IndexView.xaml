@@ -25,6 +25,7 @@
             <Button Content="指向质心" cm:Message.Attach="LookAtCentroid()" />
             <Button Content="刷新点云" cm:Message.Attach="RefreshCloud()" />
             <Button Content="重置相机" cm:Message.Attach="ResetCamera()" />
+            <Button Content="技术支持" cm:Message.Attach="Support()" Cursor="Hand" />
         </mah:WindowCommands>
     </mah:MetroWindow.RightWindowCommands>
 
