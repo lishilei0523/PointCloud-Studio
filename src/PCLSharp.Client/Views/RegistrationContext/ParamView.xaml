@@ -247,8 +247,8 @@
         <Grid Grid.Row="1" Style="{StaticResource Form.Styles.Submit.Grid}">
             <WrapPanel Style="{StaticResource Form.Styles.Submit.WrapPanel}">
                 <Button Content="确定" cm:Message.Attach="Submit()" Style="{StaticResource Button.Styles.Fluent.Focus}" />
-                <Button Content="重置" cm:Message.Attach="Reset()" Style="{StaticResource Button.Styles.Fluent.Default}" />
                 <Button Content="取消" cm:Message.Attach="TryCloseAsync('false')" Style="{StaticResource Button.Styles.Fluent.Default}" />
+                <Button Content="重置" cm:Message.Attach="Reset()" Style="{StaticResource Button.Styles.Fluent.Default}" />
             </WrapPanel>
         </Grid>
     </Grid>
