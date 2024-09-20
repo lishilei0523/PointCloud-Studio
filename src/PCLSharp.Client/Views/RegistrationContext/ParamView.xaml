@@ -3,7 +3,7 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:fluentWpf="clr-namespace:SourceChord.FluentWPF;assembly=FluentWPF"
+        xmlns:fw="clr-namespace:SourceChord.FluentWPF;assembly=FluentWPF"
         xmlns:sd="https://github.com/lishilei0523/SD.Framework"
         xmlns:cm="http://www.caliburnproject.org"
         xmlns:mah="http://metro.mahapps.com/winfx/xaml/controls"
@@ -13,8 +13,8 @@
         FontSize="14"
         WindowStyle="ThreeDBorderWindow"
         WindowStartupLocation="CenterOwner"
-        fluentWpf:AcrylicWindow.Enabled="True"
-        fluentWpf:AcrylicWindow.AcrylicWindowStyle="NoIcon">
+        fw:AcrylicWindow.Enabled="True"
+        fw:AcrylicWindow.AcrylicWindowStyle="NoIcon">
 
     <Grid>
         <Grid.RowDefinitions>
