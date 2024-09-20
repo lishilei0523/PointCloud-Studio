@@ -59,34 +59,9 @@ namespace PCLSharp.Client.ViewModels.HomeContext
         private readonly ICloudFiles _cloudFiles;
 
         /// <summary>
-        /// 点云搜索接口
-        /// </summary>
-        private readonly ICloudSearch _cloudSearch;
-
-        /// <summary>
-        /// 点云滤波接口
-        /// </summary>
-        private readonly ICloudFilters _cloudFilters;
-
-        /// <summary>
-        /// 点云法向量接口
-        /// </summary>
-        private readonly ICloudNormals _cloudNormals;
-
-        /// <summary>
-        /// 点云关键点接口
-        /// </summary>
-        private readonly ICloudKeyPoints _cloudKeyPoints;
-
-        /// <summary>
         /// 点云特征接口
         /// </summary>
         private readonly ICloudFeatures _cloudFeatures;
-
-        /// <summary>
-        /// 点云分割接口
-        /// </summary>
-        private readonly ICloudSegmentations _cloudSegmentations;
 
         /// <summary>
         /// 窗体管理器
@@ -96,16 +71,11 @@ namespace PCLSharp.Client.ViewModels.HomeContext
         /// <summary>
         /// 依赖注入构造器
         /// </summary>
-        public IndexViewModel(ICloudCommon cloudCommon, ICloudFiles cloudFiles, ICloudSearch cloudSearch, ICloudFilters cloudFilters, ICloudNormals cloudNormals, ICloudKeyPoints cloudKeyPoints, ICloudFeatures cloudFeatures, ICloudSegmentations cloudSegmentations, IWindowManager windowManager)
+        public IndexViewModel(ICloudCommon cloudCommon, ICloudFiles cloudFiles, ICloudFeatures cloudFeatures, IWindowManager windowManager)
         {
             this._cloudCommon = cloudCommon;
             this._cloudFiles = cloudFiles;
-            this._cloudSearch = cloudSearch;
-            this._cloudFilters = cloudFilters;
-            this._cloudNormals = cloudNormals;
-            this._cloudKeyPoints = cloudKeyPoints;
             this._cloudFeatures = cloudFeatures;
-            this._cloudSegmentations = cloudSegmentations;
             this._windowManager = windowManager;
         }
 

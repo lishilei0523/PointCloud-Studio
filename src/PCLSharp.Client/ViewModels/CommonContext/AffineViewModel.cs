@@ -98,7 +98,7 @@ namespace PCLSharp.Client.ViewModels.CommonContext
             this.X = 0.1f;
             this.Y = 0.1f;
             this.Z = 0.1f;
-            this.RX = 15f;
+            this.RX = 15;
             this.RY = 15;
             this.RZ = 0;
 

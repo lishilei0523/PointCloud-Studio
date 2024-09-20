@@ -256,7 +256,7 @@ namespace PCLSharp.Client.ViewModels.CommonContext
 
                     Matrix<double> newMatrix = newPose.ToRotationTranslationMatrix();
                     Matrix3D newMatrix3D = newMatrix.ToMatrix3D();
-                    this.BoundingBox.Transform = new MatrixTransform3D(newMatrix3D); ;
+                    this.BoundingBox.Transform = new MatrixTransform3D(newMatrix3D);
 
                     eventArgs.Handled = true;
                     return;
@@ -271,7 +271,7 @@ namespace PCLSharp.Client.ViewModels.CommonContext
                     rtMatrix3D.OffsetX = newVisualPos3D.X;
                     rtMatrix3D.OffsetY = newVisualPos3D.Y;
                     rtMatrix3D.OffsetZ = newVisualPos3D.Z;
-                    this.BoundingBox.Transform = new MatrixTransform3D(rtMatrix3D); ;
+                    this.BoundingBox.Transform = new MatrixTransform3D(rtMatrix3D);
 
                     eventArgs.Handled = true;
                     return;
