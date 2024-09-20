@@ -23,7 +23,7 @@
                                   cm:Message.Attach="[Event Toggled] = [Action SwitchImageQuality()]" />
             </mah:WindowCommands>
             <Button Content="指向质心" cm:Message.Attach="LookAtCentroid()" />
-            <Button Content="刷新点云" cm:Message.Attach="RefreshCloud()" />
+            <Button Content="重置点云" cm:Message.Attach="ResetPointCloud()" />
             <Button Content="重置相机" cm:Message.Attach="ResetCamera()" />
             <Button Content="技术支持" cm:Message.Attach="Support()" Cursor="Hand" />
         </mah:WindowCommands>
@@ -49,11 +49,11 @@
                     <MenuItem Header="另存为(_A)" cm:Message.Attach="SaveAsCloud()" />
                 </MenuItem>
                 <MenuItem Header="编辑(_E)">
-                    <MenuItem Header="刷新点云(_E)" cm:Message.Attach="RefreshCloud()" />
-                    <MenuItem Header="点云颜色(_P)" cm:Message.Attach="SetCloudColor()" />
+                    <MenuItem Header="点云颜色(_C)" cm:Message.Attach="SetCloudColor()" />
                     <MenuItem Header="背景颜色(_B)" cm:Message.Attach="SetBackgroundColor()" />
                     <MenuItem Header="关键点颜色(_K)" cm:Message.Attach="SetKeyPointColor()" />
                     <MenuItem Header="指向质心(_O)" cm:Message.Attach="LookAtCentroid()" />
+                    <MenuItem Header="重置点云(_P)" cm:Message.Attach="ResetPointCloud()" />
                     <MenuItem Header="重置相机(_R)" cm:Message.Attach="ResetCamera()" />
                 </MenuItem>
                 <MenuItem Header="常用(_G)">

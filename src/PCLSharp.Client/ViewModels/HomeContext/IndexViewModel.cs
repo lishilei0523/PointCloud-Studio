@@ -407,30 +407,6 @@ namespace PCLSharp.Client.ViewModels.HomeContext
 
         //编辑
 
-        #region 刷新点云 —— async void RefreshCloud()
-        /// <summary>
-        /// 刷新点云
-        /// </summary>
-        public async void RefreshCloud()
-        {
-            #region # 验证
-
-            if (this.EffectivePointCloud == null)
-            {
-                MessageBox.Show("点云未加载！", "错误", MessageBoxButton.OK, MessageBoxImage.Error);
-                return;
-            }
-
-            #endregion
-
-            this.Busy();
-
-            await this.ReloadCloud();
-
-            this.Idle();
-        }
-        #endregion
-
         #region 设置点云颜色 —— async void SetCloudColor()
         /// <summary>
         /// 设置点云颜色
@@ -509,6 +485,30 @@ namespace PCLSharp.Client.ViewModels.HomeContext
             }
 
             this.Camera.LookAt(centroid.ToPoint(), 200);
+
+            this.Idle();
+        }
+        #endregion
+
+        #region 重置点云 —— async void ResetPointCloud()
+        /// <summary>
+        /// 重置点云
+        /// </summary>
+        public async void ResetPointCloud()
+        {
+            #region # 验证
+
+            if (this.EffectivePointCloud == null)
+            {
+                MessageBox.Show("点云未加载！", "错误", MessageBoxButton.OK, MessageBoxImage.Error);
+                return;
+            }
+
+            #endregion
+
+            this.Busy();
+
+            await this.ReloadCloud();
 
             this.Idle();
         }
@@ -1682,7 +1682,7 @@ namespace PCLSharp.Client.ViewModels.HomeContext
 
                 #endregion
 
-                this.RefreshCloud();
+                this.ResetPointCloud();
             }
             if (Keyboard.IsKeyDown(Key.LeftCtrl) && Keyboard.IsKeyDown(Key.S))
             {

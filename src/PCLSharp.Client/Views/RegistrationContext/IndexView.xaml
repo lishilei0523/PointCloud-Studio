@@ -22,8 +22,8 @@
                                   IsOn="{Binding HighImageQuality}"
                                   cm:Message.Attach="[Event Toggled] = [Action SwitchImageQuality()]" />
             </mah:WindowCommands>
-            <Button Content="刷新点云" cm:Message.Attach="RefreshCloud()" />
             <Button Content="指向质心" cm:Message.Attach="LookAtCentroid()" />
+            <Button Content="重置点云" cm:Message.Attach="ResetPointCloud()" />
             <Button Content="重置相机" cm:Message.Attach="ResetCamera()" />
         </mah:WindowCommands>
     </mah:MetroWindow.RightWindowCommands>

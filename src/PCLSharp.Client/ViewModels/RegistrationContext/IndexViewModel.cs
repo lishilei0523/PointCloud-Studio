@@ -765,27 +765,6 @@ namespace PCLSharp.Client.ViewModels.RegistrationContext
         }
         #endregion
 
-        #region 刷新点云 —— async void RefreshCloud()
-        /// <summary>
-        /// 刷新点云
-        /// </summary>
-        public async void RefreshCloud()
-        {
-            this.Busy();
-
-            if (!string.IsNullOrWhiteSpace(this.SourceFilePath))
-            {
-                await this.ReloadSourceCloud();
-            }
-            if (!string.IsNullOrWhiteSpace(this.TargetFilePath))
-            {
-                await this.ReloadTargetCloud();
-            }
-
-            this.Idle();
-        }
-        #endregion
-
         #region 指向质心 —— async void LookAtCentroid()
         /// <summary>
         /// 指向质心
@@ -823,6 +802,27 @@ namespace PCLSharp.Client.ViewModels.RegistrationContext
         }
         #endregion
 
+        #region 重置点云 —— async void ResetPointCloud()
+        /// <summary>
+        /// 重置点云
+        /// </summary>
+        public async void ResetPointCloud()
+        {
+            this.Busy();
+
+            if (!string.IsNullOrWhiteSpace(this.SourceFilePath))
+            {
+                await this.ReloadSourceCloud();
+            }
+            if (!string.IsNullOrWhiteSpace(this.TargetFilePath))
+            {
+                await this.ReloadTargetCloud();
+            }
+
+            this.Idle();
+        }
+        #endregion
+
         #region 重置相机 —— void ResetCamera()
         /// <summary>
         /// 重置相机
@@ -852,7 +852,7 @@ namespace PCLSharp.Client.ViewModels.RegistrationContext
         {
             if (Keyboard.IsKeyDown(Key.F5))
             {
-                this.RefreshCloud();
+                this.ResetPointCloud();
             }
         }
         #endregion
