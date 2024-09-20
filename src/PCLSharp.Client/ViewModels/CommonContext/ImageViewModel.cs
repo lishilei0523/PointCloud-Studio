@@ -84,6 +84,7 @@ namespace PCLSharp.Client.ViewModels.CommonContext
 
             SaveFileDialog saveFileDialog = new SaveFileDialog
             {
+                FileName = this.Title,
                 Filter = "(*.jpg)|*.jpg",
                 AddExtension = true,
                 RestoreDirectory = true

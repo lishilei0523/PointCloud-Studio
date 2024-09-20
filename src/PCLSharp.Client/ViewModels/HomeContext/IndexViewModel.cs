@@ -1321,8 +1321,8 @@ namespace PCLSharp.Client.ViewModels.HomeContext
 
                 //绘制直方图
                 using Plot plot = new Plot();
-                plot.AddNARF(descriptors);
-                using SKImage skImage = plot.GetSKImage(viewModel.ImageWidth!.Value, viewModel.ImageHeight!.Value);
+                await Task.Run(() => plot.AddNARF(descriptors));
+                using SKImage skImage = await Task.Run(() => plot.GetSKImage(viewModel.ImageWidth!.Value, viewModel.ImageHeight!.Value));
                 BitmapSource bitmapSource = skImage.ToWriteableBitmap();
 
                 ImageViewModel imageViewModel = ResolveMediator.Resolve<ImageViewModel>();
@@ -1361,8 +1361,8 @@ namespace PCLSharp.Client.ViewModels.HomeContext
 
                 //绘制直方图
                 using Plot plot = new Plot();
-                plot.AddPFH(descriptors);
-                using SKImage skImage = plot.GetSKImage(viewModel.ImageWidth!.Value, viewModel.ImageHeight!.Value);
+                await Task.Run(() => plot.AddPFH(descriptors));
+                using SKImage skImage = await Task.Run(() => plot.GetSKImage(viewModel.ImageWidth!.Value, viewModel.ImageHeight!.Value));
                 BitmapSource bitmapSource = skImage.ToWriteableBitmap();
 
                 ImageViewModel imageViewModel = ResolveMediator.Resolve<ImageViewModel>();
@@ -1401,8 +1401,8 @@ namespace PCLSharp.Client.ViewModels.HomeContext
 
                 //绘制直方图
                 using Plot plot = new Plot();
-                plot.AddFPFH(descriptors);
-                using SKImage skImage = plot.GetSKImage(viewModel.ImageWidth!.Value, viewModel.ImageHeight!.Value);
+                await Task.Run(() => plot.AddFPFH(descriptors));
+                using SKImage skImage = await Task.Run(() => plot.GetSKImage(viewModel.ImageWidth!.Value, viewModel.ImageHeight!.Value));
                 BitmapSource bitmapSource = skImage.ToWriteableBitmap();
 
                 ImageViewModel imageViewModel = ResolveMediator.Resolve<ImageViewModel>();
@@ -1441,8 +1441,8 @@ namespace PCLSharp.Client.ViewModels.HomeContext
 
                 //绘制直方图
                 using Plot plot = new Plot();
-                plot.Add3DSC(descriptors);
-                using SKImage skImage = plot.GetSKImage(viewModel.ImageWidth!.Value, viewModel.ImageHeight!.Value);
+                await Task.Run(() => plot.Add3DSC(descriptors));
+                using SKImage skImage = await Task.Run(() => plot.GetSKImage(viewModel.ImageWidth!.Value, viewModel.ImageHeight!.Value));
                 BitmapSource bitmapSource = skImage.ToWriteableBitmap();
 
                 ImageViewModel imageViewModel = ResolveMediator.Resolve<ImageViewModel>();
@@ -1481,8 +1481,8 @@ namespace PCLSharp.Client.ViewModels.HomeContext
 
                 //绘制直方图
                 using Plot plot = new Plot();
-                plot.AddSHOT(descriptors);
-                using SKImage skImage = plot.GetSKImage(viewModel.ImageWidth!.Value, viewModel.ImageHeight!.Value);
+                await Task.Run(() => plot.AddSHOT(descriptors));
+                using SKImage skImage = await Task.Run(() => plot.GetSKImage(viewModel.ImageWidth!.Value, viewModel.ImageHeight!.Value));
                 BitmapSource bitmapSource = skImage.ToWriteableBitmap();
 
                 ImageViewModel imageViewModel = ResolveMediator.Resolve<ImageViewModel>();
