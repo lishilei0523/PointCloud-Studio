@@ -1326,7 +1326,7 @@ namespace PCLSharp.Client.ViewModels.HomeContext
                 BitmapSource bitmapSource = skImage.ToWriteableBitmap();
 
                 ImageViewModel imageViewModel = ResolveMediator.Resolve<ImageViewModel>();
-                imageViewModel.Load("NARF特征", bitmapSource);
+                imageViewModel.Load(bitmapSource, "NARF特征");
                 await this._windowManager.ShowDialogAsync(imageViewModel);
             }
 
@@ -1366,7 +1366,7 @@ namespace PCLSharp.Client.ViewModels.HomeContext
                 BitmapSource bitmapSource = skImage.ToWriteableBitmap();
 
                 ImageViewModel imageViewModel = ResolveMediator.Resolve<ImageViewModel>();
-                imageViewModel.Load("PFH特征", bitmapSource);
+                imageViewModel.Load(bitmapSource, "PFH特征");
                 await this._windowManager.ShowDialogAsync(imageViewModel);
             }
 
@@ -1406,7 +1406,7 @@ namespace PCLSharp.Client.ViewModels.HomeContext
                 BitmapSource bitmapSource = skImage.ToWriteableBitmap();
 
                 ImageViewModel imageViewModel = ResolveMediator.Resolve<ImageViewModel>();
-                imageViewModel.Load("FPFH特征", bitmapSource);
+                imageViewModel.Load(bitmapSource, "FPFH特征");
                 await this._windowManager.ShowDialogAsync(imageViewModel);
             }
 
@@ -1446,7 +1446,7 @@ namespace PCLSharp.Client.ViewModels.HomeContext
                 BitmapSource bitmapSource = skImage.ToWriteableBitmap();
 
                 ImageViewModel imageViewModel = ResolveMediator.Resolve<ImageViewModel>();
-                imageViewModel.Load("3DSC特征", bitmapSource);
+                imageViewModel.Load(bitmapSource, "3DSC特征");
                 await this._windowManager.ShowDialogAsync(imageViewModel);
             }
 
@@ -1486,7 +1486,7 @@ namespace PCLSharp.Client.ViewModels.HomeContext
                 BitmapSource bitmapSource = skImage.ToWriteableBitmap();
 
                 ImageViewModel imageViewModel = ResolveMediator.Resolve<ImageViewModel>();
-                imageViewModel.Load("SHOT特征", bitmapSource);
+                imageViewModel.Load(bitmapSource, "SHOT特征");
                 await this._windowManager.ShowDialogAsync(imageViewModel);
             }
 

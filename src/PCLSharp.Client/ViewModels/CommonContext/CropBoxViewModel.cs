@@ -79,11 +79,10 @@ namespace PCLSharp.Client.ViewModels.CommonContext
                 OffsetZ = this.PointCloud.Bound.Center.Z
             };
             this.BoundingBox.Transform = new MatrixTransform3D(boxMatrix);
-            DiffuseMaterial material = new DiffuseMaterial
+            this.BoundingBox.Material = new DiffuseMaterial
             {
                 DiffuseColor = new Color4(1, 0, 0, 0.25f)
             };
-            this.BoundingBox.Material = material;
         }
         #endregion
 

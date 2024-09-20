@@ -79,7 +79,8 @@
                     <StackPanel Grid.IsSharedSizeScope="True" Margin="5,20">
                         <sd:FormItem Label="网格尺寸：">
                             <mah:NumericUpDown Value="{Binding LeafSize, UpdateSourceTrigger=PropertyChanged}"
-                                               Style="{StaticResource NumericUpDown.Styles.Fluent.Float}" />
+                                               Style="{StaticResource NumericUpDown.Styles.Fluent.Float}"
+                                               cm:Message.Attach="[Event ValueChanged] = [Action Apply()]" />
                         </sd:FormItem>
                     </StackPanel>
                 </GroupBox>

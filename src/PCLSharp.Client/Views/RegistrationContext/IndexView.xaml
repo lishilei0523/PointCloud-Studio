@@ -40,7 +40,7 @@
         <!--Header-->
         <Border Grid.Row="0" Style="{StaticResource Panel.Styles.Function.Border}">
             <Menu Margin="4,2">
-                <MenuItem Header="打开源点云(_S)" cm:Message.Attach="OpenSourceCloud()" />
+                <MenuItem Header="打开参考点云(_S)" cm:Message.Attach="OpenSourceCloud()" />
                 <MenuItem Header="打开目标点云(_T)" cm:Message.Attach="OpenTargetCloud()" />
                 <MenuItem Header="设置参数(_P)" cm:Message.Attach="SetParameters()" />
                 <MenuItem Header="执行配准(_R)" cm:Message.Attach="ExecuteAlignment()" />
@@ -226,7 +226,7 @@
                         </hx:Viewport3DX.InputBindings>
                         <!--光源-->
                         <hx:DirectionalLight3D Color="White" Direction="{Binding Camera.LookDirection}" />
-                        <!--源点云-->
+                        <!--参考点云-->
                         <hx:PointGeometryModel3D Geometry="{Binding SourceCloud}" Color="Red" />
                         <!--目标点云-->
                         <hx:PointGeometryModel3D Geometry="{Binding TargetCloud}" Color="Green" />
@@ -343,7 +343,7 @@
                     <TextBlock Text="{Binding Camera.FieldOfView, StringFormat=FieldOfView: \{0:0.0\}}" FontSize="12" />
                 </WrapPanel>
                 <WrapPanel Margin="0,0,10,0" HorizontalAlignment="Right" VerticalAlignment="Center">
-                    <TextBlock Text="源点云数量：" FontSize="12" />
+                    <TextBlock Text="参考点云数量：" FontSize="12" />
                     <TextBlock Text="{Binding SourceCloud.Positions.Count}" FontSize="12" />
                     <TextBlock Text=" | " FontSize="12" />
                     <TextBlock Text="目标点云数量：" FontSize="12" />

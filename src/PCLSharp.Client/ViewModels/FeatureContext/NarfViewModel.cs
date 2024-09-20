@@ -25,8 +25,8 @@ namespace PCLSharp.Client.ViewModels.FeatureContext
             this.BorderSize = 1;
             this.SupportSize = 0.2f;
             this.RotationInvariant = true;
-            this.ImageWidth = 1920;
-            this.ImageHeight = 1080;
+            this.ImageWidth = 1440;
+            this.ImageHeight = 870;
         }
 
         #endregion

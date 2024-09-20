@@ -20,8 +20,8 @@ namespace PCLSharp.Client.ViewModels.FeatureContext
             this.NormalK = 4;
             this.FeatureK = 5;
             this.ThreadsCount = 20;
-            this.ImageWidth = 1920;
-            this.ImageHeight = 1080;
+            this.ImageWidth = 1440;
+            this.ImageHeight = 870;
         }
 
         #endregion

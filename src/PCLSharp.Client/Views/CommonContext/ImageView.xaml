@@ -4,12 +4,19 @@
                  xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
                  xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
                  xmlns:mah="http://metro.mahapps.com/winfx/xaml/controls"
+                 xmlns:cm="http://caliburnmicro.com"
                  xmlns:sd="https://github.com/lishilei0523/SD.Framework"
                  mc:Ignorable="d"
                  Title="{Binding Title}" 
-                 Width="1280" Height="800" FontSize="14"
+                 Width="1440" Height="900" FontSize="14"
                  WindowStartupLocation="CenterScreen"
                  Style="{StaticResource MetroWindow.Styles.Clean}">
+
+    <mah:MetroWindow.RightWindowCommands>
+        <mah:WindowCommands>
+            <Button Content="另存为" cm:Message.Attach="SaveAsImage()" />
+        </mah:WindowCommands>
+    </mah:MetroWindow.RightWindowCommands>
 
     <Grid Background="LightGray">
         <sd:ImageViewer ImageSource="{Binding Image}" />

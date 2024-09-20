@@ -83,7 +83,8 @@
                         </sd:FormItem>
                         <sd:FormItem Label="采样数量：">
                             <mah:NumericUpDown Value="{Binding SamplesCount, UpdateSourceTrigger=PropertyChanged}"
-                                               Style="{StaticResource NumericUpDown.Styles.Fluent}" />
+                                               Style="{StaticResource NumericUpDown.Styles.Fluent}"
+                                               cm:Message.Attach="[Event ValueChanged] = [Action Apply()]" />
                         </sd:FormItem>
                     </StackPanel>
                 </GroupBox>
