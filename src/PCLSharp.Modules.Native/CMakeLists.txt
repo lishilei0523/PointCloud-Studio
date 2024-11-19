@@ -13,10 +13,9 @@ file(GLOB INCLUDE_FILES
 file(GLOB SOURCE_FILES
     "${CMAKE_CURRENT_LIST_DIR}/*.cpp")
 
-add_library(${PROJECT_NAME} SHARED ${INCLUDE_FILES} ${SOURCE_FILES})
+add_library(${PROJECT_NAME} SHARED ${INCLUDE_FILES} ${SOURCE_FILES} ${CMAKE_CURRENT_LIST_DIR}/Version.rc)
 
-target_link_libraries(${PROJECT_NAME} ${PCL_LIBRARIES})
-target_link_libraries(${PROJECT_NAME} "PCLSharp.Primitives.Native")
+target_link_libraries(${PROJECT_NAME} ${PCL_LIBRARIES} "PCLSharp.Primitives.Native")
 
 # MSVC大文件编译选项
 target_compile_options(${PROJECT_NAME} PRIVATE $<$<CXX_COMPILER_ID:MSVC>:/bigobj>)
