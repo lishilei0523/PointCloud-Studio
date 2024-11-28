@@ -19,3 +19,6 @@ target_link_libraries(${PROJECT_NAME} ${PCL_LIBRARIES} "PCLSharp.Primitives.Nati
 
 # MSVC大文件编译选项
 target_compile_options(${PROJECT_NAME} PRIVATE $<$<CXX_COMPILER_ID:MSVC>:/bigobj>)
+
+# 添加版本信息
+set_target_properties(${PROJECT_NAME} PROPERTIES VERSION 1.0.1 SOVERSION 1.0.1)
