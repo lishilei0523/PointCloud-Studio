@@ -8,7 +8,7 @@
 #### 开发目的：
     1、探索PCL常用点云算法；
 
-    2、探索HelixToolkit及其与点云算法的结合应用；
+    2、探索HelixToolkit.SharpDX及其与点云算法的结合应用；
 
     3、探索MahApps.Metro的各种控件应用；
 
@@ -17,11 +17,11 @@
     5、方便算法开发人员测试调试算法；
 
 #### 主要涉及技术：
-    UI部分：WPF、HelixToolkit、FluentWPF、MahApps.Metro、Caliburn.Micro等；
+    UI部分：WPF、HelixToolkit.SharpDX、Caliburn.Micro、MahApps.Metro、FluentWPF等；
 
-    算法部分：PCL、SkiaSharp、Math.NET、ScottPlot、OnnxRuntime等；
+    算法部分：PCL、SkiaSharp、Math.NET、ScottPlot等；
 
-    其他：P/Invoke互操作；
+    其他：C++20、CMake、P/Invoke；
 
 #### 主要功能模块：
     搜索部分：
@@ -41,6 +41,9 @@
 
     分割部分：
         分割平面、分割球体、欧几里得聚类分割、区域生长分割等；
+
+    配准部分：
+        K-FPCS粗配准、SAC-IA粗配准、ICP点到点精配准、ICP点到面精配准、GICP精配准、NDT精配准；
     
     其他部分：
         估算质心、盒子剪裁、仿射变换、投射平面、提取边界、点云配准等；
