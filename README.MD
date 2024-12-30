@@ -53,5 +53,8 @@
 > 关联项目，OpenCV工作室：
 > [OpenCV Studio](https://gitee.com/lishilei0523/OpenCV-Studio)
 
+> 关联项目，标注工具：
+> [LabelSharp](https://gitee.com/lishilei0523/LabelSharp)
+
 ## 首页预览
 ![Index](assets/Index.jpg)
