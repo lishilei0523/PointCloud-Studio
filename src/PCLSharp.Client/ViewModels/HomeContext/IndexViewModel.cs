@@ -95,8 +95,20 @@ namespace PCLSharp.Client.ViewModels.HomeContext
         /// <summary>
         /// 是否高画质
         /// </summary>
-        [DependencyProperty]
-        public bool HighImageQuality { get; set; }
+        private bool _highImageQuality;
+
+        /// <summary>
+        /// 是否高画质
+        /// </summary>
+        public bool HighImageQuality
+        {
+            get => this._highImageQuality;
+            set
+            {
+                this.Set(ref this._highImageQuality, value);
+                this.MSAALevel = value ? MSAALevel.Maximum : MSAALevel.Disable;
+            }
+        }
         #endregion
 
         #region 文件路径 —— string FilePath
@@ -534,16 +546,6 @@ namespace PCLSharp.Client.ViewModels.HomeContext
 
 
         //常用
-
-        #region 切换画质 —— void SwitchImageQuality()
-        /// <summary>
-        /// 切换画质
-        /// </summary>
-        public void SwitchImageQuality()
-        {
-            this.MSAALevel = this.HighImageQuality ? MSAALevel.Maximum : MSAALevel.Disable;
-        }
-        #endregion
 
         #region 估算质心 —— async void EstimateCentroid()
         /// <summary>

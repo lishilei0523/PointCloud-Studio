@@ -248,9 +248,13 @@
             </Trigger>
         </Style.Triggers>
     </Style>
+    <!--MahApps.Metro.ToggleSwitch默认样式-->
+    <Style TargetType="{x:Type mah:ToggleSwitch}">
+        <Setter Property="FontFamily" Value="微软雅黑" />
+        <Setter Property="FontSize" Value="14" />
+    </Style>
     <!--MahApps.Metro.ToggleSwitch.Fluent样式-->
     <Style x:Key="ToggleSwitch.Styles.Fluent" TargetType="{x:Type mah:ToggleSwitch}">
-        <Setter Property="FontFamily" Value="微软雅黑" />
     </Style>
     <!--MahApps.Metro.ToggleButton.ToolBar样式-->
     <Style x:Key="ToggleButton.Styles.ToolBar" TargetType="{x:Type ToggleButton}" 

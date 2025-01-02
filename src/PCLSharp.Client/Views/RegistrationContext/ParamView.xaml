@@ -35,8 +35,8 @@
                     <StackPanel Grid.IsSharedSizeScope="True" Margin="0,10">
                         <sd:FormItem Label="一次采样：">
                             <mah:ToggleSwitch IsOn="{Binding NeedSampleI}" OnContent="是" OffContent="否" 
-                                     Style="{StaticResource ToggleSwitch.Styles.Fluent}"
-                                     cm:Message.Attach="[Event Toggled] = [Action SwitchSampleI()]" />
+                                              Style="{StaticResource ToggleSwitch.Styles.Fluent}"
+                                              cm:Message.Attach="[Event Toggled] = [Action SwitchSampleI()]" />
                         </sd:FormItem>
                         <sd:FormItem Label="网格尺寸：" IsEnabled="{Binding SampleIEnabled}">
                             <mah:NumericUpDown Value="{Binding SampleILeafSize, UpdateSourceTrigger=PropertyChanged}"
@@ -44,13 +44,13 @@
                         </sd:FormItem>
                         <sd:FormItem Label="粗配准：">
                             <mah:ToggleSwitch IsOn="{Binding NeedCoarseAlignment}" OnContent="是" OffContent="否" 
-                                     Style="{StaticResource ToggleSwitch.Styles.Fluent}"
-                                     cm:Message.Attach="[Event Toggled] = [Action SwitchCoarseAlignment()]" />
+                                              Style="{StaticResource ToggleSwitch.Styles.Fluent}"
+                                              cm:Message.Attach="[Event Toggled] = [Action SwitchCoarseAlignment()]" />
                         </sd:FormItem>
                         <sd:FormItem Label="      二次采样：">
                             <mah:ToggleSwitch IsOn="{Binding NeedSampleII}" OnContent="是" OffContent="否" 
-                                     Style="{StaticResource ToggleSwitch.Styles.Fluent}"
-                                     cm:Message.Attach="[Event Toggled] = [Action SwitchSampleII()]" />
+                                              Style="{StaticResource ToggleSwitch.Styles.Fluent}"
+                                              cm:Message.Attach="[Event Toggled] = [Action SwitchSampleII()]" />
                         </sd:FormItem>
                         <sd:FormItem Label="网格尺寸：" IsEnabled="{Binding SampleIIEnabled}">
                             <mah:NumericUpDown Value="{Binding SampleIILeafSize, UpdateSourceTrigger=PropertyChanged}"
@@ -58,8 +58,8 @@
                         </sd:FormItem>
                         <sd:FormItem Label="精配准：">
                             <mah:ToggleSwitch IsOn="{Binding NeedFineAlignment}" OnContent="是" OffContent="否" 
-                                     Style="{StaticResource ToggleSwitch.Styles.Fluent}"
-                                     cm:Message.Attach="[Event Toggled] = [Action SwitchFineAlignment()]" />
+                                              Style="{StaticResource ToggleSwitch.Styles.Fluent}"
+                                              cm:Message.Attach="[Event Toggled] = [Action SwitchFineAlignment()]" />
                         </sd:FormItem>
                         <sd:FormItem Label="线程数：">
                             <mah:NumericUpDown Value="{Binding ThreadsCount, UpdateSourceTrigger=PropertyChanged}"

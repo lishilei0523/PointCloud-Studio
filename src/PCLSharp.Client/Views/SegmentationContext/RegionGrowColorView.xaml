@@ -17,9 +17,7 @@
     <mah:MetroWindow.RightWindowCommands>
         <mah:WindowCommands>
             <mah:WindowCommands Margin="0,0,-20,0">
-                <mah:ToggleSwitch OnContent="高画质模式" OffContent="流畅模式" Height="34" FontSize="14" FontFamily="微软雅黑"
-                                 IsOn="{Binding HighImageQuality}"
-                                 cm:Message.Attach="[Event Toggled] = [Action SwitchImageQuality()]" />
+                <mah:ToggleSwitch Height="34" OnContent="高画质模式" OffContent="流畅模式" IsOn="{Binding HighImageQuality}" />
             </mah:WindowCommands>
             <Button Content="指向质心" cm:Message.Attach="LookAtCentroid()" />
             <Button Content="重置点云" cm:Message.Attach="ResetPointCloud()" />

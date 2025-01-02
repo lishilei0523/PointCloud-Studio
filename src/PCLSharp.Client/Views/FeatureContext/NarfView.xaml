@@ -53,7 +53,8 @@
                                    Style="{StaticResource NumericUpDown.Styles.Fluent.Float}" />
             </sd:FormItem>
             <sd:FormItem Label="旋转不变性：">
-                <mah:ToggleSwitch IsOn="{Binding RotationInvariant}" OnContent="是" OffContent="否" Style="{StaticResource ToggleSwitch.Styles.Fluent}" />
+                <mah:ToggleSwitch IsOn="{Binding RotationInvariant}" OnContent="是" OffContent="否" 
+                                  Style="{StaticResource ToggleSwitch.Styles.Fluent}" />
             </sd:FormItem>
             <sd:FormItem Label="直方图宽度：">
                 <mah:NumericUpDown Value="{Binding ImageWidth, UpdateSourceTrigger=PropertyChanged}"

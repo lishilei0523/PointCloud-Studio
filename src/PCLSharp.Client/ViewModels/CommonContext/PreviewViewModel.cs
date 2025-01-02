@@ -51,8 +51,20 @@ namespace PCLSharp.Client.ViewModels.CommonContext
         /// <summary>
         /// 是否高画质
         /// </summary>
-        [DependencyProperty]
-        public bool HighImageQuality { get; set; }
+        private bool _highImageQuality;
+
+        /// <summary>
+        /// 是否高画质
+        /// </summary>
+        public bool HighImageQuality
+        {
+            get => this._highImageQuality;
+            set
+            {
+                this.Set(ref this._highImageQuality, value);
+                this.MSAALevel = value ? MSAALevel.Maximum : MSAALevel.Disable;
+            }
+        }
         #endregion 
 
         #region 相机 —— PerspectiveCamera Camera
@@ -119,16 +131,6 @@ namespace PCLSharp.Client.ViewModels.CommonContext
             {
                 Positions = new Vector3Collection(positions)
             };
-        }
-        #endregion
-
-        #region 切换画质 —— void SwitchImageQuality()
-        /// <summary>
-        /// 切换画质
-        /// </summary>
-        public void SwitchImageQuality()
-        {
-            this.MSAALevel = this.HighImageQuality ? MSAALevel.Maximum : MSAALevel.Disable;
         }
         #endregion
 
