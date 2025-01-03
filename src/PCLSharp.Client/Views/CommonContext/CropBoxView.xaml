@@ -55,9 +55,9 @@
                             CoordinateSystemLabelForeground="Black"
                             Camera="{Binding Camera}"
                             cm:Message.Attach="
-                            [Event MouseLeftButtonDown] = [Action ViewportOnMouseLeftDown($source, $eventArgs)];
-                            [Event MouseMove] = [Action ViewportOnMouseMove($source, $eventArgs)];
-                            [Event MouseUp] = [Action ViewportOnMouseUp()]">
+                            [Event MouseLeftButtonDown] = [Action OnViewportMouseLeftDown($source, $eventArgs)];
+                            [Event MouseMove] = [Action OnViewportMouseMove($source, $eventArgs)];
+                            [Event MouseUp] = [Action OnViewportMouseUp()]">
                     <!--效果器-->
                     <hx:Viewport3DX.EffectsManager>
                         <hx:DefaultEffectsManager />

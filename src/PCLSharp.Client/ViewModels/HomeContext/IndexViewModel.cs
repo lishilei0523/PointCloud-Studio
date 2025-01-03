@@ -250,7 +250,7 @@ namespace PCLSharp.Client.ViewModels.HomeContext
         {
             OpenFileDialog openFileDialog = new OpenFileDialog
             {
-                Filter = Constants.OpenCloudExtFilter,
+                Filter = "点云文件(*.pcd;*.ply;*.obj)|*.pcd;*.ply;*.obj",
                 AddExtension = true,
                 RestoreDirectory = true
             };
@@ -276,7 +276,7 @@ namespace PCLSharp.Client.ViewModels.HomeContext
         {
             OpenFileDialog openFileDialog = new OpenFileDialog
             {
-                Filter = Constants.OpenCloudExtFilter,
+                Filter = "点云文件(*.pcd;*.ply;*.obj)|*.pcd;*.ply;*.obj",
                 AddExtension = true,
                 RestoreDirectory = true
             };
@@ -385,7 +385,7 @@ namespace PCLSharp.Client.ViewModels.HomeContext
 
             SaveFileDialog saveFileDialog = new SaveFileDialog
             {
-                Filter = Constants.SaveCloudExtFilter,
+                Filter = "(*.pcd)|*.pcd|(*.ply)|*.ply",
                 FileName = $"{Path.GetFileNameWithoutExtension(this.FilePath)} - 副本",
                 AddExtension = true,
                 RestoreDirectory = true

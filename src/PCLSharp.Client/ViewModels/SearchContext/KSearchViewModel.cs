@@ -1,5 +1,4 @@
 ﻿using HelixToolkit.Wpf.SharpDX;
-using HelixToolkit.Wpf.SharpDX.Model.Scene;
 using PCLSharp.Client.ViewModels.CommonContext;
 using PCLSharp.Extensions.Helix;
 using PCLSharp.Modules.Interfaces;
@@ -163,14 +162,14 @@ namespace PCLSharp.Client.ViewModels.SearchContext
         }
         #endregion
 
-        #region 鼠标左键按下事件 —— void ViewportOnMouseLeftDown(Viewport3DX viewport3D...
+        #region 视口鼠标左击事件 —— void OnViewportMouseLeftDown(Viewport3DX viewport3D...
         /// <summary>
-        /// 鼠标左键按下事件
+        /// 视口鼠标左击事件
         /// </summary>
-        public void ViewportOnMouseLeftDown(Viewport3DX viewport3D, MouseButtonEventArgs eventArgs)
+        public void OnViewportMouseLeftDown(Viewport3DX viewport3D, MouseButtonEventArgs eventArgs)
         {
             Point mousePos2D = eventArgs.GetPosition(viewport3D);
-            bool success = viewport3D.FindNearest(mousePos2D, out Point3D mousePos3D, out Vector3D _, out Element3D _, out SceneNode _);
+            bool success = viewport3D.FindNearest(mousePos2D, out Point3D mousePos3D, out _, out _, out _);
 
             //获得焦点
             if (success)
@@ -179,8 +178,6 @@ namespace PCLSharp.Client.ViewModels.SearchContext
                 this.ReferencePointX = (float)mousePos3D.X;
                 this.ReferencePointY = (float)mousePos3D.Y;
                 this.ReferencePointZ = (float)mousePos3D.Z;
-
-                eventArgs.Handled = true;
             }
         }
         #endregion

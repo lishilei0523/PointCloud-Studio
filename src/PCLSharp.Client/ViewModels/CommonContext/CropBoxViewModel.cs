@@ -134,11 +134,11 @@ namespace PCLSharp.Client.ViewModels.CommonContext
 
         //Events
 
-        #region 鼠标左键按下事件 —— void ViewportOnMouseLeftDown(Viewport3DX viewport3D, MouseButtonEventArgs eventArgs)
+        #region 视口鼠标左击事件 —— void OnViewportMouseLeftDown(Viewport3DX viewport3D...
         /// <summary>
-        /// 鼠标左键按下事件
+        /// 视口鼠标左击事件
         /// </summary>
-        public void ViewportOnMouseLeftDown(Viewport3DX viewport3D, MouseButtonEventArgs eventArgs)
+        public void OnViewportMouseLeftDown(Viewport3DX viewport3D, MouseButtonEventArgs eventArgs)
         {
             Point mousePos2D = eventArgs.GetPosition(viewport3D);
             Point3D mousePos3D;
@@ -150,7 +150,6 @@ namespace PCLSharp.Client.ViewModels.CommonContext
             {
                 viewport3D.LookAt(mousePos3D, 200);
 
-                eventArgs.Handled = true;
                 return;
             }
             //选中元素
@@ -159,17 +158,16 @@ namespace PCLSharp.Client.ViewModels.CommonContext
                 this._isSelectedBox = true;
                 this._selectedPoint2D = mousePos2D;
 
-                eventArgs.Handled = true;
                 return;
             }
         }
         #endregion
 
-        #region 鼠标移动事件 —— void ViewportOnMouseMove(Viewport3DX viewport3D, MouseEventArgs eventArgs)
+        #region 视口鼠标移动事件 —— void OnViewportMouseMove(Viewport3DX viewport3D...
         /// <summary>
-        /// 鼠标移动事件
+        /// 视口鼠标移动事件
         /// </summary>
-        public void ViewportOnMouseMove(Viewport3DX viewport3D, MouseEventArgs eventArgs)
+        public void OnViewportMouseMove(Viewport3DX viewport3D, MouseEventArgs eventArgs)
         {
             if (this._isSelectedBox)
             {
@@ -185,7 +183,7 @@ namespace PCLSharp.Client.ViewModels.CommonContext
                 Vector3 normal = lookDirction.ToVector3();
                 bool success = ray3D.PlaneIntersection(position, normal, out Vector3 newVisualPos3D);//移动平面上的交点
 
-                //缩放
+                //调整尺寸
                 if (success && eventArgs.LeftButton == MouseButtonState.Pressed && Keyboard.IsKeyDown(Key.LeftCtrl))
                 {
                     //设置光标
@@ -218,7 +216,6 @@ namespace PCLSharp.Client.ViewModels.CommonContext
                         Trace.WriteLine("不允许！");
                     }
 
-                    eventArgs.Handled = true;
                     return;
                 }
                 //旋转
@@ -249,7 +246,6 @@ namespace PCLSharp.Client.ViewModels.CommonContext
                     else
                     {
                         Trace.WriteLine("不允许！");
-                        eventArgs.Handled = true;
                         return;
                     }
 
@@ -257,7 +253,6 @@ namespace PCLSharp.Client.ViewModels.CommonContext
                     Matrix3D newMatrix3D = newMatrix.ToMatrix3D();
                     this.BoundingBox.Transform = new MatrixTransform3D(newMatrix3D);
 
-                    eventArgs.Handled = true;
                     return;
                 }
                 //平移
@@ -272,18 +267,17 @@ namespace PCLSharp.Client.ViewModels.CommonContext
                     rtMatrix3D.OffsetZ = newVisualPos3D.Z;
                     this.BoundingBox.Transform = new MatrixTransform3D(rtMatrix3D);
 
-                    eventArgs.Handled = true;
                     return;
                 }
             }
         }
         #endregion
 
-        #region 鼠标松开事件 —— void ViewportOnMouseUp()
+        #region 视口鼠标松开事件 —— void OnViewportMouseUp()
         /// <summary>
-        /// 鼠标松开事件
+        /// 视口鼠标松开事件
         /// </summary>
-        public void ViewportOnMouseUp()
+        public void OnViewportMouseUp()
         {
             //设置光标
             Mouse.OverrideCursor = Cursors.Arrow;

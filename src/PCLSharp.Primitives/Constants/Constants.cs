@@ -49,7 +49,7 @@ namespace PCLSharp
         /// <summary>
         /// 打开点云文件扩展名过滤器
         /// </summary>
-        public const string OpenCloudExtFilter = "(*.pcd)|*.pcd|(*.ply)|*.ply|(*.obj)|*.obj";
+        public const string OpenCloudExtFilter = "点云文件(*.pcd;*.ply;*.obj)|*.pcd;*.ply;*.obj";
 
         /// <summary>
         /// 保存点云文件扩展名过滤器
