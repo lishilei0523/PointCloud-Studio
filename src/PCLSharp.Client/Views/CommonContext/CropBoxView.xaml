@@ -30,8 +30,6 @@
             <RowDefinition Height="Auto" />
             <!--Body-->
             <RowDefinition Height="*" />
-            <!--Footer-->
-            <RowDefinition Height="25" />
             <!--Controller-->
             <RowDefinition Height="50" />
         </Grid.RowDefinitions>
@@ -45,16 +43,36 @@
         <!--Body-->
         <busyIndicator:BusyMask Grid.Row="1" IndicatorType="Cupertino" IsBusy="{Binding IsBusy}">
             <!--点云预览-->
-            <GroupBox Header="点云预览" Margin="4,4,4,4">
+            <GroupBox Margin="4">
+                <!--Header-->
+                <GroupBox.HeaderTemplate>
+                    <DataTemplate>
+                        <Grid DataContext="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=Window}, Path=DataContext}">
+                            <TextBlock Text="点云预览" />
+                            <WrapPanel Margin="0,0,10,0" HorizontalAlignment="Right" VerticalAlignment="Center">
+                                <TextBlock Text="{Binding Camera.LookDirection, StringFormat=LookDirection: \{0:0.0\}}" FontSize="12" />
+                                <TextBlock Text=" | " FontSize="12" />
+                                <TextBlock Text="{Binding Camera.UpDirection, StringFormat=UpDirection: \{0:0.0\}}" FontSize="12" />
+                                <TextBlock Text=" | " FontSize="12" />
+                                <TextBlock Text="{Binding Camera.Position, StringFormat=Position: \{0:0.0\}}" FontSize="12" />
+                                <TextBlock Text=" | " FontSize="12" />
+                                <TextBlock Text="{Binding Camera.FieldOfView, StringFormat=FieldOfView: \{0:0.0\}}" FontSize="12" />
+                                <TextBlock Text=" | " FontSize="12" />
+                                <TextBlock Text="点云数量：" FontSize="12" />
+                                <TextBlock Text="{Binding PointCloud.Positions.Count}" FontSize="12" />
+                            </WrapPanel>
+                        </Grid>
+                    </DataTemplate>
+                </GroupBox.HeaderTemplate>
                 <hx:Viewport3DX BackgroundColor="LightGray"
-                            MSAA="{Binding MSAALevel}"
-                            ShowCoordinateSystem="True"
-                            CoordinateSystemSize="2"
-                            CoordinateSystemHorizontalPosition="-1"
-                            CoordinateSystemVerticalPosition="1"
-                            CoordinateSystemLabelForeground="Black"
-                            Camera="{Binding Camera}"
-                            cm:Message.Attach="
+                                MSAA="{Binding MSAALevel}"
+                                ShowCoordinateSystem="True"
+                                CoordinateSystemSize="2"
+                                CoordinateSystemHorizontalPosition="-1"
+                                CoordinateSystemVerticalPosition="1"
+                                CoordinateSystemLabelForeground="Black"
+                                Camera="{Binding Camera}"
+                                cm:Message.Attach="
                             [Event MouseLeftButtonDown] = [Action OnViewportMouseLeftDown($source, $eventArgs)];
                             [Event MouseMove] = [Action OnViewportMouseMove($source, $eventArgs)];
                             [Event MouseUp] = [Action OnViewportMouseUp()]">
@@ -83,26 +101,8 @@
                 </hx:Viewport3DX>
             </GroupBox>
         </busyIndicator:BusyMask>
-        <!--Footer-->
-        <Border Grid.Row="2" Style="{StaticResource Panel.Styles.Function.Border}" BorderThickness="0,1,0,0">
-            <Grid>
-                <WrapPanel Margin="10,0,0,0" HorizontalAlignment="Left" VerticalAlignment="Center">
-                    <TextBlock Text="{Binding Camera.LookDirection, StringFormat=LookDirection: \{0:0.0\}}" FontSize="12" />
-                    <TextBlock Text=" | " FontSize="12" />
-                    <TextBlock Text="{Binding Camera.UpDirection, StringFormat=UpDirection: \{0:0.0\}}" FontSize="12" />
-                    <TextBlock Text=" | " FontSize="12" />
-                    <TextBlock Text="{Binding Camera.Position, StringFormat=Position: \{0:0.0\}}" FontSize="12" />
-                    <TextBlock Text=" | " FontSize="12" />
-                    <TextBlock Text="{Binding Camera.FieldOfView, StringFormat=FieldOfView: \{0:0.0\}}" FontSize="12" />
-                </WrapPanel>
-                <WrapPanel Margin="0,0,10,0" HorizontalAlignment="Right" VerticalAlignment="Center">
-                    <TextBlock Text="点云数量：" FontSize="12" />
-                    <TextBlock Text="{Binding PointCloud.Positions.Count}" FontSize="12" />
-                </WrapPanel>
-            </Grid>
-        </Border>
         <!--Controller-->
-        <Grid Grid.Row="3" Style="{StaticResource Form.Styles.Submit.Grid}">
+        <Grid Grid.Row="2" Style="{StaticResource Form.Styles.Submit.Grid}">
             <WrapPanel Style="{StaticResource Form.Styles.Submit.WrapPanel}">
                 <Button Content="确定" cm:Message.Attach="TryCloseAsync('true')" Style="{StaticResource Button.Styles.Fluent.Focus}" />
                 <Button Content="取消" cm:Message.Attach="TryCloseAsync('false')" Style="{StaticResource Button.Styles.Fluent.Default}" />

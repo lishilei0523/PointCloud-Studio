@@ -1,5 +1,4 @@
 ﻿using HelixToolkit.Wpf.SharpDX;
-using HelixToolkit.Wpf.SharpDX.Model.Scene;
 using MathNet.Numerics.LinearAlgebra;
 using PCLSharp.Modules.Interfaces;
 using SD.Infrastructure.WPF.Caliburn.Aspects;
@@ -143,7 +142,7 @@ namespace PCLSharp.Client.ViewModels.CommonContext
             Point mousePos2D = eventArgs.GetPosition(viewport3D);
             Point3D mousePos3D;
             Element3D visual3D;
-            bool success = viewport3D.FindNearest(mousePos2D, out mousePos3D, out Vector3D _, out visual3D, out SceneNode _);
+            bool success = viewport3D.FindNearest(mousePos2D, out mousePos3D, out _, out visual3D, out _);
 
             //获得焦点
             if (success && Keyboard.IsKeyDown(Key.LeftShift))
@@ -172,18 +171,17 @@ namespace PCLSharp.Client.ViewModels.CommonContext
             if (this._isSelectedBox)
             {
                 //计算模型位置
-                Matrix3D rtMatrix3D = this.BoundingBox.Transform.Value;         //模型的变换矩阵
-                Point3D oldVisualPos3D = rtMatrix3D.GetLocation();              //模型位置
+                Matrix3D rtMatrix3D = this.BoundingBox.Transform.Value;               //模型变换矩阵
+                Point3D oldVisualPos3D = rtMatrix3D.GetLocation();                    //模型位置
 
                 //计算模型新位置
-                Point mousePos2D = eventArgs.GetPosition(viewport3D);           //鼠标位置
-                Ray ray3D = viewport3D.UnProject(mousePos2D);                   //反透射
-                Vector3D lookDirction = viewport3D.Camera.LookDirection;        //相机方向
-                Vector3 position = oldVisualPos3D.ToVector3();
-                Vector3 normal = lookDirction.ToVector3();
-                bool success = ray3D.PlaneIntersection(position, normal, out Vector3 newVisualPos3D);//移动平面上的交点
+                Point mousePos2D = eventArgs.GetPosition(viewport3D);                 //鼠标2D位置
+                Ray ray = viewport3D.UnProject(mousePos2D);                           //逆透视
+                Vector3 oldVisualPos = oldVisualPos3D.ToVector3();
+                Vector3 lookDirction = viewport3D.Camera.LookDirection.ToVector3();   //相机方向
+                bool success = ray.PlaneIntersection(oldVisualPos, lookDirction, out Vector3 newVisualPos3D);//移动平面上的交点
 
-                //调整尺寸
+                //改变尺寸
                 if (success && eventArgs.LeftButton == MouseButtonState.Pressed && Keyboard.IsKeyDown(Key.LeftCtrl))
                 {
                     //设置光标
@@ -224,7 +222,7 @@ namespace PCLSharp.Client.ViewModels.CommonContext
                     //设置光标
                     Mouse.OverrideCursor = Cursors.ScrollWE;
 
-                    double angle = mousePos2D.X - this._selectedPoint2D!.Value.X + mousePos2D.Y - this._selectedPoint2D!.Value.Y;
+                    double angle = (mousePos2D.X - this._selectedPoint2D!.Value.X + mousePos2D.Y - this._selectedPoint2D!.Value.Y) % 180;
                     Matrix<double> rtMatrix = TransformExtension.ToMatrix(rtMatrix3D);
                     Pose oldPose = rtMatrix.ToPose();
                     Pose newPose;
