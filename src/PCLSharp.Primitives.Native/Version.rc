@@ -24,7 +24,7 @@ BEGIN
         BEGIN
             VALUE "CompanyName", "SD"
             VALUE "FileDescription", "SD.Framework PCL基元Native"
-            VALUE "LegalCopyright", "Copyright © SD 2024"
+            VALUE "LegalCopyright", "Copyright © SD 2025"
             VALUE "ProductName", "PCLSharp"
             VALUE "ProductVersion", "1.0.1"
         END
