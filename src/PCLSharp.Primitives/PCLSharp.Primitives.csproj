@@ -20,7 +20,12 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <None Include="..\PCLSharp.Primitives.Native\bin\$(Configuration)\x64\*.dll">
+    <None Include="$(SolutionDir)\bin\$(Configuration)\PCLSharp.Primitives.Native.dll" Condition="$([MSBuild]::IsOSPlatform('Windows'))">
+      <Link>%(RecursiveDir)%(Filename)%(Extension)</Link>
+      <Visible>False</Visible>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="$(SolutionDir)\bin\$(Configuration)\libPCLSharp.Primitives.Native.so" Condition="$([MSBuild]::IsOSPlatform('Linux'))">
       <Link>%(RecursiveDir)%(Filename)%(Extension)</Link>
       <Visible>False</Visible>
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>

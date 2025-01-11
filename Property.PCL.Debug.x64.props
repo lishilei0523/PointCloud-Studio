@@ -6,7 +6,7 @@
     <_PropertySheetDisplayName>Property.PCL.Debug.x64</_PropertySheetDisplayName>
     <IncludePath>E:\Packages\cpp\PCL\v1.14.0\include\pcl-1.14;E:\Packages\cpp\PCL\v1.14.0\3rdParty\Boost\include\boost-1_84;E:\Packages\cpp\PCL\v1.14.0\3rdParty\Eigen3\include\eigen3;E:\Packages\cpp\PCL\v1.14.0\3rdParty\FLANN\include;E:\Packages\cpp\PCL\v1.14.0\3rdParty\OpenNI2\Include;E:\Packages\cpp\PCL\v1.14.0\3rdParty\Qhull\include;E:\Packages\cpp\PCL\v1.14.0\3rdParty\VTK\include\vtk-9.3;$(IncludePath)</IncludePath>
     <LibraryPath>E:\Packages\cpp\PCL\v1.14.0\lib;E:\Packages\cpp\PCL\v1.14.0\3rdParty\Boost\lib;E:\Packages\cpp\PCL\v1.14.0\3rdParty\FLANN\lib;E:\Packages\cpp\PCL\v1.14.0\3rdParty\OpenNI2\Lib;E:\Packages\cpp\PCL\v1.14.0\3rdParty\Qhull\lib;E:\Packages\cpp\PCL\v1.14.0\3rdParty\VTK\lib;$(LibraryPath)</LibraryPath>
-    <OutDir>bin\$(Configuration)\$(Platform)\</OutDir>
+    <OutDir>$(SolutionDir)\bin\$(Configuration)\</OutDir>
     <IntDir>obj\$(Configuration)\$(Platform)\</IntDir>
   </PropertyGroup>
   <ItemDefinitionGroup>
@@ -19,6 +19,7 @@
       <EnableEnhancedInstructionSet>AdvancedVectorExtensions</EnableEnhancedInstructionSet>
       <SDLCheck>false</SDLCheck>
       <OpenMPSupport>true</OpenMPSupport>
+      <AdditionalOptions>/bigobj %(AdditionalOptions)</AdditionalOptions>
       <GenerateXMLDocumentationFiles>true</GenerateXMLDocumentationFiles>
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
     </ClCompile>
