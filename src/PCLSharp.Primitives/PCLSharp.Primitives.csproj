@@ -25,7 +25,7 @@
       <Visible>False</Visible>
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Include="$(SolutionDir)\bin\$(Configuration)\libPCLSharp.Primitives.Native.so" Condition="$([MSBuild]::IsOSPlatform('Linux'))">
+    <None Include="$(SolutionDir)\bin\libPCLSharp.Primitives.Native.so" Condition="$([MSBuild]::IsOSPlatform('Linux'))">
       <Link>%(RecursiveDir)%(Filename)%(Extension)</Link>
       <Visible>False</Visible>
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
