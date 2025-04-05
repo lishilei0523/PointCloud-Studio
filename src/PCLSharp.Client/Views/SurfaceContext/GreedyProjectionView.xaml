@@ -9,7 +9,7 @@
                  xmlns:busyIndicator="https://github.com/Peoky/BusyIndicator"
                  xmlns:hx="http://helix-toolkit.org/wpf/SharpDX"
                  mc:Ignorable="d"
-                 Title="贪婪三角化"
+                 Title="贪婪三角化重建"
                  Width="1440" Height="900" FontSize="14"
                  WindowStartupLocation="CenterOwner"
                  Style="{StaticResource MetroWindow.Styles.Clean}">
