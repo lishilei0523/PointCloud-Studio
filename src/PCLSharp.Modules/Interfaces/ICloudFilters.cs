@@ -82,5 +82,15 @@ namespace PCLSharp.Modules.Interfaces
         /// <returns>过滤后点集</returns>
         Point3F[] ApplyRadiusOutlierRemoval(IEnumerable<Point3F> points, float radius, int minNeighborsInRadius);
         #endregion
+
+        #region # 适用移动最小二乘法重采样 —— Point3F[] ApplyMovingLeastSquares(IEnumerable<Point3F> points...
+        /// <summary>
+        /// 适用移动最小二乘法重采样
+        /// </summary>
+        /// <param name="points">点集</param>
+        /// <param name="radius">搜索半径</param>
+        /// <returns>过滤后点集</returns>
+        Point3F[] ApplyMovingLeastSquares(IEnumerable<Point3F> points, float radius);
+        #endregion
     }
 }

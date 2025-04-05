@@ -2,6 +2,7 @@
   <PropertyGroup>
     <TargetFrameworks>net462;netstandard2.0</TargetFrameworks>
     <LangVersion>8.0</LangVersion>
+    <DocumentationFile>$(AssemblyName).xml</DocumentationFile>
     <Authors>Lee</Authors>
     <Company>SD</Company>
     <Description>SD.Framework PCL绘图扩展</Description>
@@ -11,16 +12,9 @@
     <FileVersion>1.0.0.0</FileVersion>
   </PropertyGroup>
 
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
-    <DocumentationFile>bin\Debug\$(TargetFramework)\PCLSharp.Extensions.Plotter.xml</DocumentationFile>
-  </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
-    <DocumentationFile>bin\Release\$(TargetFramework)\PCLSharp.Extensions.Plotter.xml</DocumentationFile>
-  </PropertyGroup>
-
   <ItemGroup>
     <PackageReference Include="SkiaSharp" Version="3.116.1" />
-    <PackageReference Include="ScottPlot" Version="5.0.54" />
+    <PackageReference Include="ScottPlot" Version="5.0.55" />
   </ItemGroup>
 
   <ItemGroup>

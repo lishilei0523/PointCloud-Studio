@@ -226,3 +226,12 @@ void disposeAlignmentResult(const AlignmentResult* pointer)
 {
 	delete pointer;
 }
+
+/// <summary>
+/// 释放网格几何
+/// </summary>
+/// <param name="pointer">指针</param>
+void disposeMeshGeometry(const MeshGeometry* pointer)
+{
+	delete pointer;
+}

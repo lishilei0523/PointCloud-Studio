@@ -1,0 +1,2608 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>PCLSharp.Modules</name>
+    </assembly>
+    <members>
+        <member name="T:PCLSharp.Modules.Declarations.CommonNative">
+            <summary>
+            点云通用操作声明
+            </summary>
+        </member>
+        <member name="M:PCLSharp.Modules.Declarations.CommonNative.EstimateCentroid(PCLSharp.Primitives.Models.Point3F[],System.Int32)">
+            <summary>
+            估算质心
+            </summary>
+            <param name="points">点集</param>
+            <param name="length">点集长度</param>
+            <returns>质心坐标点</returns>
+        </member>
+        <member name="M:PCLSharp.Modules.Declarations.CommonNative.AffineTransform(PCLSharp.Primitives.Models.Point3F[],System.Int32,PCLSharp.Primitives.Models.Pose)">
+            <summary>
+            仿射变换
+            </summary>
+            <param name="points">点集</param>
+            <param name="length">点集长度</param>
+            <param name="pose">位姿</param>
+            <returns>变换后点云</returns>
+        </member>
+        <member name="M:PCLSharp.Modules.Declarations.CommonNative.MatrixTransform(PCLSharp.Primitives.Models.Point3F[],System.Int32,System.Single[])">
+            <summary>
+            矩阵变换
+            </summary>
+            <param name="points">点集</param>
+            <param name="length">点集长度</param>
+            <param name="matrixArray">矩阵数组(长度: 16)</param>
+            <returns>变换后点云</returns>
+        </member>
+        <member name="M:PCLSharp.Modules.Declarations.CommonNative.MergePointsNormals(PCLSharp.Primitives.Models.Point3F[],PCLSharp.Primitives.Models.Normal3F[],System.Int32)">
+            <summary>
+            合并坐标点法向量
+            </summary>
+            <param name="points">点集</param>
+            <param name="normal3Fs">法向量集</param>
+            <param name="length">点集长度</param>
+            <returns>点集</returns>
+        </member>
+        <member name="M:PCLSharp.Modules.Declarations.CommonNative.CropBox(PCLSharp.Primitives.Models.Point3F[],System.Int32,PCLSharp.Primitives.Models.Point3F,PCLSharp.Primitives.Models.Point3F,System.Boolean)">
+            <summary>
+            长方体剪裁
+            </summary>
+            <param name="points">点集</param>
+            <param name="length">点集长度</param>
+            <param name="minPoint">最小坐标点</param>
+            <param name="maxPoint">最大坐标点</param>
+            <param name="negative">true: 剪裁/false: 保留</param>
+            <returns>剪裁后点云</returns>
+        </member>
+        <member name="M:PCLSharp.Modules.Declarations.CommonNative.CropConvexHull(PCLSharp.Primitives.Models.Point3F[],System.Int32,PCLSharp.Primitives.Models.Point3F[],System.Int32,System.Int32)">
+            <summary>
+            凸包剪裁
+            </summary>
+            <param name="points">点集</param>
+            <param name="length">点集长度</param>
+            <param name="contourPoints">轮廓点集</param>
+            <param name="contourLength">轮廓点集长度</param>
+            <param name="dimensionsCount">维度数</param>
+            <returns>剪裁后点云</returns>
+        </member>
+        <member name="M:PCLSharp.Modules.Declarations.CommonNative.ProjectPlane(PCLSharp.Primitives.Models.Point3F[],System.Int32,System.Single,System.Single,System.Single,System.Single)">
+            <summary>
+            投射平面
+            </summary>
+            <param name="points">点集</param>
+            <param name="length">点集长度</param>
+            <param name="a">平面方程系数a</param>
+            <param name="b">平面方程系数b</param>
+            <param name="c">平面方程系数c</param>
+            <param name="d">平面方程系数d</param>
+            <returns>投射后点云</returns>
+            <remarks>平面方程: ax + by +cz + d = 0</remarks>
+        </member>
+        <member name="M:PCLSharp.Modules.Declarations.CommonNative.ExtractBorder(PCLSharp.Primitives.Models.Point3F[],System.Int32)">
+            <summary>
+            提取边框
+            </summary>
+            <param name="points">点集</param>
+            <param name="length">点集长度</param>
+            <returns>边框点云</returns>
+        </member>
+        <member name="M:PCLSharp.Modules.Declarations.CommonNative.ExtractBoundary(PCLSharp.Primitives.Models.Point3F[],System.Int32,System.Int32,System.Single,System.Single,System.Int32)">
+            <summary>
+            提取边界
+            </summary>
+            <param name="points">点集</param>
+            <param name="length">点集长度</param>
+            <param name="normalK">法向量K</param>
+            <param name="featureRadius">特征半径</param>
+            <param name="angleThreshold">角度阈值</param>
+            <param name="threadsCount">线程数</param>
+            <returns>边界点云</returns>
+        </member>
+        <member name="T:PCLSharp.Modules.Declarations.DisposeNative">
+            <summary>
+            点云释放声明
+            </summary>
+        </member>
+        <member name="M:PCLSharp.Modules.Declarations.DisposeNative.DisposePoint3F(System.IntPtr)">
+            <summary>
+            释放坐标点
+            </summary>
+            <param name="pointer">指针</param>
+        </member>
+        <member name="M:PCLSharp.Modules.Declarations.DisposeNative.DisposePoint3Fs(System.IntPtr)">
+            <summary>
+            释放坐标点集
+            </summary>
+            <param name="pointer">指针</param>
+        </member>
+        <member name="M:PCLSharp.Modules.Declarations.DisposeNative.DisposePoint3FsGroup(System.IntPtr,System.Int32)">
+            <summary>
+            释放坐标点集分组
+            </summary>
+            <param name="pointer">二级指针</param>
+            <param name="groupCount">分组数</param>
+        </member>
+        <member name="M:PCLSharp.Modules.Declarations.DisposeNative.DisposeNormal3F(System.IntPtr)">
+            <summary>
+            释放法向量
+            </summary>
+            <param name="pointer">指针</param>
+        </member>
+        <member name="M:PCLSharp.Modules.Declarations.DisposeNative.DisposeNormal3Fs(System.IntPtr)">
+            <summary>
+            释放法向量集
+            </summary>
+            <param name="pointer">指针</param>
+        </member>
+        <member name="M:PCLSharp.Modules.Declarations.DisposeNative.DisposeNormal3FsGroup(System.IntPtr,System.Int32)">
+            <summary>
+            释放法向量集分组
+            </summary>
+            <param name="pointer">二级指针</param>
+            <param name="groupCount">分组数</param>
+        </member>
+        <member name="M:PCLSharp.Modules.Declarations.DisposeNative.DisposePoint3Normal3(System.IntPtr)">
+            <summary>
+            释放坐标点法向量
+            </summary>
+            <param name="pointer">指针</param>
+        </member>
+        <member name="M:PCLSharp.Modules.Declarations.DisposeNative.DisposePoint3Normal3s(System.IntPtr)">
+            <summary>
+            释放坐标点法向量集
+            </summary>
+            <param name="pointer">指针</param>
+        </member>
+        <member name="M:PCLSharp.Modules.Declarations.DisposeNative.DisposePoint3Normal3sGroup(System.IntPtr,System.Int32)">
+            <summary>
+            释放坐标点法向量集分组
+            </summary>
+            <param name="pointer">二级指针</param>
+            <param name="groupCount">分组数</param>
+        </member>
+        <member name="M:PCLSharp.Modules.Declarations.DisposeNative.DisposePoint3Color4(System.IntPtr)">
+            <summary>
+            释放坐标点颜色
+            </summary>
+            <param name="pointer">指针</param>
+        </member>
+        <member name="M:PCLSharp.Modules.Declarations.DisposeNative.DisposePoint3Color4s(System.IntPtr)">
+            <summary>
+            释放坐标点颜色集
+            </summary>
+            <param name="pointer">指针</param>
+        </member>
+        <member name="M:PCLSharp.Modules.Declarations.DisposeNative.DisposePoint3Color4sGroup(System.IntPtr,System.Int32)">
+            <summary>
+            释放坐标点颜色集分组
+            </summary>
+            <param name="pointer">二级指针</param>
+            <param name="groupCount">分组数</param>
+        </member>
+        <member name="M:PCLSharp.Modules.Declarations.DisposeNative.DisposeNarf36F(System.IntPtr)">
+            <summary>
+            释放NARF描述子
+            </summary>
+            <param name="pointer">指针</param>
+        </member>
+        <member name="M:PCLSharp.Modules.Declarations.DisposeNative.DisposeNarf36Fs(System.IntPtr)">
+            <summary>
+            释放NARF描述子集
+            </summary>
+            <param name="pointer">指针</param>
+        </member>
+        <member name="M:PCLSharp.Modules.Declarations.DisposeNative.DisposePFHSignature125F(System.IntPtr)">
+            <summary>
+            释放PFH描述子
+            </summary>
+            <param name="pointer">指针</param>
+        </member>
+        <member name="M:PCLSharp.Modules.Declarations.DisposeNative.DisposePFHSignature125Fs(System.IntPtr)">
+            <summary>
+            释放PFH描述子集
+            </summary>
+            <param name="pointer">指针</param>
+        </member>
+        <member name="M:PCLSharp.Modules.Declarations.DisposeNative.DisposeFPFHSignature33F(System.IntPtr)">
+            <summary>
+            释放FPFH描述子
+            </summary>
+            <param name="pointer">指针</param>
+        </member>
+        <member name="M:PCLSharp.Modules.Declarations.DisposeNative.DisposeFPFHSignature33Fs(System.IntPtr)">
+            <summary>
+            释放FPFH描述子集
+            </summary>
+            <param name="pointer">指针</param>
+        </member>
+        <member name="M:PCLSharp.Modules.Declarations.DisposeNative.DisposeShapeContext1980F(System.IntPtr)">
+            <summary>
+            释放3DSC描述子
+            </summary>
+            <param name="pointer">指针</param>
+        </member>
+        <member name="M:PCLSharp.Modules.Declarations.DisposeNative.DisposeShapeContext1980Fs(System.IntPtr)">
+            <summary>
+            释放3DSC描述子集
+            </summary>
+            <param name="pointer">指针</param>
+        </member>
+        <member name="M:PCLSharp.Modules.Declarations.DisposeNative.DisposeShot352F(System.IntPtr)">
+            <summary>
+            释放SHOT描述子
+            </summary>
+            <param name="pointer">指针</param>
+        </member>
+        <member name="M:PCLSharp.Modules.Declarations.DisposeNative.DisposeShot352Fs(System.IntPtr)">
+            <summary>
+            释放SHOT描述子集
+            </summary>
+            <param name="pointer">指针</param>
+        </member>
+        <member name="M:PCLSharp.Modules.Declarations.DisposeNative.DisposeAlignmentResult(System.IntPtr)">
+            <summary>
+            释放配准结果
+            </summary>
+            <param name="pointer">指针</param>
+        </member>
+        <member name="M:PCLSharp.Modules.Declarations.DisposeNative.DisposeMeshGeometry(System.IntPtr)">
+            <summary>
+            释放网格几何
+            </summary>
+            <param name="pointer">指针</param>
+        </member>
+        <member name="T:PCLSharp.Modules.Declarations.FeaturesNative">
+            <summary>
+            点云特征声明
+            </summary>
+        </member>
+        <member name="M:PCLSharp.Modules.Declarations.FeaturesNative.ComputeNARF(PCLSharp.Primitives.Models.Point3F[],System.Int32,System.Single,System.Single,System.Single,System.Single,System.Single,System.Int32,System.Single,System.Boolean)">
+            <summary>
+            计算NARF特征
+            </summary>
+            <param name="points">点集</param>
+            <param name="length">点集长度</param>
+            <param name="angularResolution">角度分辨率</param>
+            <param name="maxAngleWidth">传感器水平边界角度</param>
+            <param name="maxAngleHeight">传感器垂直边界角度</param>
+            <param name="noiseLevel">所有与最近点的最大距离</param>
+            <param name="minRange">最小可见范围</param>
+            <param name="borderSize">边界尺寸</param>
+            <param name="supportSize">计算范围半径</param>
+            <param name="rotationInvariant">旋转不变性</param>
+            <returns>NARF特征描述子集</returns>
+        </member>
+        <member name="M:PCLSharp.Modules.Declarations.FeaturesNative.ComputePFH(PCLSharp.Primitives.Models.Point3F[],System.Int32,System.Int32,System.Int32,System.Int32)">
+            <summary>
+            计算PFH特征
+            </summary>
+            <param name="points">点集</param>
+            <param name="length">点集长度</param>
+            <param name="normalK">法向量K</param>
+            <param name="featureK">特征K</param>
+            <param name="threadsCount">线程数</param>
+            <returns>PFH特征描述子集</returns>
+            <remarks>特征K值要大于法向量K值</remarks>
+        </member>
+        <member name="M:PCLSharp.Modules.Declarations.FeaturesNative.ComputeFPFH(PCLSharp.Primitives.Models.Point3F[],System.Int32,System.Int32,System.Int32,System.Int32)">
+            <summary>
+            计算FPFH特征
+            </summary>
+            <param name="points">点集</param>
+            <param name="length">点集长度</param>
+            <param name="normalK">法向量K</param>
+            <param name="featureK">特征K</param>
+            <param name="threadsCount">线程数</param>
+            <returns>FPFH特征描述子集</returns>
+            <remarks>特征K值要大于法向量K值</remarks>
+        </member>
+        <member name="M:PCLSharp.Modules.Declarations.FeaturesNative.Compute3DSC(PCLSharp.Primitives.Models.Point3F[],System.Int32,System.Int32,System.Single,System.Single,System.Single,System.Int32)">
+            <summary>
+            计算3DSC特征
+            </summary>
+            <param name="points">点集</param>
+            <param name="length">点集长度</param>
+            <param name="normalK">法向量K</param>
+            <param name="searchRadius">搜索半径</param>
+            <param name="pointDensityRadius">点密度半径</param>
+            <param name="minimalRadius">最小半径</param>
+            <param name="threadsCount">线程数</param>
+            <returns>3DSC特征描述子集</returns>
+            <remarks>
+            点密度半径建议设置为搜索半径的1/5；
+            最小半径建议设置为搜索半径的1/10；
+            </remarks>
+        </member>
+        <member name="M:PCLSharp.Modules.Declarations.FeaturesNative.ComputeSHOT(PCLSharp.Primitives.Models.Point3F[],System.Int32,System.Int32,System.Single,System.Int32)">
+            <summary>
+            计算SHOT特征
+            </summary>
+            <param name="points">点集</param>
+            <param name="length">点集长度</param>
+            <param name="normalK">法向量K</param>
+            <param name="featureRadius">特征搜索半径</param>
+            <param name="threadsCount">线程数</param>
+            <returns>SHOT特征描述子集</returns>
+        </member>
+        <member name="T:PCLSharp.Modules.Declarations.FilesNative">
+            <summary>
+            点云文件声明
+            </summary>
+        </member>
+        <member name="M:PCLSharp.Modules.Declarations.FilesNative.LoadPCD(System.String)">
+            <summary>
+            加载PCD文件
+            </summary>
+            <param name="filePath">文件路径</param>
+            <returns>点集</returns>
+        </member>
+        <member name="M:PCLSharp.Modules.Declarations.FilesNative.LoadNormalPCD(System.String)">
+            <summary>
+            加载法向量PCD文件
+            </summary>
+            <param name="filePath">文件路径</param>
+            <returns>点集</returns>
+        </member>
+        <member name="M:PCLSharp.Modules.Declarations.FilesNative.LoadColorPCD(System.String)">
+            <summary>
+            加载颜色PCD文件
+            </summary>
+            <param name="filePath">文件路径</param>
+            <returns>点集</returns>
+        </member>
+        <member name="M:PCLSharp.Modules.Declarations.FilesNative.LoadPLY(System.String)">
+            <summary>
+            加载PLY文件
+            </summary>
+            <param name="filePath">文件路径</param>
+            <returns>点集</returns>
+        </member>
+        <member name="M:PCLSharp.Modules.Declarations.FilesNative.LoadNormalPLY(System.String)">
+            <summary>
+            加载法向量PLY文件
+            </summary>
+            <param name="filePath">文件路径</param>
+            <returns>点集</returns>
+        </member>
+        <member name="M:PCLSharp.Modules.Declarations.FilesNative.LoadColorPLY(System.String)">
+            <summary>
+            加载颜色PLY文件
+            </summary>
+            <param name="filePath">文件路径</param>
+            <returns>点集</returns>
+        </member>
+        <member name="M:PCLSharp.Modules.Declarations.FilesNative.LoadOBJ(System.String)">
+            <summary>
+            加载OBJ文件
+            </summary>
+            <param name="filePath">文件路径</param>
+            <returns>点集</returns>
+        </member>
+        <member name="M:PCLSharp.Modules.Declarations.FilesNative.LoadNormalOBJ(System.String)">
+            <summary>
+            加载法向量OBJ文件
+            </summary>
+            <param name="filePath">文件路径</param>
+            <returns>点集</returns>
+        </member>
+        <member name="M:PCLSharp.Modules.Declarations.FilesNative.LoadColorOBJ(System.String)">
+            <summary>
+            加载颜色OBJ文件
+            </summary>
+            <param name="filePath">文件路径</param>
+            <returns>点集</returns>
+        </member>
+        <member name="M:PCLSharp.Modules.Declarations.FilesNative.SaveTextPCD(PCLSharp.Primitives.Models.Point3F[],System.Int32,System.String)">
+            <summary>
+            保存PCD文本文件
+            </summary>
+            <param name="points">点集</param>
+            <param name="length">点集长度</param>
+            <param name="filePath">文件路径</param>
+        </member>
+        <member name="M:PCLSharp.Modules.Declarations.FilesNative.SaveBinaryPCD(PCLSharp.Primitives.Models.Point3F[],System.Int32,System.String)">
+            <summary>
+            保存PCD二进制文件
+            </summary>
+            <param name="points">点集</param>
+            <param name="length">点集长度</param>
+            <param name="filePath">文件路径</param>
+        </member>
+        <member name="M:PCLSharp.Modules.Declarations.FilesNative.SaveNormalTextPCD(PCLSharp.Primitives.Models.Point3Normal3[],System.Int32,System.String)">
+            <summary>
+            保存法向量PCD文本文件
+            </summary>
+            <param name="pointNormals">点集</param>
+            <param name="length">点集长度</param>
+            <param name="filePath">文件路径</param>
+        </member>
+        <member name="M:PCLSharp.Modules.Declarations.FilesNative.SaveNormalBinaryPCD(PCLSharp.Primitives.Models.Point3Normal3[],System.Int32,System.String)">
+            <summary>
+            保存法向量PCD二进制文件
+            </summary>
+            <param name="pointNormals">点集</param>
+            <param name="length">点集长度</param>
+            <param name="filePath">文件路径</param>
+        </member>
+        <member name="M:PCLSharp.Modules.Declarations.FilesNative.SaveColorTextPCD(PCLSharp.Primitives.Models.Point3Color4[],System.Int32,System.String)">
+            <summary>
+            保存颜色PCD文本文件
+            </summary>
+            <param name="pointColors">点集</param>
+            <param name="length">点集长度</param>
+            <param name="filePath">文件路径</param>
+        </member>
+        <member name="M:PCLSharp.Modules.Declarations.FilesNative.SaveColorBinaryPCD(PCLSharp.Primitives.Models.Point3Color4[],System.Int32,System.String)">
+            <summary>
+            保存颜色PCD二进制文件
+            </summary>
+            <param name="pointColors">点集</param>
+            <param name="length">点集长度</param>
+            <param name="filePath">文件路径</param>
+        </member>
+        <member name="M:PCLSharp.Modules.Declarations.FilesNative.SaveTextPLY(PCLSharp.Primitives.Models.Point3F[],System.Int32,System.String)">
+            <summary>
+            保存PLY文本文件
+            </summary>
+            <param name="points">点集</param>
+            <param name="length">点集长度</param>
+            <param name="filePath">文件路径</param>
+        </member>
+        <member name="M:PCLSharp.Modules.Declarations.FilesNative.SaveBinaryPLY(PCLSharp.Primitives.Models.Point3F[],System.Int32,System.String)">
+            <summary>
+            保存PLY二进制文件
+            </summary>
+            <param name="points">点集</param>
+            <param name="length">点集长度</param>
+            <param name="filePath">文件路径</param>
+        </member>
+        <member name="M:PCLSharp.Modules.Declarations.FilesNative.SaveNormalTextPLY(PCLSharp.Primitives.Models.Point3Normal3[],System.Int32,System.String)">
+            <summary>
+            保存法向量PLY文本文件
+            </summary>
+            <param name="pointNormals">点集</param>
+            <param name="length">点集长度</param>
+            <param name="filePath">文件路径</param>
+        </member>
+        <member name="M:PCLSharp.Modules.Declarations.FilesNative.SaveNormalBinaryPLY(PCLSharp.Primitives.Models.Point3Normal3[],System.Int32,System.String)">
+            <summary>
+            保存法向量PLY二进制文件
+            </summary>
+            <param name="pointNormals">点集</param>
+            <param name="length">点集长度</param>
+            <param name="filePath">文件路径</param>
+        </member>
+        <member name="M:PCLSharp.Modules.Declarations.FilesNative.SaveColorTextPLY(PCLSharp.Primitives.Models.Point3Color4[],System.Int32,System.String)">
+            <summary>
+            保存颜色PLY文本文件
+            </summary>
+            <param name="pointColors">点集</param>
+            <param name="length">点集长度</param>
+            <param name="filePath">文件路径</param>
+        </member>
+        <member name="M:PCLSharp.Modules.Declarations.FilesNative.SaveColorBinaryPLY(PCLSharp.Primitives.Models.Point3Color4[],System.Int32,System.String)">
+            <summary>
+            保存颜色PLY二进制文件
+            </summary>
+            <param name="pointColors">点集</param>
+            <param name="length">点集长度</param>
+            <param name="filePath">文件路径</param>
+        </member>
+        <member name="T:PCLSharp.Modules.Declarations.FiltersNative">
+            <summary>
+            点云滤波声明
+            </summary>
+        </member>
+        <member name="M:PCLSharp.Modules.Declarations.FiltersNative.ApplyPassThrogh(PCLSharp.Primitives.Models.Point3F[],System.Int32,System.String,System.Single,System.Single)">
+            <summary>
+            适用直通滤波
+            </summary>
+            <param name="points">点集</param>
+            <param name="length">点集长度</param>
+            <param name="axis">过滤坐标轴</param>
+            <param name="limitMin">过滤范围最小值</param>
+            <param name="limixMax">过滤范围最大值</param>
+            <returns>过滤后点集</returns>
+        </member>
+        <member name="M:PCLSharp.Modules.Declarations.FiltersNative.ApplyRandomSampling(PCLSharp.Primitives.Models.Point3F[],System.Int32,System.Int32,System.Int32)">
+            <summary>
+            适用随机采样
+            </summary>
+            <param name="points">点集</param>
+            <param name="length">点集长度</param>
+            <param name="seed">随机种子</param>
+            <param name="samplesCount">采样数量</param>
+            <returns>过滤后点集</returns>
+        </member>
+        <member name="M:PCLSharp.Modules.Declarations.FiltersNative.ApplyUniformSampling(PCLSharp.Primitives.Models.Point3F[],System.Int32,System.Single)">
+            <summary>
+            适用均匀采样
+            </summary>
+            <param name="points">点集</param>
+            <param name="length">点集长度</param>
+            <param name="radius">采样半径</param>
+            <returns>过滤后点集</returns>
+        </member>
+        <member name="M:PCLSharp.Modules.Declarations.FiltersNative.ApplyVoxelGrid(PCLSharp.Primitives.Models.Point3F[],System.Int32,System.Single)">
+            <summary>
+            适用体素降采样
+            </summary>
+            <param name="points">点集</param>
+            <param name="length">点集长度</param>
+            <param name="leafSize">网格尺寸</param>
+            <returns>过滤后点集</returns>
+        </member>
+        <member name="M:PCLSharp.Modules.Declarations.FiltersNative.ApplyApproxVoxelGrid(PCLSharp.Primitives.Models.Point3F[],System.Int32,System.Single)">
+            <summary>
+            适用近似体素降采样
+            </summary>
+            <param name="points">点集</param>
+            <param name="length">点集长度</param>
+            <param name="leafSize">网格尺寸</param>
+            <returns>过滤后点集</returns>
+        </member>
+        <member name="M:PCLSharp.Modules.Declarations.FiltersNative.ApplyStatisticalOutlierRemoval(PCLSharp.Primitives.Models.Point3F[],System.Int32,System.Int32,System.Single)">
+            <summary>
+            适用统计离群点移除
+            </summary>
+            <param name="points">点集</param>
+            <param name="length">点集长度</param>
+            <param name="meanK">平均距离估计的最近邻居的数量</param>
+            <param name="stddevMult">标准差阈值系数</param>
+            <returns>过滤后点集</returns>
+        </member>
+        <member name="M:PCLSharp.Modules.Declarations.FiltersNative.ApplyRadiusOutlierRemoval(PCLSharp.Primitives.Models.Point3F[],System.Int32,System.Single,System.Int32)">
+            <summary>
+            适用半径离群点移除
+            </summary>
+            <param name="points">点集</param>
+            <param name="length">点集长度</param>
+            <param name="radius">搜索半径</param>
+            <param name="minNeighborsInRadius">半径范围内点数量最小值</param>
+            <returns>过滤后点集</returns>
+        </member>
+        <member name="M:PCLSharp.Modules.Declarations.FiltersNative.ApplyMovingLeastSquares(PCLSharp.Primitives.Models.Point3F[],System.Int32,System.Single)">
+            <summary>
+            适用移动最小二乘法重采样
+            </summary>
+            <param name="points">点集</param>
+            <param name="length">点集长度</param>
+            <param name="radius">搜索半径</param>
+            <returns>过滤后点集</returns>
+        </member>
+        <member name="T:PCLSharp.Modules.Declarations.KeyPointsNative">
+            <summary>
+            点云关键点声明
+            </summary>
+        </member>
+        <member name="M:PCLSharp.Modules.Declarations.KeyPointsNative.DetectNARF(PCLSharp.Primitives.Models.Point3F[],System.Int32,System.Single,System.Single,System.Single,System.Single,System.Single,System.Int32,System.Single)">
+            <summary>
+            检测NARF关键点
+            </summary>
+            <param name="points">点集</param>
+            <param name="length">点集长度</param>
+            <param name="angularResolution">角度分辨率</param>
+            <param name="maxAngleWidth">传感器水平边界角度</param>
+            <param name="maxAngleHeight">传感器垂直边界角度</param>
+            <param name="noiseLevel">所有与最近点的最大距离</param>
+            <param name="minRange">最小可见范围</param>
+            <param name="borderSize">边界尺寸</param>
+            <param name="supportSize">计算范围半径</param>
+            <returns>NARF关键点集</returns>
+        </member>
+        <member name="M:PCLSharp.Modules.Declarations.KeyPointsNative.DetectISS(PCLSharp.Primitives.Models.Point3F[],System.Int32,System.Single,System.Single,System.Single,System.Single,System.Int32,System.Int32)">
+            <summary>
+            检测ISS关键点
+            </summary>
+            <param name="points">点集</param>
+            <param name="length">点集长度</param>
+            <param name="salientRadius">显著半径</param>
+            <param name="nonMaxRadius">非极大值抑制半径</param>
+            <param name="threshold21">二一特征值比上限</param>
+            <param name="threshold32">三二特征值比上限</param>
+            <param name="minNeighborsCount">最小邻域点数</param>
+            <param name="threadsCount">线程数</param>
+            <returns>ISS关键点集</returns>
+        </member>
+        <member name="M:PCLSharp.Modules.Declarations.KeyPointsNative.DetectSIFT(PCLSharp.Primitives.Models.Point3F[],System.Int32,System.Single,System.Int32,System.Int32,System.Single)">
+            <summary>
+            检测SIFT关键点
+            </summary>
+            <param name="points">点集</param>
+            <param name="length">点集长度</param>
+            <param name="minScale">尺度空间最小标准偏差</param>
+            <param name="octavesCount">金字塔组数量</param>
+            <param name="scalesPerOctaveCount">每组金字塔计算尺度</param>
+            <param name="minContrast">限制关键点检测阈值</param>
+            <returns>SIFT关键点集</returns>
+        </member>
+        <member name="M:PCLSharp.Modules.Declarations.KeyPointsNative.DetectHarris(PCLSharp.Primitives.Models.Point3F[],System.Int32,System.Boolean,System.Single,System.Single)">
+            <summary>
+            检测Harris关键点
+            </summary>
+            <param name="points">点集</param>
+            <param name="length">点集长度</param>
+            <param name="nonMaxSupression">非极大值抑制</param>
+            <param name="radius">搜索半径</param>
+            <param name="threshold">感兴趣阈值</param>
+            <returns>Harris关键点集</returns>
+        </member>
+        <member name="M:PCLSharp.Modules.Declarations.KeyPointsNative.DetectSUSAN(PCLSharp.Primitives.Models.Point3F[],System.Int32,System.Boolean,System.Single,System.Single,System.Single,System.Single)">
+            <summary>
+            检测SUSAN关键点
+            </summary>
+            <param name="points">点集</param>
+            <param name="length">点集长度</param>
+            <param name="nonMaxSupression">非极大值抑制</param>
+            <param name="radius">搜索半径</param>
+            <param name="distanceThreshold">距离阈值</param>
+            <param name="angularThreshold">角度阈值</param>
+            <param name="intensityThreshold">强度阈值</param>
+            <returns>SUSAN关键点集</returns>
+        </member>
+        <member name="T:PCLSharp.Modules.Declarations.NormalsNative">
+            <summary>
+            点云法向量声明
+            </summary>
+        </member>
+        <member name="M:PCLSharp.Modules.Declarations.NormalsNative.EstimateNormalsByK(PCLSharp.Primitives.Models.Point3F[],System.Int32,System.Int32)">
+            <summary>
+            估算法向量
+            </summary>
+            <param name="points">点集</param>
+            <param name="length">点集长度</param>
+            <param name="k">搜索近邻数量</param>
+            <returns>法向量集</returns>
+        </member>
+        <member name="M:PCLSharp.Modules.Declarations.NormalsNative.EstimateNormalsByRadius(PCLSharp.Primitives.Models.Point3F[],System.Int32,System.Single)">
+            <summary>
+            估算法向量
+            </summary>
+            <param name="points">点集</param>
+            <param name="length">点集长度</param>
+            <param name="radius">搜索半径</param>
+            <returns>法向量集</returns>
+        </member>
+        <member name="M:PCLSharp.Modules.Declarations.NormalsNative.EstimateNormalsByKP(PCLSharp.Primitives.Models.Point3F[],System.Int32,System.Int32)">
+            <summary>
+            估算法向量 (OMP)
+            </summary>
+            <param name="points">点集</param>
+            <param name="length">点集长度</param>
+            <param name="k">搜索近邻数量</param>
+            <returns>法向量集</returns>
+        </member>
+        <member name="M:PCLSharp.Modules.Declarations.NormalsNative.EstimateNormalsByRadiusP(PCLSharp.Primitives.Models.Point3F[],System.Int32,System.Single)">
+            <summary>
+            估算法向量 (OMP)
+            </summary>
+            <param name="points">点集</param>
+            <param name="length">点集长度</param>
+            <param name="radius">搜索半径</param>
+            <returns>法向量集</returns>
+        </member>
+        <member name="T:PCLSharp.Modules.Declarations.RegistrationsNative">
+            <summary>
+            点云配准声明
+            </summary>
+        </member>
+        <member name="M:PCLSharp.Modules.Declarations.RegistrationsNative.AlignFPCS(PCLSharp.Primitives.Models.Point3F[],System.Int32,PCLSharp.Primitives.Models.Point3F[],System.Int32,System.Single,System.Single,System.Boolean,System.Int32,System.Int32,System.Int32)">
+            <summary>
+            FPCS配准
+            </summary>
+            <param name="sourcePoints">源点集</param>
+            <param name="sourceLength">源点集长度</param>
+            <param name="targetPoints">目标点集</param>
+            <param name="targetLength">目标点集长度</param>
+            <param name="approxOverlap">近似重叠</param>
+            <param name="delta">配准距离</param>
+            <param name="normalize">标准化</param>
+            <param name="samplesCount">采样数量</param>
+            <param name="maxComputationTime">最大计算时间(秒)</param>
+            <param name="threadsCount">线程数</param>
+            <returns>配准结果</returns>
+        </member>
+        <member name="M:PCLSharp.Modules.Declarations.RegistrationsNative.AlignKFPCS(PCLSharp.Primitives.Models.Point3F[],System.Int32,PCLSharp.Primitives.Models.Point3F[],System.Int32,System.Single,System.Single,System.Single,System.Boolean,System.Int32,System.Int32,System.Int32)">
+            <summary>
+            K-FPCS配准
+            </summary>
+            <param name="sourcePoints">源点集</param>
+            <param name="sourceLength">源点集长度</param>
+            <param name="targetPoints">目标点集</param>
+            <param name="targetLength">目标点集长度</param>
+            <param name="approxOverlap">近似重叠</param>
+            <param name="lambda">平移向量加权系数</param>
+            <param name="delta">配准距离</param>
+            <param name="normalize">标准化</param>
+            <param name="samplesCount">采样数量</param>
+            <param name="maxComputationTime">最大计算时间(秒)</param>
+            <param name="threadsCount">线程数</param>
+            <returns>配准结果</returns>
+        </member>
+        <member name="M:PCLSharp.Modules.Declarations.RegistrationsNative.SaciaAlignNARF(PCLSharp.Primitives.Models.Point3F[],PCLSharp.Primitives.Features.Narf36F[],System.Int32,PCLSharp.Primitives.Models.Point3F[],PCLSharp.Primitives.Features.Narf36F[],System.Int32,System.Single,System.Int32,System.Int32)">
+            <summary>
+            SAC-IA-NARF配准
+            </summary>
+            <param name="sourcePoints">源点集</param>
+            <param name="sourceDescriptors">源NARF描述子集</param>
+            <param name="sourceLength">源点集长度</param>
+            <param name="targetPoints">目标点集</param>
+            <param name="targetDescriptors">目标NARF描述子集</param>
+            <param name="targetLength">目标点集长度</param>
+            <param name="minSampleDistance">采样点最小距离</param>
+            <param name="samplesCount">采样数量</param>
+            <param name="correspondenceRandomness">随机特征邻域点数</param>
+            <returns>配准结果</returns>
+        </member>
+        <member name="M:PCLSharp.Modules.Declarations.RegistrationsNative.SaciaAlignPFH(PCLSharp.Primitives.Models.Point3F[],PCLSharp.Primitives.Features.PFHSignature125F[],System.Int32,PCLSharp.Primitives.Models.Point3F[],PCLSharp.Primitives.Features.PFHSignature125F[],System.Int32,System.Single,System.Int32,System.Int32)">
+            <summary>
+            SAC-IA-PFH配准
+            </summary>
+            <param name="sourcePoints">源点集</param>
+            <param name="sourceDescriptors">源PFH描述子集</param>
+            <param name="sourceLength">源点集长度</param>
+            <param name="targetPoints">目标点集</param>
+            <param name="targetDescriptors">目标PFH描述子集</param>
+            <param name="targetLength">目标点集长度</param>
+            <param name="minSampleDistance">采样点最小距离</param>
+            <param name="samplesCount">采样数量</param>
+            <param name="correspondenceRandomness">随机特征邻域点数</param>
+            <returns>配准结果</returns>
+        </member>
+        <member name="M:PCLSharp.Modules.Declarations.RegistrationsNative.SaciaAlignFPFH(PCLSharp.Primitives.Models.Point3F[],PCLSharp.Primitives.Features.FPFHSignature33F[],System.Int32,PCLSharp.Primitives.Models.Point3F[],PCLSharp.Primitives.Features.FPFHSignature33F[],System.Int32,System.Single,System.Int32,System.Int32)">
+            <summary>
+            SAC-IA-FPFH配准
+            </summary>
+            <param name="sourcePoints">源点集</param>
+            <param name="sourceDescriptors">源FPFH描述子集</param>
+            <param name="sourceLength">源点集长度</param>
+            <param name="targetPoints">目标点集</param>
+            <param name="targetDescriptors">目标FPFH描述子集</param>
+            <param name="targetLength">目标点集长度</param>
+            <param name="minSampleDistance">采样点最小距离</param>
+            <param name="samplesCount">采样数量</param>
+            <param name="correspondenceRandomness">随机特征邻域点数</param>
+            <returns>配准结果</returns>
+        </member>
+        <member name="M:PCLSharp.Modules.Declarations.RegistrationsNative.SaciaAlign3DSC(PCLSharp.Primitives.Models.Point3F[],PCLSharp.Primitives.Features.ShapeContext1980F[],System.Int32,PCLSharp.Primitives.Models.Point3F[],PCLSharp.Primitives.Features.ShapeContext1980F[],System.Int32,System.Single,System.Int32,System.Int32)">
+            <summary>
+            SAC-IA-3DSC配准
+            </summary>
+            <param name="sourcePoints">源点集</param>
+            <param name="sourceDescriptors">源3DSC描述子集</param>
+            <param name="sourceLength">源点集长度</param>
+            <param name="targetPoints">目标点集</param>
+            <param name="targetDescriptors">目标3DSC描述子集</param>
+            <param name="targetLength">目标点集长度</param>
+            <param name="minSampleDistance">采样点最小距离</param>
+            <param name="samplesCount">采样数量</param>
+            <param name="correspondenceRandomness">随机特征邻域点数</param>
+            <returns>配准结果</returns>
+        </member>
+        <member name="M:PCLSharp.Modules.Declarations.RegistrationsNative.SaciaAlignSHOT(PCLSharp.Primitives.Models.Point3F[],PCLSharp.Primitives.Features.Shot352F[],System.Int32,PCLSharp.Primitives.Models.Point3F[],PCLSharp.Primitives.Features.Shot352F[],System.Int32,System.Single,System.Int32,System.Int32)">
+            <summary>
+            SAC-IA-SHOT配准
+            </summary>
+            <param name="sourcePoints">源点集</param>
+            <param name="sourceDescriptors">源SHOT描述子集</param>
+            <param name="sourceLength">源点集长度</param>
+            <param name="targetPoints">目标点集</param>
+            <param name="targetDescriptors">目标SHOT描述子集</param>
+            <param name="targetLength">目标点集长度</param>
+            <param name="minSampleDistance">采样点最小距离</param>
+            <param name="samplesCount">采样数量</param>
+            <param name="correspondenceRandomness">随机特征邻域点数</param>
+            <returns>配准结果</returns>
+        </member>
+        <member name="M:PCLSharp.Modules.Declarations.RegistrationsNative.AlignNDT(PCLSharp.Primitives.Models.Point3F[],System.Int32,PCLSharp.Primitives.Models.Point3F[],System.Int32,System.Single,System.Single,System.Single,System.Int32)">
+            <summary>
+            NDT配准
+            </summary>
+            <param name="sourcePoints">源点集</param>
+            <param name="sourceLength">源点集长度</param>
+            <param name="targetPoints">目标点集</param>
+            <param name="targetLength">目标点集长度</param>
+            <param name="resolution">分辨率</param>
+            <param name="stepSize">步长</param>
+            <param name="transformationEpsilon">变换最大差值</param>
+            <param name="maximumIterations">最大迭代次数</param>
+            <returns>配准结果</returns>
+        </member>
+        <member name="M:PCLSharp.Modules.Declarations.RegistrationsNative.AlignGICP(PCLSharp.Primitives.Models.Point3F[],System.Int32,PCLSharp.Primitives.Models.Point3F[],System.Int32,System.Single,System.Single,System.Single,System.Int32)">
+            <summary>
+            GICP配准
+            </summary>
+            <param name="sourcePoints">源点集</param>
+            <param name="sourceLength">源点集长度</param>
+            <param name="targetPoints">目标点集</param>
+            <param name="targetLength">目标点集长度</param>
+            <param name="maxCorrespondenceDistance">最大相似距离</param>
+            <param name="transformationEpsilon">变换最大差值</param>
+            <param name="euclideanFitnessEpsilon">均方误差阈值</param>
+            <param name="maximumIterations">最大迭代次数</param>
+            <returns>配准结果</returns>
+        </member>
+        <member name="M:PCLSharp.Modules.Declarations.RegistrationsNative.AlignPointToPoint(PCLSharp.Primitives.Models.Point3F[],System.Int32,PCLSharp.Primitives.Models.Point3F[],System.Int32,System.Single,System.Single,System.Single,System.Int32)">
+            <summary>
+            ICP-Point-To-Point配准
+            </summary>
+            <param name="sourcePoints">源点集</param>
+            <param name="sourceLength">源点集长度</param>
+            <param name="targetPoints">目标点集</param>
+            <param name="targetLength">目标点集长度</param>
+            <param name="maxCorrespondenceDistance">最大相似距离</param>
+            <param name="transformationEpsilon">变换最大差值</param>
+            <param name="euclideanFitnessEpsilon">均方误差阈值</param>
+            <param name="maximumIterations">最大迭代次数</param>
+            <returns>配准结果</returns>
+        </member>
+        <member name="M:PCLSharp.Modules.Declarations.RegistrationsNative.AlignPointToPlane(PCLSharp.Primitives.Models.Point3F[],System.Int32,PCLSharp.Primitives.Models.Point3F[],System.Int32,System.Int32,System.Single,System.Single,System.Single,System.Int32,System.Int32)">
+            <summary>
+            ICP-Point-To-Plane配准
+            </summary>
+            <param name="sourcePoints">源点集</param>
+            <param name="sourceLength">源点集长度</param>
+            <param name="targetPoints">目标点集</param>
+            <param name="targetLength">目标点集长度</param>
+            <param name="normalK">法向量K</param>
+            <param name="maxCorrespondenceDistance">最大相似距离</param>
+            <param name="transformationEpsilon">变换最大差值</param>
+            <param name="euclideanFitnessEpsilon">均方误差阈值</param>
+            <param name="maximumIterations">最大迭代次数</param>
+            <param name="threadsCount">线程数</param>
+            <returns>配准结果</returns>
+        </member>
+        <member name="T:PCLSharp.Modules.Declarations.SearchNative">
+            <summary>
+            点云搜索声明
+            </summary>
+        </member>
+        <member name="M:PCLSharp.Modules.Declarations.SearchNative.KSearch(PCLSharp.Primitives.Models.Point3F[],System.Int32,PCLSharp.Primitives.Models.Point3F,System.Int32)">
+            <summary>
+            K近邻搜索
+            </summary>
+            <param name="points">点集</param>
+            <param name="length">点集长度</param>
+            <param name="referencePoint">参考坐标点</param>
+            <param name="k">近邻数量</param>
+            <returns>结果点集</returns>
+        </member>
+        <member name="M:PCLSharp.Modules.Declarations.SearchNative.RadiusSearch(PCLSharp.Primitives.Models.Point3F[],System.Int32,PCLSharp.Primitives.Models.Point3F,System.Single)">
+            <summary>
+            半径搜索
+            </summary>
+            <param name="points">点集</param>
+            <param name="length">点集长度</param>
+            <param name="referencePoint">参考坐标点</param>
+            <param name="radius">搜索半径</param>
+            <returns>结果点集</returns>
+        </member>
+        <member name="M:PCLSharp.Modules.Declarations.SearchNative.OctreeSearch(PCLSharp.Primitives.Models.Point3F[],System.Int32,PCLSharp.Primitives.Models.Point3F,System.Single)">
+            <summary>
+            八叉树搜索
+            </summary>
+            <param name="points">点集</param>
+            <param name="length">点集长度</param>
+            <param name="referencePoint">参考坐标点</param>
+            <param name="resolution">分辨率</param>
+            <returns>结果点集</returns>
+        </member>
+        <member name="T:PCLSharp.Modules.Declarations.SegmentationsNative">
+            <summary>
+            点云分割声明
+            </summary>
+        </member>
+        <member name="M:PCLSharp.Modules.Declarations.SegmentationsNative.SegmentPlane(PCLSharp.Primitives.Models.Point3F[],System.Int32,System.Boolean,System.Single,System.Single,System.Int32,System.Int32@,System.Int32@,System.Int32@,System.Int32@)">
+            <summary>
+            分割平面
+            </summary>
+            <param name="points">点集</param>
+            <param name="length">点集长度</param>
+            <param name="optimizeCoefficients">是否优化模型系数</param>
+            <param name="probability">概率</param>
+            <param name="distanceThreshold">距离阈值</param>
+            <param name="maxIterationsCount">最大迭代次数</param>
+            <param name="a">平面方程系数a</param>
+            <param name="b">平面方程系数b</param>
+            <param name="c">平面方程系数c</param>
+            <param name="d">平面方程系数d</param>
+            <returns>平面点云</returns>
+        </member>
+        <member name="M:PCLSharp.Modules.Declarations.SegmentationsNative.SegmentSphere(PCLSharp.Primitives.Models.Point3F[],System.Int32,System.Boolean,System.Single,System.Single,System.Single,System.Single,System.Int32,PCLSharp.Primitives.Models.Point3F@,System.Single@)">
+            <summary>
+            分割球体
+            </summary>
+            <param name="points">点集</param>
+            <param name="length">点集长度</param>
+            <param name="optimizeCoefficients">是否优化模型系数</param>
+            <param name="probability">概率</param>
+            <param name="distanceThreshold">距离阈值</param>
+            <param name="minRadius">球体最小半径</param>
+            <param name="maxRadius">球体最大半径</param>
+            <param name="maxIterationsCount">最大迭代次数</param>
+            <param name="center">球心</param>
+            <param name="radius">半径</param>
+            <returns>球体点云</returns>
+        </member>
+        <member name="M:PCLSharp.Modules.Declarations.SegmentationsNative.EuclidClusterSegment(PCLSharp.Primitives.Models.Point3F[],System.Int32,System.Single,System.Int32,System.Int32,System.Int32@)">
+            <summary>
+            欧几里得聚类分割
+            </summary>
+            <param name="points">点集</param>
+            <param name="length">点集长度</param>
+            <param name="clusterTolerance">簇搜索容差</param>
+            <param name="minClusterSize">簇最小尺寸</param>
+            <param name="maxClusterSize">簇最大尺寸</param>
+            <param name="clustersCount">点云簇数</param>
+            <returns>点云簇列表</returns>
+        </member>
+        <member name="M:PCLSharp.Modules.Declarations.SegmentationsNative.RegionGrowingSegment(PCLSharp.Primitives.Models.Point3F[],System.Int32,System.Int32,System.Int32,System.Single,System.Single,System.Int32,System.Int32,System.Int32,System.Int32@)">
+            <summary>
+            区域生长分割
+            </summary>
+            <param name="points">点集</param>
+            <param name="length">点集长度</param>
+            <param name="normalK">法向量K</param>
+            <param name="clusterK">簇K</param>
+            <param name="smoothnessThreshold">平滑阈值（角度）</param>
+            <param name="curvatureThreshold">曲率阈值</param>
+            <param name="minClusterSize">簇最小尺寸</param>
+            <param name="maxClusterSize">簇最大尺寸</param>
+            <param name="threadsCount">线程数</param>
+            <param name="clustersCount">点云簇数</param>
+            <returns>点云簇列表</returns>
+        </member>
+        <member name="M:PCLSharp.Modules.Declarations.SegmentationsNative.RegionGrowingColorSegment(PCLSharp.Primitives.Models.Point3Color4[],System.Int32,System.Int32,System.Int32,System.Single,System.Single,System.Single,System.Single,System.Single,System.Int32,System.Int32,System.Int32,System.Int32@)">
+            <summary>
+            区域生长颜色分割
+            </summary>
+            <param name="points">点集</param>
+            <param name="length">点集长度</param>
+            <param name="normalK">法向量K</param>
+            <param name="clusterK">簇K</param>
+            <param name="distanceThreshold">距离阈值</param>
+            <param name="smoothnessThreshold">平滑阈值（角度）</param>
+            <param name="curvatureThreshold">曲率阈值</param>
+            <param name="pointColorThreshold">点颜色阈值</param>
+            <param name="regionColorThreshold">区域颜色阈值</param>
+            <param name="minClusterSize">簇最小尺寸</param>
+            <param name="maxClusterSize">簇最大尺寸</param>
+            <param name="threadsCount">线程数</param>
+            <param name="clustersCount">点云簇数</param>
+            <returns>点云簇列表</returns>
+        </member>
+        <member name="T:PCLSharp.Modules.Declarations.SurfacesNative">
+            <summary>
+            点云表面声明
+            </summary>
+        </member>
+        <member name="M:PCLSharp.Modules.Declarations.SurfacesNative.ApplyGreedyProjection(PCLSharp.Primitives.Models.Point3F[],System.Int32,System.Int32,System.Single,System.Single,System.Int32,System.Double,System.Double,System.Double,System.Boolean,System.Int32)">
+            <summary>
+            适用贪婪投影三角化
+            </summary>
+            <param name="points">点集</param>
+            <param name="length">点集长度</param>
+            <param name="normalK">法向量K</param>
+            <param name="searchRadius">搜索半径</param>
+            <param name="mu">近邻点最远倍数</param>
+            <param name="maxNearestNeighbors">最多邻域数</param>
+            <param name="maxSurfaceAngle">偏离法向量最大角度</param>
+            <param name="minAngle">三角形最小角度</param>
+            <param name="maxAngle">三角形最大角度</param>
+            <param name="normalConsistency">保证法向量朝向一致</param>
+            <param name="threadsCount">线程数</param>
+            <returns>网格几何</returns>
+        </member>
+        <member name="M:PCLSharp.Modules.Declarations.SurfacesNative.ApplyPoissonReconstruction(PCLSharp.Primitives.Models.Point3F[],System.Int32,System.Int32,System.Boolean,System.Int32,System.Int32,System.Int32,System.Boolean,System.Boolean,System.Single,System.Single,System.Int32,System.Int32)">
+            <summary>
+            适用泊松重建
+            </summary>
+            <param name="points">点集</param>
+            <param name="length">点集长度</param>
+            <param name="normalK">法向量K</param>
+            <param name="confidence">是否使用法向量置信</param>
+            <param name="degree">度数</param>
+            <param name="depth">树最大深度</param>
+            <param name="isoDivide">ISO等值面深度</param>
+            <param name="manifold">是否添加多边形重心</param>
+            <param name="outputPolygons">是否输出多边形网格</param>
+            <param name="samplesPerNode">八叉树样本点最小数量</param>
+            <param name="scale">重构立方体与样本边界立方体直径比率</param>
+            <param name="solverDivide">Gauss-Seidel迭代深度</param>
+            <param name="threadsCount">线程数</param>
+            <returns>网格几何</returns>
+        </member>
+        <member name="M:PCLSharp.Modules.Declarations.SurfacesNative.ApplyMarchingCubes(PCLSharp.Primitives.Models.Point3F[],System.Int32,System.Int32,System.Single,System.Int32,System.Single,System.Int32)">
+            <summary>
+            适用移动立方体重建
+            </summary>
+            <param name="points">点集</param>
+            <param name="length">点集长度</param>
+            <param name="normalK">法向量K</param>
+            <param name="isoLevel">等值面值</param>
+            <param name="gridResolution">网格分辨率</param>
+            <param name="percentageExtendGrid">自由空间比例</param>
+            <param name="threadsCount">线程数</param>
+            <returns>网格几何</returns>
+        </member>
+        <member name="T:PCLSharp.Modules.Implements.CloudCommon">
+            <summary>
+            点云通用操作实现
+            </summary>
+        </member>
+        <member name="M:PCLSharp.Modules.Implements.CloudCommon.EstimateCentroid(System.Collections.Generic.IEnumerable{PCLSharp.Primitives.Models.Point3F})">
+            <summary>
+            估算质心
+            </summary>
+            <param name="points">点集</param>
+            <returns>质心坐标点</returns>
+        </member>
+        <member name="M:PCLSharp.Modules.Implements.CloudCommon.AffineTransform(System.Collections.Generic.IEnumerable{PCLSharp.Primitives.Models.Point3F},PCLSharp.Primitives.Models.Pose)">
+            <summary>
+            仿射变换
+            </summary>
+            <param name="points">点集</param>
+            <param name="pose">位姿</param>
+            <returns>变换后点云</returns>
+        </member>
+        <member name="M:PCLSharp.Modules.Implements.CloudCommon.MatrixTransform(System.Collections.Generic.IEnumerable{PCLSharp.Primitives.Models.Point3F},System.Single[])">
+            <summary>
+            矩阵变换
+            </summary>
+            <param name="points">点集</param>
+            <param name="matrixArray">矩阵数组(长度: 16)</param>
+            <returns>变换后点云</returns>
+        </member>
+        <member name="M:PCLSharp.Modules.Implements.CloudCommon.MergePointsNormals(System.Collections.Generic.IEnumerable{PCLSharp.Primitives.Models.Point3F},System.Collections.Generic.IEnumerable{PCLSharp.Primitives.Models.Normal3F})">
+            <summary>
+            合并坐标点法向量
+            </summary>
+            <param name="points">点集</param>
+            <param name="normals">法向量集</param>
+            <returns>点集</returns>
+        </member>
+        <member name="M:PCLSharp.Modules.Implements.CloudCommon.CropBox(System.Collections.Generic.IEnumerable{PCLSharp.Primitives.Models.Point3F},PCLSharp.Primitives.Models.Point3F,PCLSharp.Primitives.Models.Point3F,System.Boolean)">
+            <summary>
+            长方体剪裁
+            </summary>
+            <param name="points">点集</param>
+            <param name="minPoint">最小坐标点</param>
+            <param name="maxPoint">最大坐标点</param>
+            <param name="negative">true: 剪裁/false: 保留</param>
+            <returns>剪裁后点云</returns>
+        </member>
+        <member name="M:PCLSharp.Modules.Implements.CloudCommon.CropConvexHull(System.Collections.Generic.IEnumerable{PCLSharp.Primitives.Models.Point3F},System.Collections.Generic.IEnumerable{PCLSharp.Primitives.Models.Point3F},System.Int32)">
+            <summary>
+            凸包剪裁
+            </summary>
+            <param name="points">点集</param>
+            <param name="contourPoints">轮廓点集</param>
+            <param name="dimensionsCount">维度数</param>
+            <returns>剪裁后点云</returns>
+        </member>
+        <member name="M:PCLSharp.Modules.Implements.CloudCommon.ProjectPlane(System.Collections.Generic.IEnumerable{PCLSharp.Primitives.Models.Point3F},System.Single,System.Single,System.Single,System.Single)">
+            <summary>
+            投射平面
+            </summary>
+            <param name="points">点集</param>
+            <param name="a">平面方程系数a</param>
+            <param name="b">平面方程系数b</param>
+            <param name="c">平面方程系数c</param>
+            <param name="d">平面方程系数d</param>
+            <returns>投射后点云</returns>
+            <remarks>平面方程: ax + by +cz + d = 0</remarks>
+        </member>
+        <member name="M:PCLSharp.Modules.Implements.CloudCommon.ExtractBorder(System.Collections.Generic.IEnumerable{PCLSharp.Primitives.Models.Point3F})">
+            <summary>
+            提取边框
+            </summary>
+            <param name="points">点集</param>
+            <returns>边框点云</returns>
+        </member>
+        <member name="M:PCLSharp.Modules.Implements.CloudCommon.ExtractBoundary(System.Collections.Generic.IEnumerable{PCLSharp.Primitives.Models.Point3F},System.Int32,System.Single,System.Single,System.Int32)">
+            <summary>
+            提取边界
+            </summary>
+            <param name="points">点集</param>
+            <param name="normalK">法向量K</param>
+            <param name="featureRadius">特征半径</param>
+            <param name="angleThreshold">角度阈值</param>
+            <param name="threadsCount">线程数</param>
+            <returns>边界点云</returns>
+        </member>
+        <member name="T:PCLSharp.Modules.Implements.CloudFeatures">
+            <summary>
+            点云特征实现
+            </summary>
+        </member>
+        <member name="M:PCLSharp.Modules.Implements.CloudFeatures.ComputeNARF(System.Collections.Generic.IEnumerable{PCLSharp.Primitives.Models.Point3F},System.Single,System.Single,System.Single,System.Single,System.Single,System.Int32,System.Single,System.Boolean)">
+            <summary>
+            计算NARF特征
+            </summary>
+            <param name="points">点集</param>
+            <param name="angularResolution">角度分辨率</param>
+            <param name="maxAngleWidth">传感器水平边界角度</param>
+            <param name="maxAngleHeight">传感器垂直边界角度</param>
+            <param name="noiseLevel">所有与最近点的最大距离</param>
+            <param name="minRange">最小可见范围</param>
+            <param name="borderSize">边界尺寸</param>
+            <param name="supportSize">计算范围半径</param>
+            <param name="rotationInvariant">旋转不变性</param>
+            <returns>NARF特征描述子集</returns>
+        </member>
+        <member name="M:PCLSharp.Modules.Implements.CloudFeatures.ComputePFH(System.Collections.Generic.IEnumerable{PCLSharp.Primitives.Models.Point3F},System.Int32,System.Int32,System.Int32)">
+            <summary>
+            计算PFH特征
+            </summary>
+            <param name="points">点集</param>
+            <param name="normalK">法向量K</param>
+            <param name="featureK">特征K</param>
+            <param name="threadsCount">线程数</param>
+            <returns>PFH特征描述子集</returns>
+            <remarks>特征K值要大于法向量K值</remarks>
+        </member>
+        <member name="M:PCLSharp.Modules.Implements.CloudFeatures.ComputeFPFH(System.Collections.Generic.IEnumerable{PCLSharp.Primitives.Models.Point3F},System.Int32,System.Int32,System.Int32)">
+            <summary>
+            计算FPFH特征
+            </summary>
+            <param name="points">点集</param>
+            <param name="normalK">法向量K</param>
+            <param name="featureK">特征K</param>
+            <param name="threadsCount">线程数</param>
+            <returns>FPFH特征描述子集</returns>
+            <remarks>特征K值要大于法向量K值</remarks>
+        </member>
+        <member name="M:PCLSharp.Modules.Implements.CloudFeatures.Compute3DSC(System.Collections.Generic.IEnumerable{PCLSharp.Primitives.Models.Point3F},System.Int32,System.Single,System.Single,System.Single,System.Int32)">
+            <summary>
+            计算3DSC特征
+            </summary>
+            <param name="points">点集</param>
+            <param name="normalK">法向量K</param>
+            <param name="searchRadius">搜索半径</param>
+            <param name="pointDensityRadius">点密度半径</param>
+            <param name="minimalRadius">最小半径</param>
+            <param name="threadsCount">线程数</param>
+            <returns>3DSC特征描述子集</returns>
+            <remarks>
+            点密度半径建议设置为搜索半径的1/5；
+            最小半径建议设置为搜索半径的1/10；
+            </remarks>
+        </member>
+        <member name="M:PCLSharp.Modules.Implements.CloudFeatures.ComputeSHOT(System.Collections.Generic.IEnumerable{PCLSharp.Primitives.Models.Point3F},System.Int32,System.Single,System.Int32)">
+            <summary>
+            计算SHOT特征
+            </summary>
+            <param name="points">点集</param>
+            <param name="normalK">法向量K</param>
+            <param name="featureRadius">特征搜索半径</param>
+            <param name="threadsCount">线程数</param>
+            <returns>SHOT特征描述子集</returns>
+        </member>
+        <member name="T:PCLSharp.Modules.Implements.CloudFiles">
+            <summary>
+            点云文件实现
+            </summary>
+        </member>
+        <member name="M:PCLSharp.Modules.Implements.CloudFiles.LoadPCD(System.String)">
+            <summary>
+            加载PCD文件
+            </summary>
+            <param name="filePath">文件路径</param>
+            <returns>点集</returns>
+        </member>
+        <member name="M:PCLSharp.Modules.Implements.CloudFiles.LoadNormalPCD(System.String)">
+            <summary>
+            加载法向量PCD文件
+            </summary>
+            <param name="filePath">文件路径</param>
+            <returns>点集</returns>
+        </member>
+        <member name="M:PCLSharp.Modules.Implements.CloudFiles.LoadColorPCD(System.String)">
+            <summary>
+            加载颜色PCD文件
+            </summary>
+            <param name="filePath">文件路径</param>
+            <returns>点集</returns>
+        </member>
+        <member name="M:PCLSharp.Modules.Implements.CloudFiles.LoadPLY(System.String)">
+            <summary>
+            加载PLY文件
+            </summary>
+            <param name="filePath">文件路径</param>
+            <returns>点集</returns>
+        </member>
+        <member name="M:PCLSharp.Modules.Implements.CloudFiles.LoadNormalPLY(System.String)">
+            <summary>
+            加载法向量PLY文件
+            </summary>
+            <param name="filePath">文件路径</param>
+            <returns>点集</returns>
+        </member>
+        <member name="M:PCLSharp.Modules.Implements.CloudFiles.LoadColorPLY(System.String)">
+            <summary>
+            加载颜色PLY文件
+            </summary>
+            <param name="filePath">文件路径</param>
+            <returns>点集</returns>
+        </member>
+        <member name="M:PCLSharp.Modules.Implements.CloudFiles.LoadOBJ(System.String)">
+            <summary>
+            加载OBJ文件
+            </summary>
+            <param name="filePath">文件路径</param>
+            <returns>点集</returns>
+        </member>
+        <member name="M:PCLSharp.Modules.Implements.CloudFiles.LoadNormalOBJ(System.String)">
+            <summary>
+            加载法向量OBJ文件
+            </summary>
+            <param name="filePath">文件路径</param>
+            <returns>点集</returns>
+        </member>
+        <member name="M:PCLSharp.Modules.Implements.CloudFiles.LoadColorOBJ(System.String)">
+            <summary>
+            加载颜色OBJ文件
+            </summary>
+            <param name="filePath">文件路径</param>
+            <returns>点集</returns>
+        </member>
+        <member name="M:PCLSharp.Modules.Implements.CloudFiles.SaveTextPCD(System.Collections.Generic.IEnumerable{PCLSharp.Primitives.Models.Point3F},System.String)">
+            <summary>
+            保存PCD文本文件
+            </summary>
+            <param name="points">点集</param>
+            <param name="filePath">文件路径</param>
+        </member>
+        <member name="M:PCLSharp.Modules.Implements.CloudFiles.SaveBinaryPCD(System.Collections.Generic.IEnumerable{PCLSharp.Primitives.Models.Point3F},System.String)">
+            <summary>
+            保存PCD二进制文件
+            </summary>
+            <param name="points">点集</param>
+            <param name="filePath">文件路径</param>
+        </member>
+        <member name="M:PCLSharp.Modules.Implements.CloudFiles.SaveNormalTextPCD(System.Collections.Generic.IEnumerable{PCLSharp.Primitives.Models.Point3Normal3},System.String)">
+            <summary>
+            保存法向量PCD文本文件
+            </summary>
+            <param name="pointNormals">点集</param>
+            <param name="filePath">文件路径</param>
+        </member>
+        <member name="M:PCLSharp.Modules.Implements.CloudFiles.SaveNormalBinaryPCD(System.Collections.Generic.IEnumerable{PCLSharp.Primitives.Models.Point3Normal3},System.String)">
+            <summary>
+            保存法向量PCD二进制文件
+            </summary>
+            <param name="pointNormals">点集</param>
+            <param name="filePath">文件路径</param>
+        </member>
+        <member name="M:PCLSharp.Modules.Implements.CloudFiles.SaveColorTextPCD(System.Collections.Generic.IEnumerable{PCLSharp.Primitives.Models.Point3Color4},System.String)">
+            <summary>
+            保存颜色PCD文本文件
+            </summary>
+            <param name="pointColors">点集</param>
+            <param name="filePath">文件路径</param>
+        </member>
+        <member name="M:PCLSharp.Modules.Implements.CloudFiles.SaveColorBinaryPCD(System.Collections.Generic.IEnumerable{PCLSharp.Primitives.Models.Point3Color4},System.String)">
+            <summary>
+            保存颜色PCD二进制文件
+            </summary>
+            <param name="pointColors">点集</param>
+            <param name="filePath">文件路径</param>
+        </member>
+        <member name="M:PCLSharp.Modules.Implements.CloudFiles.SaveTextPLY(System.Collections.Generic.IEnumerable{PCLSharp.Primitives.Models.Point3F},System.String)">
+            <summary>
+            保存PLY文本文件
+            </summary>
+            <param name="points">点集</param>
+            <param name="filePath">文件路径</param>
+        </member>
+        <member name="M:PCLSharp.Modules.Implements.CloudFiles.SaveBinaryPLY(System.Collections.Generic.IEnumerable{PCLSharp.Primitives.Models.Point3F},System.String)">
+            <summary>
+            保存PLY二进制文件
+            </summary>
+            <param name="points">点集</param>
+            <param name="filePath">文件路径</param>
+        </member>
+        <member name="M:PCLSharp.Modules.Implements.CloudFiles.SaveNormalTextPLY(System.Collections.Generic.IEnumerable{PCLSharp.Primitives.Models.Point3Normal3},System.String)">
+            <summary>
+            保存法向量PLY文本文件
+            </summary>
+            <param name="pointNormals">点集</param>
+            <param name="filePath">文件路径</param>
+        </member>
+        <member name="M:PCLSharp.Modules.Implements.CloudFiles.SaveNormalBinaryPLY(System.Collections.Generic.IEnumerable{PCLSharp.Primitives.Models.Point3Normal3},System.String)">
+            <summary>
+            保存法向量PLY二进制文件
+            </summary>
+            <param name="pointNormals">点集</param>
+            <param name="filePath">文件路径</param>
+        </member>
+        <member name="M:PCLSharp.Modules.Implements.CloudFiles.SaveColorTextPLY(System.Collections.Generic.IEnumerable{PCLSharp.Primitives.Models.Point3Color4},System.String)">
+            <summary>
+            保存颜色PLY文本文件
+            </summary>
+            <param name="pointColors">点集</param>
+            <param name="filePath">文件路径</param>
+        </member>
+        <member name="M:PCLSharp.Modules.Implements.CloudFiles.SaveColorBinaryPLY(System.Collections.Generic.IEnumerable{PCLSharp.Primitives.Models.Point3Color4},System.String)">
+            <summary>
+            保存颜色PLY二进制文件
+            </summary>
+            <param name="pointColors">点集</param>
+            <param name="filePath">文件路径</param>
+        </member>
+        <member name="T:PCLSharp.Modules.Implements.CloudFilters">
+            <summary>
+            点云滤波实现
+            </summary>
+        </member>
+        <member name="M:PCLSharp.Modules.Implements.CloudFilters.ApplyPassThrogh(System.Collections.Generic.IEnumerable{PCLSharp.Primitives.Models.Point3F},System.String,System.Single,System.Single)">
+            <summary>
+            适用直通滤波
+            </summary>
+            <param name="points">点集</param>
+            <param name="axis">过滤坐标轴</param>
+            <param name="limitMin">过滤范围最小值</param>
+            <param name="limixMax">过滤范围最大值</param>
+            <returns>过滤后点集</returns>
+        </member>
+        <member name="M:PCLSharp.Modules.Implements.CloudFilters.ApplyRandomSampling(System.Collections.Generic.IEnumerable{PCLSharp.Primitives.Models.Point3F},System.Int32,System.Int32)">
+            <summary>
+            适用随机采样
+            </summary>
+            <param name="points">点集</param>
+            <param name="seed">随机种子</param>
+            <param name="samplesCount">采样数量</param>
+            <returns>过滤后点集</returns>
+        </member>
+        <member name="M:PCLSharp.Modules.Implements.CloudFilters.ApplyUniformSampling(System.Collections.Generic.IEnumerable{PCLSharp.Primitives.Models.Point3F},System.Single)">
+            <summary>
+            适用均匀采样
+            </summary>
+            <param name="points">点集</param>
+            <param name="radius">采样半径</param>
+            <returns>过滤后点集</returns>
+        </member>
+        <member name="M:PCLSharp.Modules.Implements.CloudFilters.ApplyVoxelGrid(System.Collections.Generic.IEnumerable{PCLSharp.Primitives.Models.Point3F},System.Single)">
+            <summary>
+            适用体素降采样
+            </summary>
+            <param name="points">点集</param>
+            <param name="leafSize">网格尺寸</param>
+            <returns>过滤后点集</returns>
+        </member>
+        <member name="M:PCLSharp.Modules.Implements.CloudFilters.ApplyApproxVoxelGrid(System.Collections.Generic.IEnumerable{PCLSharp.Primitives.Models.Point3F},System.Single)">
+            <summary>
+            适用近似体素降采样
+            </summary>
+            <param name="points">点集</param>
+            <param name="leafSize">网格尺寸</param>
+            <returns>过滤后点集</returns>
+        </member>
+        <member name="M:PCLSharp.Modules.Implements.CloudFilters.ApplyStatisticalOutlierRemoval(System.Collections.Generic.IEnumerable{PCLSharp.Primitives.Models.Point3F},System.Int32,System.Single)">
+            <summary>
+            适用统计离群点移除
+            </summary>
+            <param name="points">点集</param>
+            <param name="meanK">平均距离估计的最近邻居的数量</param>
+            <param name="stddevMult">标准差阈值系数</param>
+            <returns>过滤后点集</returns>
+        </member>
+        <member name="M:PCLSharp.Modules.Implements.CloudFilters.ApplyRadiusOutlierRemoval(System.Collections.Generic.IEnumerable{PCLSharp.Primitives.Models.Point3F},System.Single,System.Int32)">
+            <summary>
+            适用半径离群点移除
+            </summary>
+            <param name="points">点集</param>
+            <param name="radius">搜索半径</param>
+            <param name="minNeighborsInRadius">半径范围内点数量最小值</param>
+            <returns>过滤后点集</returns>
+        </member>
+        <member name="M:PCLSharp.Modules.Implements.CloudFilters.ApplyMovingLeastSquares(System.Collections.Generic.IEnumerable{PCLSharp.Primitives.Models.Point3F},System.Single)">
+            <summary>
+            适用移动最小二乘法重采样
+            </summary>
+            <param name="points">点集</param>
+            <param name="radius">搜索半径</param>
+            <returns>过滤后点集</returns>
+        </member>
+        <member name="T:PCLSharp.Modules.Implements.CloudKeyPoints">
+            <summary>
+            点云关键点实现
+            </summary>
+        </member>
+        <member name="M:PCLSharp.Modules.Implements.CloudKeyPoints.DetectNARF(System.Collections.Generic.IEnumerable{PCLSharp.Primitives.Models.Point3F},System.Single,System.Single,System.Single,System.Single,System.Single,System.Int32,System.Single)">
+            <summary>
+            检测NARF关键点
+            </summary>
+            <param name="points">点集</param>
+            <param name="angularResolution">角度分辨率</param>
+            <param name="maxAngleWidth">传感器水平边界角度</param>
+            <param name="maxAngleHeight">传感器垂直边界角度</param>
+            <param name="noiseLevel">所有与最近点的最大距离</param>
+            <param name="minRange">最小可见范围</param>
+            <param name="borderSize">边界尺寸</param>
+            <param name="supportSize">计算范围半径</param>
+            <returns>NARF关键点集</returns>
+        </member>
+        <member name="M:PCLSharp.Modules.Implements.CloudKeyPoints.DetectISS(System.Collections.Generic.IEnumerable{PCLSharp.Primitives.Models.Point3F},System.Single,System.Single,System.Single,System.Single,System.Int32,System.Int32)">
+            <summary>
+            检测ISS关键点
+            </summary>
+            <param name="points">点集</param>
+            <param name="salientRadius">显著半径</param>
+            <param name="nonMaxRadius">非极大值抑制半径</param>
+            <param name="threshold21">二一特征值比上限</param>
+            <param name="threshold32">三二特征值比上限</param>
+            <param name="minNeighborsCount">最小邻域点数</param>
+            <param name="threadsCount">线程数</param>
+            <returns>ISS关键点集</returns>
+        </member>
+        <member name="M:PCLSharp.Modules.Implements.CloudKeyPoints.DetectSIFT(System.Collections.Generic.IEnumerable{PCLSharp.Primitives.Models.Point3F},System.Single,System.Int32,System.Int32,System.Single)">
+            <summary>
+            检测SIFT关键点
+            </summary>
+            <param name="points">点集</param>
+            <param name="minScale">尺度空间最小标准偏差</param>
+            <param name="octavesCount">金字塔组数量</param>
+            <param name="scalesPerOctaveCount">每组金字塔计算尺度</param>
+            <param name="minContrast">限制关键点检测阈值</param>
+            <returns>SIFT关键点集</returns>
+        </member>
+        <member name="M:PCLSharp.Modules.Implements.CloudKeyPoints.DetectHarris(System.Collections.Generic.IEnumerable{PCLSharp.Primitives.Models.Point3F},System.Boolean,System.Single,System.Single)">
+            <summary>
+            检测Harris关键点
+            </summary>
+            <param name="points">点集</param>
+            <param name="nonMaxSupression">非极大值抑制</param>
+            <param name="radius">搜索半径</param>
+            <param name="threshold">感兴趣阈值</param>
+            <returns>Harris关键点集</returns>
+        </member>
+        <member name="M:PCLSharp.Modules.Implements.CloudKeyPoints.DetectSUSAN(System.Collections.Generic.IEnumerable{PCLSharp.Primitives.Models.Point3F},System.Boolean,System.Single,System.Single,System.Single,System.Single)">
+            <summary>
+            检测SUSAN关键点
+            </summary>
+            <param name="points">点集</param>
+            <param name="nonMaxSupression">非极大值抑制</param>
+            <param name="radius">搜索半径</param>
+            <param name="distanceThreshold">距离阈值</param>
+            <param name="angularThreshold">角度阈值</param>
+            <param name="intensityThreshold">强度阈值</param>
+            <returns>SUSAN关键点集</returns>
+        </member>
+        <member name="T:PCLSharp.Modules.Implements.CloudNormals">
+            <summary>
+            点云法向量实现
+            </summary>
+        </member>
+        <member name="M:PCLSharp.Modules.Implements.CloudNormals.EstimateNormalsByK(System.Collections.Generic.IEnumerable{PCLSharp.Primitives.Models.Point3F},System.Int32)">
+            <summary>
+            估算法向量
+            </summary>
+            <param name="points">点集</param>
+            <param name="k">搜索近邻数量</param>
+            <returns>法向量集</returns>
+        </member>
+        <member name="M:PCLSharp.Modules.Implements.CloudNormals.EstimateNormalsByRadius(System.Collections.Generic.IEnumerable{PCLSharp.Primitives.Models.Point3F},System.Single)">
+            <summary>
+            估算法向量
+            </summary>
+            <param name="points">点集</param>
+            <param name="radius">搜索半径</param>
+            <returns>法向量集</returns>
+        </member>
+        <member name="M:PCLSharp.Modules.Implements.CloudNormals.EstimateNormalsByKP(System.Collections.Generic.IEnumerable{PCLSharp.Primitives.Models.Point3F},System.Int32)">
+            <summary>
+            估算法向量 (OMP)
+            </summary>
+            <param name="points">点集</param>
+            <param name="k">搜索近邻数量</param>
+            <returns>法向量集</returns>
+        </member>
+        <member name="M:PCLSharp.Modules.Implements.CloudNormals.EstimateNormalsByRadiusP(System.Collections.Generic.IEnumerable{PCLSharp.Primitives.Models.Point3F},System.Single)">
+            <summary>
+            估算法向量 (OMP)
+            </summary>
+            <param name="points">点集</param>
+            <param name="radius">搜索半径</param>
+            <returns>法向量集</returns>
+        </member>
+        <member name="T:PCLSharp.Modules.Implements.CloudRegistrations">
+            <summary>
+            点云配准实现
+            </summary>
+        </member>
+        <member name="M:PCLSharp.Modules.Implements.CloudRegistrations.AlignFPCS(System.Collections.Generic.IEnumerable{PCLSharp.Primitives.Models.Point3F},System.Collections.Generic.IEnumerable{PCLSharp.Primitives.Models.Point3F},System.Single,System.Single,System.Boolean,System.Int32,System.Int32,System.Int32)">
+            <summary>
+            FPCS配准
+            </summary>
+            <param name="sourcePoints">源点集</param>
+            <param name="targetPoints">目标点集</param>
+            <param name="approxOverlap">近似重叠</param>
+            <param name="delta">配准距离</param>
+            <param name="normalize">标准化</param>
+            <param name="samplesCount">采样数量</param>
+            <param name="maxComputationTime">最大计算时间(秒)</param>
+            <param name="threadsCount">线程数</param>
+            <returns>配准结果</returns>
+        </member>
+        <member name="M:PCLSharp.Modules.Implements.CloudRegistrations.AlignKFPCS(System.Collections.Generic.IEnumerable{PCLSharp.Primitives.Models.Point3F},System.Collections.Generic.IEnumerable{PCLSharp.Primitives.Models.Point3F},System.Single,System.Single,System.Single,System.Boolean,System.Int32,System.Int32,System.Int32)">
+            <summary>
+            K-FPCS配准
+            </summary>
+            <param name="sourcePoints">源点集</param>
+            <param name="targetPoints">目标点集</param>
+            <param name="approxOverlap">近似重叠</param>
+            <param name="lambda">平移向量加权系数</param>
+            <param name="delta">配准距离</param>
+            <param name="normalize">标准化</param>
+            <param name="samplesCount">采样数量</param>
+            <param name="maxComputationTime">最大计算时间(秒)</param>
+            <param name="threadsCount">线程数</param>
+            <returns>配准结果</returns>
+        </member>
+        <member name="M:PCLSharp.Modules.Implements.CloudRegistrations.AlignSACIA(System.Collections.Generic.IEnumerable{PCLSharp.Primitives.Models.Point3F},System.Collections.Generic.IEnumerable{PCLSharp.Primitives.Features.Narf36F},System.Collections.Generic.IEnumerable{PCLSharp.Primitives.Models.Point3F},System.Collections.Generic.IEnumerable{PCLSharp.Primitives.Features.Narf36F},System.Single,System.Int32,System.Int32)">
+            <summary>
+            SAC-IA-NARF配准
+            </summary>
+            <param name="sourcePoints">源点集</param>
+            <param name="sourceDescriptors">源NARF描述子集</param>
+            <param name="targetPoints">目标点集</param>
+            <param name="targetDescriptors">目标NARF描述子集</param>
+            <param name="minSampleDistance">采样点最小距离</param>
+            <param name="samplesCount">采样数量</param>
+            <param name="correspondenceRandomness">随机特征邻域点数</param>
+            <returns>配准结果</returns>
+        </member>
+        <member name="M:PCLSharp.Modules.Implements.CloudRegistrations.AlignSACIA(System.Collections.Generic.IEnumerable{PCLSharp.Primitives.Models.Point3F},System.Collections.Generic.IEnumerable{PCLSharp.Primitives.Features.PFHSignature125F},System.Collections.Generic.IEnumerable{PCLSharp.Primitives.Models.Point3F},System.Collections.Generic.IEnumerable{PCLSharp.Primitives.Features.PFHSignature125F},System.Single,System.Int32,System.Int32)">
+            <summary>
+            SAC-IA-PFH配准
+            </summary>
+            <param name="sourcePoints">源点集</param>
+            <param name="sourceDescriptors">源PFH描述子集</param>
+            <param name="targetPoints">目标点集</param>
+            <param name="targetDescriptors">目标PFH描述子集</param>
+            <param name="minSampleDistance">采样点最小距离</param>
+            <param name="samplesCount">采样数量</param>
+            <param name="correspondenceRandomness">随机特征邻域点数</param>
+            <returns>配准结果</returns>
+        </member>
+        <member name="M:PCLSharp.Modules.Implements.CloudRegistrations.AlignSACIA(System.Collections.Generic.IEnumerable{PCLSharp.Primitives.Models.Point3F},System.Collections.Generic.IEnumerable{PCLSharp.Primitives.Features.FPFHSignature33F},System.Collections.Generic.IEnumerable{PCLSharp.Primitives.Models.Point3F},System.Collections.Generic.IEnumerable{PCLSharp.Primitives.Features.FPFHSignature33F},System.Single,System.Int32,System.Int32)">
+            <summary>
+            SAC-IA-FPFH配准
+            </summary>
+            <param name="sourcePoints">源点集</param>
+            <param name="sourceDescriptors">源FPFH描述子集</param>
+            <param name="targetPoints">目标点集</param>
+            <param name="targetDescriptors">目标FPFH描述子集</param>
+            <param name="minSampleDistance">采样点最小距离</param>
+            <param name="samplesCount">采样数量</param>
+            <param name="correspondenceRandomness">随机特征邻域点数</param>
+            <returns>配准结果</returns>
+        </member>
+        <member name="M:PCLSharp.Modules.Implements.CloudRegistrations.AlignSACIA(System.Collections.Generic.IEnumerable{PCLSharp.Primitives.Models.Point3F},System.Collections.Generic.IEnumerable{PCLSharp.Primitives.Features.ShapeContext1980F},System.Collections.Generic.IEnumerable{PCLSharp.Primitives.Models.Point3F},System.Collections.Generic.IEnumerable{PCLSharp.Primitives.Features.ShapeContext1980F},System.Single,System.Int32,System.Int32)">
+            <summary>
+            SAC-IA-3DSC配准
+            </summary>
+            <param name="sourcePoints">源点集</param>
+            <param name="sourceDescriptors">源3DSC描述子集</param>
+            <param name="targetPoints">目标点集</param>
+            <param name="targetDescriptors">目标3DSC描述子集</param>
+            <param name="minSampleDistance">采样点最小距离</param>
+            <param name="samplesCount">采样数量</param>
+            <param name="correspondenceRandomness">随机特征邻域点数</param>
+            <returns>配准结果</returns>
+        </member>
+        <member name="M:PCLSharp.Modules.Implements.CloudRegistrations.AlignSACIA(System.Collections.Generic.IEnumerable{PCLSharp.Primitives.Models.Point3F},System.Collections.Generic.IEnumerable{PCLSharp.Primitives.Features.Shot352F},System.Collections.Generic.IEnumerable{PCLSharp.Primitives.Models.Point3F},System.Collections.Generic.IEnumerable{PCLSharp.Primitives.Features.Shot352F},System.Single,System.Int32,System.Int32)">
+            <summary>
+            SAC-IA-SHOT配准
+            </summary>
+            <param name="sourcePoints">源点集</param>
+            <param name="sourceDescriptors">源SHOT描述子集</param>
+            <param name="targetPoints">目标点集</param>
+            <param name="targetDescriptors">目标SHOT描述子集</param>
+            <param name="minSampleDistance">采样点最小距离</param>
+            <param name="samplesCount">采样数量</param>
+            <param name="correspondenceRandomness">随机特征邻域点数</param>
+            <returns>配准结果</returns>
+        </member>
+        <member name="M:PCLSharp.Modules.Implements.CloudRegistrations.AlignNDT(System.Collections.Generic.IEnumerable{PCLSharp.Primitives.Models.Point3F},System.Collections.Generic.IEnumerable{PCLSharp.Primitives.Models.Point3F},System.Single,System.Single,System.Single,System.Int32)">
+            <summary>
+            NDT配准
+            </summary>
+            <param name="sourcePoints">源点集</param>
+            <param name="targetPoints">目标点集</param>
+            <param name="resolution">分辨率</param>
+            <param name="stepSize">步长</param>
+            <param name="transformationEpsilon">变换最大差值</param>
+            <param name="maximumIterations">最大迭代次数</param>
+            <returns>配准结果</returns>
+        </member>
+        <member name="M:PCLSharp.Modules.Implements.CloudRegistrations.AlignGICP(System.Collections.Generic.IEnumerable{PCLSharp.Primitives.Models.Point3F},System.Collections.Generic.IEnumerable{PCLSharp.Primitives.Models.Point3F},System.Single,System.Single,System.Single,System.Int32)">
+            <summary>
+            GICP配准
+            </summary>
+            <param name="sourcePoints">源点集</param>
+            <param name="targetPoints">目标点集</param>
+            <param name="maxCorrespondenceDistance">最大相似距离</param>
+            <param name="transformationEpsilon">变换最大差值</param>
+            <param name="euclideanFitnessEpsilon">均方误差阈值</param>
+            <param name="maximumIterations">最大迭代次数</param>
+            <returns>配准结果</returns>
+        </member>
+        <member name="M:PCLSharp.Modules.Implements.CloudRegistrations.AlignPointToPoint(System.Collections.Generic.IEnumerable{PCLSharp.Primitives.Models.Point3F},System.Collections.Generic.IEnumerable{PCLSharp.Primitives.Models.Point3F},System.Single,System.Single,System.Single,System.Int32)">
+            <summary>
+            ICP-Point-To-Point配准
+            </summary>
+            <param name="sourcePoints">源点集</param>
+            <param name="targetPoints">目标点集</param>
+            <param name="maxCorrespondenceDistance">最大相似距离</param>
+            <param name="transformationEpsilon">变换最大差值</param>
+            <param name="euclideanFitnessEpsilon">均方误差阈值</param>
+            <param name="maximumIterations">最大迭代次数</param>
+            <returns>配准结果</returns>
+        </member>
+        <member name="M:PCLSharp.Modules.Implements.CloudRegistrations.AlignPointToPlane(System.Collections.Generic.IEnumerable{PCLSharp.Primitives.Models.Point3F},System.Collections.Generic.IEnumerable{PCLSharp.Primitives.Models.Point3F},System.Int32,System.Single,System.Single,System.Single,System.Int32,System.Int32)">
+            <summary>
+            ICP-Point-To-Plane配准
+            </summary>
+            <param name="sourcePoints">源点集</param>
+            <param name="targetPoints">目标点集</param>
+            <param name="normalK">法向量K</param>
+            <param name="maxCorrespondenceDistance">最大相似距离</param>
+            <param name="transformationEpsilon">变换最大差值</param>
+            <param name="euclideanFitnessEpsilon">均方误差阈值</param>
+            <param name="maximumIterations">最大迭代次数</param>
+            <param name="threadsCount">线程数</param>
+            <returns>配准结果</returns>
+        </member>
+        <member name="T:PCLSharp.Modules.Implements.CloudSearch">
+            <summary>
+            点云搜索实现
+            </summary>
+        </member>
+        <member name="M:PCLSharp.Modules.Implements.CloudSearch.KSearch(System.Collections.Generic.IEnumerable{PCLSharp.Primitives.Models.Point3F},PCLSharp.Primitives.Models.Point3F,System.Int32)">
+            <summary>
+            K近邻搜索
+            </summary>
+            <param name="points">点集</param>
+            <param name="referencePoint">参考坐标点</param>
+            <param name="k">近邻数量</param>
+            <returns>结果点集</returns>
+        </member>
+        <member name="M:PCLSharp.Modules.Implements.CloudSearch.RadiusSearch(System.Collections.Generic.IEnumerable{PCLSharp.Primitives.Models.Point3F},PCLSharp.Primitives.Models.Point3F,System.Single)">
+            <summary>
+            半径搜索
+            </summary>
+            <param name="points">点集</param>
+            <param name="referencePoint">参考坐标点</param>
+            <param name="radius">搜索半径</param>
+            <returns>结果点集</returns>
+        </member>
+        <member name="M:PCLSharp.Modules.Implements.CloudSearch.OctreeSearch(System.Collections.Generic.IEnumerable{PCLSharp.Primitives.Models.Point3F},PCLSharp.Primitives.Models.Point3F,System.Single)">
+            <summary>
+            八叉树搜索
+            </summary>
+            <param name="points">点集</param>
+            <param name="referencePoint">参考坐标点</param>
+            <param name="resolution">分辨率</param>
+            <returns>结果点集</returns>
+        </member>
+        <member name="T:PCLSharp.Modules.Implements.CloudSegmentations">
+            <summary>
+            点云分割实现
+            </summary>
+        </member>
+        <member name="M:PCLSharp.Modules.Implements.CloudSegmentations.SegmentPlane(System.Collections.Generic.IEnumerable{PCLSharp.Primitives.Models.Point3F},System.Boolean,System.Single,System.Single,System.Int32,System.Int32@,System.Int32@,System.Int32@,System.Int32@)">
+            <summary>
+            分割平面
+            </summary>
+            <param name="points">点集</param>
+            <param name="optimizeCoefficients">是否优化模型系数</param>
+            <param name="probability">概率</param>
+            <param name="distanceThreshold">距离阈值</param>
+            <param name="maxIterationsCount">最大迭代次数</param>
+            <param name="a">平面方程系数a</param>
+            <param name="b">平面方程系数b</param>
+            <param name="c">平面方程系数c</param>
+            <param name="d">平面方程系数d</param>
+            <returns>平面点云</returns>
+        </member>
+        <member name="M:PCLSharp.Modules.Implements.CloudSegmentations.SegmentSphere(System.Collections.Generic.IEnumerable{PCLSharp.Primitives.Models.Point3F},System.Boolean,System.Single,System.Single,System.Single,System.Single,System.Int32,PCLSharp.Primitives.Models.Point3F@,System.Single@)">
+            <summary>
+            分割球体
+            </summary>
+            <param name="points">点集</param>
+            <param name="optimizeCoefficients">是否优化模型系数</param>
+            <param name="probability">概率</param>
+            <param name="distanceThreshold">距离阈值</param>
+            <param name="minRadius">球体最小半径</param>
+            <param name="maxRadius">球体最大半径</param>
+            <param name="maxIterationsCount">最大迭代次数</param>
+            <param name="center">球心</param>
+            <param name="radius">半径</param>
+            <returns>球体点云</returns>
+        </member>
+        <member name="M:PCLSharp.Modules.Implements.CloudSegmentations.EuclidClusterSegment(System.Collections.Generic.IEnumerable{PCLSharp.Primitives.Models.Point3F},System.Single,System.Int32,System.Int32)">
+            <summary>
+            欧几里得聚类分割
+            </summary>
+            <param name="points">点集</param>
+            <param name="clusterTolerance">簇搜索容差</param>
+            <param name="minClusterSize">簇最小尺寸</param>
+            <param name="maxClusterSize">簇最大尺寸</param>
+            <returns>点云簇列表</returns>
+        </member>
+        <member name="M:PCLSharp.Modules.Implements.CloudSegmentations.RegionGrowingSegment(System.Collections.Generic.IEnumerable{PCLSharp.Primitives.Models.Point3F},System.Int32,System.Int32,System.Single,System.Single,System.Int32,System.Int32,System.Int32)">
+            <summary>
+            区域生长分割
+            </summary>
+            <param name="points">点集</param>
+            <param name="normalK">法向量K</param>
+            <param name="clusterK">簇K</param>
+            <param name="smoothnessThreshold">平滑阈值（角度）</param>
+            <param name="curvatureThreshold">曲率阈值</param>
+            <param name="minClusterSize">簇最小尺寸</param>
+            <param name="maxClusterSize">簇最大尺寸</param>
+            <param name="threadsCount">线程数</param>
+            <returns>点云簇列表</returns>
+        </member>
+        <member name="M:PCLSharp.Modules.Implements.CloudSegmentations.RegionGrowingColorSegment(System.Collections.Generic.IEnumerable{PCLSharp.Primitives.Models.Point3Color4},System.Int32,System.Int32,System.Single,System.Single,System.Single,System.Single,System.Single,System.Int32,System.Int32,System.Int32)">
+            <summary>
+            区域生长颜色分割
+            </summary>
+            <param name="points">点集</param>
+            <param name="normalK">法向量K</param>
+            <param name="clusterK">簇K</param>
+            <param name="distanceThreshold">距离阈值</param>
+            <param name="smoothnessThreshold">平滑阈值（角度）</param>
+            <param name="curvatureThreshold">曲率阈值</param>
+            <param name="pointColorThreshold">点颜色阈值</param>
+            <param name="regionColorThreshold">区域颜色阈值</param>
+            <param name="minClusterSize">簇最小尺寸</param>
+            <param name="maxClusterSize">簇最大尺寸</param>
+            <param name="threadsCount">线程数</param>
+            <returns>点云簇列表</returns>
+        </member>
+        <member name="T:PCLSharp.Modules.Implements.CloudSurfaces">
+            <summary>
+            点云表面实现
+            </summary>
+        </member>
+        <member name="M:PCLSharp.Modules.Implements.CloudSurfaces.ApplyGreedyProjection(System.Collections.Generic.IEnumerable{PCLSharp.Primitives.Models.Point3F},System.Int32,System.Single,System.Single,System.Int32,System.Double,System.Double,System.Double,System.Boolean,System.Int32)">
+            <summary>
+            适用贪婪投影三角化
+            </summary>
+            <param name="points">点集</param>
+            <param name="normalK">法向量K</param>
+            <param name="searchRadius">搜索半径</param>
+            <param name="mu">近邻点最远倍数</param>
+            <param name="maxNearestNeighbors">最多邻域数</param>
+            <param name="maxSurfaceAngle">偏离法向量最大角度</param>
+            <param name="minAngle">三角形最小角度</param>
+            <param name="maxAngle">三角形最大角度</param>
+            <param name="normalConsistency">保证法向量朝向一致</param>
+            <param name="threadsCount">线程数</param>
+            <returns>网格几何</returns>
+        </member>
+        <member name="M:PCLSharp.Modules.Implements.CloudSurfaces.ApplyPoissonReconstruction(System.Collections.Generic.IEnumerable{PCLSharp.Primitives.Models.Point3F},System.Int32,System.Boolean,System.Int32,System.Int32,System.Int32,System.Boolean,System.Boolean,System.Single,System.Single,System.Int32,System.Int32)">
+            <summary>
+            适用泊松重建
+            </summary>
+            <param name="points">点集</param>
+            <param name="normalK">法向量K</param>
+            <param name="confidence">是否使用法向量置信</param>
+            <param name="degree">度数</param>
+            <param name="depth">树最大深度</param>
+            <param name="isoDivide">ISO等值面深度</param>
+            <param name="manifold">是否添加多边形重心</param>
+            <param name="outputPolygons">是否输出多边形网格</param>
+            <param name="samplesPerNode">八叉树样本点最小数量</param>
+            <param name="scale">重构立方体与样本边界立方体直径比率</param>
+            <param name="solverDivide">Gauss-Seidel迭代深度</param>
+            <param name="threadsCount">线程数</param>
+            <returns>网格几何</returns>
+        </member>
+        <member name="M:PCLSharp.Modules.Implements.CloudSurfaces.ApplyMarchingCubes(System.Collections.Generic.IEnumerable{PCLSharp.Primitives.Models.Point3F},System.Int32,System.Single,System.Int32,System.Single,System.Int32)">
+            <summary>
+            适用移动立方体重建
+            </summary>
+            <param name="points">点集</param>
+            <param name="normalK">法向量K</param>
+            <param name="isoLevel">等值面值</param>
+            <param name="gridResolution">网格分辨率</param>
+            <param name="percentageExtendGrid">自由空间比例</param>
+            <param name="threadsCount">线程数</param>
+            <returns>网格几何</returns>
+        </member>
+        <member name="T:PCLSharp.Modules.Interfaces.ICloudCommon">
+            <summary>
+            点云通用操作接口
+            </summary>
+        </member>
+        <member name="M:PCLSharp.Modules.Interfaces.ICloudCommon.EstimateCentroid(System.Collections.Generic.IEnumerable{PCLSharp.Primitives.Models.Point3F})">
+            <summary>
+            估算质心
+            </summary>
+            <param name="points">点集</param>
+            <returns>质心坐标点</returns>
+        </member>
+        <member name="M:PCLSharp.Modules.Interfaces.ICloudCommon.AffineTransform(System.Collections.Generic.IEnumerable{PCLSharp.Primitives.Models.Point3F},PCLSharp.Primitives.Models.Pose)">
+            <summary>
+            仿射变换
+            </summary>
+            <param name="points">点集</param>
+            <param name="pose">位姿</param>
+            <returns>变换后点云</returns>
+        </member>
+        <member name="M:PCLSharp.Modules.Interfaces.ICloudCommon.MatrixTransform(System.Collections.Generic.IEnumerable{PCLSharp.Primitives.Models.Point3F},System.Single[])">
+            <summary>
+            矩阵变换
+            </summary>
+            <param name="points">点集</param>
+            <param name="matrixArray">矩阵数组(长度: 16)</param>
+            <returns>变换后点云</returns>
+        </member>
+        <member name="M:PCLSharp.Modules.Interfaces.ICloudCommon.MergePointsNormals(System.Collections.Generic.IEnumerable{PCLSharp.Primitives.Models.Point3F},System.Collections.Generic.IEnumerable{PCLSharp.Primitives.Models.Normal3F})">
+            <summary>
+            合并坐标点法向量
+            </summary>
+            <param name="points">点集</param>
+            <param name="normals">法向量集</param>
+            <returns>点集</returns>
+        </member>
+        <member name="M:PCLSharp.Modules.Interfaces.ICloudCommon.CropBox(System.Collections.Generic.IEnumerable{PCLSharp.Primitives.Models.Point3F},PCLSharp.Primitives.Models.Point3F,PCLSharp.Primitives.Models.Point3F,System.Boolean)">
+            <summary>
+            长方体剪裁
+            </summary>
+            <param name="points">点集</param>
+            <param name="minPoint">最小坐标点</param>
+            <param name="maxPoint">最大坐标点</param>
+            <param name="negative">true: 剪裁/false: 保留</param>
+            <returns>剪裁后点云</returns>
+        </member>
+        <member name="M:PCLSharp.Modules.Interfaces.ICloudCommon.CropConvexHull(System.Collections.Generic.IEnumerable{PCLSharp.Primitives.Models.Point3F},System.Collections.Generic.IEnumerable{PCLSharp.Primitives.Models.Point3F},System.Int32)">
+            <summary>
+            凸包剪裁
+            </summary>
+            <param name="points">点集</param>
+            <param name="contourPoints">轮廓点集</param>
+            <param name="dimensionsCount">维度数</param>
+            <returns>剪裁后点云</returns>
+        </member>
+        <member name="M:PCLSharp.Modules.Interfaces.ICloudCommon.ProjectPlane(System.Collections.Generic.IEnumerable{PCLSharp.Primitives.Models.Point3F},System.Single,System.Single,System.Single,System.Single)">
+            <summary>
+            投射平面
+            </summary>
+            <param name="points">点集</param>
+            <param name="a">平面方程系数a</param>
+            <param name="b">平面方程系数b</param>
+            <param name="c">平面方程系数c</param>
+            <param name="d">平面方程系数d</param>
+            <returns>投射后点云</returns>
+            <remarks>平面方程: ax + by +cz + d = 0</remarks>
+        </member>
+        <member name="M:PCLSharp.Modules.Interfaces.ICloudCommon.ExtractBorder(System.Collections.Generic.IEnumerable{PCLSharp.Primitives.Models.Point3F})">
+            <summary>
+            提取边框
+            </summary>
+            <param name="points">点集</param>
+            <returns>边框点云</returns>
+        </member>
+        <member name="M:PCLSharp.Modules.Interfaces.ICloudCommon.ExtractBoundary(System.Collections.Generic.IEnumerable{PCLSharp.Primitives.Models.Point3F},System.Int32,System.Single,System.Single,System.Int32)">
+            <summary>
+            提取边界
+            </summary>
+            <param name="points">点集</param>
+            <param name="normalK">法向量K</param>
+            <param name="featureRadius">特征半径</param>
+            <param name="angleThreshold">角度阈值</param>
+            <param name="threadsCount">线程数</param>
+            <returns>边界点云</returns>
+        </member>
+        <member name="T:PCLSharp.Modules.Interfaces.ICloudFeatures">
+            <summary>
+            点云特征接口
+            </summary>
+        </member>
+        <member name="M:PCLSharp.Modules.Interfaces.ICloudFeatures.ComputeNARF(System.Collections.Generic.IEnumerable{PCLSharp.Primitives.Models.Point3F},System.Single,System.Single,System.Single,System.Single,System.Single,System.Int32,System.Single,System.Boolean)">
+            <summary>
+            计算NARF特征
+            </summary>
+            <param name="points">点集</param>
+            <param name="angularResolution">角度分辨率</param>
+            <param name="maxAngleWidth">传感器水平边界角度</param>
+            <param name="maxAngleHeight">传感器垂直边界角度</param>
+            <param name="noiseLevel">所有与最近点的最大距离</param>
+            <param name="minRange">最小可见范围</param>
+            <param name="borderSize">边界尺寸</param>
+            <param name="supportSize">计算范围半径</param>
+            <param name="rotationInvariant">旋转不变性</param>
+            <returns>NARF特征描述子集</returns>
+        </member>
+        <member name="M:PCLSharp.Modules.Interfaces.ICloudFeatures.ComputePFH(System.Collections.Generic.IEnumerable{PCLSharp.Primitives.Models.Point3F},System.Int32,System.Int32,System.Int32)">
+            <summary>
+            计算PFH特征
+            </summary>
+            <param name="points">点集</param>
+            <param name="normalK">法向量K</param>
+            <param name="featureK">特征K</param>
+            <param name="threadsCount">线程数</param>
+            <returns>PFH特征描述子集</returns>
+            <remarks>特征K值要大于法向量K值</remarks>
+        </member>
+        <member name="M:PCLSharp.Modules.Interfaces.ICloudFeatures.ComputeFPFH(System.Collections.Generic.IEnumerable{PCLSharp.Primitives.Models.Point3F},System.Int32,System.Int32,System.Int32)">
+            <summary>
+            计算FPFH特征
+            </summary>
+            <param name="points">点集</param>
+            <param name="normalK">法向量K</param>
+            <param name="featureK">特征K</param>
+            <param name="threadsCount">线程数</param>
+            <returns>FPFH特征描述子集</returns>
+            <remarks>特征K值要大于法向量K值</remarks>
+        </member>
+        <member name="M:PCLSharp.Modules.Interfaces.ICloudFeatures.Compute3DSC(System.Collections.Generic.IEnumerable{PCLSharp.Primitives.Models.Point3F},System.Int32,System.Single,System.Single,System.Single,System.Int32)">
+            <summary>
+            计算3DSC特征
+            </summary>
+            <param name="points">点集</param>
+            <param name="normalK">法向量K</param>
+            <param name="searchRadius">搜索半径</param>
+            <param name="pointDensityRadius">点密度半径</param>
+            <param name="minimalRadius">最小半径</param>
+            <param name="threadsCount">线程数</param>
+            <returns>3DSC特征描述子集</returns>
+            <remarks>
+            点密度半径建议设置为搜索半径的1/5；
+            最小半径建议设置为搜索半径的1/10；
+            </remarks>
+        </member>
+        <member name="M:PCLSharp.Modules.Interfaces.ICloudFeatures.ComputeSHOT(System.Collections.Generic.IEnumerable{PCLSharp.Primitives.Models.Point3F},System.Int32,System.Single,System.Int32)">
+            <summary>
+            计算SHOT特征
+            </summary>
+            <param name="points">点集</param>
+            <param name="normalK">法向量K</param>
+            <param name="featureRadius">特征搜索半径</param>
+            <param name="threadsCount">线程数</param>
+            <returns>SHOT特征描述子集</returns>
+        </member>
+        <member name="T:PCLSharp.Modules.Interfaces.ICloudFiles">
+            <summary>
+            点云读写接口
+            </summary>
+        </member>
+        <member name="M:PCLSharp.Modules.Interfaces.ICloudFiles.LoadPCD(System.String)">
+            <summary>
+            加载PCD文件
+            </summary>
+            <param name="filePath">文件路径</param>
+            <returns>点集</returns>
+        </member>
+        <member name="M:PCLSharp.Modules.Interfaces.ICloudFiles.LoadNormalPCD(System.String)">
+            <summary>
+            加载法向量PCD文件
+            </summary>
+            <param name="filePath">文件路径</param>
+            <returns>点集</returns>
+        </member>
+        <member name="M:PCLSharp.Modules.Interfaces.ICloudFiles.LoadColorPCD(System.String)">
+            <summary>
+            加载颜色PCD文件
+            </summary>
+            <param name="filePath">文件路径</param>
+            <returns>点集</returns>
+        </member>
+        <member name="M:PCLSharp.Modules.Interfaces.ICloudFiles.LoadPLY(System.String)">
+            <summary>
+            加载PLY文件
+            </summary>
+            <param name="filePath">文件路径</param>
+            <returns>点集</returns>
+        </member>
+        <member name="M:PCLSharp.Modules.Interfaces.ICloudFiles.LoadNormalPLY(System.String)">
+            <summary>
+            加载法向量PLY文件
+            </summary>
+            <param name="filePath">文件路径</param>
+            <returns>点集</returns>
+        </member>
+        <member name="M:PCLSharp.Modules.Interfaces.ICloudFiles.LoadColorPLY(System.String)">
+            <summary>
+            加载颜色PLY文件
+            </summary>
+            <param name="filePath">文件路径</param>
+            <returns>点集</returns>
+        </member>
+        <member name="M:PCLSharp.Modules.Interfaces.ICloudFiles.LoadOBJ(System.String)">
+            <summary>
+            加载OBJ文件
+            </summary>
+            <param name="filePath">文件路径</param>
+            <returns>点集</returns>
+        </member>
+        <member name="M:PCLSharp.Modules.Interfaces.ICloudFiles.LoadNormalOBJ(System.String)">
+            <summary>
+            加载法向量OBJ文件
+            </summary>
+            <param name="filePath">文件路径</param>
+            <returns>点集</returns>
+        </member>
+        <member name="M:PCLSharp.Modules.Interfaces.ICloudFiles.LoadColorOBJ(System.String)">
+            <summary>
+            加载颜色OBJ文件
+            </summary>
+            <param name="filePath">文件路径</param>
+            <returns>点集</returns>
+        </member>
+        <member name="M:PCLSharp.Modules.Interfaces.ICloudFiles.SaveTextPCD(System.Collections.Generic.IEnumerable{PCLSharp.Primitives.Models.Point3F},System.String)">
+            <summary>
+            保存PCD文本文件
+            </summary>
+            <param name="points">点集</param>
+            <param name="filePath">文件路径</param>
+        </member>
+        <member name="M:PCLSharp.Modules.Interfaces.ICloudFiles.SaveBinaryPCD(System.Collections.Generic.IEnumerable{PCLSharp.Primitives.Models.Point3F},System.String)">
+            <summary>
+            保存PCD二进制文件
+            </summary>
+            <param name="points">点集</param>
+            <param name="filePath">文件路径</param>
+        </member>
+        <member name="M:PCLSharp.Modules.Interfaces.ICloudFiles.SaveNormalTextPCD(System.Collections.Generic.IEnumerable{PCLSharp.Primitives.Models.Point3Normal3},System.String)">
+            <summary>
+            保存法向量PCD文本文件
+            </summary>
+            <param name="pointNormals">点集</param>
+            <param name="filePath">文件路径</param>
+        </member>
+        <member name="M:PCLSharp.Modules.Interfaces.ICloudFiles.SaveNormalBinaryPCD(System.Collections.Generic.IEnumerable{PCLSharp.Primitives.Models.Point3Normal3},System.String)">
+            <summary>
+            保存法向量PCD二进制文件
+            </summary>
+            <param name="pointNormals">点集</param>
+            <param name="filePath">文件路径</param>
+        </member>
+        <member name="M:PCLSharp.Modules.Interfaces.ICloudFiles.SaveColorTextPCD(System.Collections.Generic.IEnumerable{PCLSharp.Primitives.Models.Point3Color4},System.String)">
+            <summary>
+            保存颜色PCD文本文件
+            </summary>
+            <param name="pointColors">点集</param>
+            <param name="filePath">文件路径</param>
+        </member>
+        <member name="M:PCLSharp.Modules.Interfaces.ICloudFiles.SaveColorBinaryPCD(System.Collections.Generic.IEnumerable{PCLSharp.Primitives.Models.Point3Color4},System.String)">
+            <summary>
+            保存颜色PCD二进制文件
+            </summary>
+            <param name="pointColors">点集</param>
+            <param name="filePath">文件路径</param>
+        </member>
+        <member name="M:PCLSharp.Modules.Interfaces.ICloudFiles.SaveTextPLY(System.Collections.Generic.IEnumerable{PCLSharp.Primitives.Models.Point3F},System.String)">
+            <summary>
+            保存PLY文本文件
+            </summary>
+            <param name="points">点集</param>
+            <param name="filePath">文件路径</param>
+        </member>
+        <member name="M:PCLSharp.Modules.Interfaces.ICloudFiles.SaveBinaryPLY(System.Collections.Generic.IEnumerable{PCLSharp.Primitives.Models.Point3F},System.String)">
+            <summary>
+            保存PLY二进制文件
+            </summary>
+            <param name="points">点集</param>
+            <param name="filePath">文件路径</param>
+        </member>
+        <member name="M:PCLSharp.Modules.Interfaces.ICloudFiles.SaveNormalTextPLY(System.Collections.Generic.IEnumerable{PCLSharp.Primitives.Models.Point3Normal3},System.String)">
+            <summary>
+            保存法向量PLY文本文件
+            </summary>
+            <param name="pointNormals">点集</param>
+            <param name="filePath">文件路径</param>
+        </member>
+        <member name="M:PCLSharp.Modules.Interfaces.ICloudFiles.SaveNormalBinaryPLY(System.Collections.Generic.IEnumerable{PCLSharp.Primitives.Models.Point3Normal3},System.String)">
+            <summary>
+            保存法向量PLY二进制文件
+            </summary>
+            <param name="pointNormals">点集</param>
+            <param name="filePath">文件路径</param>
+        </member>
+        <member name="M:PCLSharp.Modules.Interfaces.ICloudFiles.SaveColorTextPLY(System.Collections.Generic.IEnumerable{PCLSharp.Primitives.Models.Point3Color4},System.String)">
+            <summary>
+            保存颜色PLY文本文件
+            </summary>
+            <param name="pointColors">点集</param>
+            <param name="filePath">文件路径</param>
+        </member>
+        <member name="M:PCLSharp.Modules.Interfaces.ICloudFiles.SaveColorBinaryPLY(System.Collections.Generic.IEnumerable{PCLSharp.Primitives.Models.Point3Color4},System.String)">
+            <summary>
+            保存颜色PLY二进制文件
+            </summary>
+            <param name="pointColors">点集</param>
+            <param name="filePath">文件路径</param>
+        </member>
+        <member name="T:PCLSharp.Modules.Interfaces.ICloudFilters">
+            <summary>
+            点云文件接口
+            </summary>
+        </member>
+        <member name="M:PCLSharp.Modules.Interfaces.ICloudFilters.ApplyPassThrogh(System.Collections.Generic.IEnumerable{PCLSharp.Primitives.Models.Point3F},System.String,System.Single,System.Single)">
+            <summary>
+            适用直通滤波
+            </summary>
+            <param name="points">点集</param>
+            <param name="axis">过滤坐标轴</param>
+            <param name="limitMin">过滤范围最小值</param>
+            <param name="limixMax">过滤范围最大值</param>
+            <returns>过滤后点集</returns>
+        </member>
+        <member name="M:PCLSharp.Modules.Interfaces.ICloudFilters.ApplyRandomSampling(System.Collections.Generic.IEnumerable{PCLSharp.Primitives.Models.Point3F},System.Int32,System.Int32)">
+            <summary>
+            适用随机采样
+            </summary>
+            <param name="points">点集</param>
+            <param name="seed">随机种子</param>
+            <param name="samplesCount">采样数量</param>
+            <returns>过滤后点集</returns>
+        </member>
+        <member name="M:PCLSharp.Modules.Interfaces.ICloudFilters.ApplyUniformSampling(System.Collections.Generic.IEnumerable{PCLSharp.Primitives.Models.Point3F},System.Single)">
+            <summary>
+            适用均匀采样
+            </summary>
+            <param name="points">点集</param>
+            <param name="radius">采样半径</param>
+            <returns>过滤后点集</returns>
+        </member>
+        <member name="M:PCLSharp.Modules.Interfaces.ICloudFilters.ApplyVoxelGrid(System.Collections.Generic.IEnumerable{PCLSharp.Primitives.Models.Point3F},System.Single)">
+            <summary>
+            适用体素降采样
+            </summary>
+            <param name="points">点集</param>
+            <param name="leafSize">网格尺寸</param>
+            <returns>过滤后点集</returns>
+        </member>
+        <member name="M:PCLSharp.Modules.Interfaces.ICloudFilters.ApplyApproxVoxelGrid(System.Collections.Generic.IEnumerable{PCLSharp.Primitives.Models.Point3F},System.Single)">
+            <summary>
+            适用近似体素降采样
+            </summary>
+            <param name="points">点集</param>
+            <param name="leafSize">网格尺寸</param>
+            <returns>过滤后点集</returns>
+        </member>
+        <member name="M:PCLSharp.Modules.Interfaces.ICloudFilters.ApplyStatisticalOutlierRemoval(System.Collections.Generic.IEnumerable{PCLSharp.Primitives.Models.Point3F},System.Int32,System.Single)">
+            <summary>
+            适用统计离群点移除
+            </summary>
+            <param name="points">点集</param>
+            <param name="meanK">平均距离估计的最近邻居的数量</param>
+            <param name="stddevMult">标准差阈值系数</param>
+            <returns>过滤后点集</returns>
+        </member>
+        <member name="M:PCLSharp.Modules.Interfaces.ICloudFilters.ApplyRadiusOutlierRemoval(System.Collections.Generic.IEnumerable{PCLSharp.Primitives.Models.Point3F},System.Single,System.Int32)">
+            <summary>
+            适用半径离群点移除
+            </summary>
+            <param name="points">点集</param>
+            <param name="radius">搜索半径</param>
+            <param name="minNeighborsInRadius">半径范围内点数量最小值</param>
+            <returns>过滤后点集</returns>
+        </member>
+        <member name="M:PCLSharp.Modules.Interfaces.ICloudFilters.ApplyMovingLeastSquares(System.Collections.Generic.IEnumerable{PCLSharp.Primitives.Models.Point3F},System.Single)">
+            <summary>
+            适用移动最小二乘法重采样
+            </summary>
+            <param name="points">点集</param>
+            <param name="radius">搜索半径</param>
+            <returns>过滤后点集</returns>
+        </member>
+        <member name="T:PCLSharp.Modules.Interfaces.ICloudKeyPoints">
+            <summary>
+            点云关键点接口
+            </summary>
+        </member>
+        <member name="M:PCLSharp.Modules.Interfaces.ICloudKeyPoints.DetectNARF(System.Collections.Generic.IEnumerable{PCLSharp.Primitives.Models.Point3F},System.Single,System.Single,System.Single,System.Single,System.Single,System.Int32,System.Single)">
+            <summary>
+            检测NARF关键点
+            </summary>
+            <param name="points">点集</param>
+            <param name="angularResolution">角度分辨率</param>
+            <param name="maxAngleWidth">传感器水平边界角度</param>
+            <param name="maxAngleHeight">传感器垂直边界角度</param>
+            <param name="noiseLevel">所有与最近点的最大距离</param>
+            <param name="minRange">最小可见范围</param>
+            <param name="borderSize">边界尺寸</param>
+            <param name="supportSize">计算范围半径</param>
+            <returns>NARF关键点集</returns>
+        </member>
+        <member name="M:PCLSharp.Modules.Interfaces.ICloudKeyPoints.DetectISS(System.Collections.Generic.IEnumerable{PCLSharp.Primitives.Models.Point3F},System.Single,System.Single,System.Single,System.Single,System.Int32,System.Int32)">
+            <summary>
+            检测ISS关键点
+            </summary>
+            <param name="points">点集</param>
+            <param name="salientRadius">显著半径</param>
+            <param name="nonMaxRadius">非极大值抑制半径</param>
+            <param name="threshold21">二一特征值比上限</param>
+            <param name="threshold32">三二特征值比上限</param>
+            <param name="minNeighborsCount">最小邻域点数</param>
+            <param name="threadsCount">线程数</param>
+            <returns>ISS关键点集</returns>
+        </member>
+        <member name="M:PCLSharp.Modules.Interfaces.ICloudKeyPoints.DetectSIFT(System.Collections.Generic.IEnumerable{PCLSharp.Primitives.Models.Point3F},System.Single,System.Int32,System.Int32,System.Single)">
+            <summary>
+            检测SIFT关键点
+            </summary>
+            <param name="points">点集</param>
+            <param name="minScale">尺度空间最小标准偏差</param>
+            <param name="octavesCount">金字塔组数量</param>
+            <param name="scalesPerOctaveCount">每组金字塔计算尺度</param>
+            <param name="minContrast">限制关键点检测阈值</param>
+            <returns>SIFT关键点集</returns>
+        </member>
+        <member name="M:PCLSharp.Modules.Interfaces.ICloudKeyPoints.DetectHarris(System.Collections.Generic.IEnumerable{PCLSharp.Primitives.Models.Point3F},System.Boolean,System.Single,System.Single)">
+            <summary>
+            检测Harris关键点
+            </summary>
+            <param name="points">点集</param>
+            <param name="nonMaxSupression">非极大值抑制</param>
+            <param name="radius">搜索半径</param>
+            <param name="threshold">感兴趣阈值</param>
+            <returns>Harris关键点集</returns>
+        </member>
+        <member name="M:PCLSharp.Modules.Interfaces.ICloudKeyPoints.DetectSUSAN(System.Collections.Generic.IEnumerable{PCLSharp.Primitives.Models.Point3F},System.Boolean,System.Single,System.Single,System.Single,System.Single)">
+            <summary>
+            检测SUSAN关键点
+            </summary>
+            <param name="points">点集</param>
+            <param name="nonMaxSupression">非极大值抑制</param>
+            <param name="radius">搜索半径</param>
+            <param name="distanceThreshold">距离阈值</param>
+            <param name="angularThreshold">角度阈值</param>
+            <param name="intensityThreshold">强度阈值</param>
+            <returns>SUSAN关键点集</returns>
+        </member>
+        <member name="T:PCLSharp.Modules.Interfaces.ICloudNormals">
+            <summary>
+            点云法向量接口
+            </summary>
+        </member>
+        <member name="M:PCLSharp.Modules.Interfaces.ICloudNormals.EstimateNormalsByK(System.Collections.Generic.IEnumerable{PCLSharp.Primitives.Models.Point3F},System.Int32)">
+            <summary>
+            估算法向量
+            </summary>
+            <param name="points">点集</param>
+            <param name="k">搜索近邻数量</param>
+            <returns>法向量集</returns>
+        </member>
+        <member name="M:PCLSharp.Modules.Interfaces.ICloudNormals.EstimateNormalsByRadius(System.Collections.Generic.IEnumerable{PCLSharp.Primitives.Models.Point3F},System.Single)">
+            <summary>
+            估算法向量
+            </summary>
+            <param name="points">点集</param>
+            <param name="radius">搜索半径</param>
+            <returns>法向量集</returns>
+        </member>
+        <member name="M:PCLSharp.Modules.Interfaces.ICloudNormals.EstimateNormalsByKP(System.Collections.Generic.IEnumerable{PCLSharp.Primitives.Models.Point3F},System.Int32)">
+            <summary>
+            估算法向量 (OMP)
+            </summary>
+            <param name="points">点集</param>
+            <param name="k">搜索近邻数量</param>
+            <returns>法向量集</returns>
+        </member>
+        <member name="M:PCLSharp.Modules.Interfaces.ICloudNormals.EstimateNormalsByRadiusP(System.Collections.Generic.IEnumerable{PCLSharp.Primitives.Models.Point3F},System.Single)">
+            <summary>
+            估算法向量 (OMP)
+            </summary>
+            <param name="points">点集</param>
+            <param name="radius">搜索半径</param>
+            <returns>法向量集</returns>
+        </member>
+        <member name="T:PCLSharp.Modules.Interfaces.ICloudRegistrations">
+            <summary>
+            点云配准接口
+            </summary>
+        </member>
+        <member name="M:PCLSharp.Modules.Interfaces.ICloudRegistrations.AlignFPCS(System.Collections.Generic.IEnumerable{PCLSharp.Primitives.Models.Point3F},System.Collections.Generic.IEnumerable{PCLSharp.Primitives.Models.Point3F},System.Single,System.Single,System.Boolean,System.Int32,System.Int32,System.Int32)">
+            <summary>
+            FPCS配准
+            </summary>
+            <param name="sourcePoints">源点集</param>
+            <param name="targetPoints">目标点集</param>
+            <param name="approxOverlap">近似重叠</param>
+            <param name="delta">配准距离</param>
+            <param name="normalize">标准化</param>
+            <param name="samplesCount">采样数量</param>
+            <param name="maxComputationTime">最大计算时间(秒)</param>
+            <param name="threadsCount">线程数</param>
+            <returns>配准结果</returns>
+        </member>
+        <member name="M:PCLSharp.Modules.Interfaces.ICloudRegistrations.AlignKFPCS(System.Collections.Generic.IEnumerable{PCLSharp.Primitives.Models.Point3F},System.Collections.Generic.IEnumerable{PCLSharp.Primitives.Models.Point3F},System.Single,System.Single,System.Single,System.Boolean,System.Int32,System.Int32,System.Int32)">
+            <summary>
+            K-FPCS配准
+            </summary>
+            <param name="sourcePoints">源点集</param>
+            <param name="targetPoints">目标点集</param>
+            <param name="approxOverlap">近似重叠</param>
+            <param name="lambda">平移向量加权系数</param>
+            <param name="delta">配准距离</param>
+            <param name="normalize">标准化</param>
+            <param name="samplesCount">采样数量</param>
+            <param name="maxComputationTime">最大计算时间(秒)</param>
+            <param name="threadsCount">线程数</param>
+            <returns>配准结果</returns>
+        </member>
+        <member name="M:PCLSharp.Modules.Interfaces.ICloudRegistrations.AlignSACIA(System.Collections.Generic.IEnumerable{PCLSharp.Primitives.Models.Point3F},System.Collections.Generic.IEnumerable{PCLSharp.Primitives.Features.Narf36F},System.Collections.Generic.IEnumerable{PCLSharp.Primitives.Models.Point3F},System.Collections.Generic.IEnumerable{PCLSharp.Primitives.Features.Narf36F},System.Single,System.Int32,System.Int32)">
+            <summary>
+            SAC-IA-NARF配准
+            </summary>
+            <param name="sourcePoints">源点集</param>
+            <param name="sourceDescriptors">源NARF描述子集</param>
+            <param name="targetPoints">目标点集</param>
+            <param name="targetDescriptors">目标NARF描述子集</param>
+            <param name="minSampleDistance">采样点最小距离</param>
+            <param name="samplesCount">采样数量</param>
+            <param name="correspondenceRandomness">随机特征邻域点数</param>
+            <returns>配准结果</returns>
+        </member>
+        <member name="M:PCLSharp.Modules.Interfaces.ICloudRegistrations.AlignSACIA(System.Collections.Generic.IEnumerable{PCLSharp.Primitives.Models.Point3F},System.Collections.Generic.IEnumerable{PCLSharp.Primitives.Features.PFHSignature125F},System.Collections.Generic.IEnumerable{PCLSharp.Primitives.Models.Point3F},System.Collections.Generic.IEnumerable{PCLSharp.Primitives.Features.PFHSignature125F},System.Single,System.Int32,System.Int32)">
+            <summary>
+            SAC-IA-PFH配准
+            </summary>
+            <param name="sourcePoints">源点集</param>
+            <param name="sourceDescriptors">源PFH描述子集</param>
+            <param name="targetPoints">目标点集</param>
+            <param name="targetDescriptors">目标PFH描述子集</param>
+            <param name="minSampleDistance">采样点最小距离</param>
+            <param name="samplesCount">采样数量</param>
+            <param name="correspondenceRandomness">随机特征邻域点数</param>
+            <returns>配准结果</returns>
+        </member>
+        <member name="M:PCLSharp.Modules.Interfaces.ICloudRegistrations.AlignSACIA(System.Collections.Generic.IEnumerable{PCLSharp.Primitives.Models.Point3F},System.Collections.Generic.IEnumerable{PCLSharp.Primitives.Features.FPFHSignature33F},System.Collections.Generic.IEnumerable{PCLSharp.Primitives.Models.Point3F},System.Collections.Generic.IEnumerable{PCLSharp.Primitives.Features.FPFHSignature33F},System.Single,System.Int32,System.Int32)">
+            <summary>
+            SAC-IA-FPFH配准
+            </summary>
+            <param name="sourcePoints">源点集</param>
+            <param name="sourceDescriptors">源FPFH描述子集</param>
+            <param name="targetPoints">目标点集</param>
+            <param name="targetDescriptors">目标FPFH描述子集</param>
+            <param name="minSampleDistance">采样点最小距离</param>
+            <param name="samplesCount">采样数量</param>
+            <param name="correspondenceRandomness">随机特征邻域点数</param>
+            <returns>配准结果</returns>
+        </member>
+        <member name="M:PCLSharp.Modules.Interfaces.ICloudRegistrations.AlignSACIA(System.Collections.Generic.IEnumerable{PCLSharp.Primitives.Models.Point3F},System.Collections.Generic.IEnumerable{PCLSharp.Primitives.Features.ShapeContext1980F},System.Collections.Generic.IEnumerable{PCLSharp.Primitives.Models.Point3F},System.Collections.Generic.IEnumerable{PCLSharp.Primitives.Features.ShapeContext1980F},System.Single,System.Int32,System.Int32)">
+            <summary>
+            SAC-IA-3DSC配准
+            </summary>
+            <param name="sourcePoints">源点集</param>
+            <param name="sourceDescriptors">源3DSC描述子集</param>
+            <param name="targetPoints">目标点集</param>
+            <param name="targetDescriptors">目标3DSC描述子集</param>
+            <param name="minSampleDistance">采样点最小距离</param>
+            <param name="samplesCount">采样数量</param>
+            <param name="correspondenceRandomness">随机特征邻域点数</param>
+            <returns>配准结果</returns>
+        </member>
+        <member name="M:PCLSharp.Modules.Interfaces.ICloudRegistrations.AlignSACIA(System.Collections.Generic.IEnumerable{PCLSharp.Primitives.Models.Point3F},System.Collections.Generic.IEnumerable{PCLSharp.Primitives.Features.Shot352F},System.Collections.Generic.IEnumerable{PCLSharp.Primitives.Models.Point3F},System.Collections.Generic.IEnumerable{PCLSharp.Primitives.Features.Shot352F},System.Single,System.Int32,System.Int32)">
+            <summary>
+            SAC-IA-SHOT配准
+            </summary>
+            <param name="sourcePoints">源点集</param>
+            <param name="sourceDescriptors">源SHOT描述子集</param>
+            <param name="targetPoints">目标点集</param>
+            <param name="targetDescriptors">目标SHOT描述子集</param>
+            <param name="minSampleDistance">采样点最小距离</param>
+            <param name="samplesCount">采样数量</param>
+            <param name="correspondenceRandomness">随机特征邻域点数</param>
+            <returns>配准结果</returns>
+        </member>
+        <member name="M:PCLSharp.Modules.Interfaces.ICloudRegistrations.AlignNDT(System.Collections.Generic.IEnumerable{PCLSharp.Primitives.Models.Point3F},System.Collections.Generic.IEnumerable{PCLSharp.Primitives.Models.Point3F},System.Single,System.Single,System.Single,System.Int32)">
+            <summary>
+            NDT配准
+            </summary>
+            <param name="sourcePoints">源点集</param>
+            <param name="targetPoints">目标点集</param>
+            <param name="resolution">分辨率</param>
+            <param name="stepSize">步长</param>
+            <param name="transformationEpsilon">变换最大差值</param>
+            <param name="maximumIterations">最大迭代次数</param>
+            <returns>配准结果</returns>
+        </member>
+        <member name="M:PCLSharp.Modules.Interfaces.ICloudRegistrations.AlignGICP(System.Collections.Generic.IEnumerable{PCLSharp.Primitives.Models.Point3F},System.Collections.Generic.IEnumerable{PCLSharp.Primitives.Models.Point3F},System.Single,System.Single,System.Single,System.Int32)">
+            <summary>
+            GICP配准
+            </summary>
+            <param name="sourcePoints">源点集</param>
+            <param name="targetPoints">目标点集</param>
+            <param name="maxCorrespondenceDistance">最大相似距离</param>
+            <param name="transformationEpsilon">变换最大差值</param>
+            <param name="euclideanFitnessEpsilon">均方误差阈值</param>
+            <param name="maximumIterations">最大迭代次数</param>
+            <returns>配准结果</returns>
+        </member>
+        <member name="M:PCLSharp.Modules.Interfaces.ICloudRegistrations.AlignPointToPoint(System.Collections.Generic.IEnumerable{PCLSharp.Primitives.Models.Point3F},System.Collections.Generic.IEnumerable{PCLSharp.Primitives.Models.Point3F},System.Single,System.Single,System.Single,System.Int32)">
+            <summary>
+            ICP-Point-To-Point配准
+            </summary>
+            <param name="sourcePoints">源点集</param>
+            <param name="targetPoints">目标点集</param>
+            <param name="maxCorrespondenceDistance">最大相似距离</param>
+            <param name="transformationEpsilon">变换最大差值</param>
+            <param name="euclideanFitnessEpsilon">均方误差阈值</param>
+            <param name="maximumIterations">最大迭代次数</param>
+            <returns>配准结果</returns>
+        </member>
+        <member name="M:PCLSharp.Modules.Interfaces.ICloudRegistrations.AlignPointToPlane(System.Collections.Generic.IEnumerable{PCLSharp.Primitives.Models.Point3F},System.Collections.Generic.IEnumerable{PCLSharp.Primitives.Models.Point3F},System.Int32,System.Single,System.Single,System.Single,System.Int32,System.Int32)">
+            <summary>
+            ICP-Point-To-Plane配准
+            </summary>
+            <param name="sourcePoints">源点集</param>
+            <param name="targetPoints">目标点集</param>
+            <param name="normalK">法向量K</param>
+            <param name="maxCorrespondenceDistance">最大相似距离</param>
+            <param name="transformationEpsilon">变换最大差值</param>
+            <param name="euclideanFitnessEpsilon">均方误差阈值</param>
+            <param name="maximumIterations">最大迭代次数</param>
+            <param name="threadsCount">线程数</param>
+            <returns>配准结果</returns>
+        </member>
+        <member name="T:PCLSharp.Modules.Interfaces.ICloudSearch">
+            <summary>
+            点云搜索接口
+            </summary>
+        </member>
+        <member name="M:PCLSharp.Modules.Interfaces.ICloudSearch.KSearch(System.Collections.Generic.IEnumerable{PCLSharp.Primitives.Models.Point3F},PCLSharp.Primitives.Models.Point3F,System.Int32)">
+            <summary>
+            K近邻搜索
+            </summary>
+            <param name="points">点集</param>
+            <param name="referencePoint">参考坐标点</param>
+            <param name="k">近邻数量</param>
+            <returns>结果点集</returns>
+        </member>
+        <member name="M:PCLSharp.Modules.Interfaces.ICloudSearch.RadiusSearch(System.Collections.Generic.IEnumerable{PCLSharp.Primitives.Models.Point3F},PCLSharp.Primitives.Models.Point3F,System.Single)">
+            <summary>
+            半径搜索
+            </summary>
+            <param name="points">点集</param>
+            <param name="referencePoint">参考坐标点</param>
+            <param name="radius">搜索半径</param>
+            <returns>结果点集</returns>
+        </member>
+        <member name="M:PCLSharp.Modules.Interfaces.ICloudSearch.OctreeSearch(System.Collections.Generic.IEnumerable{PCLSharp.Primitives.Models.Point3F},PCLSharp.Primitives.Models.Point3F,System.Single)">
+            <summary>
+            八叉树搜索
+            </summary>
+            <param name="points">点集</param>
+            <param name="referencePoint">参考坐标点</param>
+            <param name="resolution">分辨率</param>
+            <returns>结果点集</returns>
+        </member>
+        <member name="T:PCLSharp.Modules.Interfaces.ICloudSegmentations">
+            <summary>
+            点云分割接口
+            </summary>
+        </member>
+        <member name="M:PCLSharp.Modules.Interfaces.ICloudSegmentations.SegmentPlane(System.Collections.Generic.IEnumerable{PCLSharp.Primitives.Models.Point3F},System.Boolean,System.Single,System.Single,System.Int32,System.Int32@,System.Int32@,System.Int32@,System.Int32@)">
+            <summary>
+            分割平面
+            </summary>
+            <param name="points">点集</param>
+            <param name="optimizeCoefficients">是否优化模型系数</param>
+            <param name="probability">概率</param>
+            <param name="distanceThreshold">距离阈值</param>
+            <param name="maxIterationsCount">最大迭代次数</param>
+            <param name="a">平面方程系数a</param>
+            <param name="b">平面方程系数b</param>
+            <param name="c">平面方程系数c</param>
+            <param name="d">平面方程系数d</param>
+            <returns>平面点云</returns>
+        </member>
+        <member name="M:PCLSharp.Modules.Interfaces.ICloudSegmentations.SegmentSphere(System.Collections.Generic.IEnumerable{PCLSharp.Primitives.Models.Point3F},System.Boolean,System.Single,System.Single,System.Single,System.Single,System.Int32,PCLSharp.Primitives.Models.Point3F@,System.Single@)">
+            <summary>
+            分割球体
+            </summary>
+            <param name="points">点集</param>
+            <param name="optimizeCoefficients">是否优化模型系数</param>
+            <param name="probability">概率</param>
+            <param name="distanceThreshold">距离阈值</param>
+            <param name="minRadius">球体最小半径</param>
+            <param name="maxRadius">球体最大半径</param>
+            <param name="maxIterationsCount">最大迭代次数</param>
+            <param name="center">球心</param>
+            <param name="radius">半径</param>
+            <returns>球体点云</returns>
+        </member>
+        <member name="M:PCLSharp.Modules.Interfaces.ICloudSegmentations.EuclidClusterSegment(System.Collections.Generic.IEnumerable{PCLSharp.Primitives.Models.Point3F},System.Single,System.Int32,System.Int32)">
+            <summary>
+            欧几里得聚类分割
+            </summary>
+            <param name="points">点集</param>
+            <param name="clusterTolerance">簇搜索容差</param>
+            <param name="minClusterSize">簇最小尺寸</param>
+            <param name="maxClusterSize">簇最大尺寸</param>
+            <returns>点云簇列表</returns>
+        </member>
+        <member name="M:PCLSharp.Modules.Interfaces.ICloudSegmentations.RegionGrowingSegment(System.Collections.Generic.IEnumerable{PCLSharp.Primitives.Models.Point3F},System.Int32,System.Int32,System.Single,System.Single,System.Int32,System.Int32,System.Int32)">
+            <summary>
+            区域生长分割
+            </summary>
+            <param name="points">点集</param>
+            <param name="normalK">法向量K</param>
+            <param name="clusterK">簇K</param>
+            <param name="smoothnessThreshold">平滑阈值（角度）</param>
+            <param name="curvatureThreshold">曲率阈值</param>
+            <param name="minClusterSize">簇最小尺寸</param>
+            <param name="maxClusterSize">簇最大尺寸</param>
+            <param name="threadsCount">线程数</param>
+            <returns>点云簇列表</returns>
+        </member>
+        <member name="M:PCLSharp.Modules.Interfaces.ICloudSegmentations.RegionGrowingColorSegment(System.Collections.Generic.IEnumerable{PCLSharp.Primitives.Models.Point3Color4},System.Int32,System.Int32,System.Single,System.Single,System.Single,System.Single,System.Single,System.Int32,System.Int32,System.Int32)">
+            <summary>
+            区域生长颜色分割
+            </summary>
+            <param name="points">点集</param>
+            <param name="normalK">法向量K</param>
+            <param name="clusterK">簇K</param>
+            <param name="distanceThreshold">距离阈值</param>
+            <param name="smoothnessThreshold">平滑阈值（角度）</param>
+            <param name="curvatureThreshold">曲率阈值</param>
+            <param name="pointColorThreshold">点颜色阈值</param>
+            <param name="regionColorThreshold">区域颜色阈值</param>
+            <param name="minClusterSize">簇最小尺寸</param>
+            <param name="maxClusterSize">簇最大尺寸</param>
+            <param name="threadsCount">线程数</param>
+            <returns>点云簇列表</returns>
+        </member>
+        <member name="T:PCLSharp.Modules.Interfaces.ICloudSurfaces">
+            <summary>
+            点云表面接口
+            </summary>
+        </member>
+        <member name="M:PCLSharp.Modules.Interfaces.ICloudSurfaces.ApplyGreedyProjection(System.Collections.Generic.IEnumerable{PCLSharp.Primitives.Models.Point3F},System.Int32,System.Single,System.Single,System.Int32,System.Double,System.Double,System.Double,System.Boolean,System.Int32)">
+            <summary>
+            适用贪婪投影三角化
+            </summary>
+            <param name="points">点集</param>
+            <param name="normalK">法向量K</param>
+            <param name="searchRadius">搜索半径</param>
+            <param name="mu">近邻点最远倍数</param>
+            <param name="maxNearestNeighbors">最多邻域数</param>
+            <param name="maxSurfaceAngle">偏离法向量最大角度</param>
+            <param name="minAngle">三角形最小角度</param>
+            <param name="maxAngle">三角形最大角度</param>
+            <param name="normalConsistency">保证法向量朝向一致</param>
+            <param name="threadsCount">线程数</param>
+            <returns>网格几何</returns>
+        </member>
+        <member name="M:PCLSharp.Modules.Interfaces.ICloudSurfaces.ApplyPoissonReconstruction(System.Collections.Generic.IEnumerable{PCLSharp.Primitives.Models.Point3F},System.Int32,System.Boolean,System.Int32,System.Int32,System.Int32,System.Boolean,System.Boolean,System.Single,System.Single,System.Int32,System.Int32)">
+            <summary>
+            适用泊松重建
+            </summary>
+            <param name="points">点集</param>
+            <param name="normalK">法向量K</param>
+            <param name="confidence">是否使用法向量置信</param>
+            <param name="degree">度数</param>
+            <param name="depth">树最大深度</param>
+            <param name="isoDivide">ISO等值面深度</param>
+            <param name="manifold">是否添加多边形重心</param>
+            <param name="outputPolygons">是否输出多边形网格</param>
+            <param name="samplesPerNode">八叉树样本点最小数量</param>
+            <param name="scale">重构立方体与样本边界立方体直径比率</param>
+            <param name="solverDivide">Gauss-Seidel迭代深度</param>
+            <param name="threadsCount">线程数</param>
+            <returns>网格几何</returns>
+        </member>
+        <member name="M:PCLSharp.Modules.Interfaces.ICloudSurfaces.ApplyMarchingCubes(System.Collections.Generic.IEnumerable{PCLSharp.Primitives.Models.Point3F},System.Int32,System.Single,System.Int32,System.Single,System.Int32)">
+            <summary>
+            适用移动立方体重建
+            </summary>
+            <param name="points">点集</param>
+            <param name="normalK">法向量K</param>
+            <param name="isoLevel">等值面值</param>
+            <param name="gridResolution">网格分辨率</param>
+            <param name="percentageExtendGrid">自由空间比例</param>
+            <param name="threadsCount">线程数</param>
+            <returns>网格几何</returns>
+        </member>
+    </members>
+</doc>

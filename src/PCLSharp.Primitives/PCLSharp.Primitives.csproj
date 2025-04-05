@@ -3,20 +3,14 @@
     <TargetFrameworks>net462;netstandard2.0</TargetFrameworks>
     <LangVersion>8.0</LangVersion>
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+    <DocumentationFile>$(AssemblyName).xml</DocumentationFile>
     <Authors>Lee</Authors>
     <Company>SD</Company>
     <Description>SD.Framework PCL基元</Description>
     <Copyright>Copyright © SD 2025</Copyright>
-    <Version>1.0.3</Version>
-    <AssemblyVersion>1.0.3</AssemblyVersion>
-    <FileVersion>1.0.3.0</FileVersion>
-  </PropertyGroup>
-
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
-    <DocumentationFile>bin\Debug\$(TargetFramework)\PCLSharp.Primitives.xml</DocumentationFile>
-  </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
-    <DocumentationFile>bin\Release\$(TargetFramework)\PCLSharp.Primitives.xml</DocumentationFile>
+    <Version>1.1.0</Version>
+    <AssemblyVersion>1.1.0</AssemblyVersion>
+    <FileVersion>1.1.0.0</FileVersion>
   </PropertyGroup>
 
   <ItemGroup>
@@ -33,6 +27,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="System.Memory" Version="4.6.0" />
+    <PackageReference Include="System.Memory" Version="4.6.3" />
+    <PackageReference Include="System.ValueTuple" Version="4.6.1" />
   </ItemGroup>
 </Project>

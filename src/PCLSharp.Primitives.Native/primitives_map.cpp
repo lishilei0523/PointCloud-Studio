@@ -1,3 +1,4 @@
+#include <pcl/conversions.h>
 #include "primitives_map.h"
 using namespace std;
 using namespace pcl;
@@ -207,4 +208,41 @@ Point3Color4s* pclsharp::toPoint3Color4s(const PointCloud<PointXYZRGBA>& pointCl
 	Point3Color4s* point3Color4s = new Point3Color4s(pointColors, static_cast<int>(length));
 
 	return point3Color4s;
+}
+
+/// <summary>
+/// 多边形网格映射网格几何
+/// </summary>
+/// <param name="polygonMesh">多边形网格</param>
+/// <returns>网格几何</returns>
+MeshGeometry* pclsharp::toMeshGeometry(const PolygonMesh& polygonMesh)
+{
+	PointCloud<PointXYZ> pointCloud;
+	fromPCLPointCloud2(polygonMesh.cloud, pointCloud);
+
+	//位置解析
+	const size_t& positionsLength = pointCloud.size();
+	Point3F* positions = new Point3F[positionsLength];
+	for (int i = 0; i < positionsLength; i++)
+	{
+		const PointXYZ& pointXYZ = pointCloud.points[i];
+		positions[i] = Point3F(pointXYZ.x, pointXYZ.y, pointXYZ.z);
+	}
+
+	//三角索引解析
+	int i = 0;
+	const size_t& triangleIndicesLength = polygonMesh.polygons.size() * 3;
+	int* triangleIndices = new int[triangleIndicesLength];
+	for (const Vertices& polygon : polygonMesh.polygons)
+	{
+		for (const int& index : polygon.vertices)
+		{
+			triangleIndices[i] = index;
+			i++;
+		}
+	}
+
+	MeshGeometry* meshGeometry = new MeshGeometry(positions, static_cast<int>(positionsLength), triangleIndices, static_cast<int>(triangleIndicesLength));
+
+	return meshGeometry;
 }

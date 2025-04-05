@@ -221,5 +221,34 @@ namespace PCLSharp.Modules.Implements
             return filteredPoints;
         }
         #endregion
+
+        #region # 适用移动最小二乘法重采样 —— Point3F[] ApplyMovingLeastSquares(IEnumerable<Point3F> points...
+        /// <summary>
+        /// 适用移动最小二乘法重采样
+        /// </summary>
+        /// <param name="points">点集</param>
+        /// <param name="radius">搜索半径</param>
+        /// <returns>过滤后点集</returns>
+        public Point3F[] ApplyMovingLeastSquares(IEnumerable<Point3F> points, float radius)
+        {
+            Point3F[] points_ = points?.ToArray() ?? Array.Empty<Point3F>();
+
+            #region # 验证
+
+            if (!points_.Any())
+            {
+                return Array.Empty<Point3F>();
+            }
+
+            #endregion
+
+            IntPtr pointer = FiltersNative.ApplyMovingLeastSquares(points_, points_.Length, radius);
+            Point3Fs point3Fs = Marshal.PtrToStructure<Point3Fs>(pointer);
+            Point3F[] filteredPoints = point3Fs.Recover();
+            DisposeNative.DisposePoint3Fs(pointer);
+
+            return filteredPoints;
+        }
+        #endregion
     }
 }

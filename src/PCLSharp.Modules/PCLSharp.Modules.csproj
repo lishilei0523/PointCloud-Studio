@@ -3,20 +3,14 @@
     <TargetFrameworks>net462;netstandard2.0</TargetFrameworks>
     <LangVersion>8.0</LangVersion>
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+    <DocumentationFile>$(AssemblyName).xml</DocumentationFile>
     <Authors>Lee</Authors>
     <Company>SD</Company>
     <Description>SD.Framework PCL模块</Description>
     <Copyright>Copyright © SD 2025</Copyright>
-    <Version>1.0.2</Version>
-    <AssemblyVersion>1.0.2</AssemblyVersion>
-    <FileVersion>1.0.2.0</FileVersion>
-  </PropertyGroup>
-
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
-    <DocumentationFile>bin\Debug\$(TargetFramework)\PCLSharp.Modules.xml</DocumentationFile>
-  </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
-    <DocumentationFile>bin\Release\$(TargetFramework)\PCLSharp.Modules.xml</DocumentationFile>
+    <Version>1.1.0</Version>
+    <AssemblyVersion>1.1.0</AssemblyVersion>
+    <FileVersion>1.1.0.0</FileVersion>
   </PropertyGroup>
 
   <ItemGroup>
@@ -30,6 +24,10 @@
       <Visible>False</Visible>
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="System.ValueTuple" Version="4.6.1" />
   </ItemGroup>
 
   <ItemGroup>

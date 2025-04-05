@@ -1,0 +1,910 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>PCLSharp.Primitives</name>
+    </assembly>
+    <members>
+        <member name="T:PCLSharp.Primitives.Constants.AssemblyNames">
+            <summary>
+            程序集名称
+            </summary>
+        </member>
+        <member name="F:PCLSharp.Primitives.Constants.AssemblyNames.Primitives">
+            <summary>
+            基元程序集
+            </summary>
+        </member>
+        <member name="F:PCLSharp.Primitives.Constants.AssemblyNames.Modules">
+            <summary>
+            模块程序集
+            </summary>
+        </member>
+        <member name="T:PCLSharp.Primitives.Constants.CoarseAlignmentMode">
+            <summary>
+            粗配准模式
+            </summary>
+        </member>
+        <member name="F:PCLSharp.Primitives.Constants.CoarseAlignmentMode.KFPCS">
+            <summary>
+            K-FPCS
+            </summary>
+        </member>
+        <member name="F:PCLSharp.Primitives.Constants.CoarseAlignmentMode.SACIA">
+            <summary>
+            SAC-IA
+            </summary>
+        </member>
+        <member name="T:PCLSharp.Primitives.Constants.FineAlignmentMode">
+            <summary>
+            精配准模式
+            </summary>
+        </member>
+        <member name="F:PCLSharp.Primitives.Constants.FineAlignmentMode.PointToPoint">
+            <summary>
+            点到点
+            </summary>
+        </member>
+        <member name="F:PCLSharp.Primitives.Constants.FineAlignmentMode.PointToPlane">
+            <summary>
+            点到面
+            </summary>
+        </member>
+        <member name="F:PCLSharp.Primitives.Constants.FineAlignmentMode.GICP">
+            <summary>
+            Generalized-ICP
+            </summary>
+        </member>
+        <member name="F:PCLSharp.Primitives.Constants.FineAlignmentMode.NDT">
+            <summary>
+            NDT
+            </summary>
+        </member>
+        <member name="T:PCLSharp.Primitives.Constants.PointColorType">
+            <summary>
+            点颜色类型
+            </summary>
+        </member>
+        <member name="F:PCLSharp.Primitives.Constants.PointColorType.Mono">
+            <summary>
+            灰度
+            </summary>
+        </member>
+        <member name="F:PCLSharp.Primitives.Constants.PointColorType.RGBA">
+            <summary>
+            彩色
+            </summary>
+        </member>
+        <member name="T:PCLSharp.Primitives.Extensions.PrimitivesExtension">
+            <summary>
+            基元扩展
+            </summary>
+        </member>
+        <member name="M:PCLSharp.Primitives.Extensions.PrimitivesExtension.GetPoint(PCLSharp.Primitives.Models.Point3Normal3)">
+            <summary>
+            获取坐标点
+            </summary>
+            <param name="pointNormal">坐标点法向量</param>
+            <returns>坐标点</returns>
+        </member>
+        <member name="M:PCLSharp.Primitives.Extensions.PrimitivesExtension.GetNormal(PCLSharp.Primitives.Models.Point3Normal3)">
+            <summary>
+            获取法向量
+            </summary>
+            <param name="pointNormal">坐标点法向量</param>
+            <returns>法向量</returns>
+        </member>
+        <member name="M:PCLSharp.Primitives.Extensions.PrimitivesExtension.GetPoint(PCLSharp.Primitives.Models.Point3Color4)">
+            <summary>
+            获取坐标点
+            </summary>
+            <param name="pointColor">坐标点颜色</param>
+            <returns>坐标点</returns>
+        </member>
+        <member name="M:PCLSharp.Primitives.Extensions.PrimitivesExtension.GetColor(PCLSharp.Primitives.Models.Point3Color4)">
+            <summary>
+            获取颜色
+            </summary>
+            <param name="pointColor">坐标点颜色</param>
+            <returns>颜色</returns>
+        </member>
+        <member name="M:PCLSharp.Primitives.Extensions.PrimitivesExtension.FilterNaN(PCLSharp.Primitives.Models.Point3F[])">
+            <summary>
+            过滤NaN坐标点
+            </summary>
+        </member>
+        <member name="M:PCLSharp.Primitives.Extensions.PrimitivesExtension.FilterNaN(System.Collections.Generic.IEnumerable{PCLSharp.Primitives.Models.Point3F})">
+            <summary>
+            过滤NaN坐标点
+            </summary>
+        </member>
+        <member name="M:PCLSharp.Primitives.Extensions.PrimitivesExtension.FilterNaN(PCLSharp.Primitives.Models.Point3Normal3[])">
+            <summary>
+            过滤NaN坐标点
+            </summary>
+        </member>
+        <member name="M:PCLSharp.Primitives.Extensions.PrimitivesExtension.FilterNaN(System.Collections.Generic.IEnumerable{PCLSharp.Primitives.Models.Point3Normal3})">
+            <summary>
+            过滤NaN坐标点
+            </summary>
+        </member>
+        <member name="M:PCLSharp.Primitives.Extensions.PrimitivesExtension.FilterNaN(PCLSharp.Primitives.Models.Point3Color4[])">
+            <summary>
+            过滤NaN坐标点
+            </summary>
+        </member>
+        <member name="M:PCLSharp.Primitives.Extensions.PrimitivesExtension.FilterNaN(System.Collections.Generic.IEnumerable{PCLSharp.Primitives.Models.Point3Color4})">
+            <summary>
+            过滤NaN坐标点
+            </summary>
+        </member>
+        <member name="M:PCLSharp.Primitives.Extensions.PrimitivesExtension.FilterNaN(PCLSharp.Primitives.Models.Normal3F[])">
+            <summary>
+            过滤NaN法向量
+            </summary>
+        </member>
+        <member name="M:PCLSharp.Primitives.Extensions.PrimitivesExtension.FilterNaN(System.Collections.Generic.IEnumerable{PCLSharp.Primitives.Models.Normal3F})">
+            <summary>
+            过滤NaN法向量
+            </summary>
+        </member>
+        <member name="T:PCLSharp.Primitives.Extensions.RecoveryExtension">
+            <summary>
+            重建扩展
+            </summary>
+        </member>
+        <member name="M:PCLSharp.Primitives.Extensions.RecoveryExtension.Recover(PCLSharp.Primitives.Models.Point3Fs)">
+            <summary>
+            坐标点集重建坐标点数组
+            </summary>
+        </member>
+        <member name="M:PCLSharp.Primitives.Extensions.RecoveryExtension.Recover(PCLSharp.Primitives.Models.Normal3Fs)">
+            <summary>
+            法向量集重建法向量数组
+            </summary>
+        </member>
+        <member name="M:PCLSharp.Primitives.Extensions.RecoveryExtension.Recover(PCLSharp.Primitives.Models.Point3Normal3s)">
+            <summary>
+            坐标点法向量集重建坐标点法向量数组
+            </summary>
+        </member>
+        <member name="M:PCLSharp.Primitives.Extensions.RecoveryExtension.Recover(PCLSharp.Primitives.Models.Point3Color4s)">
+            <summary>
+            坐标点颜色集重建坐标点颜色数组
+            </summary>
+        </member>
+        <member name="M:PCLSharp.Primitives.Extensions.RecoveryExtension.Recover(PCLSharp.Primitives.Features.Narf36Fs)">
+            <summary>
+            NARF描述子集重建NARF描述子数组
+            </summary>
+        </member>
+        <member name="M:PCLSharp.Primitives.Extensions.RecoveryExtension.Recover(PCLSharp.Primitives.Features.PFHSignature125Fs)">
+            <summary>
+            PFH描述子集重建PFH描述子数组
+            </summary>
+        </member>
+        <member name="M:PCLSharp.Primitives.Extensions.RecoveryExtension.Recover(PCLSharp.Primitives.Features.FPFHSignature33Fs)">
+            <summary>
+            FPFH描述子集重建FPFH描述子数组
+            </summary>
+        </member>
+        <member name="M:PCLSharp.Primitives.Extensions.RecoveryExtension.Recover(PCLSharp.Primitives.Features.ShapeContext1980Fs)">
+            <summary>
+            3DSC描述子集重建3DSC描述子数组
+            </summary>
+        </member>
+        <member name="M:PCLSharp.Primitives.Extensions.RecoveryExtension.Recover(PCLSharp.Primitives.Features.Shot352Fs)">
+            <summary>
+            SHOT描述子集重建SHOT描述子数组
+            </summary>
+        </member>
+        <member name="M:PCLSharp.Primitives.Extensions.RecoveryExtension.Recover(PCLSharp.Primitives.Models.MeshGeometry)">
+            <summary>
+            网格几何重建
+            </summary>
+            <param name="meshGeometry">网格几何</param>
+            <returns>网格几何元组</returns>
+        </member>
+        <member name="T:PCLSharp.Primitives.Features.FPFHSignature33F">
+            <summary>
+            FPFH描述子
+            </summary>
+        </member>
+        <member name="M:PCLSharp.Primitives.Features.FPFHSignature33F.#ctor(System.Single[])">
+            <summary>
+            创建FPFH描述子构造器
+            </summary>
+            <param name="features">特征向量</param>
+        </member>
+        <member name="F:PCLSharp.Primitives.Features.FPFHSignature33F.Features">
+            <summary>
+            特征向量
+            </summary>
+        </member>
+        <member name="T:PCLSharp.Primitives.Features.FPFHSignature33Fs">
+            <summary>
+            FPFH描述子集
+            </summary>
+        </member>
+        <member name="M:PCLSharp.Primitives.Features.FPFHSignature33Fs.#ctor(System.IntPtr,System.Int32)">
+            <summary>
+            创建FPFH描述子集构造器
+            </summary>
+            <param name="descriptors">FPFH描述子集指针</param>
+            <param name="length">长度</param>
+        </member>
+        <member name="F:PCLSharp.Primitives.Features.FPFHSignature33Fs.Descriptors">
+            <summary>
+            FPFH描述子集指针
+            </summary>
+        </member>
+        <member name="F:PCLSharp.Primitives.Features.FPFHSignature33Fs.Length">
+            <summary>
+            长度
+            </summary>
+        </member>
+        <member name="T:PCLSharp.Primitives.Features.Narf36F">
+            <summary>
+            NARF描述子
+            </summary>
+        </member>
+        <member name="M:PCLSharp.Primitives.Features.Narf36F.#ctor(System.Single,System.Single,System.Single,System.Single,System.Single,System.Single,System.Single[])">
+            <summary>
+            创建NARF描述子构造器
+            </summary>
+            <param name="x">X坐标</param>
+            <param name="y">Y坐标</param>
+            <param name="z">Z坐标</param>
+            <param name="pitch">俯仰角(RX)</param>
+            <param name="yaw">偏航角(RY)</param>
+            <param name="roll">翻滚角(RZ)</param>
+            <param name="features">特征向量</param>
+        </member>
+        <member name="F:PCLSharp.Primitives.Features.Narf36F.X">
+            <summary>
+            X坐标
+            </summary>
+        </member>
+        <member name="F:PCLSharp.Primitives.Features.Narf36F.Y">
+            <summary>
+            Y坐标
+            </summary>
+        </member>
+        <member name="F:PCLSharp.Primitives.Features.Narf36F.Z">
+            <summary>
+            Z坐标
+            </summary>
+        </member>
+        <member name="F:PCLSharp.Primitives.Features.Narf36F.Pitch">
+            <summary>
+            俯仰角(RX)
+            </summary>
+        </member>
+        <member name="F:PCLSharp.Primitives.Features.Narf36F.Yaw">
+            <summary>
+            偏航角(RY)
+            </summary>
+        </member>
+        <member name="F:PCLSharp.Primitives.Features.Narf36F.Roll">
+            <summary>
+            翻滚角(RZ)
+            </summary>
+        </member>
+        <member name="F:PCLSharp.Primitives.Features.Narf36F.Features">
+            <summary>
+            特征向量
+            </summary>
+        </member>
+        <member name="T:PCLSharp.Primitives.Features.Narf36Fs">
+            <summary>
+            NARF描述子集
+            </summary>
+        </member>
+        <member name="M:PCLSharp.Primitives.Features.Narf36Fs.#ctor(System.IntPtr,System.Int32)">
+            <summary>
+            创建NARF描述子集构造器
+            </summary>
+            <param name="descriptors">NARF描述子集指针</param>
+            <param name="length">长度</param>
+        </member>
+        <member name="F:PCLSharp.Primitives.Features.Narf36Fs.Descriptors">
+            <summary>
+            NARF描述子集指针
+            </summary>
+        </member>
+        <member name="F:PCLSharp.Primitives.Features.Narf36Fs.Length">
+            <summary>
+            长度
+            </summary>
+        </member>
+        <member name="T:PCLSharp.Primitives.Features.PFHSignature125F">
+            <summary>
+            PFH描述子
+            </summary>
+        </member>
+        <member name="M:PCLSharp.Primitives.Features.PFHSignature125F.#ctor(System.Single[])">
+            <summary>
+            创建PFH描述子构造器
+            </summary>
+            <param name="features">特征向量</param>
+        </member>
+        <member name="F:PCLSharp.Primitives.Features.PFHSignature125F.Features">
+            <summary>
+            特征向量
+            </summary>
+        </member>
+        <member name="T:PCLSharp.Primitives.Features.PFHSignature125Fs">
+            <summary>
+            PFH描述子集
+            </summary>
+        </member>
+        <member name="M:PCLSharp.Primitives.Features.PFHSignature125Fs.#ctor(System.IntPtr,System.Int32)">
+            <summary>
+            创建PFH描述子集构造器
+            </summary>
+            <param name="descriptors">PFH描述子集指针</param>
+            <param name="length">长度</param>
+        </member>
+        <member name="F:PCLSharp.Primitives.Features.PFHSignature125Fs.Descriptors">
+            <summary>
+            PFH描述子集指针
+            </summary>
+        </member>
+        <member name="F:PCLSharp.Primitives.Features.PFHSignature125Fs.Length">
+            <summary>
+            长度
+            </summary>
+        </member>
+        <member name="T:PCLSharp.Primitives.Features.ShapeContext1980F">
+            <summary>
+            3DSC描述子
+            </summary>
+        </member>
+        <member name="M:PCLSharp.Primitives.Features.ShapeContext1980F.#ctor(System.Single[],System.Single[])">
+            <summary>
+            创建3DSC描述子构造器
+            </summary>
+            <param name="rf">RF</param>
+            <param name="features">特征向量</param>
+        </member>
+        <member name="F:PCLSharp.Primitives.Features.ShapeContext1980F.RF">
+            <summary>
+            RF
+            </summary>
+        </member>
+        <member name="F:PCLSharp.Primitives.Features.ShapeContext1980F.Features">
+            <summary>
+            特征向量
+            </summary>
+        </member>
+        <member name="T:PCLSharp.Primitives.Features.ShapeContext1980Fs">
+            <summary>
+            3DSC描述子集
+            </summary>
+        </member>
+        <member name="M:PCLSharp.Primitives.Features.ShapeContext1980Fs.#ctor(System.IntPtr,System.Int32)">
+            <summary>
+            创建3DSC描述子集构造器
+            </summary>
+            <param name="descriptors">3DSC描述子集指针</param>
+            <param name="length">长度</param>
+        </member>
+        <member name="F:PCLSharp.Primitives.Features.ShapeContext1980Fs.Descriptors">
+            <summary>
+            3DSC描述子集指针
+            </summary>
+        </member>
+        <member name="F:PCLSharp.Primitives.Features.ShapeContext1980Fs.Length">
+            <summary>
+            长度
+            </summary>
+        </member>
+        <member name="T:PCLSharp.Primitives.Features.Shot352F">
+            <summary>
+            SHOT描述子
+            </summary>
+        </member>
+        <member name="M:PCLSharp.Primitives.Features.Shot352F.#ctor(System.Single[],System.Single[])">
+            <summary>
+            创建SHOT描述子构造器
+            </summary>
+            <param name="rf">RF</param>
+            <param name="features">特征向量</param>
+        </member>
+        <member name="F:PCLSharp.Primitives.Features.Shot352F.RF">
+            <summary>
+            RF
+            </summary>
+        </member>
+        <member name="F:PCLSharp.Primitives.Features.Shot352F.Features">
+            <summary>
+            特征向量
+            </summary>
+        </member>
+        <member name="T:PCLSharp.Primitives.Features.Shot352Fs">
+            <summary>
+            SHOT描述子集
+            </summary>
+        </member>
+        <member name="M:PCLSharp.Primitives.Features.Shot352Fs.#ctor(System.IntPtr,System.Int32)">
+            <summary>
+            创建SHOT描述子集构造器
+            </summary>
+            <param name="descriptors">SHOT描述子集指针</param>
+            <param name="length">长度</param>
+        </member>
+        <member name="F:PCLSharp.Primitives.Features.Shot352Fs.Descriptors">
+            <summary>
+            SHOT描述子集指针
+            </summary>
+        </member>
+        <member name="F:PCLSharp.Primitives.Features.Shot352Fs.Length">
+            <summary>
+            长度
+            </summary>
+        </member>
+        <member name="T:PCLSharp.Primitives.Models.AlignmentResult">
+            <summary>
+            配准结果
+            </summary>
+        </member>
+        <member name="M:PCLSharp.Primitives.Models.AlignmentResult.#ctor(System.Boolean,System.Single,System.Single[])">
+            <summary>
+            创建配准结果构造器
+            </summary>
+            <param name="hasConverged">是否收敛</param>
+            <param name="fitnessScore">拟合分数</param>
+            <param name="matrix">RT矩阵</param>
+        </member>
+        <member name="F:PCLSharp.Primitives.Models.AlignmentResult.HasConverged">
+            <summary>
+            是否收敛
+            </summary>
+        </member>
+        <member name="F:PCLSharp.Primitives.Models.AlignmentResult.FitnessScore">
+            <summary>
+            拟合分数
+            </summary>
+        </member>
+        <member name="F:PCLSharp.Primitives.Models.AlignmentResult.Matrix">
+            <summary>
+            RT矩阵
+            </summary>
+        </member>
+        <member name="T:PCLSharp.Primitives.Models.Color4F">
+            <summary>
+            RGBA颜色
+            </summary>
+        </member>
+        <member name="M:PCLSharp.Primitives.Models.Color4F.#ctor(System.Byte,System.Byte,System.Byte,System.Byte)">
+            <summary>
+            创建RGBA颜色构造器
+            </summary>
+            <param name="r">R值</param>
+            <param name="g">G值</param>
+            <param name="b">B值</param>
+            <param name="a">A值</param>
+        </member>
+        <member name="F:PCLSharp.Primitives.Models.Color4F.R">
+            <summary>
+            R值
+            </summary>
+        </member>
+        <member name="F:PCLSharp.Primitives.Models.Color4F.G">
+            <summary>
+            G值
+            </summary>
+        </member>
+        <member name="F:PCLSharp.Primitives.Models.Color4F.B">
+            <summary>
+            B值
+            </summary>
+        </member>
+        <member name="F:PCLSharp.Primitives.Models.Color4F.A">
+            <summary>
+            A值
+            </summary>
+        </member>
+        <member name="T:PCLSharp.Primitives.Models.MeshGeometry">
+            <summary>
+            网格几何
+            </summary>
+        </member>
+        <member name="M:PCLSharp.Primitives.Models.MeshGeometry.#ctor(System.IntPtr,System.Int32,System.IntPtr,System.Int32)">
+            <summary>
+            创建网格几何构造器
+            </summary>
+            <param name="positions">位置集指针</param>
+            <param name="positionsLength">位置集长度</param>
+            <param name="triangleIndices">三角索引集指针</param>
+            <param name="triangleIndicesLength">三角索引集长度</param>
+        </member>
+        <member name="F:PCLSharp.Primitives.Models.MeshGeometry.Positions">
+            <summary>
+            位置集指针
+            </summary>
+        </member>
+        <member name="F:PCLSharp.Primitives.Models.MeshGeometry.PositionsLength">
+            <summary>
+            位置集长度
+            </summary>
+        </member>
+        <member name="F:PCLSharp.Primitives.Models.MeshGeometry.TriangleIndices">
+            <summary>
+            三角索引集指针
+            </summary>
+        </member>
+        <member name="F:PCLSharp.Primitives.Models.MeshGeometry.TriangleIndicesLength">
+            <summary>
+            三角索引集长度
+            </summary>
+        </member>
+        <member name="T:PCLSharp.Primitives.Models.Normal3F">
+            <summary>
+            法向量
+            </summary>
+        </member>
+        <member name="M:PCLSharp.Primitives.Models.Normal3F.#ctor(System.Single,System.Single,System.Single)">
+            <summary>
+            创建法向量构造器
+            </summary>
+            <param name="nx">法向量X坐标</param>
+            <param name="ny">法向量Y坐标</param>
+            <param name="nz">法向量Z坐标</param>
+        </member>
+        <member name="F:PCLSharp.Primitives.Models.Normal3F.NX">
+            <summary>
+            法向量X坐标
+            </summary>
+        </member>
+        <member name="F:PCLSharp.Primitives.Models.Normal3F.NY">
+            <summary>
+            法向量Y坐标
+            </summary>
+        </member>
+        <member name="F:PCLSharp.Primitives.Models.Normal3F.NZ">
+            <summary>
+            法向量Z坐标
+            </summary>
+        </member>
+        <member name="T:PCLSharp.Primitives.Models.Normal3Fs">
+            <summary>
+            法向量集
+            </summary>
+        </member>
+        <member name="M:PCLSharp.Primitives.Models.Normal3Fs.#ctor(System.IntPtr,System.Int32)">
+            <summary>
+            创建法向量集构造器
+            </summary>
+            <param name="normals">法向量集指针</param>
+            <param name="length">长度</param>
+        </member>
+        <member name="F:PCLSharp.Primitives.Models.Normal3Fs.Normals">
+            <summary>
+            法向量集指针
+            </summary>
+        </member>
+        <member name="F:PCLSharp.Primitives.Models.Normal3Fs.Length">
+            <summary>
+            长度
+            </summary>
+        </member>
+        <member name="T:PCLSharp.Primitives.Models.Point3Color4">
+            <summary>
+            坐标点颜色
+            </summary>
+        </member>
+        <member name="M:PCLSharp.Primitives.Models.Point3Color4.#ctor(System.Single,System.Single,System.Single,System.Byte,System.Byte,System.Byte,System.Byte)">
+            <summary>
+            创建坐标点颜色构造器
+            </summary>
+            <param name="x">X坐标</param>
+            <param name="y">Y坐标</param>
+            <param name="z">Z坐标</param>
+            <param name="r">R值</param>
+            <param name="g">G值</param>
+            <param name="b">B值</param>
+            <param name="a">A值</param>
+        </member>
+        <member name="F:PCLSharp.Primitives.Models.Point3Color4.X">
+            <summary>
+            X坐标
+            </summary>
+        </member>
+        <member name="F:PCLSharp.Primitives.Models.Point3Color4.Y">
+            <summary>
+            Y坐标
+            </summary>
+        </member>
+        <member name="F:PCLSharp.Primitives.Models.Point3Color4.Z">
+            <summary>
+            Z坐标
+            </summary>
+        </member>
+        <member name="F:PCLSharp.Primitives.Models.Point3Color4.R">
+            <summary>
+            R值
+            </summary>
+        </member>
+        <member name="F:PCLSharp.Primitives.Models.Point3Color4.G">
+            <summary>
+            G值
+            </summary>
+        </member>
+        <member name="F:PCLSharp.Primitives.Models.Point3Color4.B">
+            <summary>
+            B值
+            </summary>
+        </member>
+        <member name="F:PCLSharp.Primitives.Models.Point3Color4.A">
+            <summary>
+            A值
+            </summary>
+        </member>
+        <member name="T:PCLSharp.Primitives.Models.Point3Color4s">
+            <summary>
+            坐标点颜色集
+            </summary>
+        </member>
+        <member name="M:PCLSharp.Primitives.Models.Point3Color4s.#ctor(System.IntPtr,System.Int32)">
+            <summary>
+            创建坐标点颜色集构造器
+            </summary>
+            <param name="pointColors">坐标点颜色集指针指针</param>
+            <param name="length">长度</param>
+        </member>
+        <member name="F:PCLSharp.Primitives.Models.Point3Color4s.PointColors">
+            <summary>
+            坐标点颜色集指针
+            </summary>
+        </member>
+        <member name="F:PCLSharp.Primitives.Models.Point3Color4s.Length">
+            <summary>
+            长度
+            </summary>
+        </member>
+        <member name="T:PCLSharp.Primitives.Models.Point3F">
+            <summary>
+            坐标点
+            </summary>
+        </member>
+        <member name="M:PCLSharp.Primitives.Models.Point3F.#ctor(System.Single,System.Single,System.Single)">
+            <summary>
+            创建坐标点构造器
+            </summary>
+            <param name="x">X坐标</param>
+            <param name="y">Y坐标</param>
+            <param name="z">Z坐标</param>
+        </member>
+        <member name="F:PCLSharp.Primitives.Models.Point3F.X">
+            <summary>
+            X坐标
+            </summary>
+        </member>
+        <member name="F:PCLSharp.Primitives.Models.Point3F.Y">
+            <summary>
+            Y坐标
+            </summary>
+        </member>
+        <member name="F:PCLSharp.Primitives.Models.Point3F.Z">
+            <summary>
+            Z坐标
+            </summary>
+        </member>
+        <member name="T:PCLSharp.Primitives.Models.Point3Fs">
+            <summary>
+            坐标点集
+            </summary>
+        </member>
+        <member name="M:PCLSharp.Primitives.Models.Point3Fs.#ctor(System.IntPtr,System.Int32)">
+            <summary>
+            创建坐标点集构造器
+            </summary>
+            <param name="points">坐标集指针</param>
+            <param name="length">长度</param>
+        </member>
+        <member name="F:PCLSharp.Primitives.Models.Point3Fs.Points">
+            <summary>
+            坐标集指针
+            </summary>
+        </member>
+        <member name="F:PCLSharp.Primitives.Models.Point3Fs.Length">
+            <summary>
+            长度
+            </summary>
+        </member>
+        <member name="T:PCLSharp.Primitives.Models.Point3Normal3">
+            <summary>
+            坐标点法向量
+            </summary>
+        </member>
+        <member name="M:PCLSharp.Primitives.Models.Point3Normal3.#ctor(System.Single,System.Single,System.Single,System.Single,System.Single,System.Single)">
+            <summary>
+            创建坐标点法向量构造器
+            </summary>
+            <param name="x">X坐标</param>
+            <param name="y">Y坐标</param>
+            <param name="z">Z坐标</param>
+            <param name="nx">法向量X坐标</param>
+            <param name="ny">法向量Y坐标</param>
+            <param name="nz">法向量Z坐标</param>
+        </member>
+        <member name="F:PCLSharp.Primitives.Models.Point3Normal3.X">
+            <summary>
+            X坐标
+            </summary>
+        </member>
+        <member name="F:PCLSharp.Primitives.Models.Point3Normal3.Y">
+            <summary>
+            Y坐标
+            </summary>
+        </member>
+        <member name="F:PCLSharp.Primitives.Models.Point3Normal3.Z">
+            <summary>
+            Z坐标
+            </summary>
+        </member>
+        <member name="F:PCLSharp.Primitives.Models.Point3Normal3.NX">
+            <summary>
+            法向量X坐标
+            </summary>
+        </member>
+        <member name="F:PCLSharp.Primitives.Models.Point3Normal3.NY">
+            <summary>
+            法向量Y坐标
+            </summary>
+        </member>
+        <member name="F:PCLSharp.Primitives.Models.Point3Normal3.NZ">
+            <summary>
+            法向量Z坐标
+            </summary>
+        </member>
+        <member name="T:PCLSharp.Primitives.Models.Point3Normal3s">
+            <summary>
+            坐标点法向量集
+            </summary>
+        </member>
+        <member name="M:PCLSharp.Primitives.Models.Point3Normal3s.#ctor(System.IntPtr,System.Int32)">
+            <summary>
+            创建坐标点法向量集构造器
+            </summary>
+            <param name="pointNormals">坐标点法向量集指针</param>
+            <param name="length">长度</param>
+        </member>
+        <member name="F:PCLSharp.Primitives.Models.Point3Normal3s.PointNormals">
+            <summary>
+            坐标点法向量集指针
+            </summary>
+        </member>
+        <member name="F:PCLSharp.Primitives.Models.Point3Normal3s.Length">
+            <summary>
+            长度
+            </summary>
+        </member>
+        <member name="T:PCLSharp.Primitives.Models.Pose">
+            <summary>
+            位姿
+            </summary>
+        </member>
+        <member name="M:PCLSharp.Primitives.Models.Pose.#ctor(System.Single,System.Single,System.Single,System.Single,System.Single,System.Single)">
+            <summary>
+            创建位姿构造器
+            </summary>
+            <param name="x">X轴位置</param>
+            <param name="y">Y轴位置</param>
+            <param name="z">Z轴位置</param>
+            <param name="rx">X轴旋转角度</param>
+            <param name="ry">Y轴旋转角度</param>
+            <param name="rz">Z轴旋转角度</param>
+        </member>
+        <member name="F:PCLSharp.Primitives.Models.Pose.X">
+            <summary>
+            X轴位置
+            </summary>
+        </member>
+        <member name="F:PCLSharp.Primitives.Models.Pose.Y">
+            <summary>
+            Y轴位置
+            </summary>
+        </member>
+        <member name="F:PCLSharp.Primitives.Models.Pose.Z">
+            <summary>
+            Z轴位置
+            </summary>
+        </member>
+        <member name="F:PCLSharp.Primitives.Models.Pose.RX">
+            <summary>
+            X轴旋转角度
+            </summary>
+        </member>
+        <member name="F:PCLSharp.Primitives.Models.Pose.RY">
+            <summary>
+            Y轴旋转角度
+            </summary>
+        </member>
+        <member name="F:PCLSharp.Primitives.Models.Pose.RZ">
+            <summary>
+            Z轴旋转角度
+            </summary>
+        </member>
+        <member name="T:PCLSharp.Constants">
+            <summary>
+            常量字典
+            </summary>
+        </member>
+        <member name="F:PCLSharp.Constants.DurationFormat">
+            <summary>
+            耗时格式
+            </summary>
+        </member>
+        <member name="F:PCLSharp.Constants.MatrixFormat">
+            <summary>
+            耗时格式
+            </summary>
+        </member>
+        <member name="F:PCLSharp.Constants.AxisX">
+            <summary>
+            X轴
+            </summary>
+        </member>
+        <member name="F:PCLSharp.Constants.AxisY">
+            <summary>
+            Y轴
+            </summary>
+        </member>
+        <member name="F:PCLSharp.Constants.AxisZ">
+            <summary>
+            Z轴
+            </summary>
+        </member>
+        <member name="F:PCLSharp.Constants.PCD">
+            <summary>
+            PCD格式点云
+            </summary>
+        </member>
+        <member name="F:PCLSharp.Constants.PLY">
+            <summary>
+            PLY格式点云
+            </summary>
+        </member>
+        <member name="F:PCLSharp.Constants.OBJ">
+            <summary>
+            OBJ格式点云
+            </summary>
+        </member>
+        <member name="F:PCLSharp.Constants.OpenCloudExtFilter">
+            <summary>
+            打开点云文件扩展名过滤器
+            </summary>
+        </member>
+        <member name="F:PCLSharp.Constants.SaveCloudExtFilter">
+            <summary>
+            保存点云文件扩展名过滤器
+            </summary>
+        </member>
+        <member name="F:PCLSharp.Constants.LengthOfNARF">
+            <summary>
+            NARF描述子长度
+            </summary>
+        </member>
+        <member name="F:PCLSharp.Constants.LengthOfPFH">
+            <summary>
+            PFH描述子长度
+            </summary>
+        </member>
+        <member name="F:PCLSharp.Constants.LengthOfFPFH">
+            <summary>
+            FPFH描述子长度
+            </summary>
+        </member>
+        <member name="F:PCLSharp.Constants.LengthOf3DSC">
+            <summary>
+            3DSC描述子长度
+            </summary>
+        </member>
+        <member name="F:PCLSharp.Constants.LengthOfSHOT">
+            <summary>
+            SHOT描述子长度
+            </summary>
+        </member>
+    </members>
+</doc>

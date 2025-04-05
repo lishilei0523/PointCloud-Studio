@@ -219,5 +219,14 @@ namespace PCLSharp.Modules.Declarations
         [DllImport(AssemblyNames.Modules, EntryPoint = "disposeAlignmentResult")]
         public static extern void DisposeAlignmentResult(IntPtr pointer);
         #endregion
+
+        #region # 释放网格几何 —— static extern void DisposeMeshGeometry(IntPtr pointer)
+        /// <summary>
+        /// 释放网格几何
+        /// </summary>
+        /// <param name="pointer">指针</param>
+        [DllImport(AssemblyNames.Modules, EntryPoint = "disposeMeshGeometry")]
+        public static extern void DisposeMeshGeometry(IntPtr pointer);
+        #endregion
     }
 }

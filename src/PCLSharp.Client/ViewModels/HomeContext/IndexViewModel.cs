@@ -1051,6 +1051,36 @@ namespace PCLSharp.Client.ViewModels.HomeContext
         }
         #endregion
 
+        #region 适用移动最小二乘法重采样 —— async void ApplyMovingLeastSquares()
+        /// <summary>
+        /// 适用移动最小二乘法重采样
+        /// </summary>
+        public async void ApplyMovingLeastSquares()
+        {
+            #region # 验证
+
+            if (this.EffectivePointCloud == null)
+            {
+                MessageBox.Show("点云未加载！", "错误", MessageBoxButton.OK, MessageBoxImage.Error);
+                return;
+            }
+
+            #endregion
+
+            this.Busy();
+
+            MovingLeastSquaresViewModel viewModel = ResolveMediator.Resolve<MovingLeastSquaresViewModel>();
+            viewModel.Load(this.EffectivePointCloud);
+            bool? result = await this._windowManager.ShowDialogAsync(viewModel);
+            if (result == true)
+            {
+                this.EffectivePointCloud = viewModel.PointCloud;
+            }
+
+            this.Idle();
+        }
+        #endregion
+
 
         //法向量
 

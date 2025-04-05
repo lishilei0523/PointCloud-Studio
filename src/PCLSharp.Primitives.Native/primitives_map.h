@@ -6,6 +6,7 @@
 #endif
 #include <pcl/point_types.h>
 #include <pcl/point_cloud.h>
+#include <pcl/PolygonMesh.h>
 #include "point3f.h"
 #include "point3fs.h"
 #include "point3color4.h"
@@ -14,6 +15,7 @@
 #include "point3normal3s.h"
 #include "normal3f.h"
 #include "normal3fs.h"
+#include "mesh_geometry.h"
 
 namespace pclsharp
 {
@@ -98,4 +100,11 @@ namespace pclsharp
 	/// <param name="pointCloud">PointXYZRGBA点云</param>
 	/// <returns>坐标点颜色集</returns>
 	EXPORT_CPP Point3Color4s* toPoint3Color4s(const pcl::PointCloud<pcl::PointXYZRGBA>& pointCloud);
+
+	/// <summary>
+	/// 多边形网格映射网格几何
+	/// </summary>
+	/// <param name="polygonMesh">多边形网格</param>
+	/// <returns>网格几何</returns>
+	EXPORT_CPP MeshGeometry* toMeshGeometry(const pcl::PolygonMesh& polygonMesh);
 }

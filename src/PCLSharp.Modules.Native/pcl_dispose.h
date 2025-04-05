@@ -25,6 +25,7 @@
 #include <shot352f.h>
 #include <shot352fs.h>
 #include <alignment_result.h>
+#include <mesh_geometry.h>
 
 /// <summary>
 /// 释放坐标点
@@ -167,3 +168,9 @@ EXPORT_C void CALLING_MODE disposeShot352Fs(const Shot352Fs* pointer);
 /// </summary>
 /// <param name="pointer">指针</param>
 EXPORT_C void CALLING_MODE disposeAlignmentResult(const AlignmentResult* pointer);
+
+/// <summary>
+/// 释放网格几何
+/// </summary>
+/// <param name="pointer">指针</param>
+EXPORT_C void CALLING_MODE disposeMeshGeometry(const MeshGeometry* pointer);

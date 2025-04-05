@@ -1,5 +1,6 @@
 #include <pcl/point_types.h>
 #include <pcl/point_cloud.h>
+#include <pcl/search/kdtree.h>
 #include <pcl/filters/passthrough.h>
 #include <pcl/filters/random_sample.h>
 #include <pcl/filters/uniform_sampling.h>
@@ -7,6 +8,7 @@
 #include <pcl/filters/approximate_voxel_grid.h>
 #include <pcl/filters/statistical_outlier_removal.h>
 #include <pcl/filters/radius_outlier_removal.h>
+#include <pcl/surface/mls.h>
 #include <primitives_map.h>
 #include "pcl_filters.h"
 using namespace std;
@@ -116,7 +118,7 @@ Point3Fs* applyVoxelGrid(Point3F points[], const int length, const float leafSiz
 /// <param name="length">点集长度</param>
 /// <param name="leafSize">网格尺寸</param>
 /// <returns>过滤后点集</returns>
-Point3Fs* applyApproxVoxelGrid(Point3F points[], int length, float leafSize)
+Point3Fs* applyApproxVoxelGrid(Point3F points[], const int length, const float leafSize)
 {
 	const PointCloud<PointXYZ>::Ptr& sourceCloud = pclsharp::toPointCloud(points, length);
 	const PointCloud<PointXYZ>::Ptr targetCloud = std::make_shared<PointCloud<PointXYZ>>();
@@ -165,7 +167,7 @@ Point3Fs* applyStatisticalOutlierRemoval(Point3F points[], const int length, con
 /// <param name="radius">搜索半径</param>
 /// <param name="minNeighborsInRadius">半径范围内点数量最小值</param>
 /// <returns>过滤后点集</returns>
-Point3Fs* applyRadiusOutlierRemoval(Point3F points[], int length, const float radius, const int minNeighborsInRadius)
+Point3Fs* applyRadiusOutlierRemoval(Point3F points[], const int length, const float radius, const int minNeighborsInRadius)
 {
 	const PointCloud<PointXYZ>::Ptr& sourceCloud = pclsharp::toPointCloud(points, length);
 	const PointCloud<PointXYZ>::Ptr targetCloud = std::make_shared<PointCloud<PointXYZ>>();
@@ -176,6 +178,32 @@ Point3Fs* applyRadiusOutlierRemoval(Point3F points[], int length, const float ra
 	radiusOutlierRemoval.setRadiusSearch(radius);
 	radiusOutlierRemoval.setMinNeighborsInRadius(minNeighborsInRadius);
 	radiusOutlierRemoval.filter(*targetCloud);
+
+	Point3Fs* point3Fs = pclsharp::toPoint3Fs(*targetCloud);
+
+	return point3Fs;
+}
+
+/// <summary>
+/// 适用移动最小二乘法重采样
+/// </summary>
+/// <param name="points">点集</param>
+/// <param name="length">点集长度</param>
+/// <param name="radius">搜索半径</param>
+/// <returns>过滤后点集</returns>
+Point3Fs* applyMovingLeastSquares(Point3F points[], const int length, const float radius)
+{
+	const PointCloud<PointXYZ>::Ptr& sourceCloud = pclsharp::toPointCloud(points, length);
+	const PointCloud<PointXYZ>::Ptr targetCloud = std::make_shared<PointCloud<PointXYZ>>();
+
+	//移动最小二乘法重采样
+	const search::KdTree<PointXYZ>::Ptr kdTree = std::make_shared<search::KdTree<PointXYZ>>();
+	MovingLeastSquares<PointXYZ, PointXYZ> movingLeastSquares;
+	movingLeastSquares.setInputCloud(sourceCloud);
+	movingLeastSquares.setSearchMethod(kdTree);
+	movingLeastSquares.setSearchRadius(radius);
+	movingLeastSquares.setComputeNormals(true);
+	movingLeastSquares.process(*targetCloud);
 
 	Point3Fs* point3Fs = pclsharp::toPoint3Fs(*targetCloud);
 

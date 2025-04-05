@@ -157,6 +157,7 @@
     <ClInclude Include="features_map.h" />
     <ClInclude Include="fpfh_signature33f.h" />
     <ClInclude Include="fpfh_signature33fs.h" />
+    <ClInclude Include="mesh_geometry.h" />
     <ClInclude Include="narf36f.h" />
     <ClInclude Include="narf36fs.h" />
     <ClInclude Include="normal3f.h" />
