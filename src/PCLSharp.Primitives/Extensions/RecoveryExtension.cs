@@ -157,20 +157,19 @@ namespace PCLSharp.Primitives.Extensions
         }
         #endregion
 
-        #region # 网格几何重建 —— static (Point3F[], int[]) Recover(this MeshGeometry meshGeometry)
+        #region # 网格几何重建 —— static MeshGeometryInfo Recover(this MeshGeometry meshGeometry)
         /// <summary>
         /// 网格几何重建
         /// </summary>
         /// <param name="meshGeometry">网格几何</param>
-        /// <returns>网格几何元组</returns>
-        public static (Point3F[], int[]) Recover(this MeshGeometry meshGeometry)
+        /// <returns>网格几何信息</returns>
+        public static MeshGeometryInfo Recover(this MeshGeometry meshGeometry)
         {
             Span<Point3F> pointsSpan = new Span<Point3F>(meshGeometry.Positions.ToPointer(), meshGeometry.PositionsLength);
             Span<int> indicesSpan = new Span<int>(meshGeometry.TriangleIndices.ToPointer(), meshGeometry.TriangleIndicesLength);
-            Point3F[] points = pointsSpan.ToArray();
-            int[] indices = indicesSpan.ToArray();
+            MeshGeometryInfo meshGeometryInfo = new MeshGeometryInfo(pointsSpan.ToArray(), indicesSpan.ToArray());
 
-            return (points, indices);
+            return meshGeometryInfo;
         }
         #endregion
     }

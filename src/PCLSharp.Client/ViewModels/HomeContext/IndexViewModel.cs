@@ -8,6 +8,7 @@ using PCLSharp.Client.ViewModels.KeyPointContext;
 using PCLSharp.Client.ViewModels.NormalContext;
 using PCLSharp.Client.ViewModels.SearchContext;
 using PCLSharp.Client.ViewModels.SegmentationContext;
+using PCLSharp.Client.ViewModels.SurfaceContext;
 using PCLSharp.Extensions.Helix;
 using PCLSharp.Extensions.Plotter;
 using PCLSharp.Modules.Interfaces;
@@ -1690,6 +1691,35 @@ namespace PCLSharp.Client.ViewModels.HomeContext
         {
             RegistrationContext.IndexViewModel viewModel = ResolveMediator.Resolve<RegistrationContext.IndexViewModel>();
             await this._windowManager.ShowWindowAsync(viewModel);
+        }
+        #endregion
+
+
+        //表面
+
+        #region 适用贪婪三角化 —— async void ApplyGreedyProjection()
+        /// <summary>
+        /// 适用贪婪三角化
+        /// </summary>
+        public async void ApplyGreedyProjection()
+        {
+            #region # 验证
+
+            if (this.EffectivePointCloud == null)
+            {
+                MessageBox.Show("点云未加载！", "错误", MessageBoxButton.OK, MessageBoxImage.Error);
+                return;
+            }
+
+            #endregion
+
+            this.Busy();
+
+            GreedyProjectionViewModel viewModel = ResolveMediator.Resolve<GreedyProjectionViewModel>();
+            viewModel.Load(this.EffectivePointCloud);
+            await this._windowManager.ShowDialogAsync(viewModel);
+
+            this.Idle();
         }
         #endregion
 

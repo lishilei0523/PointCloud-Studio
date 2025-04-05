@@ -31,10 +31,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="System.ValueTuple" Version="4.6.1" />
-  </ItemGroup>
-
-  <ItemGroup>
     <ProjectReference Include="..\PCLSharp.Primitives\PCLSharp.Primitives.csproj" />
   </ItemGroup>
 </Project>

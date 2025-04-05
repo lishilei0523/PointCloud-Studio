@@ -32,6 +32,5 @@
 
   <ItemGroup>
     <PackageReference Include="System.Memory" Version="4.6.3" />
-    <PackageReference Include="System.ValueTuple" Version="4.6.1" />
   </ItemGroup>
 </Project>

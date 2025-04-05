@@ -46,13 +46,6 @@
   </ItemGroup>
 
   <!--NuGet引用SDK-->
-  <ItemGroup>
-    <!--<PackageReference Include="PCLSharp.Primitives" Version="1.0.2" />
-    <PackageReference Include="PCLSharp.Modules" Version="1.0.2" />
-    <PackageReference Include="PCLSharp.Extensions.Helix" Version="1.0.0" />
-    <PackageReference Include="PCLSharp.Extensions.Plotter" Version="1.0.0" />
-    <PackageReference Include="PCLSharp.Runtime.win-x64" Version="1.0.1" />-->
-  </ItemGroup>
 
   <!--项目引用SDK-->
   <ItemGroup>

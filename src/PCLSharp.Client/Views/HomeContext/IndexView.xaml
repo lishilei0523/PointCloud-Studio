@@ -103,6 +103,9 @@
                     <MenuItem Header="区域生长颜色分割(_G)" cm:Message.Attach="RegionGrowingColorSegment()" />
                 </MenuItem>
                 <MenuItem Header="配准(_R)" cm:Message.Attach="AlignCloud()" />
+                <MenuItem Header="表面(_P)">
+                    <MenuItem Header="贪婪三角化(_G)" cm:Message.Attach="ApplyGreedyProjection()" />
+                </MenuItem>
             </Menu>
         </Border>
         <!--Body-->

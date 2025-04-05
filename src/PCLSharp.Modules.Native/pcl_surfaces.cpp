@@ -19,7 +19,7 @@ using namespace pcl;
 /// <param name="normalK">法向量K</param>
 /// <param name="searchRadius">搜索半径</param>
 /// <param name="mu">近邻点最远倍数</param>
-/// <param name="maxNearestNeighbors">最多邻域数</param>
+/// <param name="maxNearestNeighbors">最大邻域数</param>
 /// <param name="maxSurfaceAngle">偏离法向量最大角度</param>
 /// <param name="minAngle">三角形最小角度</param>
 /// <param name="maxAngle">三角形最大角度</param>

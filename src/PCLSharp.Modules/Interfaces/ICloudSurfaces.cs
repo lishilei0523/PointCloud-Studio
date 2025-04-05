@@ -8,7 +8,7 @@ namespace PCLSharp.Modules.Interfaces
     /// </summary>
     public interface ICloudSurfaces
     {
-        #region # 适用贪婪投影三角化 —— (Point3F[], int[]) ApplyGreedyProjection(IEnumerable<Point3F> points...
+        #region # 适用贪婪投影三角化 —— MeshGeometryInfo ApplyGreedyProjection(IEnumerable<Point3F> points...
         /// <summary>
         /// 适用贪婪投影三角化
         /// </summary>
@@ -16,17 +16,17 @@ namespace PCLSharp.Modules.Interfaces
         /// <param name="normalK">法向量K</param>
         /// <param name="searchRadius">搜索半径</param>
         /// <param name="mu">近邻点最远倍数</param>
-        /// <param name="maxNearestNeighbors">最多邻域数</param>
+        /// <param name="maxNearestNeighbors">最大邻域数</param>
         /// <param name="maxSurfaceAngle">偏离法向量最大角度</param>
         /// <param name="minAngle">三角形最小角度</param>
         /// <param name="maxAngle">三角形最大角度</param>
         /// <param name="normalConsistency">保证法向量朝向一致</param>
         /// <param name="threadsCount">线程数</param>
         /// <returns>网格几何</returns>
-        (Point3F[], int[]) ApplyGreedyProjection(IEnumerable<Point3F> points, int normalK, float searchRadius, float mu, int maxNearestNeighbors, double maxSurfaceAngle, double minAngle, double maxAngle, bool normalConsistency, int threadsCount);
+        MeshGeometryInfo ApplyGreedyProjection(IEnumerable<Point3F> points, int normalK, float searchRadius, float mu, int maxNearestNeighbors, double maxSurfaceAngle, double minAngle, double maxAngle, bool normalConsistency, int threadsCount);
         #endregion
 
-        #region # 适用泊松重建 —— (Point3F[], int[]) ApplyPoissonReconstruction(IEnumerable<Point3F> points...
+        #region # 适用泊松重建 —— MeshGeometryInfo ApplyPoissonReconstruction(IEnumerable<Point3F> points...
         /// <summary>
         /// 适用泊松重建
         /// </summary>
@@ -43,10 +43,10 @@ namespace PCLSharp.Modules.Interfaces
         /// <param name="solverDivide">Gauss-Seidel迭代深度</param>
         /// <param name="threadsCount">线程数</param>
         /// <returns>网格几何</returns>
-        (Point3F[], int[]) ApplyPoissonReconstruction(IEnumerable<Point3F> points, int normalK, bool confidence, int degree, int depth, int isoDivide, bool manifold, bool outputPolygons, float samplesPerNode, float scale, int solverDivide, int threadsCount);
+        MeshGeometryInfo ApplyPoissonReconstruction(IEnumerable<Point3F> points, int normalK, bool confidence, int degree, int depth, int isoDivide, bool manifold, bool outputPolygons, float samplesPerNode, float scale, int solverDivide, int threadsCount);
         #endregion
 
-        #region # 适用移动立方体重建 —— (Point3F[], int[]) ApplyMarchingCubes(IEnumerable<Point3F> points...
+        #region # 适用移动立方体重建 —— MeshGeometryInfo ApplyMarchingCubes(IEnumerable<Point3F> points...
         /// <summary>
         /// 适用移动立方体重建
         /// </summary>
@@ -57,7 +57,7 @@ namespace PCLSharp.Modules.Interfaces
         /// <param name="percentageExtendGrid">自由空间比例</param>
         /// <param name="threadsCount">线程数</param>
         /// <returns>网格几何</returns>
-        (Point3F[], int[]) ApplyMarchingCubes(IEnumerable<Point3F> points, int normalK, float isoLevel, int gridResolution, float percentageExtendGrid, int threadsCount);
+        MeshGeometryInfo ApplyMarchingCubes(IEnumerable<Point3F> points, int normalK, float isoLevel, int gridResolution, float percentageExtendGrid, int threadsCount);
         #endregion
     }
 }
