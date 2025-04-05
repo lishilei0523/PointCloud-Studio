@@ -3,7 +3,6 @@
     <TargetFrameworks>net462;netstandard2.0</TargetFrameworks>
     <LangVersion>8.0</LangVersion>
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
-    <DocumentationFile>$(AssemblyName).xml</DocumentationFile>
     <Authors>Lee</Authors>
     <Company>SD</Company>
     <Description>SD.Framework PCL基元</Description>
@@ -11,6 +10,11 @@
     <Version>1.1.0</Version>
     <AssemblyVersion>1.1.0</AssemblyVersion>
     <FileVersion>1.1.0.0</FileVersion>
+  </PropertyGroup>
+
+  <PropertyGroup>
+    <BaseOutputPath>bin\</BaseOutputPath>
+    <DocumentationFile>$(BaseOutputPath)\$(Configuration)\$(TargetFramework)\$(AssemblyName).xml</DocumentationFile>
   </PropertyGroup>
 
   <ItemGroup>
