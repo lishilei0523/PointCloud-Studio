@@ -13,7 +13,7 @@
 
   <PropertyGroup>
     <BaseOutputPath>bin\</BaseOutputPath>
-    <DocumentationFile>$(BaseOutputPath)\$(Configuration)\$(TargetFramework)\$(AssemblyName).xml</DocumentationFile>
+    <GenerateDocumentationFile>True</GenerateDocumentationFile>
   </PropertyGroup>
 
   <ItemGroup>
