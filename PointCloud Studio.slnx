@@ -1,0 +1,21 @@
+<Solution>
+  <Configurations>
+    <Platform Name="Any CPU" />
+    <Platform Name="x64" />
+    <Platform Name="x86" />
+  </Configurations>
+  <Project Path="src/PCLSharp.Client/PCLSharp.Client.csproj" />
+  <Project Path="src/PCLSharp.Extensions.Helix/PCLSharp.Extensions.Helix.csproj" />
+  <Project Path="src/PCLSharp.Extensions.Plotter/PCLSharp.Extensions.Plotter.csproj" />
+  <Project Path="src/PCLSharp.Modules.Native/PCLSharp.Modules.Native.vcxproj" Id="ecf01658-fc0a-46a2-a91a-6f433b401832">
+    <BuildDependency Project="src/PCLSharp.Primitives.Native/PCLSharp.Primitives.Native.vcxproj" />
+  </Project>
+  <Project Path="src/PCLSharp.Modules/PCLSharp.Modules.csproj">
+    <BuildDependency Project="src/PCLSharp.Modules.Native/PCLSharp.Modules.Native.vcxproj" />
+  </Project>
+  <Project Path="src/PCLSharp.Primitives.Native/PCLSharp.Primitives.Native.vcxproj" Id="2e39ca0f-912b-46c6-808a-34bb95c4cb6f" />
+  <Project Path="src/PCLSharp.Primitives/PCLSharp.Primitives.csproj">
+    <BuildDependency Project="src/PCLSharp.Primitives.Native/PCLSharp.Primitives.Native.vcxproj" />
+  </Project>
+  <Project Path="src/PCLSharp.Tests/PCLSharp.Tests.csproj" />
+</Solution>
