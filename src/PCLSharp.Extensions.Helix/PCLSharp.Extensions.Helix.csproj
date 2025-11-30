@@ -1,28 +1,13 @@
 <Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
-    <TargetFrameworks>net48;net6.0-windows;net8.0-windows</TargetFrameworks>
+    <TargetFrameworks>net48;net8.0-windows</TargetFrameworks>
     <LangVersion>8.0</LangVersion>
     <UseWPF>true</UseWPF>
-    <Authors>Lee</Authors>
-    <Company>SD</Company>
     <Description>SD.Framework PCL Helix-Toolkit.SharpDX扩展</Description>
-    <Copyright>Copyright © SD 2025</Copyright>
-    <Version>1.0.0</Version>
-    <AssemblyVersion>1.0.0</AssemblyVersion>
-    <FileVersion>1.0.0.0</FileVersion>
   </PropertyGroup>
 
-  <PropertyGroup>
-    <BaseOutputPath>bin\</BaseOutputPath>
-    <GenerateDocumentationFile>True</GenerateDocumentationFile>
-  </PropertyGroup>
-
-  <ItemGroup Condition="$(TargetFramework.Equals('net48'))">
-    <PackageReference Include="HelixToolkit.Wpf.SharpDX" Version="2.27.3" />
-  </ItemGroup>
-
-  <ItemGroup Condition="$(TargetFramework.Equals('net6.0-windows')) Or $(TargetFramework.Equals('net8.0-windows'))">
-    <PackageReference Include="HelixToolkit.SharpDX.Core.Wpf" Version="2.27.3" />
+  <ItemGroup>
+    <PackageReference Include="HelixToolkit.Wpf.SharpDX" Version="3.1.2" />
   </ItemGroup>
 
   <ItemGroup>

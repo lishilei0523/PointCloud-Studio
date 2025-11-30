@@ -1,4 +1,5 @@
-﻿using HelixToolkit.Wpf.SharpDX;
+﻿using HelixToolkit.SharpDX;
+using HelixToolkit.Wpf.SharpDX;
 using PCLSharp.Client.ViewModels.CommonContext;
 using PCLSharp.Extensions.Helix;
 using PCLSharp.Modules.Interfaces;

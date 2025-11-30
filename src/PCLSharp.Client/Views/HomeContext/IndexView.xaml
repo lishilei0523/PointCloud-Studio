@@ -7,6 +7,7 @@
                  xmlns:cm="http://caliburnmicro.com"
                  xmlns:hx="http://helix-toolkit.org/wpf/SharpDX"
                  xmlns:busyIndicator="https://github.com/Peoky/BusyIndicator"
+                 xmlns:sharpDx="clr-namespace:HelixToolkit.SharpDX;assembly=HelixToolkit.SharpDX"
                  mc:Ignorable="d"
                  Title="PointCloud Studio" 
                  Icon="/favicon.ico"
@@ -130,7 +131,7 @@
                                     Camera="{Binding Camera}">
                         <!--效果器-->
                         <hx:Viewport3DX.EffectsManager>
-                            <hx:DefaultEffectsManager />
+                            <sharpDx:DefaultEffectsManager />
                         </hx:Viewport3DX.EffectsManager>
                         <!--键盘鼠标-->
                         <hx:Viewport3DX.InputBindings>
@@ -158,7 +159,7 @@
                                     Camera="{Binding Camera}">
                         <!--效果器-->
                         <hx:Viewport3DX.EffectsManager>
-                            <hx:DefaultEffectsManager />
+                            <sharpDx:DefaultEffectsManager />
                         </hx:Viewport3DX.EffectsManager>
                         <!--键盘鼠标-->
                         <hx:Viewport3DX.InputBindings>

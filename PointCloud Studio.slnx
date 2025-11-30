@@ -4,18 +4,33 @@
     <Platform Name="x64" />
     <Platform Name="x86" />
   </Configurations>
-  <Project Path="src/PCLSharp.Client/PCLSharp.Client.csproj" />
-  <Project Path="src/PCLSharp.Extensions.Helix/PCLSharp.Extensions.Helix.csproj" />
-  <Project Path="src/PCLSharp.Extensions.Plotter/PCLSharp.Extensions.Plotter.csproj" />
-  <Project Path="src/PCLSharp.Modules.Native/PCLSharp.Modules.Native.vcxproj" Id="ecf01658-fc0a-46a2-a91a-6f433b401832">
-    <BuildDependency Project="src/PCLSharp.Primitives.Native/PCLSharp.Primitives.Native.vcxproj" />
-  </Project>
-  <Project Path="src/PCLSharp.Modules/PCLSharp.Modules.csproj">
-    <BuildDependency Project="src/PCLSharp.Modules.Native/PCLSharp.Modules.Native.vcxproj" />
-  </Project>
-  <Project Path="src/PCLSharp.Primitives.Native/PCLSharp.Primitives.Native.vcxproj" Id="2e39ca0f-912b-46c6-808a-34bb95c4cb6f" />
-  <Project Path="src/PCLSharp.Primitives/PCLSharp.Primitives.csproj">
-    <BuildDependency Project="src/PCLSharp.Primitives.Native/PCLSharp.Primitives.Native.vcxproj" />
-  </Project>
-  <Project Path="src/PCLSharp.Tests/PCLSharp.Tests.csproj" />
+  <Folder Name="/00 - Global/">
+    <File Path="Directory.Build.props" />
+    <File Path="PCL.Debug.x64.props" />
+    <File Path="PCL.Release.x64.props" />
+  </Folder>
+  <Folder Name="/01 - Clients/">
+    <Project Path="src/PCLSharp.Client/PCLSharp.Client.csproj" />
+  </Folder>
+  <Folder Name="/02 - Libraries/">
+    <Project Path="src/PCLSharp.Extensions.Helix/PCLSharp.Extensions.Helix.csproj" />
+    <Project Path="src/PCLSharp.Extensions.Plotter/PCLSharp.Extensions.Plotter.csproj" />
+    <Project Path="src/PCLSharp.Modules.Native/PCLSharp.Modules.Native.vcxproj" Id="ecf01658-fc0a-46a2-a91a-6f433b401832">
+      <BuildDependency Project="src/PCLSharp.Primitives.Native/PCLSharp.Primitives.Native.vcxproj" />
+    </Project>
+    <Project Path="src/PCLSharp.Modules/PCLSharp.Modules.csproj">
+      <BuildDependency Project="src/PCLSharp.Modules.Native/PCLSharp.Modules.Native.vcxproj" />
+    </Project>
+    <Project Path="src/PCLSharp.Primitives.Native/PCLSharp.Primitives.Native.vcxproj" Id="2e39ca0f-912b-46c6-808a-34bb95c4cb6f" />
+    <Project Path="src/PCLSharp.Primitives/PCLSharp.Primitives.csproj">
+      <BuildDependency Project="src/PCLSharp.Primitives.Native/PCLSharp.Primitives.Native.vcxproj" />
+    </Project>
+  </Folder>
+  <Folder Name="/03 - Runtimes/">
+    <Project Path="src/PCLSharp.Runtime.linux-x64/PCLSharp.Runtime.linux-x64.csproj" />
+    <Project Path="src/PCLSharp.Runtime.win-x64/PCLSharp.Runtime.win-x64.csproj" Id="1e6336b3-c757-45ff-9cc7-2bf9cb75d399" />
+  </Folder>
+  <Folder Name="/04 - Tests/">
+    <Project Path="src/PCLSharp.Tests/PCLSharp.Tests.csproj" />
+  </Folder>
 </Solution>

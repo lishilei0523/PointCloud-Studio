@@ -1,16 +1,12 @@
-﻿using PCLSharp.Primitives.Extensions;
+﻿using HelixToolkit;
+using HelixToolkit.Maths;
+using HelixToolkit.SharpDX;
+using PCLSharp.Primitives.Extensions;
 using PCLSharp.Primitives.Models;
-using SharpDX;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-#if NET462_OR_GREATER
-using HelixToolkit.Wpf.SharpDX;
-#endif
-#if NET6_0_OR_GREATER
-using HelixToolkit.SharpDX.Core;
-using HelixToolkit.Wpf.SharpDX;
-#endif
+using System.Numerics;
 
 namespace PCLSharp.Extensions.Helix
 {

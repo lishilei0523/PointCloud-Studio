@@ -1,0 +1,14 @@
+<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <None Include="$(MSBuildThisFileDirectory)\win-x64\*.*" Condition="$([MSBuild]::IsOSPlatform('Windows'))">
+      <Link>%(RecursiveDir)%(FileName)%(Extension)</Link>
+      <Visible>False</Visible>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="$(MSBuildThisFileDirectory)\linux-x64\*.*" Condition="$([MSBuild]::IsOSPlatform('Linux'))">
+      <Link>%(RecursiveDir)%(FileName)%(Extension)</Link>
+      <Visible>False</Visible>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+</Project>

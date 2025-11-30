@@ -1,4 +1,5 @@
 ﻿using Caliburn.Micro;
+using HelixToolkit.SharpDX;
 using HelixToolkit.Wpf.SharpDX;
 using MathNet.Numerics.LinearAlgebra;
 using MathNet.Numerics.LinearAlgebra.Single;
@@ -12,12 +13,12 @@ using PCLSharp.Primitives.Models;
 using SD.Infrastructure.WPF.Caliburn.Aspects;
 using SD.Infrastructure.WPF.Caliburn.Base;
 using SD.IOC.Core.Mediators;
-using SharpDX;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
+using System.Numerics;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
@@ -786,7 +787,7 @@ namespace PCLSharp.Client.ViewModels.RegistrationContext
             Point3F centroid;
             if (this.SourceCentroid != null)
             {
-                Vector3 position = this.SourceCentroid.Positions.Single();
+                Vector3 position = this.SourceCentroid.Positions!.Single();
                 centroid = position.ToPoint3F();
             }
             else

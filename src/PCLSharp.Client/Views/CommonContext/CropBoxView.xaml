@@ -7,6 +7,7 @@
                  xmlns:cm="http://caliburnmicro.com"
                  xmlns:hx="http://helix-toolkit.org/wpf/SharpDX"
                  xmlns:busyIndicator="https://github.com/Peoky/BusyIndicator"
+                 xmlns:sharpDx="clr-namespace:HelixToolkit.SharpDX;assembly=HelixToolkit.SharpDX"
                  mc:Ignorable="d"
                  Title="盒子裁剪" 
                  Width="1440" Height="900" FontSize="14"
@@ -78,7 +79,7 @@
                             [Event MouseUp] = [Action OnViewportMouseUp()]">
                     <!--效果器-->
                     <hx:Viewport3DX.EffectsManager>
-                        <hx:DefaultEffectsManager />
+                        <sharpDx:DefaultEffectsManager />
                     </hx:Viewport3DX.EffectsManager>
                     <!--键盘鼠标-->
                     <hx:Viewport3DX.InputBindings>

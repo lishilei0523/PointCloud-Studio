@@ -1,13 +1,16 @@
-﻿using HelixToolkit.Wpf.SharpDX;
+﻿using HelixToolkit;
+using HelixToolkit.Maths;
+using HelixToolkit.SharpDX;
+using HelixToolkit.Wpf.SharpDX;
 using MathNet.Numerics.LinearAlgebra;
 using PCLSharp.Modules.Interfaces;
 using SD.Infrastructure.WPF.Caliburn.Aspects;
 using SD.Infrastructure.WPF.ThreeDims.Extensions;
 using SD.Infrastructure.WPF.ThreeDims.Visual3Ds;
 using SD.Toolkits.Mathematics.Extensions;
-using SharpDX;
 using System;
 using System.Diagnostics;
+using System.Numerics;
 using System.Windows.Input;
 using System.Windows.Media.Media3D;
 using DiffuseMaterial = HelixToolkit.Wpf.SharpDX.DiffuseMaterial;
@@ -95,7 +98,7 @@ namespace PCLSharp.Client.ViewModels.CommonContext
         public void Crop()
         {
             Vector3Collection positions = new Vector3Collection();
-            foreach (Vector3 position in this.PointCloud.Positions)
+            foreach (Vector3 position in this.PointCloud.Positions!)
             {
                 if (!this.BoundingBox.ContainsPoint(position))
                 {
@@ -178,7 +181,7 @@ namespace PCLSharp.Client.ViewModels.CommonContext
                 Point mousePos2D = eventArgs.GetPosition(viewport3D);                 //鼠标2D位置
                 Ray ray = viewport3D.UnProject(mousePos2D);                           //逆透视
                 Vector3 oldVisualPos = oldVisualPos3D.ToVector3();
-                Vector3 lookDirction = viewport3D.Camera.LookDirection.ToVector3();   //相机方向
+                Vector3 lookDirction = viewport3D.Camera!.LookDirection.ToVector3();   //相机方向
                 bool success = ray.PlaneIntersection(oldVisualPos, lookDirction, out Vector3 newVisualPos3D);//移动平面上的交点
 
                 //改变尺寸
@@ -190,22 +193,22 @@ namespace PCLSharp.Client.ViewModels.CommonContext
                     //计算新尺寸
                     if (viewport3D.Camera.LookDirection.X.Equals(0) && viewport3D.Camera.LookDirection.Y.Equals(0))
                     {
-                        double diffX = Math.Abs(newVisualPos3D.X - oldVisualPos3D.X);
-                        double diffY = Math.Abs(newVisualPos3D.Y - oldVisualPos3D.Y);
+                        float diffX = (float)Math.Abs(newVisualPos3D.X - oldVisualPos3D.X);
+                        float diffY = (float)Math.Abs(newVisualPos3D.Y - oldVisualPos3D.Y);
                         this.BoundingBox.Length = diffX * 2;
                         this.BoundingBox.Width = diffY * 2;
                     }
                     else if (viewport3D.Camera.LookDirection.X.Equals(0) && viewport3D.Camera.LookDirection.Z.Equals(0))
                     {
-                        double diffX = Math.Abs(newVisualPos3D.X - oldVisualPos3D.X);
-                        double diffZ = Math.Abs(newVisualPos3D.Z - oldVisualPos3D.Z);
+                        float diffX = (float)Math.Abs(newVisualPos3D.X - oldVisualPos3D.X);
+                        float diffZ = (float)Math.Abs(newVisualPos3D.Z - oldVisualPos3D.Z);
                         this.BoundingBox.Length = diffX * 2;
                         this.BoundingBox.Height = diffZ * 2;
                     }
                     else if (viewport3D.Camera.LookDirection.Y.Equals(0) && viewport3D.Camera.LookDirection.Z.Equals(0))
                     {
-                        double diffY = Math.Abs(newVisualPos3D.Y - oldVisualPos3D.Y);
-                        double diffZ = Math.Abs(newVisualPos3D.Z - oldVisualPos3D.Z);
+                        float diffY = (float)Math.Abs(newVisualPos3D.Y - oldVisualPos3D.Y);
+                        float diffZ = (float)Math.Abs(newVisualPos3D.Z - oldVisualPos3D.Z);
                         this.BoundingBox.Width = diffY * 2;
                         this.BoundingBox.Height = diffZ * 2;
                     }

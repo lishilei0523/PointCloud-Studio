@@ -3,19 +3,25 @@
     <TargetFrameworks>net462;netstandard2.0</TargetFrameworks>
     <LangVersion>8.0</LangVersion>
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
-    <Authors>Lee</Authors>
-    <Company>SD</Company>
     <Description>SD.Framework PCL模块</Description>
-    <Copyright>Copyright © SD 2025</Copyright>
-    <Version>1.1.0</Version>
-    <AssemblyVersion>1.1.0</AssemblyVersion>
-    <FileVersion>1.1.0.0</FileVersion>
   </PropertyGroup>
 
-  <PropertyGroup>
-    <BaseOutputPath>bin\</BaseOutputPath>
-    <GenerateDocumentationFile>True</GenerateDocumentationFile>
-  </PropertyGroup>
+  <ItemGroup>
+    <None Include="Content\Package.targets">
+      <Pack>True</Pack>
+      <PackagePath>build\$(PackageId).targets</PackagePath>
+    </None>
+    <None Include="$(SolutionDir)\bin\$(Configuration)\PCLSharp.Modules.Native.dll">
+      <Visible>False</Visible>
+      <Pack>True</Pack>
+      <PackagePath>build\win-x64\</PackagePath>
+    </None>
+    <None Include="$(SolutionDir)\bin\libPCLSharp.Modules.Native.so">
+      <Visible>False</Visible>
+      <Pack>True</Pack>
+      <PackagePath>build\linux-x64\</PackagePath>
+    </None>
+  </ItemGroup>
 
   <ItemGroup>
     <None Include="$(SolutionDir)\bin\$(Configuration)\PCLSharp.Modules.Native.dll" Condition="$([MSBuild]::IsOSPlatform('Windows'))">

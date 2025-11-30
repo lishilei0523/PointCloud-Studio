@@ -1,0 +1,37 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+    <IncludeBuildOutput>False</IncludeBuildOutput>
+    <GenerateAssemblyInfo>False</GenerateAssemblyInfo>
+    <GenerateDocumentationFile>False</GenerateDocumentationFile>
+    <CopyBuildOutputToOutputDirectory>False</CopyBuildOutputToOutputDirectory>
+    <CopyOutputSymbolsToOutputDirectory>False</CopyOutputSymbolsToOutputDirectory>
+    <Description>SD.Framework PCL运行时-Windows-x64</Description>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Include="Package.props">
+      <Pack>True</Pack>
+      <PackagePath>build\net462\$(PackageId).props</PackagePath>
+    </None>
+    <None Include="Package.props">
+      <Pack>True</Pack>
+      <PackagePath>build\netstandard2.0\$(PackageId).props</PackagePath>
+    </None>
+    <None Include="$(SolutionDir)\runtimes\win-x64\3rd\*.dll">
+      <Visible>False</Visible>
+      <Pack>True</Pack>
+      <PackagePath>runtimes\win-x64\</PackagePath>
+    </None>
+    <None Include="$(SolutionDir)\runtimes\win-x64\dll\*.dll">
+      <Visible>False</Visible>
+      <Pack>True</Pack>
+      <PackagePath>runtimes\win-x64\</PackagePath>
+    </None>
+    <None Include="$(SolutionDir)\runtimes\win-x64\msvc\*.dll">
+      <Visible>False</Visible>
+      <Pack>True</Pack>
+      <PackagePath>runtimes\win-x64\</PackagePath>
+    </None>
+  </ItemGroup>
+</Project>

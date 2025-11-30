@@ -1,11 +1,12 @@
-﻿using HelixToolkit.Wpf.SharpDX;
+﻿using HelixToolkit;
+using HelixToolkit.SharpDX;
 using PCLSharp.Client.ViewModels.CommonContext;
 using PCLSharp.Extensions.Helix;
 using PCLSharp.Modules.Interfaces;
 using PCLSharp.Primitives.Models;
 using SD.Infrastructure.WPF.Caliburn.Aspects;
-using SharpDX;
 using System.Collections.Generic;
+using System.Numerics;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;

@@ -1,15 +1,12 @@
-﻿using PCLSharp.Primitives.Models;
-using SharpDX;
+﻿using HelixToolkit.Maths;
+using PCLSharp.Primitives.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Numerics;
 using System.Windows.Media.Media3D;
-#if NET462_OR_GREATER
-using Geometry3D = HelixToolkit.Wpf.SharpDX.Geometry3D;
-#endif
-#if NET6_0_OR_GREATER
-using Geometry3D = HelixToolkit.SharpDX.Core.Geometry3D;
-#endif
+using Color = System.Windows.Media.Color;
+using Geometry3D = HelixToolkit.SharpDX.Geometry3D;
 
 namespace PCLSharp.Extensions.Helix
 {
@@ -97,7 +94,7 @@ namespace PCLSharp.Extensions.Helix
         /// </summary>
         public static Color ToColor(this Color4F color4F)
         {
-            Color color = new Color(color4F.R, color4F.G, color4F.B, color4F.A);
+            Color color = Color.FromArgb(color4F.A, color4F.R, color4F.G, color4F.B);
 
             return color;
         }

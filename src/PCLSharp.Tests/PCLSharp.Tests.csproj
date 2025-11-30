@@ -2,11 +2,7 @@
   <PropertyGroup>
     <TargetFrameworks>net48;net8.0</TargetFrameworks>
     <LangVersion>8.0</LangVersion>
-    <IsPackable>false</IsPackable>
-    <PlatformTarget>AnyCPU</PlatformTarget>
-    <Authors>Lee</Authors>
-    <Company>SD</Company>
-    <Copyright>Copyright © SD 2025</Copyright>
+    <IsPackable>False</IsPackable>
   </PropertyGroup>
 
   <ItemGroup>

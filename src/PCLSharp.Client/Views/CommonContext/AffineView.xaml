@@ -8,6 +8,7 @@
                  xmlns:mah="http://metro.mahapps.com/winfx/xaml/controls"
                  xmlns:busyIndicator="https://github.com/Peoky/BusyIndicator"
                  xmlns:hx="http://helix-toolkit.org/wpf/SharpDX"
+                 xmlns:sharpDx="clr-namespace:HelixToolkit.SharpDX;assembly=HelixToolkit.SharpDX"
                  mc:Ignorable="d"
                  Title="仿射变换"
                  Width="1440" Height="900" FontSize="14"
@@ -52,7 +53,7 @@
                                     Camera="{Binding Camera}">
                         <!--效果器-->
                         <hx:Viewport3DX.EffectsManager>
-                            <hx:DefaultEffectsManager />
+                            <sharpDx:DefaultEffectsManager />
                         </hx:Viewport3DX.EffectsManager>
                         <!--键盘鼠标-->
                         <hx:Viewport3DX.InputBindings>
