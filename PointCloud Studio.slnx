@@ -6,6 +6,7 @@
   </Configurations>
   <Folder Name="/00 - Global/">
     <File Path="Directory.Build.props" />
+    <File Path="Directory.Build.targets" />
     <File Path="PCL.Debug.x64.props" />
     <File Path="PCL.Release.x64.props" />
   </Folder>
