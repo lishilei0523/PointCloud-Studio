@@ -13,9 +13,7 @@
   <Folder Name="/01 - Clients/">
     <Project Path="src/PCLSharp.Client/PCLSharp.Client.csproj" />
   </Folder>
-  <Folder Name="/02 - Libraries/">
-    <Project Path="src/PCLSharp.Extensions.Helix/PCLSharp.Extensions.Helix.csproj" />
-    <Project Path="src/PCLSharp.Extensions.Plotter/PCLSharp.Extensions.Plotter.csproj" />
+  <Folder Name="/02 - Modules/">
     <Project Path="src/PCLSharp.Modules.Native/PCLSharp.Modules.Native.vcxproj" Id="ecf01658-fc0a-46a2-a91a-6f433b401832">
       <BuildDependency Project="src/PCLSharp.Primitives.Native/PCLSharp.Primitives.Native.vcxproj" />
     </Project>
@@ -27,11 +25,15 @@
       <BuildDependency Project="src/PCLSharp.Primitives.Native/PCLSharp.Primitives.Native.vcxproj" />
     </Project>
   </Folder>
-  <Folder Name="/03 - Runtimes/">
+  <Folder Name="/03 - Extensions/">
+    <Project Path="src/PCLSharp.Extensions.Helix/PCLSharp.Extensions.Helix.csproj" />
+    <Project Path="src/PCLSharp.Extensions.Plotter/PCLSharp.Extensions.Plotter.csproj" />
+  </Folder>
+  <Folder Name="/04 - Runtimes/">
     <Project Path="src/PCLSharp.Runtime.linux-x64/PCLSharp.Runtime.linux-x64.csproj" />
     <Project Path="src/PCLSharp.Runtime.win-x64/PCLSharp.Runtime.win-x64.csproj" Id="1e6336b3-c757-45ff-9cc7-2bf9cb75d399" />
   </Folder>
-  <Folder Name="/04 - Tests/">
+  <Folder Name="/05 - Tests/">
     <Project Path="src/PCLSharp.Tests/PCLSharp.Tests.csproj" />
   </Folder>
 </Solution>
