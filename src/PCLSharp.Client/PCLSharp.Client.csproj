@@ -35,7 +35,7 @@
     <PackageReference Include="SD.IOC.Core" Version="1.4.0" />
     <PackageReference Include="SD.Infrastructure" Version="4.0.0" />
     <PackageReference Include="SD.Infrastructure.WPF" Version="4.0.0" />
-    <PackageReference Include="SD.Infrastructure.WPF.3D" Version="4.0.0" />
+    <PackageReference Include="SD.Infrastructure.WPF.3D" Version="4.0.1" />
     <PackageReference Include="SD.Infrastructure.WPF.Caliburn" Version="4.0.0" />
   </ItemGroup>
 
