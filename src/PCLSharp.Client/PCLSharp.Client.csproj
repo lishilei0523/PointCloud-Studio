@@ -27,16 +27,16 @@
       <ExcludeAssets>contentFiles</ExcludeAssets>
     </PackageReference>
     <PackageReference Include="HelixToolkit.Wpf.SharpDX" Version="3.1.2" />
-    <PackageReference Include="SkiaSharp" Version="3.119.2" />
-    <PackageReference Include="SkiaSharp.Views.WPF" Version="3.119.2" />
+    <PackageReference Include="SkiaSharp" Version="3.119.4" />
+    <PackageReference Include="SkiaSharp.Views.WPF" Version="3.119.4" />
     <PackageReference Include="MrAdvice" Version="2.20.5" />
-    <PackageReference Include="SD.Common" Version="4.0.1" />
-    <PackageReference Include="SD.Toolkits.Mathematics" Version="4.0.1" />
-    <PackageReference Include="SD.IOC.Core" Version="1.4.1" />
-    <PackageReference Include="SD.Infrastructure" Version="4.0.1" />
-    <PackageReference Include="SD.Infrastructure.WPF" Version="4.0.0" />
-    <PackageReference Include="SD.Infrastructure.WPF.3D" Version="4.0.1" />
-    <PackageReference Include="SD.Infrastructure.WPF.Caliburn" Version="4.0.0" />
+    <PackageReference Include="SD.Common" Version="4.0.2" />
+    <PackageReference Include="SD.Toolkits.Mathematics" Version="4.0.2" />
+    <PackageReference Include="SD.IOC.Core" Version="1.4.2" />
+    <PackageReference Include="SD.Infrastructure" Version="4.0.2" />
+    <PackageReference Include="SD.Infrastructure.WPF" Version="4.0.2" />
+    <PackageReference Include="SD.Infrastructure.WPF.3D" Version="4.0.2" />
+    <PackageReference Include="SD.Infrastructure.WPF.Caliburn" Version="4.0.2" />
   </ItemGroup>
 
   <!--NuGet引用SDK-->
